@@ -1,25 +1,52 @@
-const BottomNav = () =>{
+import { useLocation } from "react-router-dom";
+import BottomNavItem from "./BottomNavItem";
+import { useEffect, useState } from "react";
+
+const BottomNav = () => {
+    const [selectedMenu, setSelectedMenu] = useState("home");
+    const location = useLocation();
+
+    useEffect(() => {
+        const selected = location.pathname;
+        if (selected === "/home" || selected === "/contents" || selected === "/ems" || selected === "/my") {
+            setSelectedMenu(selected);
+        }
+    }, [location.pathname]);
 
     return (
-        <div>
-                        <div className="inline-flex justify-start items-center gap-14">
-                <div className="text-center justify-start text-blue-500 text-xs font-extrabold font-['Pretendard']">홈</div>
-                <div className="w-6 h-6 relative overflow-hidden">
-                    <div className="w-5 h-5 left-[0.82px] top-[0.82px] absolute bg-blue-500" />
-                </div>
-                <div className="text-center justify-start text-gray-400 text-xs font-medium font-['Pretendard']">콘텐츠</div>
-                <div className="w-6 h-6 relative overflow-hidden">
-                    <div className="w-5 h-5 left-[0.82px] top-[0.91px] absolute bg-gray-400" />
-                </div>
-                <div className="text-center justify-start text-gray-400 text-xs font-medium font-['Pretendard']">긴급대응</div>
-                <div className="w-6 h-6 relative overflow-hidden" />
-                <div className="w-6 h-6 relative overflow-hidden">
-                    <div className="w-6 h-6 left-0 top-0 absolute bg-gray-400" />
-                </div>
-                <div className="w-10 text-center justify-start text-gray-400 text-xs font-medium font-['Pretendard']">마이</div>
-            </div>
+        <div
+            className="flex flex-row justify-between items-center
+        w-[412px] h-10 pl-5 pr-5 bg-white fixed bottom-0 left-1/2 -translate-x-1/2    "
+        >
+            <BottomNavItem
+                imageOnSrc="/icons/Home-icon-on.svg"
+                imageOffSrc="/icons/Home-icon-off.svg"
+                isSelected={selectedMenu === "/home"}
+                text="홈"
+            />
+
+            <BottomNavItem
+                imageOnSrc="/icons/Contents-icon-on.svg"
+                imageOffSrc="/icons/Contents-icon-off.svg"
+                isSelected={selectedMenu === "/create"}
+                text="콘텐츠"
+            />
+
+            <BottomNavItem
+                imageOnSrc="/icons/EMSInteract-icon-on.svg"
+                imageOffSrc="/icons/EMSInteract-icon-off.svg"
+                isSelected={selectedMenu === "/create"}
+                text="긴급대응"
+            />
+
+            <BottomNavItem
+                imageOnSrc="/icons/My-icon-on.svg"
+                imageOffSrc="/icons/My-icon-off.svg"
+                isSelected={selectedMenu === "/my"}
+                text="마이"
+            />
         </div>
-    )
-}
+    );
+};
 
 export default BottomNav;
