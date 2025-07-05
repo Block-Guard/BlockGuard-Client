@@ -1,9 +1,13 @@
 const HomePage = () => {
   return (
     <div className="h-[800px] overflow-y-scroll no-scrollbar">
-      <div className="bg-primary-300 font-pretendard font-extrabold">
-        테스트용
-      </div>
+      <div className="bg-primary-200 font-extrabold">브랜드 컬러 테스트 1</div>
+      <div className="bg-primary-300">브랜드 컬러 테스트 2</div>
+      <div className="bg-monochrome-500">브랜드 컬러 테스트 3</div>
+      <div className="bg-monochrome-600">브랜드 컬러 테스트 4</div>
+      <div className="bg-highlight-100">브랜드 컬러 테스트 5</div>
+      <div className="bg-highlight-200">브랜드 컬러 테스트 6</div>
+      <div className="bg-highlight-300">브랜드 컬러 테스트 7</div>
       <div className="w-full h-[718px] relative p-6 bg-blue-500 rounded-bl-[20px] rounded-br-[20px]">
         <div className="justify-start text-blue-50 text-base font-bold font-pretendard leading-loose">
           Block Guard
