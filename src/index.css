@@ -53,9 +53,11 @@
   --color-monochrome-700: #000b25;
 
   /* 브랜드 컬러 - highlight */
-  --color-highlight-100: #f24e4e;
-  --color-highlight-200: #ff0;
-  /* --color-highlight-300: linear-gradient(120deg, #6697ff 5.35%, #9af2b5 100%); */
+  --color-highlight-1: #f24e4e;
+  --color-highlight-2: #ff0;
+
+  /* 브랜드 gradient 정의 */
+  --gradient-highlight: linear-gradient(120deg, #6697ff 5.35%, #9af2b5 100%);
 
   /* Pretendard 폰트 정의 */
   --font-pretendard: "Pretendard", system-ui, sans-serif;
@@ -63,6 +65,11 @@
 
 @utility no-scrollbar {
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+/* 커스텀 gradient 클래스 */
+.bg-gradient-highlight {
+  background: var(--gradient-highlight);
 }
 
 :root {
