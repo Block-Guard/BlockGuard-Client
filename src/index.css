@@ -3,65 +3,61 @@
 /* Pretendard 폰트 face 정의 */
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Light.woff2") format("woff2");
+  src: url("/fonts/Pretendard-Light.woff2") format("woff2");
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Regular.woff2") format("woff2");
+  src: url("/fonts/Pretendard-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-SemiBold.woff2") format("woff2");
+  src: url("/fonts/Pretendard-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Bold.woff2") format("woff2");
+  src: url("/fonts/Pretendard-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Black.woff2") format("woff2");
+  src: url("/fonts/Pretendard-Black.woff2") format("woff2");
   font-weight: 800;
   font-display: swap;
 }
 
 @theme {
-  /* 브랜드 컬러 정의 - primary (파란색 계열) */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
-  --color-primary-950: #172554;
+  /* 브랜드 컬러 - primary (파란색 계열) */
+  --color-primary-100: #f1f4ff;
+  --color-primary-200: #d3e1ff;
+  --color-primary-300: #87aefd;
+  --color-primary-400: #437efc;
 
-  /* 브랜드 컬러 정의 - secondary (초록색 계열) */
-  --color-secondary-50: #f0fdf4;
-  --color-secondary-100: #dcfce7;
-  --color-secondary-200: #bbf7d0;
-  --color-secondary-300: #86efac;
-  --color-secondary-400: #4ade80;
-  --color-secondary-500: #22c55e;
-  --color-secondary-600: #16a34a;
-  --color-secondary-700: #15803d;
-  --color-secondary-800: #166534;
-  --color-secondary-900: #14532d;
-  --color-secondary-950: #052e16;
+  /* 브랜드 컬러 - monochrome (흑백 계열) */
+  --color-monochrome-100: #fff;
+  --color-monochrome-200: #eef1f3;
+  --color-monochrome-300: #e4e7e9;
+  --color-monochrome-400: #d9d9d9;
+  --color-monochrome-500: #979fa7;
+  --color-monochrome-600: #79818a;
+  --color-monochrome-700: #000b25;
+
+  /* 브랜드 컬러 - highlight */
+  --color-highlight-1: #f24e4e;
+  --color-highlight-2: #ff0;
+
+  /* 브랜드 gradient 정의 */
+  --gradient-highlight: linear-gradient(120deg, #6697ff 5.35%, #9af2b5 100%);
 
   /* Pretendard 폰트 정의 */
   --font-pretendard: "Pretendard", system-ui, sans-serif;
@@ -71,9 +67,13 @@
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
+/* 커스텀 gradient 클래스 */
+.bg-gradient-highlight {
+  background: var(--gradient-highlight);
+}
+
 :root {
   background-color: #ffffff;
-
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -85,4 +85,5 @@ body {
   place-items: center;
   min-width: 393px;
   min-height: 856px;
+  font-family: "Pretendard";
 }

@@ -5,6 +5,7 @@ const HomePage = () => {
     <div className="h-[800px] overflow-y-scroll no-scrollbar">
      
     <HomeCheck/>
+
       <div className="justify-center text-slate-950 text-xl font-bold font-pretendard leading-loose">
         바로 신고 및 대응
       </div>
