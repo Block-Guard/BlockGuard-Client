@@ -20,26 +20,26 @@ const BottomNavItem = ({
   return (
     <>
       {isSelected ? (
-        <div
+        <button
           className="flex flex-col w-25 h-7 justify-center items-center 
-                bg-[#FFFFFF] rounded-[10px]"
+                bg-[#FFFFFF] rounded-[10px] cursor-pointer"
           onClick={handleClick}
         >
           <img className="w-6 h-6" src={imageOnSrc} />
           <div className="text-center justify-start text-blue-500 text-xs font-extrabold font-pretendard">
             {text}
           </div>
-        </div>
+        </button>
       ) : (
-        <div
-          className="flex flex-col w-25 h-7 justify-center items-center"
+        <button
+          className="flex flex-col w-25 h-7 justify-center items-center cursor-pointer"
           onClick={handleClick}
         >
           <img className="w-6 h-6" src={imageOffSrc} />
           <div className="text-center justify-start text-gray-400 text-xs font-medium font-pretendard">
             {text}
           </div>
-        </div>
+        </button>
       )}
     </>
   );
