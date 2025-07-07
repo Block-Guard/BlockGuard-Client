@@ -1,4 +1,9 @@
+import Button from "../../components/Button/Button";
+
 const FraudCheck = () => {
+  const onClickCheckStart = () => {
+    console.log("사기 의심 상황 분석 시작하기 클릭");
+  };
   return (
     <div
       className="flex flex-col gap-16 w-full relative mt-35 mb-6 p-4 pt-3 
@@ -15,16 +20,12 @@ const FraudCheck = () => {
         </div>
       </div>
       <div className="relative">
-        <div className="absolute right-1 bottom-3.5 z-[-1]">
+        <div className="absolute right-1 bottom-5 z-[-1]">
           <img src="public/Blockee.svg" alt="캐릭터" />
         </div>
-        <button
-          className="w-full h-11 py-1.5 z-10 
-                    bg-gradient-to-br from-blue-400 to-green-300 
-                    rounded-[10px] justify-center items-center text-white text-lg font-semibold font-pretendard"
-        >
+        <Button onClick={onClickCheckStart} isHighlight={true}>
           시작하기
-        </button>
+        </Button>
       </div>
     </div>
   );
