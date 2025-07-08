@@ -27,7 +27,7 @@ const LinkNumberCheck = () => {
           placeholder="URL / 전화번호를 검색해보세요"
         />
       </div>
-      <div className="w-78 h-0.5 bg-white rounded-[90px]" />
+      <div className="w-full h-0.5 bg-white rounded-[90px]" />
     </div>
   );
 };
