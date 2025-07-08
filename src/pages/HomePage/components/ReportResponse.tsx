@@ -1,3 +1,5 @@
+const currentProgress = 3;
+
 const ReportResponse = () => {
   return (
     <div className="px-4">
@@ -42,19 +44,16 @@ const ReportResponse = () => {
           </div>
           <div className="w-full relative my-[10px]">
             <div className="h-[5px] rounded-[90px] bg-monochrome-300" />
-            <div className="absolute left-0 top-0 w-[calc(100%*3/4)] h-[5px] bg-primary-400 rounded-[90px] z-10" />
+            <div
+              className={`absolute left-0 top-0 w-${currentProgress}/4 h-[5px] bg-primary-400 rounded-[90px] z-10`}
+            />
           </div>
           <div className="w-full flex flex-row items-center justify-between">
-            <button
-              className="bg-primary-400 rounded-3xl text-monochrome-100 py-[5px] px-[14px]"
-              onClick={() => {
-                console.log("추가 피해 방지하기");
-              }}
-            >
+            <div className="bg-primary-400 rounded-3xl text-monochrome-100 py-[5px] px-[14px]">
               추가 피해 방지하기
-            </button>
+            </div>
             <span className="font-bold text-[16px] text-monochrome-700">
-              <span className="text-highlight-1">3</span>
+              <span className="text-highlight-1">{currentProgress}</span>
               /4단계
             </span>
           </div>
