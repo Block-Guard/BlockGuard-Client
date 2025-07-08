@@ -36,6 +36,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "NCS Radhiumz";
+  src: url("/fonts/ncs-radhiumz.regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 @theme {
   /* 브랜드 컬러 - primary (파란색 계열) */
   --color-primary-100: #f1f4ff;
@@ -61,6 +68,9 @@
 
   /* Pretendard 폰트 정의 */
   --font-pretendard: "Pretendard", system-ui, sans-serif;
+
+  /* NCS Radhiumz 폰트 정의 : 홈화면 타이틀 */
+  --font-ncs-radhiumz: "NCS Radhiumz", "Pretendard", system-ui, sans-serif;
 }
 
 @utility no-scrollbar {
