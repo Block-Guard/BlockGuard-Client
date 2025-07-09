@@ -7,7 +7,7 @@ const ReportResponse = () => {
   const hasProgress = true;
 
   return (
-    <div className="px-4">
+    <div className="mx-6">
       <div className="justify-center text-slate-950 text-xl font-bold leading-loose">
         긴급 신고 및 대응 현황
       </div>

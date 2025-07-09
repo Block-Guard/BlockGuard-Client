@@ -2,7 +2,7 @@ import NewsLinesItem from "./NewsLinesItem";
 
 const NewsLines = () => {
   return (
-    <div className="px-4">
+    <div className="mx-6">
       <div className="flex flex-row justify-between items-center">
         <div className="text-slate-950 text-xl font-bold leading-loose">
           주간 피싱 사례
