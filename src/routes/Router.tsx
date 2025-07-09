@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import HomePage from "../pages/HomePage/HomePage";
 import MainLayout from "../layouts/MainLayout";
-import EmergencyPage from "../pages/EmergencyPage/EmergencyPage";
+import EmergencyMainPage from "../pages/Emergency/EmergencyMain/EmergencyMainPage";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "emergency",
-        element: <EmergencyPage />,
+        element: <EmergencyMainPage />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import ReportProgressCard from "../../components/ReportProgressCard/ReportProgressCard";
+import ReportProgressCard from "../../../components/ReportProgressCard/ReportProgressCard";
 import EmergencyResponseStart from "./EmergencyResponseStart";
 import OrganCard from "./OrganCard";
 import QuickReportCard from "./QuickReportCard";
@@ -45,7 +45,7 @@ const dummyOrgan = [
   },
 ];
 
-const EmergencyPage = () => {
+const EmergencyMainPage = () => {
   return (
     <div className="px-6 mb-10">
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
@@ -84,4 +84,4 @@ const EmergencyPage = () => {
   );
 };
 
-export default EmergencyPage;
+export default EmergencyMainPage;
