@@ -1,7 +1,7 @@
 import ReportProgressCard from "../../../components/ReportProgressCard/ReportProgressCard";
-import EmergencyResponseStart from "./EmergencyResponseStart";
-import OrganCard from "./OrganCard";
-import QuickReportCard from "./QuickReportCard";
+import EmergencyResponseStart from "./components/EmergencyResponseStart";
+import OrganCard from "./components/OrganCard";
+import QuickReportCard from "./components/QuickReportCard";
 
 let currentProgress = 3;
 let totalProgress = 4;
