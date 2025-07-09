@@ -4,6 +4,8 @@ let currentProgress = 3;
 let totalProgress = 4;
 
 const ReportResponse = () => {
+  const hasProgress = true;
+
   return (
     <div className="px-4">
       <div className="justify-center text-slate-950 text-xl font-bold leading-loose">
@@ -32,6 +34,7 @@ const ReportResponse = () => {
           </div>
         </div>
         <ReportProgressCard
+          hasProgress={hasProgress}
           currentProgress={currentProgress}
           totalProgress={totalProgress}
         />

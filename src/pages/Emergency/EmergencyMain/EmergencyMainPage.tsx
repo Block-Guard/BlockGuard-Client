@@ -46,6 +46,7 @@ const dummyOrgan = [
 ];
 
 const EmergencyMainPage = () => {
+  const hasProgress = false;
   return (
     <div className="px-6 mb-10">
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
@@ -54,6 +55,7 @@ const EmergencyMainPage = () => {
         <div className="flex flex-col gap-[10px]">
           <h2 className="font-bold text-xl leading-8">나의 신고 현황</h2>
           <ReportProgressCard
+            hasProgress={hasProgress}
             currentProgress={currentProgress}
             totalProgress={totalProgress}
           />
