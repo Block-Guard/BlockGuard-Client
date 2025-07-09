@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import BottomNav from "../components/BottomNav/BottomNav";
 
-const HomeLayout = () => {
+const MainLayout = () => {
   return (
     <div className="flex flex-col justify-between w-full h-full">
       <main className="h-[calc(100vh-85px)] bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar">
@@ -13,4 +13,4 @@ const HomeLayout = () => {
   );
 };
 
-export default HomeLayout;
+export default MainLayout;
