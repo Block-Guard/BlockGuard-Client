@@ -19,6 +19,7 @@ const FraudLayout = () => {
     }
 
     const handleBtnClick = () => {
+        //🎯선택 항목에서, 아무것도 클릭하지 않은 경우 어떻게 처리할지 백엔드와 협의 필요.
         submitAnswer();
     }
 
@@ -57,8 +58,8 @@ const FraudLayout = () => {
 
             {location.pathname === "/fraud-analysis" ? null : (
                 <div className="ml-6 mr-6 mb-8">
-                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null}>
-                        다음 {progress}
+                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null && progress < 5}>
+                        다음
                     </Button>
                 </div>
             )}
