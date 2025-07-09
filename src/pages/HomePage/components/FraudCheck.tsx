@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 
 const FraudCheck = () => {
+  const navigate = useNavigate();
   const onClickCheckStart = () => {
     console.log("사기 의심 상황 분석 시작하기 클릭");
+    navigate('/fraud-analysis');
   };
   return (
     <div
