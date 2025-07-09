@@ -82,6 +82,21 @@
   background: var(--gradient-highlight);
 }
 
+/* 반투명 버튼 스타일 */
+.button-bg-blur {
+  border: 1px solid rgba(255, 255, 255, 0.57);
+  background: rgba(241, 244, 255, 0.41);
+  backdrop-filter: blur(2px);
+}
+
+/* 반투명한 border 스타일 */
+.border-blur {
+  border: 2px solid rgba(255, 255, 255, 0.57);
+}
+.border-blur-sm {
+  border: 1px solid rgba(255, 255, 255, 0.57);
+}
+
 :root {
   background-color: #ffffff;
   text-rendering: optimizeLegibility;

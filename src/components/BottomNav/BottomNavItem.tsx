@@ -15,7 +15,23 @@ const BottomNavItem = ({
 }: BottomNavItemProps) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/${text}`);
+    switch (text) {
+      case "홈":
+        navigate("/home");
+        break;
+      case "콘텐츠":
+        navigate("/contents");
+        break;
+      case "긴급대응":
+        navigate("/emergency");
+        break;
+      case "마이":
+        navigate("/my");
+        break;
+
+      default:
+        return;
+    }
   };
   return (
     <>

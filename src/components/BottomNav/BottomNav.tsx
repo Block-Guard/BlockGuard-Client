@@ -8,10 +8,11 @@ const BottomNav = () => {
 
   useEffect(() => {
     const selected = location.pathname;
+    console.log(selected);
     if (
       selected === "/home" ||
       selected === "/contents" ||
-      selected === "/ems" ||
+      selected === "/emergency" ||
       selected === "/my"
     ) {
       setSelectedMenu(selected);
@@ -32,17 +33,17 @@ const BottomNav = () => {
       />
 
       <BottomNavItem
+        imageOnSrc="/icons/EMSInteract-icon-on.svg"
+        imageOffSrc="/icons/EMSInteract-icon-off.svg"
+        isSelected={selectedMenu === "/emergency"}
+        text="긴급대응"
+      />
+
+      <BottomNavItem
         imageOnSrc="/icons/Contents-icon-on.svg"
         imageOffSrc="/icons/Contents-icon-off.svg"
         isSelected={selectedMenu === "/create"}
         text="콘텐츠"
-      />
-
-      <BottomNavItem
-        imageOnSrc="/icons/EMSInteract-icon-on.svg"
-        imageOffSrc="/icons/EMSInteract-icon-off.svg"
-        isSelected={selectedMenu === "/create"}
-        text="긴급대응"
       />
 
       <BottomNavItem

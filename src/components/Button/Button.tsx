@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick: () => void;
   size?: "lg" | "sm";
   isHighlight?: boolean;
+  isBlur?: boolean;
   disabled?: boolean;
 }
 
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   size = "lg",
   isHighlight = false,
+  isBlur = false,
   disabled = false,
 }) => {
   const fontSize = size === "lg" ? "22px" : "14px";
@@ -26,6 +28,14 @@ const Button: React.FC<ButtonProps> = ({
         <button
           className={`bg-gradient-highlight w-full pt-2 pb-2 text-[18px] font-semibold leading-7 text-monochrome-100 rounded-[10px] cursor-pointer`}
           onClick={onClick}
+        >
+          {children}
+        </button>
+      ) : isBlur ? (
+        <button
+          className="button-bg-blur w-full py-[15px] text-[22px] text-monochrome-100 leading-8  font-semibold rounded-[15px] "
+          onClick={onClick}
+          disabled={disabled}
         >
           {children}
         </button>
