@@ -15,9 +15,9 @@ const Button: React.FC<ButtonProps> = ({
   isHighlight = false,
   disabled = false,
 }) => {
-  const padding = size === "lg" ? 3 : 2;
   const fontSize = size === "lg" ? "22px" : "14px";
   const fontWeight = size === "lg" ? "font-bold" : "font-normal";
+  const paddingClass = size === "lg" ? "pt-3 pb-3" : "pt-2 pb-2";
   const isDiabled = disabled ? "bg-monochrome-400" : "bg-primary-400";
 
   return (
@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : (
         <button
-          className={`${isDiabled} w-full pt-${padding} pb-${padding} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
+          className={`${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
           onClick={onClick}
           disabled={disabled}
         >

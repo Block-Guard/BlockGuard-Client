@@ -6,11 +6,8 @@ const FraudLandingPage = () => {
         navigate("/fraud-analysis/survey")
     }
     return (
-        <div className="w-full h-full relative p-6 bg-blue-500 rounded-bl-[20px] rounded-br-[20px]"
+        <div className="w-full h-full relative p-6 bg-primary-400 rounded-bl-[20px] rounded-br-[20px]"
             onClick={handleClick}>
-            <div className="text-blue-50 text-base font-bold leading-loose">
-                {"< 상단바"}
-            </div>
 
             <div className="text-white text-3xl font-extrabold leading-loose">
                 AI 사기유형 진단 서비스

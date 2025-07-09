@@ -1,35 +1,35 @@
-import { useState } from "react";
-import Button from "../../components/Button/Button";
 import SurveyButton from "./components/SurveyButton";
+import { surveyContent } from "./surveyContent";
+import { useFraudStore } from "../../stores/fraudStore";
 
 const FraudSurveyPage = () => {
-    const [selectedItem, setSelectedItem] = useState("");
+
+    const { progress } = useFraudStore();
+    const currentSurvey = surveyContent.find(s => s.progress === progress);
 
     return (
-        <div className="w-full px-6">
-            <div>
-                상단바
-            </div>
-            <div>
-                프로그래스 바
+        <div className="flex flex-col w-full h-full px-6">
+            <div className="mt-9 mb-9">
+                <span className="text-slate-950 text-2xl font-bold leading-9">
+                    {currentSurvey?.question}
+                </span>
+                {currentSurvey?.isEssential ? (
+                    <span className="text-red-500 text-2xl font-bold leading-9">
+                        *
+                    </span>
+                ) : (
+                    <span className="text-zinc-300 text-2xl font-bold leading-9">
+                        {"(선택)"}
+                    </span>
+                )}
             </div>
 
-            <div className="self-stretch justify-start">
-                <span className="text-slate-950 text-2xl font-bold font-['Pretendard'] leading-9">
-                    어떤 요청을 받으셨나요?
-                </span>
-                <span className="text-red-500 text-2xl font-bold font-['Pretendard'] leading-9">
-                    *
-                </span>
+            <div className="flex flex-col gap-4">
+                {currentSurvey?.answers.map((surveyItem) => {
+                    return <SurveyButton text={surveyItem} />
+                })}
             </div>
-            <SurveyButton selectedItem={selectedItem} text="문자" setSelctedItem={setSelectedItem} />
-            <SurveyButton selectedItem={selectedItem} text="전화" setSelctedItem={setSelectedItem} />
-            <SurveyButton selectedItem={selectedItem} text="메신저" setSelctedItem={setSelectedItem} />
-            <SurveyButton selectedItem={selectedItem} text="기타" setSelctedItem={setSelectedItem} />
 
-            <Button onClick={() => { }} size="lg" isHighlight={false} disabled={selectedItem === ""}>
-                다음
-            </Button>
         </div>
     )
 }

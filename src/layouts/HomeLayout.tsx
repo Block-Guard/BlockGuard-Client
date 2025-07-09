@@ -12,4 +12,5 @@ const HomeLayout = () => {
     </div>
   );
 };
+
 export default HomeLayout;
