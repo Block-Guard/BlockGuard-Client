@@ -16,7 +16,7 @@ const NewsLines = () => {
         </button>
       </div>
 
-      <div className="flex flex-row overflow-x-scroll no-scrollbar gap-x-2">
+      <div className="flex flex-row overflow-x-scroll gap-x-4 pb-3">
         <NewsLinesItem />
         <NewsLinesItem />
         <NewsLinesItem />
