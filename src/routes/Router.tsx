@@ -7,6 +7,7 @@ import FraudLandingPage from "../pages/FraudLandingPage/FraudLandingPage";
 import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
 import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
+import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,6 @@ const router = createBrowserRouter([
     element: <Navigate to="/home" replace />,
     errorElement: <NotFound />,
   },
-
   {
     path: "/",
     element: <MainLayout />,
@@ -40,6 +40,16 @@ const router = createBrowserRouter([
       {
         path: "survey",
         element: <FraudSurveyPage />,
+      },
+    ],
+  },
+  {
+    path: "/emergency",
+    children: [
+      {
+        path: "organ-list",
+        // 두 단어로 이루어진 url에는 대시(-)를 쓰는 것이 유리하다.
+        element: <OrganListPage />,
       },
     ],
   },
