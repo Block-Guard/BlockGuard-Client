@@ -1,8 +1,13 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import HomePage from "../pages/HomePage/HomePage";
-import MainLayout from "../layouts/MainLayout";
+
 import EmergencyMainPage from "../pages/Emergency/EmergencyMain/EmergencyMainPage";
+import FraudLandingPage from "../pages/FraudLandingPage/FraudLandingPage";
+import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
+import FraudLayout from "../layouts/FraudLayout";
+import MainLayout from "../layouts/MainLayout";
+
 
 const router = createBrowserRouter([
   {
@@ -10,6 +15,7 @@ const router = createBrowserRouter([
     element: <Navigate to="/home" replace />,
     errorElement: <NotFound />,
   },
+
   // {
   //     path: '/auth',
   //     element: <AuthLayout />,
@@ -31,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: "emergency",
         element: <EmergencyMainPage />,
+  },
+  {
+    path: "/fraud-analysis",
+    element: <FraudLayout />,
+    children: [
+      {
+        path: "",
+        element: <FraudLandingPage />,
+      },
+      {
+        path: "survey",
+        element: <FraudSurveyPage />,
       },
     ],
   },
