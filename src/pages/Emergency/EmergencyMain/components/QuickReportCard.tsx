@@ -9,7 +9,7 @@ const QuickReportCard = ({ title }: Props) => {
     console.log(title, "에 전화하기");
   };
   return (
-    <div className="flex flex-row bg-primary-200 rounded-2xl border-blur py-3 px-[13px] justify-between items-center">
+    <div className="flex flex-row bg-primary-200 rounded-2xl border-blur-sm py-3 px-[13px] justify-between items-center">
       <div className="flex flex-row gap-3">
         <img
           className="w-[18px]"
