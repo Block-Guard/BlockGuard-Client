@@ -1,6 +1,12 @@
-const currentProgress = 3;
+let currentProgress = 3;
+let totalProgress = 4;
 
 const ReportResponse = () => {
+  const progress =
+    currentProgress === totalProgress
+      ? "w-full"
+      : `w-${currentProgress}/${totalProgress}`;
+
   return (
     <div className="px-4">
       <div className="justify-center text-slate-950 text-xl font-bold leading-loose">
@@ -45,7 +51,7 @@ const ReportResponse = () => {
           <div className="w-full relative my-[10px]">
             <div className="h-[5px] rounded-[90px] bg-monochrome-300" />
             <div
-              className={`absolute left-0 top-0 w-${currentProgress}/4 h-[5px] bg-primary-400 rounded-[90px] z-10`}
+              className={`absolute left-0 top-0 ${progress} h-[5px] bg-primary-400 rounded-[90px] z-10`}
             />
           </div>
           <div className="w-full flex flex-row items-center justify-between">
@@ -53,8 +59,8 @@ const ReportResponse = () => {
               추가 피해 방지하기
             </div>
             <span className="font-bold text-[16px] text-monochrome-700">
-              <span className="text-highlight-1">{currentProgress}</span>
-              /4단계
+              <span className="text-highlight-1">{currentProgress}</span>/
+              {totalProgress}단계
             </span>
           </div>
         </div>
