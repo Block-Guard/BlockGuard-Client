@@ -3,7 +3,6 @@ import NotFound from "../pages/NotFound";
 import HomeLayout from "../layouts/HomeLayout";
 import HomePage from "../pages/HomePage/HomePage";
 import FraudLandingPage from "../pages/FraudLandingPage/FraudLandingPage";
-import MainLayout from "../layouts/MainLayout";
 import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
 import FraudLayout from "../layouts/FraudLayout";
 
