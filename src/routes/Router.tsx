@@ -8,7 +8,6 @@ import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
 import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,16 +15,6 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
   },
 
-  // {
-  //     path: '/auth',
-  //     element: <AuthLayout />,
-  //     children: [
-  //         {
-  //             path: '',
-  //             // element: 랜딩, 로그인, 회원가입 페이지
-  //         },
-  //     ]
-  // },
   {
     path: "/",
     element: <MainLayout />,
@@ -37,6 +26,8 @@ const router = createBrowserRouter([
       {
         path: "emergency",
         element: <EmergencyMainPage />,
+      },
+    ],
   },
   {
     path: "/fraud-analysis",
