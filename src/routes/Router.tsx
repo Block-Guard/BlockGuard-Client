@@ -9,6 +9,9 @@ import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
 import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
+import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
+import FraudSituationPage from "../pages/FraudSurvey/FraudSituationPage/FraudSituationPage";
+import AnalysisLoadingPage from "../pages/FraudSurvey/AnalysisLoadingPage/AnalysisLoadingPage";
 
 const router = createBrowserRouter([
   {
@@ -48,12 +51,20 @@ const router = createBrowserRouter([
       },
       {
         path: "survey/8",
-        element: <FraudLinkNumPage />
+        element: <FraudMessagePage />
       },
       {
         path: "survey/9",
-        element: <FraudLinkNumPage />
+        element: <FraudSituationPage />
       },
+      {
+        path: "survey/9",
+        element: <FraudSituationPage />
+      },
+      {
+        path: "survey/result-loading",
+        element: <AnalysisLoadingPage/>
+      }
     ],
   },
   {

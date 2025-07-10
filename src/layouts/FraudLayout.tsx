@@ -5,7 +5,7 @@ import { useFraudStore } from "../stores/fraudStore";
 const FraudLayout = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { selectedAnswer, progress, setProgress, submitAnswer, reset } = useFraudStore();
+    const { selectedAnswer, progress, setProgress, recordAnswerAndProceed, reset } = useFraudStore();
     const heightSize = location.pathname === "/fraud-analysis" ? "h-[calc(100vh-48px)]" : "h-[calc(100vh-140px)]"
 
     const handleBackClick = () => {
@@ -22,11 +22,7 @@ const FraudLayout = () => {
     }
 
     const handleBtnClick = () => {
-
-        submitAnswer();
-        if (progress >= 7) {
-            navigate(`/survey/${progress}`)
-        }
+        recordAnswerAndProceed(navigate);
     }
 
     return (

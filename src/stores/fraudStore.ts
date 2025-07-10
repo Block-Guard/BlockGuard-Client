@@ -1,5 +1,5 @@
+import type { NavigateFunction } from 'react-router-dom';
 import { create } from 'zustand';
-import { NavigateFunction } from 'react-router-dom';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -70,9 +70,9 @@ export const useFraudStore = create<FraudState & FraudActions>((set, get) => ({
         console.log(`[${progress}단계] 답변 "${selectedAnswer}" 기록 완료. 다음 단계로 이동합니다.`);
 
         // 3. progress가 6 이상이면 다음 설문 페이지로 라우팅
-        if (newProgress >= 6) {
+        if (newProgress >= 7) {
             console.log(`progress가 ${newProgress}이므로 라우팅을 수행합니다.`);
-            navigate(`/survey/${newProgress}`);
+            navigate(`/fraud-analysis/survey/${newProgress}`);
         }
     },
 
