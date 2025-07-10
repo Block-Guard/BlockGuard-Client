@@ -38,7 +38,7 @@ export const surveyContent = [
     {
         question: "의심스러운 링크나 전화번호를 입력해주세요",
         isEssential: false,
-        answers: ["신분증", "보안카드 번호", "대출 이력", "주민등록번호", "휴대폰 인증번호", "기타"],
+        answers: [],
         progress: 7
     },
     {

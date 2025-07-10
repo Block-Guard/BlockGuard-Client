@@ -13,14 +13,20 @@ const FraudLayout = () => {
         if (progress <= 1) {
             reset();
             navigate(-1);
-            return
+            return;
+        }
+        if (progress >= 7) {
+            navigate(-1);
         }
         setProgress(progress - 1);
     }
 
     const handleBtnClick = () => {
-        //🎯선택 항목에서, 아무것도 클릭하지 않은 경우 어떻게 처리할지 백엔드와 협의 필요.
+
         submitAnswer();
+        if (progress >= 7) {
+            navigate(`/survey/${progress}`)
+        }
     }
 
     return (
