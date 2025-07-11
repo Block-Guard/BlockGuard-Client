@@ -1,21 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { dummyOrgan } from "../organList";
+import Header from "../../../components/Header/Header";
 
 const OrganListPage = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-between w-full h-full">
-      <header className="w-full fixed flex flex-row justify-center items-center px-6 py-[19px] bg-monochrome-100">
-        <img
-          className="absolute left-0 p-1 ml-6"
-          src="/public/icons/ArrowLeftBlack-icon.svg"
-          alt="뒤로가기"
-          onClick={() => navigate(-1)}
-        />
-        <h1 className="text-xl text-monochrome-700 font-bold leading-8">
-          보이스피싱 대응기관
-        </h1>
-      </header>
+      <Header
+        title={
+          <h1 className="text-xl text-monochrome-700 font-bold leading-8">
+            보이스피싱 대응기관
+          </h1>
+        }
+        leftChild={
+          <img
+            src="/public/icons/ArrowLeftBlack-icon.svg"
+            alt="뒤로가기"
+            onClick={() => navigate(-1)}
+          />
+        }
+        rightChild={<></>}
+      />
       <main className="mt-[72px] overflow-y-scroll flex flex-col gap-[10px] px-6 h-[calc(100vh-72px)] pb-10">
         {dummyOrgan.map((item, index) => {
           const bgColor = index % 2 === 0 ? "#EEF1F3" : "#F1F4FF";
