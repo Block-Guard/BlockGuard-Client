@@ -48,8 +48,9 @@ export const useFraudStore = create<FraudState & FraudActions>((set, get) => ({
     recordAnswerAndProceed: (navigate) => {
         const { selectedAnswer, progress, answers } = get();
 
+
         // 현재 단계에서 선택된 답변이 없으면 진행하지 않음
-        if (!selectedAnswer) {
+        if (selectedAnswer === null) {
             alert('답변을 선택해주세요.');
             return;
         }
@@ -58,11 +59,13 @@ export const useFraudStore = create<FraudState & FraudActions>((set, get) => ({
         const newAnswers = [...answers, selectedAnswer];
         const newProgress = progress + 1;
 
+        const nextSelectedAnswer = progress >= 5 ? "" : null; //선택질문에 대해 빈 값 디폴트
+
         // 2. Zustand 상태와 localStorage를 함께 업데이트
         set({
             answers: newAnswers,
             progress: newProgress,
-            selectedAnswer: null, // 다음 질문을 위해 선택 초기화
+            selectedAnswer: nextSelectedAnswer, // 다음 질문을 위해 선택 초기화
             status: 'idle',
         });
         localStorage.setItem('surveyAnswers', JSON.stringify(newAnswers));

@@ -60,7 +60,7 @@ const FraudLayout = () => {
 
             {location.pathname === "/fraud-analysis" ? null : (
                 <div className="ml-6 mr-6 mb-8">
-                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null && progress < 5}>
+                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null && progress < 7}>
                         다음
                     </Button>
                 </div>
