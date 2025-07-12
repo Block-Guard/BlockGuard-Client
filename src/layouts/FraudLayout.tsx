@@ -5,7 +5,7 @@ import { useFraudStore } from "../stores/fraudStore";
 const FraudLayout = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { selectedAnswer, progress, setProgress, submitAnswer, reset } = useFraudStore();
+    const { selectedAnswer, progress, setProgress, recordAnswerAndProceed, reset } = useFraudStore();
     const heightSize = location.pathname === "/fraud-analysis" ? "h-[calc(100vh-48px)]" : "h-[calc(100vh-140px)]"
 
     const handleBackClick = () => {
@@ -13,14 +13,16 @@ const FraudLayout = () => {
         if (progress <= 1) {
             reset();
             navigate(-1);
-            return
+            return;
+        }
+        if (progress >= 7) {
+            navigate(-1);
         }
         setProgress(progress - 1);
     }
 
     const handleBtnClick = () => {
-        //🎯선택 항목에서, 아무것도 클릭하지 않은 경우 어떻게 처리할지 백엔드와 협의 필요.
-        submitAnswer();
+        recordAnswerAndProceed(navigate);
     }
 
     return (
@@ -58,7 +60,7 @@ const FraudLayout = () => {
 
             {location.pathname === "/fraud-analysis" ? null : (
                 <div className="ml-6 mr-6 mb-8">
-                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null && progress < 5}>
+                    <Button onClick={handleBtnClick} size="lg" isHighlight={false} disabled={selectedAnswer === null && progress < 7}>
                         다음
                     </Button>
                 </div>

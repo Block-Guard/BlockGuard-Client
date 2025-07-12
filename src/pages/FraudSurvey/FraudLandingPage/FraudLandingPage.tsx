@@ -6,7 +6,7 @@ const FraudLandingPage = () => {
         navigate("/fraud-analysis/survey")
     }
     return (
-        <div className="w-full h-full relative p-6 bg-primary-400 rounded-bl-[20px] rounded-br-[20px]"
+        <div className="w-full h-full relative p-6 bg-primary-400"
             onClick={handleClick}>
 
             <div className="text-white text-3xl font-extrabold leading-loose">

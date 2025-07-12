@@ -3,11 +3,15 @@ import NotFound from "../pages/NotFound";
 import HomePage from "../pages/HomePage/HomePage";
 
 import EmergencyMainPage from "../pages/Emergency/EmergencyMain/EmergencyMainPage";
-import FraudLandingPage from "../pages/FraudLandingPage/FraudLandingPage";
-import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
+import FraudLandingPage from "../pages/FraudSurvey/FraudLandingPage/FraudLandingPage";
+import FraudSurveyPage from "../pages/FraudSurvey/FraudSurveyPage/FraudSurveyPage";
 import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
+import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
+import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
+import FraudSituationPage from "../pages/FraudSurvey/FraudSituationPage/FraudSituationPage";
+import AnalysisLoadingPage from "../pages/FraudSurvey/AnalysisLoadingPage/AnalysisLoadingPage";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +45,26 @@ const router = createBrowserRouter([
         path: "survey",
         element: <FraudSurveyPage />,
       },
+      {
+        path: "survey/7",
+        element: <FraudLinkNumPage />
+      },
+      {
+        path: "survey/8",
+        element: <FraudMessagePage />
+      },
+      {
+        path: "survey/9",
+        element: <FraudSituationPage />
+      },
+      {
+        path: "survey/9",
+        element: <FraudSituationPage />
+      },
+      {
+        path: "survey/result-loading",
+        element: <AnalysisLoadingPage/>
+      }
     ],
   },
   {
