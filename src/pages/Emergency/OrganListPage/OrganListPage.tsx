@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { dummyOrgan } from "../organList";
 import Header from "../../../components/Header/Header";
-import LeftArrowIcon from "../../../assets/icons/ArrowLeftBlack-icon.svg";
-import SiteArrowIcon from "../../../assets/icons/site-arrow-icon.svg";
+import LeftArrowIcon from "../../../assets/icons/arrow-left-darkblue-icon.svg";
+import SiteArrowIcon from "../../../assets/icons/arrow-right-site-blue-icon.svg";
 
 const OrganListPage = () => {
   const navigate = useNavigate();

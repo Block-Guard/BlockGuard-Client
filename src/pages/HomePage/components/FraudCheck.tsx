@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button/Button";
-import Blockee from "../../../assets/Blockee.svg";
+import Blockee from "../../../assets/character-image.svg";
 
 const FraudCheck = () => {
   const navigate = useNavigate();

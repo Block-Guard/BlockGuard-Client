@@ -1,5 +1,5 @@
 import Button from "../../../../components/Button/Button";
-import EmergencyMainIcon from "../../../../assets/icons/Emergency-main-icon.svg";
+import EmergencyMainIcon from "../../../../assets/icons/emergency-main-icon.svg";
 import { useNavigate } from "react-router-dom";
 
 const EmergencyResponseStart = () => {

@@ -1,4 +1,4 @@
-import ImgUploadIcon from "../../../assets/icons/ImageUpload-icon.svg";
+import ImgUploadIcon from "../../../assets/icons/image-upload-icon.svg";
 
 const FraudMessagePage = () => {
   return (

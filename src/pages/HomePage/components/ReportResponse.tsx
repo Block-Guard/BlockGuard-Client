@@ -1,6 +1,6 @@
 import ReportProgressCard from "../../../components/ReportProgressCard/ReportProgressCard";
-import SirenIcon from "../../../assets/icons/Siren-icon.svg";
-import RightArrowIcon from "../../../assets/icons/RightArrow-icon.svg";
+import SirenIcon from "../../../assets/icons/siren-icon.svg";
+import RightArrowIcon from "../../../assets/icons/arrow-right-darkblue-icon.svg";
 
 let currentProgress = 3;
 let totalProgress = 4;

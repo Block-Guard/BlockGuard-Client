@@ -1,4 +1,4 @@
-import RightArrowIcon from "../../assets/icons/RightArrow-icon.svg";
+import RightArrowIcon from "../../assets/icons/arrow-right-darkblue-icon.svg";
 
 type Props = {
   hasProgress: boolean;

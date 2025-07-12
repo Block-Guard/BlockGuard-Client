@@ -1,4 +1,4 @@
-import Blockee from "../../../assets/Blockee-cropped-fit.svg";
+import Blockee from "../../../assets/character-cropped-fit-image.svg";
 
 const AnalysisLoadingPage = () => {
   return (

@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 import { useFraudStore } from "../stores/fraudStore";
-import LeftArrowWhiteIcon from "../assets/icons/ArrowLeftWhite-icon.svg";
-import LeftArrowIcon from "../assets/icons/ArrowLeftBlack-icon.svg";
+import LeftArrowWhiteIcon from "../assets/icons/arrow-left-white-icon.svg";
+import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 
 const FraudLayout = () => {
   const location = useLocation();

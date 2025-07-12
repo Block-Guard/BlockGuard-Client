@@ -1,5 +1,5 @@
 import Header from "../../../components/Header/Header";
-import LeftArrowIcon from "../../../assets/icons/ArrowLeftBlack-icon.svg";
+import LeftArrowIcon from "../../../assets/icons/arrow-left-darkblue-icon.svg";
 import Step1Img from "../../../assets/report-guide/step1.svg";
 import Step2Img from "../../../assets/report-guide/step2.svg";
 import Step3Img from "../../../assets/report-guide/step3.svg";

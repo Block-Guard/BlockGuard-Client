@@ -1,4 +1,4 @@
-import SiteArrowIcon from "../../../../assets/icons/site-arrow-icon.svg";
+import SiteArrowIcon from "../../../../assets/icons/arrow-right-site-blue-icon.svg";
 
 type Props = {
   organData: {

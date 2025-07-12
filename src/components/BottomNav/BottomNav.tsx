@@ -1,14 +1,14 @@
 import { useLocation } from "react-router-dom";
 import BottomNavItem from "./BottomNavItem";
 import { useEffect, useState } from "react";
-import HomeIconOn from "../../assets/icons/Home-icon-on.svg";
-import HomeIconOff from "../../assets/icons/Home-icon-off.svg";
-import EmergencyIconOn from "../../assets/icons/EMSInteract-icon-on.svg";
-import EmergencyIconOff from "../../assets/icons/EMSInteract-icon-off.svg";
-import ContentIconOn from "../../assets/icons/Contents-icon-on.svg";
-import ContentIconOff from "../../assets/icons/Contents-icon-off.svg";
-import MyIconOn from "../../assets/icons/My-icon-off.svg"; // 아이콘 추가해야함
-import MyIconOff from "../../assets/icons/My-icon-off.svg";
+import HomeIconOn from "../../assets/icons/home-icon-on.svg";
+import HomeIconOff from "../../assets/icons/home-icon-off.svg";
+import EmergencyIconOn from "../../assets/icons/emergency-Interact-icon-on.svg";
+import EmergencyIconOff from "../../assets/icons/emergency-Interact-icon-off.svg";
+import ContentIconOn from "../../assets/icons/contents-icon-on.svg";
+import ContentIconOff from "../../assets/icons/contents-icon-off.svg";
+import MyIconOn from "../../assets/icons/my-icon-off.svg"; // 아이콘 추가해야함
+import MyIconOff from "../../assets/icons/my-icon-off.svg";
 
 const BottomNav = () => {
   const [selectedMenu, setSelectedMenu] = useState("home");

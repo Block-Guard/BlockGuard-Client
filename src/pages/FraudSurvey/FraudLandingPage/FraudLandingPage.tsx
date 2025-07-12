@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import HomeBgShieild from "../../../assets/homeBackgroundShield.svg";
-import Blockee from "../../../assets/Blockee-cropped-fit.svg";
+import HomeBgShieild from "../../../assets/home-background-shield-image.svg";
+import Blockee from "../../../assets/character-cropped-fit-image.svg";
 
 const FraudLandingPage = () => {
   const navigate = useNavigate();

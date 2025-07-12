@@ -1,4 +1,4 @@
-import RightArrowIcon from "../../../../assets/icons/RightArrow-sm.svg";
+import RightArrowIcon from "../../../../assets/icons/arrow-right-darkblue-sm-icon.svg";
 
 type Props = {
   step: number;

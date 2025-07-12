@@ -1,6 +1,6 @@
 import FraudCheck from "./FraudCheck";
 import LinkNumberCheck from "./LinkNumberCheck";
-import ShieldImg from "../../../assets/homeBackgroundShield.svg";
+import ShieldImg from "../../../assets/home-background-shield-image.svg";
 
 const HomeCheck = () => {
   return (
