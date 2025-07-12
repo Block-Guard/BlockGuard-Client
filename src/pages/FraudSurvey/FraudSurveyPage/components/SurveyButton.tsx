@@ -1,4 +1,4 @@
-import { useFraudStore } from "../../../stores/fraudStore";
+import { useFraudStore } from "../../../../stores/fraudStore";
 
 interface SurveyButtonProps {
     text: string;

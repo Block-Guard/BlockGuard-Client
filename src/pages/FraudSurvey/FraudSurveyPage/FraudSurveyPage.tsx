@@ -1,6 +1,6 @@
 import SurveyButton from "./components/SurveyButton";
-import { surveyContent } from "./surveyContent";
-import { useFraudStore } from "../../stores/fraudStore";
+import { surveyContent } from "../surveyContent";
+import { useFraudStore } from "../../../stores/fraudStore";
 
 const FraudSurveyPage = () => {
 
@@ -19,7 +19,7 @@ const FraudSurveyPage = () => {
                     </span>
                 ) : (
                     <span className="text-zinc-300 text-2xl font-bold leading-9">
-                        {"(선택)"}
+                        {" (선택)"}
                     </span>
                 )}
             </div>
