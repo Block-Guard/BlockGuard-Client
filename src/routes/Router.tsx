@@ -8,6 +8,8 @@ import FraudSurveyPage from "../pages/FraudSurveyPage/FraudSurveyPage";
 import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
+import EmergencyReportLandingPage from "../pages/Emergency/EmergencyReport/EmergencyReportLandingPage";
+import ReportStepPage from "../pages/Emergency/EmergencyReport/ReportStepPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
         path: "organ-list",
         // 두 단어로 이루어진 url에는 대시(-)를 쓰는 것이 유리하다.
         element: <OrganListPage />,
+      },
+      {
+        path: "report-landing",
+        element: <EmergencyReportLandingPage />,
+      },
+      {
+        path: "report-step",
+        element: <ReportStepPage />,
       },
     ],
   },

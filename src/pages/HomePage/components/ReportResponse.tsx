@@ -1,4 +1,6 @@
 import ReportProgressCard from "../../../components/ReportProgressCard/ReportProgressCard";
+import SirenIcon from "../../../assets/icons/Siren-icon.svg";
+import RightArrowIcon from "../../../assets/icons/RightArrow-icon.svg";
 
 let currentProgress = 3;
 let totalProgress = 4;
@@ -19,11 +21,11 @@ const ReportResponse = () => {
               <div className="text-slate-950 text-xl font-bold leading-8">
                 긴급 신고/대응 바로가기
               </div>
-              <img src="icons/Emergency-icon.svg" alt="긴급 신고 아이콘" />
+              <img src={SirenIcon} alt="긴급 신고 아이콘" />
             </div>
 
             <button type="button" aria-label="다음으로 이동">
-              <img src="icons/RightArrow-icon.svg" alt="오른쪽 화살표" />
+              <img src={RightArrowIcon} alt="오른쪽 화살표" />
             </button>
           </div>
 

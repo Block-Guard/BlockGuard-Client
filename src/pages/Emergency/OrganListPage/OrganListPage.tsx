@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { dummyOrgan } from "../organList";
 import Header from "../../../components/Header/Header";
+import LeftArrowIcon from "../../../assets/icons/ArrowLeftBlack-icon.svg";
+import SiteArrowIcon from "../../../assets/icons/site-arrow-icon.svg";
 
 const OrganListPage = () => {
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const OrganListPage = () => {
         }
         leftChild={
           <img
-            src="/public/icons/ArrowLeftBlack-icon.svg"
+            src={LeftArrowIcon}
             alt="뒤로가기"
             onClick={() => navigate(-1)}
           />
@@ -55,10 +57,7 @@ const OrganListPage = () => {
                 <span className="text-primary-400 font-semibold text-[14px] leading-4">
                   사이트 바로가기
                 </span>
-                <img
-                  src="/public/icons/site-arrow-icon.svg"
-                  alt="화살표 아이콘"
-                />
+                <img src={SiteArrowIcon} alt="화살표 아이콘" />
               </a>
             </div>
           );

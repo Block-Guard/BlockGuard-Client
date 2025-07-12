@@ -1,3 +1,5 @@
+import SiteArrowIcon from "../../../../assets/icons/site-arrow-icon.svg";
+
 type Props = {
   organData: {
     id: number;
@@ -37,7 +39,7 @@ const OrganCard = ({ organData, bgColor }: Props) => {
         <span className="text-primary-400 font-semibold text-[14px] leading-4">
           사이트 바로가기
         </span>
-        <img src="/public/icons/site-arrow-icon.svg" alt="화살표 아이콘" />
+        <img src={SiteArrowIcon} alt="화살표 아이콘" />
       </a>
     </div>
   );

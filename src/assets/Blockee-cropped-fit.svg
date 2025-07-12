@@ -1,0 +1,44 @@
+<svg width="182" height="154" viewBox="9 13 162 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g filter="url(#filter0_d_1415_5134)">
+    <foreignObject x="-65.7514" y="-79.7793" width="314.247" height="314.247">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(49.85px);clip-path:url(#bgblur_0_1415_5134_clip_path);height:100%;width:100%">
+      </div>
+    </foreignObject>
+    <circle data-figma-bg-blur-radius="99.6928" cx="91.3723" cy="77.3444" r="57.4308" fill="white" fill-opacity="0.51" />
+    <rect x="18.6782" y="60.0996" width="144.944" height="34.185" rx="17.0925" fill="url(#paint0_linear_1415_5134)" />
+    <foreignObject x="-65.9734" y="-80.6152" width="314.247" height="314.247">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(49.85px);clip-path:url(#bgblur_1_1415_5134_clip_path);height:100%;width:100%">
+      </div>
+    </foreignObject>
+    <circle data-figma-bg-blur-radius="99.6928" cx="91.1503" cy="76.5085" r="57.4308" fill="url(#paint1_radial_1415_5134)" fill-opacity="0.72" />
+    <rect x="48.7615" y="57.3645" width="83.4114" height="39.6546" rx="19.8273" fill="white" fill-opacity="0.62" />
+    <ellipse cx="76.1087" cy="76.5089" rx="4.1022" ry="5.4696" fill="#437EFC" />
+    <ellipse cx="106.192" cy="76.5089" rx="4.1022" ry="5.4696" fill="#437EFC" />
+  </g>
+  <defs>
+    <filter id="filter0_d_1415_5134" x="0.378162" y="0.777637" width="181.544" height="152.298" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+      <feOffset />
+      <feGaussianBlur stdDeviation="9.15" />
+      <feComposite in2="hardAlpha" operator="out" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.80095 0 0 0 0 0.80095 0 0 0 0 0.80095 0 0 0 1 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1415_5134" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1415_5134" result="shape" />
+    </filter>
+    <clipPath id="bgblur_0_1415_5134_clip_path" transform="translate(65.7514 79.7793)">
+      <circle cx="91.3723" cy="77.3444" r="57.4308" />
+    </clipPath>
+    <clipPath id="bgblur_1_1415_5134_clip_path" transform="translate(65.9734 80.6152)">
+      <circle cx="91.1503" cy="76.5085" r="57.4308" />
+    </clipPath>
+    <linearGradient id="paint0_linear_1415_5134" x1="18.6782" y1="77.1921" x2="163.623" y2="77.1921" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#437EFC" />
+      <stop offset="1" stop-color="#FF626A" />
+    </linearGradient>
+    <radialGradient id="paint1_radial_1415_5134" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(91.1503 76.5085) rotate(90) scale(57.4308)">
+      <stop stop-color="#437EFC" />
+      <stop offset="1" stop-color="white" />
+    </radialGradient>
+  </defs>
+</svg>
