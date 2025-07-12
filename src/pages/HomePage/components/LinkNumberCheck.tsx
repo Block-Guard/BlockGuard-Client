@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SearchIcon from "../../../assets/icons/Search-icon.svg";
 
 const LinkNumberCheck = () => {
   const [urlNumber, setUrlNumber] = useState("");
@@ -18,7 +19,7 @@ const LinkNumberCheck = () => {
         클릭 한 번으로 위험 확인
       </div>
       <div className="flex flex-row text-white/50 text-sm font-medium leading-none">
-        <img src="icons/Search-icon.svg" className="mr-1" alt="돋보기 아이콘" />
+        <img src={SearchIcon} className="mr-1" alt="돋보기 아이콘" />
         <input
           type="text"
           className="w-full focus:outline-none focus:ring-0 text-white text-sm font-medium leading-none"

@@ -1,13 +1,18 @@
 import React from "react";
 
 type Props = {
-  title: React.ReactNode;
-  leftChild: React.ReactNode;
-  rightChild: React.ReactNode;
+  title?: React.ReactNode;
+  leftChild?: React.ReactNode;
+  rightChild?: React.ReactNode;
   bgColor?: string;
 };
 
-const Header = ({ title, leftChild, rightChild, bgColor = "#fff" }: Props) => {
+const Header = ({
+  title = <></>,
+  leftChild = <></>,
+  rightChild = <></>,
+  bgColor = "#fff",
+}: Props) => {
   return (
     <header
       className="w-full fixed flex flex-row items-center px-6 py-[19px]"

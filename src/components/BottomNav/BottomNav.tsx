@@ -1,6 +1,14 @@
 import { useLocation } from "react-router-dom";
 import BottomNavItem from "./BottomNavItem";
 import { useEffect, useState } from "react";
+import HomeIconOn from "../../assets/icons/Home-icon-on.svg";
+import HomeIconOff from "../../assets/icons/Home-icon-off.svg";
+import EmergencyIconOn from "../../assets/icons/EMSInteract-icon-on.svg";
+import EmergencyIconOff from "../../assets/icons/EMSInteract-icon-off.svg";
+import ContentIconOn from "../../assets/icons/Contents-icon-on.svg";
+import ContentIconOff from "../../assets/icons/Contents-icon-off.svg";
+import MyIconOn from "../../assets/icons/My-icon-off.svg"; // 아이콘 추가해야함
+import MyIconOff from "../../assets/icons/My-icon-off.svg";
 
 const BottomNav = () => {
   const [selectedMenu, setSelectedMenu] = useState("home");
@@ -26,29 +34,29 @@ const BottomNav = () => {
          bg-white border-t border-gray-200 box-border z-50"
     >
       <BottomNavItem
-        imageOnSrc="/icons/Home-icon-on.svg"
-        imageOffSrc="/icons/Home-icon-off.svg"
+        imageOnSrc={HomeIconOn}
+        imageOffSrc={HomeIconOff}
         isSelected={selectedMenu === "/home"}
         text="홈"
       />
 
       <BottomNavItem
-        imageOnSrc="/icons/EMSInteract-icon-on.svg"
-        imageOffSrc="/icons/EMSInteract-icon-off.svg"
+        imageOnSrc={EmergencyIconOn}
+        imageOffSrc={EmergencyIconOff}
         isSelected={selectedMenu === "/emergency"}
         text="긴급대응"
       />
 
       <BottomNavItem
-        imageOnSrc="/icons/Contents-icon-on.svg"
-        imageOffSrc="/icons/Contents-icon-off.svg"
+        imageOnSrc={ContentIconOn}
+        imageOffSrc={ContentIconOff}
         isSelected={selectedMenu === "/create"}
         text="콘텐츠"
       />
 
       <BottomNavItem
-        imageOnSrc="/icons/My-icon-on.svg"
-        imageOffSrc="/icons/My-icon-off.svg"
+        imageOnSrc={MyIconOn}
+        imageOffSrc={MyIconOff}
         isSelected={selectedMenu === "/my"}
         text="마이"
       />

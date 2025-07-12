@@ -1,4 +1,5 @@
 import Button from "../../../../components/Button/Button";
+import PhoneCallIcon from "../../../../assets/icons/phone-call-icon.png";
 
 type Props = {
   title: string;
@@ -11,11 +12,7 @@ const QuickReportCard = ({ title }: Props) => {
   return (
     <div className="flex flex-row bg-primary-200 rounded-2xl border-blur-sm py-3 px-[13px] justify-between items-center">
       <div className="flex flex-row gap-3">
-        <img
-          className="w-[18px]"
-          src="/public/icons/phone-call-icon.png"
-          alt="전화기 아이콘"
-        />
+        <img className="w-[18px]" src={PhoneCallIcon} alt="전화기 아이콘" />
         <span className="font-bold text-[16px] text-monochrome-700 leading-5">
           {title}
         </span>

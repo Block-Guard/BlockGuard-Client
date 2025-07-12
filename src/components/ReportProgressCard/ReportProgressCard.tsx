@@ -1,3 +1,5 @@
+import RightArrowIcon from "../../assets/icons/RightArrow-icon.svg";
+
 type Props = {
   hasProgress: boolean;
   currentProgress: number;
@@ -18,7 +20,7 @@ const ReportProgressCard = ({
           진행 중인 신고현황
         </div>
         <button type="button" aria-label="다음으로 이동">
-          <img src="icons/RightArrow-icon.svg" alt="오른쪽 화살표" />
+          <img src={RightArrowIcon} alt="오른쪽 화살표" />
         </button>
       </div>
       {hasProgress ? (

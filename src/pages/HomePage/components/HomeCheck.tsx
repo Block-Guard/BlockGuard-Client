@@ -1,9 +1,10 @@
 import FraudCheck from "./FraudCheck";
 import LinkNumberCheck from "./LinkNumberCheck";
+import ShieldImg from "../../../assets/homeBackgroundShield.svg";
 
 const HomeCheck = () => {
   return (
-    <div className="w-full relative p-6 pb-9 bg-blue-500 rounded-bl-[20px] rounded-br-[20px]">
+    <div className="w-full relative p-6 pb-9 bg-blue-500">
       <div className="justify-start font-ncs-radhiumz text-blue-50 text-base leading-loose">
         Block Guard
       </div>
@@ -18,10 +19,7 @@ const HomeCheck = () => {
         블락이가 피싱여부를 분석해드려요!
       </div>
 
-      <img
-        src="/public/homeBackgroundShield.svg"
-        className="absolute right-0 top-33"
-      />
+      <img src={ShieldImg} className="absolute right-0 top-33" />
 
       <div className="flex flex-col items-center">
         <FraudCheck />
