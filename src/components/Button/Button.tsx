@@ -18,8 +18,8 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const fontSize = size === "lg" ? "22px" : "14px";
-  const fontWeight = size === "lg" ? "font-bold" : "font-normal";
-  const paddingClass = size === "lg" ? "pt-3 pb-3" : "pt-2 pb-2";
+  const fontWeight = size === "lg" ? "font-semibold" : "font-normal";
+  const paddingClass = size === "lg" ? "py-3" : "py-2 px-[10px]";
   const isDiabled = disabled ? "bg-monochrome-400" : "bg-primary-400";
 
   return (
