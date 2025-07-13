@@ -26,7 +26,7 @@ const FraudMessagePage = () => {
           <img src={ImgUploadIcon} alt="이미지 업로드" />
         </div>
 
-        <div className="w-[50%] h-11 px-6 py-3.5 bg-gray-100 rounded-[10px] inline-flex justify-center items-center gap-2.5">
+        <div className="h-11 px-6 py-3.5 bg-gray-100 rounded-[10px] inline-flex justify-center items-center gap-2.5">
           <div className="text-gray-400 text-lg font-medium leading-relaxed">
             캡처 이미지 첨부
           </div>
