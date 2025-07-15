@@ -1,24 +1,48 @@
-import { useFraudStore } from "../../../../stores/fraudStore";
+import { STEP_CONFIG, useFraudStore } from "../../../../stores/fraudStore";
 
 interface SurveyButtonProps {
     text: string;
 }
 
+
 const SurveyButton = ({ text }: SurveyButtonProps) => {
-    const { selectedAnswer, selectAnswer } = useFraudStore();
+
+    // const { progress, currentStepAnswers,
+    // toggleAnswer, setSingleAnswer, setBooleanAnswer } = useFraudStore();
+    const { progress, currentStepAnswers,
+        toggleAnswer, setSingleAnswer } = useFraudStore();
+
+
+    const currentConfig = STEP_CONFIG[progress];
+    const isSelected = currentStepAnswers.includes(text);
+
+    const handleClick = () => {
+        if (!currentConfig)
+            return;
+
+        if (currentConfig.isMultiple) {
+            toggleAnswer(text);
+        } else {
+            if (isSelected) {
+                setSingleAnswer('');
+            } else {
+                setSingleAnswer(text);
+            }
+        }
+    };
 
     return (
         <div className="w-full">
-            {selectedAnswer === text ? (
+            {isSelected ? (
                 <div data-property-1="Selected" className="w-full h-15 px-4 py-3.5 bg-blue-300 rounded-xl inline-flex justify-center items-center gap-1.5"
-                    onClick={() => selectAnswer("")}>
+                    onClick={handleClick}>
                     <div className="text-white text-xl font-bold leading-loose">
                         {text}
                     </div>
                 </div>
             ) : (
                 <div data-property-1="Default" className="w-full h-15 px-4 py-3.5 bg-gray-100 rounded-xl inline-flex justify-center items-center gap-1.5"
-                    onClick={() => selectAnswer(text)}>
+                    onClick={handleClick}>
                     <div className="text-slate-950 text-xl font-semibold leading-loose">
                         {text}
                     </div>

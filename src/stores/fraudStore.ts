@@ -1,34 +1,65 @@
 import type { NavigateFunction } from 'react-router-dom';
 import { create } from 'zustand';
+import type { Status, StepConfig, SurveyAnswers } from '../types/fraud-types';
 
-type Status = 'idle' | 'loading' | 'success' | 'error';
+export const STEP_CONFIG: Record<number, StepConfig> = {
+    1: { key: 'contactMethod', isMultiple: false, isRequired: true },
+    2: { key: 'counterpart', isMultiple: false, isRequired: true },
+    3: { key: 'requestedAction', isMultiple: true, isRequired: true },
+    4: { key: 'requestedInfo', isMultiple: true, isRequired: true },
+    5: { key: 'appType', isMultiple: false, isRequired: false },
+    6: { key: 'atmGuided', isMultiple: false, isRequired: false },
+    7: { key: 'suspiciousLinks', isMultiple: true, isRequired: false }, // 또는 suspiciousPhoneNumbers
+    8: { key: 'imageUrls', isMultiple: true, isRequired: false }, // 또는 messageContent
+    9: { key: 'additionalDescription', isMultiple: false, isRequired: false },
+};
 
 interface FraudState {
-    selectedAnswer: string | null; // 현재 선택된 답변 값
-    status: Status; // 서버 전송 상태
-    progress: number; //현재 설문 단계
-    answers: string[]; // ✅ 각 단계별 답변을 저장할 배열
+    currentStepAnswers: string[]; // 현재 단계에서 선택된 답변들
+    status: Status;
+    progress: number;
+    answers: SurveyAnswers; // ✅ 객체 형태로 답변 저장
 }
 
 interface FraudActions {
-    selectAnswer: (answer: string) => void; // 답변 값을 바꾸는 함수
+    toggleAnswer: (answer: string) => void;
+    setSingleAnswer: (answer: string) => void; // ✅ 단일 선택용 함수
     recordAnswerAndProceed: (navigate: NavigateFunction) => void;
-    submitAnswer: () => Promise<void>; // 답변 값을 서버로 전송하는 비동기 함수
+    submitAnswer: () => Promise<void>;
     setProgress: (progress: number) => void;
-    reset: () => void; // 상태를 초기화하는 함수
+    reset: () => void;
+    loadAnswersForStep: (step: number) => void;
+    setStepKey: (step: number, key: keyof SurveyAnswers) => void; // ✅ 동적 키 설정 (7, 8단계용)
 }
 
-// ✅ 앱 시작 시 localStorage에서 기존 답변을 불러오도록 초기 상태 설정
-const getInitialAnswers = (): string[] => {
+
+// ✅ localStorage에서 기존 답변을 불러오는 함수
+const getInitialAnswers = (): SurveyAnswers => {
     if (typeof window !== 'undefined') {
         const savedAnswers = localStorage.getItem('surveyAnswers');
-        return savedAnswers ? JSON.parse(savedAnswers) : [];
+        return savedAnswers ? JSON.parse(savedAnswers) : {};
     }
-    return [];
+    return {};
 };
 
-const initialState: Omit<FraudState, 'answers'> = {
-    selectedAnswer: null,
+// ✅ 특정 단계의 답변을 불러오는 함수
+const getAnswersForStep = (step: number, answers: SurveyAnswers): string[] => {
+    const config = STEP_CONFIG[step];
+    if (!config) return [];
+
+    const value = answers[config.key];
+
+    if (config.isMultiple) {
+        return Array.isArray(value) ? value : [];
+    } else {
+        if (typeof (value) === "string") {
+            return [value];
+        }
+        return []; //임시 처리 value ? [value] : [];
+    }
+};
+
+const initialState: Omit<FraudState, 'answers' | 'currentStepAnswers'> = {
     status: 'idle',
     progress: 1,
 };
@@ -36,67 +67,164 @@ const initialState: Omit<FraudState, 'answers'> = {
 export const useFraudStore = create<FraudState & FraudActions>((set, get) => ({
     ...initialState,
     answers: getInitialAnswers(),
+    currentStepAnswers: [],
+
     /**
-     * 답변 값을 선택(변경)하는 함수
-     * @param answer - 사용자가 선택한 답변
+     * ✅ 다중 선택용 토글 함수
      */
-    selectAnswer: (answer) => {
-        set({ selectedAnswer: answer }); // 답변을 선택하면 상태를 다시 'idle'로 변경
+    toggleAnswer: (answer) => {
+        const { currentStepAnswers } = get();
+
+        const isSelected = currentStepAnswers.includes(answer);
+        let newCurrentAnswers: string[];
+
+        if (isSelected) {
+            newCurrentAnswers = currentStepAnswers.filter(a => a !== answer);
+            console.log(`답변 "${answer}" 삭제됨`);
+        } else {
+            newCurrentAnswers = [...currentStepAnswers, answer];
+            console.log(`답변 "${answer}" 추가됨`);
+        }
+
+        set({ currentStepAnswers: newCurrentAnswers });
     },
 
-    //답변을 기록하고, progress를 증가시키며, 조건에 따라 라우팅하는 함수
+    /**
+     * ✅ 단일 선택용 함수
+     */
+    setSingleAnswer: (answer) => {
+        set({ currentStepAnswers: [answer] });
+        console.log(`단일 답변 "${answer}" 설정됨`);
+    },
+
+    /**
+     * ✅ 특정 단계의 답변을 불러오는 함수
+     */
+    loadAnswersForStep: (step) => {
+        const { answers } = get();
+        const currentAnswers = getAnswersForStep(step, answers);
+        set({ currentStepAnswers: currentAnswers });
+        console.log(`${step}단계 답변 불러옴:`, currentAnswers);
+    },
+
+    /**
+     * ✅ 동적 키 설정 함수 (7, 8단계에서 사용)
+     */
+    setStepKey: (step, key) => {
+        const newConfig = { ...STEP_CONFIG[step], key };
+        STEP_CONFIG[step] = newConfig;
+        console.log(`${step}단계 키를 "${key}"로 설정함`);
+    },
+
+    /**
+     * ✅ 현재 단계의 답변을 저장하고 다음 단계로 진행하는 함수
+     */
     recordAnswerAndProceed: (navigate) => {
-        const { selectedAnswer, progress, answers } = get();
+        const { currentStepAnswers, progress, answers } = get();
+        const config = STEP_CONFIG[progress];
 
+        if (!config) {
+            console.error(`${progress}단계 설정을 찾을 수 없습니다.`);
+            return;
+        }
 
-        // 현재 단계에서 선택된 답변이 없으면 진행하지 않음
-        if (selectedAnswer === null) {
+        // 필수 답변 검증
+        if (config.isRequired && currentStepAnswers.length === 0) {
             alert('답변을 선택해주세요.');
             return;
         }
 
-        // 1. 기존 답변 배열에 현재 선택된 답변을 추가
-        const newAnswers = [...answers, selectedAnswer];
+        // 답변 저장
+        const newAnswers = { ...answers };
+        const key = config.key;
+
+        // ✅ 일단 any로 타협.. 추후 개선.
+        if (config.isMultiple) {
+            // 다중 선택: 배열로 저장
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            newAnswers[key] = currentStepAnswers as any;
+        } else {
+            // 단일 선택: 값으로 저장
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            newAnswers[key] = currentStepAnswers[0] || undefined as any;
+        }
+
         const newProgress = progress + 1;
 
-        const nextSelectedAnswer = progress >= 5 ? "" : null; //선택질문에 대해 빈 값 디폴트
-
-        // 2. Zustand 상태와 localStorage를 함께 업데이트
+        // 상태 업데이트
         set({
             answers: newAnswers,
             progress: newProgress,
-            selectedAnswer: nextSelectedAnswer, // 다음 질문을 위해 선택 초기화
+            currentStepAnswers: [], // 다음 단계를 위해 초기화
             status: 'idle',
         });
+
+        // localStorage 업데이트
         localStorage.setItem('surveyAnswers', JSON.stringify(newAnswers));
 
-        console.log(`[${progress}단계] 답변 "${selectedAnswer}" 기록 완료. 다음 단계로 이동합니다.`);
+        console.log(`[${progress}단계] 답변 저장 완료:`, currentStepAnswers);
+        console.log(`키 "${key}"에 저장됨:`, newAnswers[key]);
+        console.log('전체 답변 상태:', newAnswers);
 
-        // 3. progress가 6 이상이면 다음 설문 페이지로 라우팅
-        if (newProgress >= 7) {
-            console.log(`progress가 ${newProgress}이므로 라우팅을 수행합니다.`);
-            navigate(`/fraud-analysis/survey/${newProgress}`);
+        // 다음 단계 답변 불러오기
+        if (newProgress <= 6) {
+            get().loadAnswersForStep(newProgress);
+        }
+
+        if (newProgress > 6 && newProgress <= 9) {
+            console.log("직접 입력 설문페이지로 이동")
+            navigate(`/fraud-analysis/survey/${newProgress}`)
+        }
+
+        // 설문 완료 시 라우팅
+        if (newProgress > 9) {
+            console.log('설문 완료, 결과 페이지로 이동');
+            navigate('/fraud-analysis/result');
         }
     },
 
     submitAnswer: async () => {
-        const { answers, status } = get(); // get()으로 최신 상태를 가져옵니다.
+        const { answers, status } = get();
 
-        // 유효성 검사: 답변이 없거나, 이미 전송 중이면 함수를 중단합니다.
-        if (status === 'loading' || answers.length === 0) {
+        if (status === 'loading') {
             return;
         }
 
-        // 1. 로딩 상태로 변경하여 UI에 피드백을 줍니다.
+        // 필수 답변 검증
+        const requiredKeys = Object.entries(STEP_CONFIG)
+            // `__` 에 대한 불필요한 unused 경고 제거
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            .filter(([__, config]) => config.isRequired)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            .map(([__, config]) => config.key);
+
+        const missingRequired = requiredKeys.filter(key => !answers[key]);
+        if (missingRequired.length > 0) {
+            console.error('필수 답변이 누락됨:', missingRequired);
+            alert('필수 답변을 모두 입력해주세요.');
+            return;
+        }
+
         set({ status: 'loading' });
 
         try {
-            // 실제로는 여기에 모든 답변(answers)을 body에 담아 API를 호출합니다.
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            console.log('✅ 서버로 모든 답변 전송 성공:', answers);
+            // ✅ 최종 전송 형태로 데이터 전송
+            const response = await fetch('/api/fraud-analysis', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(answers),
+            });
 
+            if (!response.ok) {
+                throw new Error('서버 응답 오류');
+            }
+
+            console.log('✅ 서버로 답변 전송 성공:', answers);
             set({ status: 'success' });
-            // 성공 시 상태와 localStorage를 모두 초기화
+
+            // 성공 시 초기화
             get().reset();
 
         } catch (error) {
@@ -106,12 +234,17 @@ export const useFraudStore = create<FraudState & FraudActions>((set, get) => ({
     },
 
     setProgress: (newProgress) => {
-        set({ progress: newProgress })
+        set({ progress: newProgress });
+        get().loadAnswersForStep(newProgress);
     },
 
     reset: () => {
         localStorage.removeItem('surveyAnswers');
-        set({ ...initialState, answers: [] });
+        set({
+            ...initialState,
+            answers: {},
+            currentStepAnswers: []
+        });
         console.log('상태와 localStorage가 초기화되었습니다.');
     },
 }));

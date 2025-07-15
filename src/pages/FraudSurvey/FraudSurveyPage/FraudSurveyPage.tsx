@@ -4,6 +4,7 @@ import { useFraudStore } from "../../../stores/fraudStore";
 
 const FraudSurveyPage = () => {
   const { progress } = useFraudStore();
+
   const currentSurvey = surveyContent.find((s) => s.progress === progress);
 
   return (
@@ -23,8 +24,9 @@ const FraudSurveyPage = () => {
 
       <div className="flex flex-col gap-4 pb-4">
         {currentSurvey?.answers.map((surveyItem) => {
-          return <SurveyButton text={surveyItem} />;
+          return <SurveyButton key={`${progress}-${surveyItem}`} text={surveyItem} />;
         })}
+
       </div>
     </div>
   );
