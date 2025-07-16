@@ -9,7 +9,7 @@ import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
 
-import EmergencyReportLandingPage from "../pages/Emergency/EmergencyReport/EmergencyReportLandingPage";
+import EmergencyReportOverviewPage from "../pages/Emergency/EmergencyReport/EmergencyReportOverviewPage";
 
 import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
 import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
@@ -84,8 +84,8 @@ const router = createBrowserRouter([
         element: <OrganListPage />,
       },
       {
-        path: "report-landing",
-        element: <EmergencyReportLandingPage />,
+        path: "report-overview",
+        element: <EmergencyReportOverviewPage />,
       },
       {
         path: "report-step",

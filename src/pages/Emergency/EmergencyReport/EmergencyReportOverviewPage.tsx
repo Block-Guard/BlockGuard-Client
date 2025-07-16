@@ -7,7 +7,7 @@ import Step4Img from "../../../assets/report-guide/step4.svg";
 import ReportStepCard from "./components/ReportStepCard";
 import { useNavigate } from "react-router-dom";
 
-const EmergencyReportLandingPage = () => {
+const EmergencyReportOverviewPage = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-between w-full h-full">
@@ -64,4 +64,4 @@ const EmergencyReportLandingPage = () => {
   );
 };
 
-export default EmergencyReportLandingPage;
+export default EmergencyReportOverviewPage;

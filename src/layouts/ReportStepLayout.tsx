@@ -40,7 +40,7 @@ const ReportStepLayout = () => {
           <img
             src={CloseIcon}
             alt="긴급 신고 가이드 닫기"
-            onClick={() => navigate("/emergency/report-landing")}
+            onClick={() => navigate("/emergency/report-overview")}
           />
         }
         bgColor="#fff"
