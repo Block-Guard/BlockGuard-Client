@@ -8,7 +8,7 @@ type Props = {
   setIsDone: (value: boolean) => void;
 };
 
-const RequiredCheckList = ({ index, title, isDone, setIsDone }: Props) => {
+const RequiredActionCheck = ({ index, title, isDone, setIsDone }: Props) => {
   const handleToCheck = () => {
     setIsDone(!isDone);
   };
@@ -28,4 +28,4 @@ const RequiredCheckList = ({ index, title, isDone, setIsDone }: Props) => {
   );
 };
 
-export default RequiredCheckList;
+export default RequiredActionCheck;

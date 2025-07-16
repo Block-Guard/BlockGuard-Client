@@ -1,4 +1,4 @@
-import RequiredCheckList from "./components/RequiredCheckList";
+import RequiredActionCheck from "./components/RequiredActionCheck";
 import { useState } from "react";
 import PhoneIcon from "../../../assets/report-guide/report-phone-icon.png";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
@@ -21,19 +21,19 @@ const ReportStep1 = () => {
         <span className="text-highlight-1 text-[16px] font-bold leading-5">
           필수 조치
         </span>
-        <RequiredCheckList
+        <RequiredActionCheck
           index={1}
           title="신고 접수하기"
           isDone={reportReceived}
           setIsDone={setReportReceived}
         />
-        <RequiredCheckList
+        <RequiredActionCheck
           index={2}
           title="증거 확보하기"
           isDone={secureEvidence}
           setIsDone={setSecureEvidence}
         />
-        <RequiredCheckList
+        <RequiredActionCheck
           index={3}
           title="경찰서 방문 및 사건접수"
           isDone={caseFiled}

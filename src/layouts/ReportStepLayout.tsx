@@ -70,7 +70,13 @@ const ReportStepLayout = () => {
           >
             <img src={UpArrowIcon} alt="맨위로" />
           </div>
-          <Button onClick={() => console.log("다음 단계로")}>다음 단계</Button>
+          <Button
+            onClick={() =>
+              navigate(`/emergency/report-step/${currentStep + 1}`)
+            }
+          >
+            다음 단계
+          </Button>
         </div>
       </div>
     </div>
