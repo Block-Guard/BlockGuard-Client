@@ -20,6 +20,7 @@ import ReportStepLayout from "../layouts/ReportStepLayout";
 import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
 import ReportStep3 from "../pages/Emergency/EmergencyReport/ReportStep3";
 import ReportStep4 from "../pages/Emergency/EmergencyReport/ReportStep4";
+import EmergencyReportCompletionPage from "../pages/Emergency/EmergencyReport/EmergencyReportCompletionPage";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
             element: <ReportStep4 />,
           },
         ],
+      },
+      {
+        path: "report-completion",
+        element: <EmergencyReportCompletionPage />,
       },
     ],
   },
