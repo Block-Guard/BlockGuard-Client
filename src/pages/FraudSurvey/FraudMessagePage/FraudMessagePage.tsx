@@ -1,16 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ImgUploadIcon from "../../../assets/icons/image-upload-icon.svg";
 import XWhiteIcon from "../../../assets/icons/x-white-icon.svg";
 
 const FraudMessagePage = () => {
 
   const [msgText, setMsgText] = useState('');
-  const [msgImage, setMsgImage] = useState([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // const handleUploadImg = (e: React.ChangeEvent<FileList>)=>{
   const handleUploadImg = () => {
     fileInputRef.current?.click();
   }
@@ -25,21 +23,22 @@ const FraudMessagePage = () => {
     setPreviewImage(prev => [...prev, ...newImageUrls]);
   }
 
-  const handleDeleteImage = (index: number) => {
-    console.log(index, "번째 이미지 제거하기");
+  const handleDeleteImage = (deleteIndex: number) => {
+    console.log(deleteIndex, "번째 이미지 제거하기");
+    URL.revokeObjectURL(previewImage[deleteIndex]); // 생성된 URL 메모리 제거용
+    const deleted = previewImage.filter((_img, index) => index !== deleteIndex)
+    setPreviewImage(deleted);
   }
+
+  useEffect(()=>{
+    // 컴포넌트 unmount시 클린 업으로 url 메모리 제거
+    return ()=>{
+      previewImage.forEach(file => URL.revokeObjectURL(file))
+    }
+  }, [previewImage])
 
   return (
     <div className="flex flex-col w-full h-full px-6">
-
-      {/* <div className="" onClick={() => {
-        console.log(msgText);
-        console.log(msgImage);
-        console.log(previewImage);
-      }}>
-        임시 전송 버튼
-      </div> */}
-
       <div className="mt-9 mb-9">
         <span className="text-slate-950 text-2xl font-bold leading-9">
           문자 내용을 입력해 주세요
