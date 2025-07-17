@@ -30,10 +30,14 @@ const ReportStepCard = ({ step, title, desc, img, progressState }: Props) => {
   }, [progressState]);
 
   // 진행상태는 로직 만들 예정
+  const onClickToReportStep = () => {
+    if (step !== 1 && progressState === "미완료") return;
+    navigate(`/emergency/report-step/${step}`);
+  };
   return (
     <div
       className="relative flex flex-col justify-between w-full min-h-60 max-w-80 bg-primary-100 rounded-2xl p-[11px] pt-[14px]"
-      onClick={() => navigate(`/emergency/report-step/${step}`)}
+      onClick={onClickToReportStep}
     >
       <div className="flex flex-col gap-[3px] z-10">
         <div className="flex flex-row items-center justify-between">
