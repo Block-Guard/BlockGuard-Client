@@ -20,7 +20,7 @@ const EmergencyResponseStart = () => {
       />
       <Button
         onClick={() => {
-          navigate("/emergency/report-landing");
+          navigate("/emergency/report-overview");
         }}
         isBlur={true}
       >

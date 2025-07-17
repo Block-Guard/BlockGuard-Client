@@ -9,14 +9,18 @@ import FraudLayout from "../layouts/FraudLayout";
 import MainLayout from "../layouts/MainLayout";
 import OrganListPage from "../pages/Emergency/OrganListPage/OrganListPage";
 
-import EmergencyReportLandingPage from "../pages/Emergency/EmergencyReport/EmergencyReportLandingPage";
-import ReportStepPage from "../pages/Emergency/EmergencyReport/ReportStepPage";
+import EmergencyReportOverviewPage from "../pages/Emergency/EmergencyReport/EmergencyReportOverviewPage";
 
 import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
 import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
 import FraudSituationPage from "../pages/FraudSurvey/FraudSituationPage/FraudSituationPage";
 import AnalysisLoadingPage from "../pages/FraudSurvey/AnalysisLoadingPage/AnalysisLoadingPage";
-
+import ReportStep1 from "../pages/Emergency/EmergencyReport/ReportStep1";
+import ReportStepLayout from "../layouts/ReportStepLayout";
+import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
+import ReportStep3 from "../pages/Emergency/EmergencyReport/ReportStep3";
+import ReportStep4 from "../pages/Emergency/EmergencyReport/ReportStep4";
+import EmergencyReportCompletionPage from "../pages/Emergency/EmergencyReport/EmergencyReportCompletionPage";
 
 const router = createBrowserRouter([
   {
@@ -52,24 +56,24 @@ const router = createBrowserRouter([
       },
       {
         path: "survey/7",
-        element: <FraudLinkNumPage />
+        element: <FraudLinkNumPage />,
       },
       {
         path: "survey/8",
-        element: <FraudMessagePage />
+        element: <FraudMessagePage />,
       },
       {
         path: "survey/9",
-        element: <FraudSituationPage />
+        element: <FraudSituationPage />,
       },
       {
         path: "survey/9",
-        element: <FraudSituationPage />
+        element: <FraudSituationPage />,
       },
       {
         path: "survey/result-loading",
-        element: <AnalysisLoadingPage/>
-      }
+        element: <AnalysisLoadingPage />,
+      },
     ],
   },
   {
@@ -81,12 +85,34 @@ const router = createBrowserRouter([
         element: <OrganListPage />,
       },
       {
-        path: "report-landing",
-        element: <EmergencyReportLandingPage />,
+        path: "report-overview",
+        element: <EmergencyReportOverviewPage />,
       },
       {
         path: "report-step",
-        element: <ReportStepPage />,
+        element: <ReportStepLayout />,
+        children: [
+          {
+            path: "1",
+            element: <ReportStep1 />,
+          },
+          {
+            path: "2",
+            element: <ReportStep2 />,
+          },
+          {
+            path: "3",
+            element: <ReportStep3 />,
+          },
+          {
+            path: "4",
+            element: <ReportStep4 />,
+          },
+        ],
+      },
+      {
+        path: "report-completion",
+        element: <EmergencyReportCompletionPage />,
       },
     ],
   },

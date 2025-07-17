@@ -5,11 +5,21 @@ import Step2Img from "../../../assets/report-guide/step2.svg";
 import Step3Img from "../../../assets/report-guide/step3.svg";
 import Step4Img from "../../../assets/report-guide/step4.svg";
 import ReportStepCard from "./components/ReportStepCard";
+import { useNavigate } from "react-router-dom";
 
-const EmergencyReportLandingPage = () => {
+const EmergencyReportOverviewPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-between w-full h-full">
-      <Header leftChild={<img src={LeftArrowIcon} />} />
+      <Header
+        leftChild={
+          <img
+            className="py-[5.5px] pr-1"
+            src={LeftArrowIcon}
+            onClick={() => navigate("/emergency")}
+          />
+        }
+      />
       <div className="overflow-y-scroll pb-10 flex flex-col gap-7 px-6 mt-[72px]">
         <h1
           className="text-monochrome-700 text-2xl font-bold leading-9"
@@ -54,4 +64,4 @@ const EmergencyReportLandingPage = () => {
   );
 };
 
-export default EmergencyReportLandingPage;
+export default EmergencyReportOverviewPage;
