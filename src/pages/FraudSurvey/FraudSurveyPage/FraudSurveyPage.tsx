@@ -1,9 +1,13 @@
 import SurveyButton from "./components/SurveyButton";
 import { surveyContent } from "../surveyContent";
-import { useFraudStore } from "../../../stores/fraudStore";
+import { useOutletContext } from "react-router-dom";
+import type { OutletContext } from "@/types/fraud-types";
+
 
 const FraudSurveyPage = () => {
-  const { progress } = useFraudStore();
+
+  const { surveyInfo } = useOutletContext<OutletContext>();
+  const { progress } = surveyInfo;
 
   const currentSurvey = surveyContent.find((s) => s.progress === progress);
 
@@ -26,7 +30,6 @@ const FraudSurveyPage = () => {
         {currentSurvey?.answers.map((surveyItem) => {
           return <SurveyButton key={`${progress}-${surveyItem}`} text={surveyItem} />;
         })}
-
       </div>
     </div>
   );

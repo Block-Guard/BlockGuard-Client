@@ -1,12 +1,14 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
-import { STEP_CONFIG, useFraudStore } from "../stores/fraudStore";
 import LeftArrowWhiteIcon from "../assets/icons/arrow-left-white-icon.svg";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
+import { canProceed, useFraudSurvey } from "../hooks/useFraudSurvey"
 
 const FraudLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const surveyInfo = useFraudSurvey();
+
 
   const heightSize =
     location.pathname === "/fraud-analysis"
@@ -19,25 +21,10 @@ const FraudLayout = () => {
     setProgress,
     recordAnswerAndProceed,
     reset,
-  } = useFraudStore();
-
-  const currentConfig = STEP_CONFIG[progress];
-
-
-  const canProceed = () => {
-    if (!currentConfig)
-      return false;
-    if (currentConfig.isRequired) {
-      return currentStepAnswers.length > 0 && currentStepAnswers[0] !== "";
-    }
-
-    return true;
-  }
-
+  } = surveyInfo;
 
   const handleBackClick = () => {
-
-    console.log("현재 백클릭에서의 progress : ", progress);
+console.log("현재 백클릭에서의 progress : ", progress);
     if (progress <= 1) {
       reset();
       navigate(-1);
@@ -50,9 +37,9 @@ const FraudLayout = () => {
   };
 
   const handleBtnClick = () => {
-    if (!canProceed()) {
+    if (!canProceed(progress, currentStepAnswers)) {
       alert("답변을 선택해주세요");
-      return
+      return;
     }
     recordAnswerAndProceed(navigate);
   };
@@ -88,7 +75,7 @@ const FraudLayout = () => {
       <main
         className={`${heightSize} bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar`}
       >
-        <Outlet /> {/* 사기분석 설문 내용 렌더링 */}
+        <Outlet context={{surveyInfo }}/> {/* 사기분석 설문 내용 렌더링 */}
       </main>
 
       {location.pathname === "/fraud-analysis" ? null : (
@@ -97,7 +84,7 @@ const FraudLayout = () => {
             onClick={handleBtnClick}
             size="lg"
             isHighlight={false}
-            disabled={!canProceed()}
+            disabled={!canProceed(progress, currentStepAnswers)}
           >
             다음
           </Button>

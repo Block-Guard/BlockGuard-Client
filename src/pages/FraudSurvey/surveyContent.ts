@@ -1,3 +1,85 @@
+
+export const surveyInfoBase =
+    [
+        {
+            progress: 0,
+            key: 'ERROR',
+            isMultiple: false,
+            isRequired: false,
+            currentStepAnswers: "잘못된 접근입니다.",
+        },
+        {
+            progress: 1,
+            key: 'contactMethod',
+            isMultiple: false,
+            isRequired: true,
+            currentStepAnswers: "",
+        },
+        {
+            progress: 2,
+            key: 'counterpart',
+            isMultiple: false,
+            isRequired: true,
+            currentStepAnswers: "",
+        },
+        {
+            progress: 3,
+            key: 'requestedAction',
+            isMultiple: true,
+            isRequired: true,
+            currentStepAnswers: [""],
+        },
+        {
+            progress: 4,
+            key: 'requestedInfo',
+            isMultiple: true,
+            isRequired: true,
+            currentStepAnswers: [""],
+        },
+        {
+            progress: 5,
+            key: 'appType',
+            isMultiple: false,
+            isRequired: false,
+            currentStepAnswers: "",
+        },
+        {
+            progress: 6,
+            key: 'atmGuided',
+            isMultiple: false,
+            isRequired: false,
+            currentStepAnswers: null,
+        },
+        {
+            progress: 7,
+            key1: 'suspiciousLinks',
+            isMultiple: false,
+            isRequired: false,
+            key2: 'suspiciousPhoneNumbers',
+            currentStepAnswers1: [""],
+            currentStepAnswers2: [""],
+        },
+        {
+            progress: 8,
+            key1: 'messageContent',
+            isMultiple: true,
+            isRequired: false,
+            currentStepAnswers1: "",
+
+            key2: 'imageUrls',
+            // isMultiple: true,
+            // isRequired: false,
+            currentStepAnswers: [],
+        },
+        {
+            progress: 9,
+            key: 'additionalDescription',
+            isMultiple: false,
+            isRequired: false,
+            currentStepAnswers: "",
+        },
+    ]
+
 export const surveyContent = [
     {
         question: "연락방식을 선택해 주세요",

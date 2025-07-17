@@ -1,20 +1,20 @@
-import { STEP_CONFIG, useFraudStore } from "../../../../stores/fraudStore";
+import { STEP_CONFIG } from "../../../../hooks/useFraudSurvey";
+import type { OutletContext } from "../../../../types/fraud-types"
+import { useOutletContext } from "react-router-dom";
+
 
 interface SurveyButtonProps {
     text: string;
 }
 
-
 const SurveyButton = ({ text }: SurveyButtonProps) => {
+    const { surveyInfo } = useOutletContext<OutletContext>();
 
-    // const { progress, currentStepAnswers,
-    // toggleAnswer, setSingleAnswer, setBooleanAnswer } = useFraudStore();
-    const { progress, currentStepAnswers,
-        toggleAnswer, setSingleAnswer } = useFraudStore();
-
+    const { progress, currentStepAnswers, toggleAnswer, setSingleAnswer } = surveyInfo;
 
     const currentConfig = STEP_CONFIG[progress];
     const isSelected = currentStepAnswers.includes(text);
+
 
     const handleClick = () => {
         if (!currentConfig)
