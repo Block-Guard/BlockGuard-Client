@@ -6,6 +6,7 @@ import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import Button from "../../../components/Button/Button";
 import ReportActionItem from "./components/ReportActionItem";
 import ReportCheckList from "./components/ReportCheckList";
+import TipPopover from "./components/TipPopover";
 
 const ReportStep1 = () => {
   const [reportReceived, setReportReceived] = useState(false);
@@ -72,7 +73,19 @@ const ReportStep1 = () => {
                 바로 가기
               </Button>
             }
-            tipIcon={<img src={TipIcon} alt="팁" />}
+            tipIcon={
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="팁" />}
+                popoverContent={
+                  <div className="flex flex-col gap-2">
+                    <span>
+                      i) 온라인 접수 후에도 반드시 경찰서에 방문해야해요.
+                    </span>
+                    <span>ii) 본인인증이 필요해요.</span>
+                  </div>
+                }
+              />
+            }
           />
         </div>
       </div>

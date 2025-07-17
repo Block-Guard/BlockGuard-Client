@@ -6,6 +6,7 @@ import PhoneIcon from "../../../assets/report-guide/report-phone-icon.png";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import Button from "../../../components/Button/Button";
+import TipPopover from "./components/TipPopover";
 
 const ReportStep2 = () => {
   const [isRequestedToStopPayment, setIsRequestedToStopPayment] =
@@ -55,7 +56,17 @@ const ReportStep2 = () => {
                 바로 걸기
               </Button>
             }
-            tipIcon={<img src={TipIcon} alt="팁" />}
+            tipIcon={
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="팁" />}
+                popoverContent={
+                  <span>
+                    금융사 및 통신사와 협업한 경찰청 통합신고 대응센터로
+                    연결되어 신고부터 피해구제까지 원스톱 대응이 가능해요.
+                  </span>
+                }
+              />
+            }
           />
           <ReportActionItem
             title="금융감독원 콜센터 (1132)️️️️️️️️"
@@ -65,7 +76,22 @@ const ReportStep2 = () => {
                 바로 걸기
               </Button>
             }
-            tipIcon={<img src={TipIcon} alt="팁" />}
+            tipIcon={
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="팁" />}
+                popoverContent={
+                  <div className="flex flex-col gap-2">
+                    <span>
+                      i) 휴대폰이 해킹되었을 확률이 높으니, 다른사람의
+                      휴대전화를 사용하여 은행 콜센터에 전화하는걸 권장해요.
+                    </span>
+                    <span>
+                      ii) 금융감독원 콜센터는 24시간 언제든 상담이 가능해요.
+                    </span>
+                  </div>
+                }
+              />
+            }
           />
           <ReportActionItem
             title="금융결제원 계좌 통합관리 서비스 ️️️️️️️️️️️️️"
@@ -75,7 +101,16 @@ const ReportStep2 = () => {
                 바로 가기
               </Button>
             }
-            tipIcon={<img src={TipIcon} alt="팁" />}
+            tipIcon={
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="팁" />}
+                popoverContent={
+                  <span>
+                    온라인 신청은 공동 인증서와 휴대폰 본인확인이 필요해요. 
+                  </span>
+                }
+              />
+            }
           />
         </div>
       </div>

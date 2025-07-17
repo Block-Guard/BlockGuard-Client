@@ -42,14 +42,14 @@ const EmergencyReportOverviewPage = () => {
             title="계좌 지급정지 요청"
             desc="경찰청/금융감독원에 피해상황을 즉시 신고해주세요."
             img={Step2Img}
-            progressState="완료"
+            progressState="미완료"
           />
           <ReportStepCard
             step={3}
             title="추가 피해 방지하기"
             desc="명의도용 등 2차 피해를 방지하기 위해 개인정보 보호 조치를 취하세요"
             img={Step3Img}
-            progressState="진행 중"
+            progressState="미완료"
           />
           <ReportStepCard
             step={4}

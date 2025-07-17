@@ -59,7 +59,7 @@ const ReportStepLayout = () => {
         <div className="h-[5px] bg-monochrome-300" />
         <div
           className="absolute left-0 top-0 rounded-r-[90px] h-[5px] bg-primary-400 z-10"
-          style={{ width: `${(currentStep / 4) * 100}%` }}
+          style={{ width: `${(currentStep / 5) * 100}%` }}
         />
       </div>
       <main

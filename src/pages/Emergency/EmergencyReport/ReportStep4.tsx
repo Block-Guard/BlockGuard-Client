@@ -6,6 +6,7 @@ import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipRedIcon from "../../../assets/icons/tip-red-icon.svg";
 import ReportActionItem from "./components/ReportActionItem";
 import Button from "../../../components/Button/Button";
+import TipPopover from "./components/TipPopover";
 
 const ReportStep4 = () => {
   const [isIssuedAccidentFactsConf, setIsIssuedAccidentFactsConf] =
@@ -128,7 +129,23 @@ const ReportStep4 = () => {
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">3</span>
           서면접수(피해구제신청)
-          <img src={TipRedIcon} alt="Tip" />
+          <TipPopover
+            popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+            popoverContent={
+              <div className="flex flex-col gap-2">
+                <span>
+                  i) 서면접수를 하지않고 3영업일+14일이 경과할 경우,
+                  피해구제신청이 없었던 것으로 간주되므로 빠른 시일 내에
+                  서면접수를 완료해주세요.
+                </span>
+                <span>
+                  ii) 피해금 입금내역 등 증거자료 출력이 가능하다면
+                  첨부해주세요.
+                </span>
+              </div>
+            }
+            isBlue={false}
+          />
         </h1>
         <p className="text-[18px] font-normal">
           피해금을 입금한 계좌의 금융회사 또는 사기이용계좌를 관리하는 해당
@@ -149,7 +166,16 @@ const ReportStep4 = () => {
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">4</span>
           채권소멸절차 및 피해금 환급
-          <img src={TipRedIcon} alt="Tip" />
+          <TipPopover
+            popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+            popoverContent={
+              <span>
+                사기이용계좌 명의인의 이의제기와 같은 특별법 제 8조에 해당하는
+                사유 발생 시, 지급정지 및 채권소멸절차가 종료될 수 있습니다.
+              </span>
+            }
+            isBlue={false}
+          />
         </h1>
         <p className="text-[18px] font-normal">
           피해자의 피해구제신청에 따라 금융회사와 금융감독원은 사기이용계좌

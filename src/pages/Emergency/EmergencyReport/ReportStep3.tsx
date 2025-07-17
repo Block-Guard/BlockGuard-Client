@@ -8,6 +8,7 @@ import Button from "../../../components/Button/Button";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import TipRedIcon from "../../../assets/icons/tip-red-icon.svg";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
+import TipPopover from "./components/TipPopover";
 
 const ReportStep3 = () => {
   const [isBlockedBadApp, setBlockedBadApp] = useState(false);
@@ -71,7 +72,17 @@ const ReportStep3 = () => {
           <span className="text-primary-400 mr-[11px]">1</span>
           악성앱 차단하기
           <span className="text-highlight-1 mr-[5px]">*</span>
-          <img src={TipRedIcon} alt="Tip" />
+          <TipPopover
+            popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+            popoverContent={
+              <span>
+                악성 앱이 설치되면 휴대폰으로 거는 전화가 모두 범죄 집단으로
+                연결되기 때문에 반드시 다른 전화기나 인터넷을 사용하여
+                신고절차를 진행해야 해요.
+              </span>
+            }
+            isBlue={false}
+          />
         </h1>
         <p className="text-[18px] font-normal">
           악성 앱이 설치되면 휴대폰이 해킹되어 내 개인정보가 모두 범죄 집단에게
@@ -91,7 +102,21 @@ const ReportStep3 = () => {
             title="원격조종 앱 확인 및 삭제하기"
             desc={`파일에서 직접 원격조종 앱(QuickSupport, Host, AnyDesk 등) 악성 설치파일이 있는지 확인하고 삭제하세요. \n\ni) 안드로이드 사용자: 휴대폰 설정 → 애플리케이션 → 내 파일-> 좌측 하단 열기버튼-> 다운로드-> 원격조종 앱 선택→ 휴지통 \n\nii) IOS 사용자: 파일 앱 접속-> 다운로드 폴더-> 악성 설치 파일 (.apk) 및 의심스러운 파일 삭제`}
             tipIcon={
-              <img src={TipIcon} onClick={() => console.log("팁 보이기")} />
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="Tip" />}
+                popoverContent={
+                  <div className="flex flex-col gap-2">
+                    <span>
+                      i) 악성파일(.apk) 예시 부고장.apk | m부고장.apk |
+                      efine.apk | govkorea.apk | kca.apk | 000 live.apk 등
+                    </span>
+                    <span>
+                      ii) 통신사 대리점, A/S센터 방문하면 휴대전화에 최근 설치된
+                      모르는 앱을 삭제해줘요
+                    </span>
+                  </div>
+                }
+              />
             }
           />
           <OpenedDescCard
@@ -102,7 +127,15 @@ const ReportStep3 = () => {
             title="휴대폰 초기화하기"
             desc="악성 앱이 완전히 삭제되지 않거나 특정하기 어려운 경우, 휴대폰 전원을 끈 채로 초기화하거나 제조사 AS센터를 방문 하세요."
             tipIcon={
-              <img src={TipIcon} onClick={() => console.log("팁 보이기")} />
+              <TipPopover
+                popoverTrigger={<img src={TipIcon} alt="Tip" />}
+                popoverContent={
+                  <span>
+                    초기화하기 전에 증거확보나 중요한 데이터는 보관해두는걸 잊지
+                    마세요 ! 
+                  </span>
+                }
+              />
             }
           />
         </div>
@@ -149,7 +182,15 @@ const ReportStep3 = () => {
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">3</span>
           계좌개설여부조회
-          <img className="ml-[5px]" src={TipRedIcon} alt="Tip" />
+          <div className="flex ml-[5px] items-center">
+            <TipPopover
+              popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+              popoverContent={
+                <span>서비스 이용을 위해 공인인증서가 필요해요.</span>
+              }
+              isBlue={false}
+            />
+          </div>
         </h1>
         <p className="text-[18px] font-normal">
           본인 명의로 개설된 전 금융권 계좌 및 대출현황을 확인하여 추가 피해를
@@ -190,7 +231,15 @@ const ReportStep3 = () => {
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">4</span>
           명의도용된 휴대전화 개설 여부 조회
-          <img className="ml-[5px]" src={TipRedIcon} alt="Tip" />
+          <div className="flex ml-[5px] items-center">
+            <TipPopover
+              popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+              popoverContent={
+                <span>서비스 이용을 위해 공인인증서가 필요해요.</span>
+              }
+              isBlue={false}
+            />
+          </div>
         </h1>
         <p className="text-[18px] font-normal">
           본인 명의로 개통된 휴대폰 가입사실현황 조회 후 추가적인 휴대폰 신규
@@ -233,7 +282,19 @@ const ReportStep3 = () => {
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">5</span>
           휴대폰 소액결제차단 신청
-          <img className="ml-[5px]" src={TipRedIcon} alt="Tip" />
+          <div className="flex ml-[5px] items-center">
+            <TipPopover
+              popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+              popoverContent={
+                <span>
+                  번호도용 차단 서비스 신청 시 내 번호로 웹사이트를 통한
+                  문자발송 차단 등 일부 제한되는 부분 있으므로 통신사와 상담후
+                  신청하는게 좋아요.
+                </span>
+              }
+              isBlue={false}
+            />
+          </div>
         </h1>
         <div className="p-[15px] flex flex-col gap-[10px] rounded-[15px] border border-monochrome-200 text-lg leading-[27px] font-normal">
           휴대폰 소액결제 → 결제 변경 → ‘이용한도를 0원으로 설정’ 후 이용 한도
@@ -250,7 +311,17 @@ const ReportStep3 = () => {
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">6</span>
           여신거래 안심차단 서비 신청
-          <img className="ml-[5px]" src={TipRedIcon} alt="Tip" />
+          <div className="flex ml-[5px] items-center">
+            <TipPopover
+              popoverTrigger={<img src={TipRedIcon} alt="Tip" />}
+              popoverContent={
+                <span>
+                  해제 시 비대면 처리가 불가해서 타은행 방문이 필요해요.
+                </span>
+              }
+              isBlue={false}
+            />
+          </div>
         </h1>
         <p className="text-[18px] font-normal">
           여신거래 안심차단 서비스는 개인의 신규 여신거래(신용대출, 카드론,

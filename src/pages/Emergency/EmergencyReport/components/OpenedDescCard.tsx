@@ -15,15 +15,17 @@ const OpenedDescCard = ({ title, desc, tipIcon }: Props) => {
   };
   return (
     <div className="my-[15px] flex flex-col gap-[5px]">
-      <div className="flex flex-row gap-[5px]" onClick={handleToOpenClose}>
-        {isOpened ? (
-          <img src={UpArrowIcon} alt="설명 닫기" />
-        ) : (
-          <img src={DownArrowIcon} alt="설명 열기" />
-        )}
-        <p className="font-bold text-[#0143D5] leading-6 text-[16px] underline">
-          {title}
-        </p>
+      <div className="flex flex-row gap-[5px]">
+        <div className="flex flex-row gap-[5px]" onClick={handleToOpenClose}>
+          {isOpened ? (
+            <img src={UpArrowIcon} alt="설명 닫기" />
+          ) : (
+            <img src={DownArrowIcon} alt="설명 열기" />
+          )}
+          <p className="font-bold text-[#0143D5] leading-6 text-[16px] underline">
+            {title}
+          </p>
+        </div>
         {tipIcon}
       </div>
       {isOpened && (
