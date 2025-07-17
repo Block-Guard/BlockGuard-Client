@@ -1,5 +1,5 @@
 import RequiredActionCheck from "./components/RequiredActionCheck";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PhoneIcon from "../../../assets/report-guide/report-phone-icon.png";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
@@ -7,14 +7,24 @@ import Button from "../../../components/Button/Button";
 import ReportActionItem from "./components/ReportActionItem";
 import ReportCheckList from "./components/ReportCheckList";
 import TipPopover from "./components/TipPopover";
+import { ReportButtonStateContext } from "../../../layouts/ReportStepLayout";
 
 const ReportStep1 = () => {
+  const context = useContext(ReportButtonStateContext);
+  if (!context) throw new Error("ReportButtonStateContext is null");
+  const { setCurrentStepCompleted } = context;
+
   const [reportReceived, setReportReceived] = useState(false);
   const [secureEvidence, setSecureEvidence] = useState(false);
   const [caseFiled, setCaseFiled] = useState(false);
-
   const [isEvidenceChecked, setIsEvidenceChecked] = useState(false);
   const [haveIdChecked, setHaveIdChecked] = useState(false);
+
+  // 서버에서 해당 상태 값 받아오기
+
+  useEffect(() => {
+    setCurrentStepCompleted(reportReceived && secureEvidence && caseFiled);
+  }, [reportReceived, secureEvidence, caseFiled]);
 
   return (
     <div className="w-full flex flex-col mb-40">

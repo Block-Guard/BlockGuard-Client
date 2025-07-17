@@ -1,17 +1,26 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
-import { useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { getStepFromUrl, getTitleFromUrl } from "../utils/emergencyReport";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 import CloseIcon from "../assets/icons/close-darkblue-icon.svg";
 import UpArrowIcon from "../assets/icons/arrow-up-darkblue-icon.svg";
 import Button from "../components/Button/Button";
 
+type ReportButtonStateType = {
+  setCurrentStepCompleted: (value: boolean) => void;
+};
+
+export const ReportButtonStateContext =
+  createContext<ReportButtonStateType | null>(null);
+
 const ReportStepLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [stepTitle, setStepTitle] = useState<string>("");
+  const [currentStepCompleted, setCurrentStepCompleted] =
+    useState<boolean>(false);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +36,15 @@ const ReportStepLayout = () => {
         top: 0,
         behavior: "smooth",
       });
+    }
+  };
+
+  const onClickNextButton = () => {
+    if (currentStep === 4) {
+      navigate("/emergency/report-completion");
+    } else {
+      navigate(`/emergency/report-step/${currentStep + 1}`);
+      setCurrentStepCompleted(false);
     }
   };
 
@@ -66,7 +84,9 @@ const ReportStepLayout = () => {
         ref={mainRef}
         className="relative h-[calc(100vh-71px)] bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar mt-[71px]"
       >
-        <Outlet />
+        <ReportButtonStateContext.Provider value={{ setCurrentStepCompleted }}>
+          <Outlet />
+        </ReportButtonStateContext.Provider>
       </main>
       <div
         className="absolute bottom-0 w-full px-6 pt-6 pb-8"
@@ -83,15 +103,7 @@ const ReportStepLayout = () => {
           >
             <img src={UpArrowIcon} alt="맨위로" />
           </div>
-          <Button
-            onClick={() => {
-              if (currentStep === 4) {
-                navigate("/emergency/report-completion");
-              } else {
-                navigate(`/emergency/report-step/${currentStep + 1}`);
-              }
-            }}
-          >
+          <Button onClick={onClickNextButton} disabled={!currentStepCompleted}>
             {currentStep === 4 ? "완료" : "다음 단계"}
           </Button>
         </div>

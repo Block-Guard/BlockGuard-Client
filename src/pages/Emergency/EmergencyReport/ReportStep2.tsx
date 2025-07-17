@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import OpenedDescCard from "./components/OpenedDescCard";
 import ReportActionItem from "./components/ReportActionItem";
@@ -7,10 +7,20 @@ import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import Button from "../../../components/Button/Button";
 import TipPopover from "./components/TipPopover";
+import { ReportButtonStateContext } from "../../../layouts/ReportStepLayout";
 
 const ReportStep2 = () => {
+  const context = useContext(ReportButtonStateContext);
+  if (!context) throw new Error("ReportButtonStateContext is null");
+  const { setCurrentStepCompleted } = context;
+
   const [isRequestedToStopPayment, setIsRequestedToStopPayment] =
     useState(false);
+  // 서버에서 해당 상태값 받아오기
+  useEffect(() => {
+    setCurrentStepCompleted(isRequestedToStopPayment);
+  }, [isRequestedToStopPayment]);
+
   return (
     <div className="w-full flex flex-col mb-40">
       <div className="flex flex-col gap-[10px] p-6">

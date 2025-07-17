@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const EmergencyReportOverviewPage = () => {
   const navigate = useNavigate();
+  // 서버에서 각 단계 상태 받아와야 함
+
   return (
     <div className="flex flex-col justify-between w-full h-full">
       <Header
