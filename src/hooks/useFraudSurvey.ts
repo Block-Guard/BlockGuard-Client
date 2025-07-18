@@ -64,7 +64,7 @@ export const useFraudSurvey = () => {
     const goToPrevStep = useCallback(() => {
         if (progress <= 1) {
             // TODO: 초기화 및 뒤로 가기 로직
-            navigate(-1);
+            navigate('/fraud-analysis/landing');
             return;
         }
         setProgress((p) => p - 1);

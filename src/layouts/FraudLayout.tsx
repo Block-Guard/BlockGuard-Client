@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Button from "../components/Button/Button";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 import { useMemo } from "react";
@@ -16,7 +16,6 @@ export type FraudSurveyContextType = {
 
 const FraudLayout = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const {
     progress,
@@ -29,11 +28,6 @@ const FraudLayout = () => {
 
   const handleBackClick = () => {
     console.log("현재 백클릭에서의 progress : ", progress);
-    if (progress <= 1) {
-      //reset
-      navigate('/fraud-analysis/landing');
-      return;
-    }
     goToPrevStep();
   };
 
@@ -70,7 +64,6 @@ const FraudLayout = () => {
           />
         </div>
       </div>
-
 
       <main
         className="h-[calc(100vh-140px)] bg-[#ffffff] 
