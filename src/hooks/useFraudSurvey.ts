@@ -55,7 +55,7 @@ export const useFraudSurvey = () => {
         setProgress(newProgress);
 
         if (newProgress > 9) {
-            navigate("/fraud-analysis/result");
+            navigate("/fraud-analysis/result-loading");
         } else if (newProgress > 6) {
             navigate(`/fraud-analysis/survey/${newProgress}`);
         }
