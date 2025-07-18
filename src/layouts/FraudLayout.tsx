@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
-import LeftArrowWhiteIcon from "../assets/icons/arrow-left-white-icon.svg";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 import { useMemo } from "react";
 import { useFraudSurvey } from "../hooks/useFraudSurvey";
@@ -18,8 +17,6 @@ export type FraudSurveyContextType = {
 const FraudLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  const heightSize = "h-[calc(100vh-140px)]";
 
   const {
     progress,

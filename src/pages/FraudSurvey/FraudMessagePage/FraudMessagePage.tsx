@@ -10,7 +10,7 @@ const FraudMessagePage = () => {
   // const msgText = (allAnswers.messageContent as string) || '';
   const imageFiles = (allAnswers.imageUrls as File[]) || [];
   // const previewImage = imageFiles.map(file => URL.createObjectURL(file));
-  const previewImage = useState<string[]>([]);
+  const [previewImage, setPreviewImage] = useState<string[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -22,11 +22,21 @@ const FraudMessagePage = () => {
     const files = e.target.files;
     if (!files) return;
     updateAnswers({ imageUrls: [...imageFiles, ...Array.from(files)] });
+    const newImageUrls = Array.from(files).map((file) => URL.createObjectURL(file));
+    setPreviewImage(prev => [...prev, ...newImageUrls]);
   };
 
   const handleDeleteImage = (deleteIndex: number) => {
+    console.log(deleteIndex, "번째 이미지 제거하기");
+
+    //실제 파일 답변 처리
     const newFiles = imageFiles.filter((_, index) => index !== deleteIndex);
     updateAnswers({ imageUrls: newFiles });
+
+    //프리뷰 처리
+    URL.revokeObjectURL(previewImage[deleteIndex]); // 생성된 URL 메모리 제거용
+    const deleted = previewImage.filter((_img, index) => index !== deleteIndex)
+    setPreviewImage(deleted);
   };
 
   useEffect(() => {
