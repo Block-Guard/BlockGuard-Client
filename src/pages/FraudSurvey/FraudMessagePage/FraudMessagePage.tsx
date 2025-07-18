@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ImgUploadIcon from "../../../assets/icons/image-upload-icon.svg";
 import XWhiteIcon from "../../../assets/icons/x-white-icon.svg";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
@@ -9,7 +9,8 @@ const FraudMessagePage = () => {
 
   // const msgText = (allAnswers.messageContent as string) || '';
   const imageFiles = (allAnswers.imageUrls as File[]) || [];
-  const previewImage = imageFiles.map(file => URL.createObjectURL(file));
+  // const previewImage = imageFiles.map(file => URL.createObjectURL(file));
+  const previewImage = useState<string[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 

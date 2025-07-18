@@ -6,7 +6,7 @@ const FraudCheck = () => {
   const navigate = useNavigate();
   const onClickCheckStart = () => {
     console.log("사기 의심 상황 분석 시작하기 클릭");
-    navigate("/fraud-analysis");
+    navigate("/fraud-analysis/landing");
   };
   return (
     <div

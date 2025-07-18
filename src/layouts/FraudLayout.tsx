@@ -19,10 +19,7 @@ const FraudLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const heightSize =
-    location.pathname === "/fraud-analysis"
-      ? "h-[calc(100vh-48px)]"
-      : "h-[calc(100vh-140px)]";
+  const heightSize = "h-[calc(100vh-140px)]";
 
   const {
     progress,
@@ -37,11 +34,8 @@ const FraudLayout = () => {
     console.log("현재 백클릭에서의 progress : ", progress);
     if (progress <= 1) {
       //reset
-      navigate(-1);
+      navigate('/fraud-analysis/landing');
       return;
-    }
-    if (progress >= 7) {
-      navigate(-1);
     }
     goToPrevStep();
   };
@@ -63,35 +57,27 @@ const FraudLayout = () => {
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
-      {location.pathname === "/fraud-analysis" ? (
-        <div className="w-full h-12 bg-primary-400 outline-none">
-          <div className="flex justify-start pl-6 pt-3.5 pb-3.5">
-            <button onClick={() => navigate(-1)}>
-              <img src={LeftArrowWhiteIcon} alt="뒤로가기" />
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className="w-full h-12">
-          <div className="flex justify-start pl-6 pt-3.5 pb-3.5">
-            <button onClick={handleBackClick}>
-              <img src={LeftArrowIcon} alt="뒤로가기" />
-            </button>
-          </div>
 
-          <div className="w-full h-1.5 relative">
-            <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
-            <div
-              className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
-              style={{ width: `${progress / 9 * 100}%` }}
-            />
-          </div>
+      <div className="w-full h-12">
+        <div className="flex justify-start pl-6 pt-3.5 pb-3.5">
+          <button onClick={handleBackClick}>
+            <img src={LeftArrowIcon} alt="뒤로가기" />
+          </button>
         </div>
-      )}
+
+        <div className="w-full h-1.5 relative">
+          <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
+          <div
+            className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
+            style={{ width: `${progress / 9 * 100}%` }}
+          />
+        </div>
+      </div>
+
 
       <main
-        className={`${heightSize} bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar`}
-      >
+        className="h-[calc(100vh-140px)] bg-[#ffffff] 
+        overflow-hidden overflow-y-auto no-scrollbar">
         <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
 
