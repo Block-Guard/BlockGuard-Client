@@ -1,10 +1,9 @@
 import SurveyButton from "./components/SurveyButton";
 import { surveyContent } from "../surveyContent";
-import { useFraudStore } from "../../../stores/fraudStore";
+import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 
 const FraudSurveyPage = () => {
-  const { progress } = useFraudStore();
-
+  const { progress } = useFraudSurveyContext();
   const currentSurvey = surveyContent.find((s) => s.progress === progress);
 
   return (

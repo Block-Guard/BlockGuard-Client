@@ -1,8 +1,19 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
-import { STEP_CONFIG, useFraudStore } from "../stores/fraudStore";
 import LeftArrowWhiteIcon from "../assets/icons/arrow-left-white-icon.svg";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
+import { useMemo } from "react";
+import { useFraudSurvey } from "../hooks/useFraudSurvey";
+
+export type AnswerValue = string | string[] | File[];
+export type SurveyAnswers = {
+  [key: string]: AnswerValue | undefined;
+};
+export type FraudSurveyContextType = {
+  allAnswers: SurveyAnswers;
+  updateAnswers: (newAnswer: Partial<SurveyAnswers>) => void;
+  progress: number;
+};
 
 const FraudLayout = () => {
   const location = useLocation();
@@ -14,48 +25,41 @@ const FraudLayout = () => {
       : "h-[calc(100vh-140px)]";
 
   const {
-    currentStepAnswers,
     progress,
-    setProgress,
-    recordAnswerAndProceed,
-    reset,
-  } = useFraudStore();
-
-  const currentConfig = STEP_CONFIG[progress];
-
-
-  const canProceed = () => {
-    if (!currentConfig)
-      return false;
-    if (currentConfig.isRequired) {
-      return currentStepAnswers.length > 0 && currentStepAnswers[0] !== "";
-    }
-
-    return true;
-  }
-
+    allAnswers,
+    updateAnswers,
+    canProceed,
+    goToNextStep,
+    goToPrevStep,
+  } = useFraudSurvey();
 
   const handleBackClick = () => {
-
     console.log("현재 백클릭에서의 progress : ", progress);
     if (progress <= 1) {
-      reset();
+      //reset
       navigate(-1);
       return;
     }
     if (progress >= 7) {
       navigate(-1);
     }
-    setProgress(progress - 1);
+    goToPrevStep();
   };
 
   const handleBtnClick = () => {
-    if (!canProceed()) {
+    if (!canProceed) {
       alert("답변을 선택해주세요");
-      return
+      return;
     }
-    recordAnswerAndProceed(navigate);
+    goToNextStep();
   };
+
+  // 4. Context로 전달하는 값을 최소화
+  const contextValue = useMemo(() => ({
+    allAnswers,
+    updateAnswers,
+    progress
+  }), [allAnswers, updateAnswers, progress]);
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
@@ -88,7 +92,7 @@ const FraudLayout = () => {
       <main
         className={`${heightSize} bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar`}
       >
-        <Outlet /> {/* 사기분석 설문 내용 렌더링 */}
+        <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
 
       {location.pathname === "/fraud-analysis" ? null : (
@@ -97,7 +101,7 @@ const FraudLayout = () => {
             onClick={handleBtnClick}
             size="lg"
             isHighlight={false}
-            disabled={!canProceed()}
+            disabled={!canProceed}
           >
             다음
           </Button>
@@ -107,3 +111,4 @@ const FraudLayout = () => {
   );
 };
 export default FraudLayout;
+

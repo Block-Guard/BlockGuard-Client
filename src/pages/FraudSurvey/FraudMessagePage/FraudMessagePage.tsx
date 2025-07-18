@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ImgUploadIcon from "../../../assets/icons/image-upload-icon.svg";
 import XWhiteIcon from "../../../assets/icons/x-white-icon.svg";
+import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 
 const FraudMessagePage = () => {
 
-  const [msgText, setMsgText] = useState('');
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
+  const { allAnswers, updateAnswers } = useFraudSurveyContext();
+
+  // const msgText = (allAnswers.messageContent as string) || '';
+  const imageFiles = (allAnswers.imageUrls as File[]) || [];
+  const previewImage = imageFiles.map(file => URL.createObjectURL(file));
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -13,29 +17,23 @@ const FraudMessagePage = () => {
     fileInputRef.current?.click();
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if(!files)
-        return;
-
-    const newImageUrls = Array.from(files).map((file)=> URL.createObjectURL(file));
-
-    setPreviewImage(prev => [...prev, ...newImageUrls]);
-  }
+    if (!files) return;
+    updateAnswers({ imageUrls: [...imageFiles, ...Array.from(files)] });
+  };
 
   const handleDeleteImage = (deleteIndex: number) => {
-    console.log(deleteIndex, "번째 이미지 제거하기");
-    URL.revokeObjectURL(previewImage[deleteIndex]); // 생성된 URL 메모리 제거용
-    const deleted = previewImage.filter((_img, index) => index !== deleteIndex)
-    setPreviewImage(deleted);
-  }
+    const newFiles = imageFiles.filter((_, index) => index !== deleteIndex);
+    updateAnswers({ imageUrls: newFiles });
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     // 컴포넌트 unmount시 클린 업으로 url 메모리 제거
-    return ()=>{
-      previewImage.forEach(file => URL.revokeObjectURL(file))
-    }
-  }, [previewImage])
+    return () => {
+      previewImage.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [imageFiles])
 
   return (
     <div className="flex flex-col w-full h-full px-6">
@@ -54,7 +52,8 @@ const FraudMessagePage = () => {
       <div className="flex flex-col items-center gap-4">
         <div className="inline-flex justify-start items-start gap-1.5 w-full h-38 p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100">
           <textarea className="w-full h-full text-zinc-300 text-lg font-medium leading-relaxed"
-            onChange={(e) => setMsgText(e.target.value)} placeholder="텍스트로 붙여넣기" />
+            onChange={(e) => updateAnswers({ messageContent: e.target.value })}
+            placeholder="텍스트로 붙여넣기" />
         </div>
 
         <div className="w-full h-60 flex justify-center items-center rounded-xl outline-2 outline-offset-[-2px] outline-gray-100 p-4">
@@ -62,13 +61,13 @@ const FraudMessagePage = () => {
             <img src={ImgUploadIcon} alt="이미지 업로드" />
           ) : (
             <div className="grid grid-cols-3 gap-2.5 w-full h-full overflow-y-scroll">
-              {previewImage.map((imageUrl, index)=>(
+              {previewImage.map((imageUrl, index) => (
                 <div className="w-24 h-24 outline-2 outline-offset-[-2px] outline-gray-100" key={index}>
                   <img className="w-full h-full" src={imageUrl} alt="프리뷰 이미지" />
 
                   <div className="w-8 h-8 bg-slate-950/30 relative bottom-24 left-16">
-                    <img className="w-full h-full" onClick={()=>handleDeleteImage(index)}
-                    src={XWhiteIcon} alt="삭제버튼"/>
+                    <img className="w-full h-full" onClick={() => handleDeleteImage(index)}
+                      src={XWhiteIcon} alt="삭제버튼" />
                   </div>
                 </div>
               ))}
@@ -77,8 +76,8 @@ const FraudMessagePage = () => {
 
           {/* 이미지 파일 input 숨김 처리 + ref 연결*/}
           <form>
-            <input className="hidden" type="file" multiple 
-            accept="image/*" ref={fileInputRef} onChange={handleFileChange}/>
+            <input className="hidden" type="file" multiple
+              accept="image/*" ref={fileInputRef} onChange={handleFileChange} />
           </form>
         </div>
 
