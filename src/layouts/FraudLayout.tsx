@@ -3,6 +3,7 @@ import Button from "../components/Button/Button";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 import { useMemo } from "react";
 import { useFraudSurvey } from "../hooks/useFraudSurvey";
+import Header from "../components/Header/Header";
 
 export type AnswerValue = string | string[] | File[];
 export type SurveyAnswers = {
@@ -40,37 +41,37 @@ const FraudLayout = () => {
   };
 
   // 4. Context로 전달하는 값을 최소화
-  const contextValue = useMemo(() => ({
-    allAnswers,
-    updateAnswers,
-    progress
-  }), [allAnswers, updateAnswers, progress]);
+  const contextValue = useMemo(
+    () => ({
+      allAnswers,
+      updateAnswers,
+      progress,
+    }),
+    [allAnswers, updateAnswers, progress]
+  );
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
-
-      <div className="w-full h-12">
-        <div className="flex justify-start pl-6 pt-3.5 pb-3.5">
+      <Header
+        leftChild={
           <button onClick={handleBackClick}>
             <img src={LeftArrowIcon} alt="뒤로가기" />
           </button>
-        </div>
-
-        <div className="w-full h-1.5 relative">
-          <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
-          <div
-            className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
-            style={{ width: `${progress / 9 * 100}%` }}
-          />
-        </div>
+        }
+      />
+      <div className="w-full h-1.5 fixed mt-[57px]">
+        <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
+        <div
+          className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
+          style={{ width: `${(progress / 9) * 100}%` }}
+        />
       </div>
-
       <main
         className="h-[calc(100vh-140px)] bg-[#ffffff] 
-        overflow-hidden overflow-y-auto no-scrollbar">
+        overflow-hidden overflow-y-auto no-scrollbar mt-15"
+      >
         <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
-
       {location.pathname === "/fraud-analysis" ? null : (
         <div className="ml-6 mr-6 mb-8">
           <Button
@@ -87,4 +88,3 @@ const FraudLayout = () => {
   );
 };
 export default FraudLayout;
-
