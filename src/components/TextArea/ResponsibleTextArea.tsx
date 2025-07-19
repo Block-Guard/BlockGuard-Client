@@ -4,7 +4,7 @@ interface ResponsibleTextAreaProps{
     rowCount? :number;
     handleChange : (value:string) => void;
     placeholder? : string;
-    preValue? :string | string[];
+    preValue? :string;
 }
 
 const ResponsibleTextArea = ({ rowCount=1, handleChange, placeholder="", preValue="" }:ResponsibleTextAreaProps) => {
@@ -24,11 +24,13 @@ const ResponsibleTextArea = ({ rowCount=1, handleChange, placeholder="", preValu
     return (
         <textarea
             rows={rowCount}
-            className="w-full p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100
+            className={`w-full p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100
                             text-lg font-medium leading-relaxed text-slate-950
                                     focus:bg-monochrome-200
                                     placeholder-zinc-300
-                                    resize-none no-scrollbar"
+                                    resize-none no-scrollbar
+                                    ${preValue.trim() ? "bg-monochrome-200" : 'bg-white'}
+                                    `}
             placeholder={placeholder}
             onChange={((e) => handleChangeValueHeight(e.target.value))} ref={textarea} defaultValue={preValue}/>
     )
