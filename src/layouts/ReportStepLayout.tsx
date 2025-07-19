@@ -1,18 +1,11 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
-import { createContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getStepFromUrl, getTitleFromUrl } from "../utils/emergencyReport";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
 import CloseIcon from "../assets/icons/close-darkblue-icon.svg";
 import UpArrowIcon from "../assets/icons/arrow-up-darkblue-icon.svg";
 import Button from "../components/Button/Button";
-
-type ReportButtonStateType = {
-  setCurrentStepCompleted: (value: boolean) => void;
-};
-
-export const ReportButtonStateContext =
-  createContext<ReportButtonStateType | null>(null);
 
 const ReportStepLayout = () => {
   const navigate = useNavigate();
@@ -84,9 +77,7 @@ const ReportStepLayout = () => {
         ref={mainRef}
         className="relative h-[calc(100vh-71px)] bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar mt-[71px]"
       >
-        <ReportButtonStateContext.Provider value={{ setCurrentStepCompleted }}>
-          <Outlet />
-        </ReportButtonStateContext.Provider>
+        <Outlet context={{ setCurrentStepCompleted }} />
       </main>
       <div
         className="absolute bottom-0 w-full px-6 pt-6 pb-8"

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import RecommendedList from "./components/RecommendedList";
 import OpenedDescCard from "./components/OpenedDescCard";
@@ -9,12 +9,11 @@ import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import TipRedIcon from "../../../assets/icons/tip-red-icon.svg";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipPopover from "./components/TipPopover";
-import { ReportButtonStateContext } from "../../../layouts/ReportStepLayout";
+import { useOutletContext } from "react-router-dom";
+import type { ReportPageProps } from "../../../types/reportTypes";
 
 const ReportStep3 = () => {
-  const context = useContext(ReportButtonStateContext);
-  if (!context) throw new Error("ReportButtonStateContext is null");
-  const { setCurrentStepCompleted } = context;
+  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
 
   const [isBlockedBadApp, setBlockedBadApp] = useState(false);
   const [
