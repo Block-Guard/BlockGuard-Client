@@ -110,7 +110,9 @@ const FraudMessagePage = () => {
       <div className="flex flex-col items-center gap-4">
         <div className="inline-flex justify-start items-start gap-1.5 w-full h-38 p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100">
           <textarea
-            className="w-full h-full text-zinc-300 text-lg font-medium leading-relaxed"
+            className="w-full h-full text- text-lg font-medium leading-relaxed 
+            focus:placeholder:red-600
+            .placeholder-zinc-300"
             value={allAnswers.messageContent as string || ''}
             onChange={(e) => updateAnswers({ messageContent: e.target.value })}
             placeholder="텍스트로 붙여넣기"

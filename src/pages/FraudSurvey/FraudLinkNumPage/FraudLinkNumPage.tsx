@@ -1,7 +1,19 @@
+import ResponsibleTextArea from "../../../components/TextArea/ResponsibleTextArea";
+import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
+
 const FraudLinkNumPage = () => {
+    const { allAnswers, updateAnswers } = useFraudSurveyContext();
+
+    const handleLinkChange = (value: string) => {
+        updateAnswers({ "suspiciousLinks": value });
+    }
+
+    const handleNumberChange = (value: string) => {
+        updateAnswers({ "suspiciousPhoneNumbers": value });
+    }
 
     return (
-        <div className="flex flex-col w-full h-full px-6">
+        <div className="flex flex-col w-full h-full px-6 overflow-y-scroll">
             <div className="mt-9 mb-9">
                 <span className="text-slate-950 text-2xl font-bold leading-9">
                     의심스러운 링크나 전화번호를
@@ -12,14 +24,11 @@ const FraudLinkNumPage = () => {
                 </span>
             </div>
 
-            <div className="flex flex-col gap-4">
-                <div data-property-1="Default" className="w-full p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100 inline-flex justify-start items-center gap-1.5">
-                    <div className="w-80 justify-center text-zinc-300 text-lg font-medium leading-relaxed">링크 (URL)</div>
-                </div>
+            <div className="flex flex-col w-full h-full gap-4 grow">
 
-                <div data-property-1="Default" className="w-full p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100 inline-flex justify-start items-center gap-1.5">
-                    <div className="w-80 justify-center text-zinc-300 text-lg font-medium leading-relaxed">전화번호</div>
-                </div>
+                <ResponsibleTextArea handleChange={handleLinkChange} placeholder={"링크 (URL)"} preValue={allAnswers["suspiciousLinks"] as string} />
+
+                <ResponsibleTextArea handleChange={handleNumberChange} placeholder={"전화번호"} preValue={allAnswers["suspiciousPhoneNumbers"] as string}/>
 
             </div>
 
