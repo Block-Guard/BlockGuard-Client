@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ImgUploadIcon from "../../../assets/icons/image-upload-icon.svg";
 import XWhiteIcon from "../../../assets/icons/x-white-icon.svg";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
+import ResponsibleTextArea from "../../../components/TextArea/ResponsibleTextArea";
 
 const FraudMessagePage = () => {
   const { allAnswers, updateAnswers } = useFraudSurveyContext();
@@ -9,6 +10,10 @@ const FraudMessagePage = () => {
   const [localFiles, setLocalFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleMsgText = (value:string) =>{
+    updateAnswers({"messageContent" : value});
+  }
 
   // 파일 변경 시 localStorage에 지속성을 부여하는 함수
   const updatePersistentState = async (filesToSave: File[]) => {
@@ -107,17 +112,12 @@ const FraudMessagePage = () => {
           붙여넣기 또는 캡처 이미지를 첨부해 주세요!
         </div>
       </div>
-      <div className="flex flex-col items-center gap-4">
-        <div className="inline-flex justify-start items-start gap-1.5 w-full h-38 p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100">
-          <textarea
-            className="w-full h-full text- text-lg font-medium leading-relaxed 
-            focus:placeholder:red-600
-            .placeholder-zinc-300"
-            value={allAnswers.messageContent as string || ''}
-            onChange={(e) => updateAnswers({ messageContent: e.target.value })}
-            placeholder="텍스트로 붙여넣기"
-          />
-        </div>
+      <div className="flex flex-col items-center gap-4 pb-6">
+ 
+          <ResponsibleTextArea rowCount={3} handleChange={handleMsgText} 
+          preValue={allAnswers["messageContent"] as string}
+          placeholder="텍스트로 붙여넣기"/>
+          
         <div className="w-full h-60 flex justify-center items-center rounded-xl outline-2 outline-offset-[-2px] outline-gray-100 p-4">
           {previewUrls.length === 0 ? (
             <button onClick={handleUploadImg} className="flex justify-center items-center w-full h-full">
@@ -138,14 +138,13 @@ const FraudMessagePage = () => {
             </div>
           )}
         </div>
+        <input className="hidden" type="file" multiple accept="image/*" ref={fileInputRef} onChange={handleFileChange} />
 
         <div className="h-11 px-6 py-3.5 bg-gray-100 rounded-[10px] inline-flex justify-center items-center gap-2.5" onClick={handleUploadImg}>
           <div className="text-gray-400 text-lg font-medium leading-relaxed">
             캡처 이미지 첨부
           </div>
         </div>
-
-        <input className="hidden" type="file" multiple accept="image/*" ref={fileInputRef} onChange={handleFileChange} />
       </div>
     </div>
   );

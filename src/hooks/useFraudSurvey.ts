@@ -60,15 +60,36 @@ export const useFraudSurvey = () => {
         }
     }, [progress, navigate]);
 
+
     const goToPrevStep = useCallback(() => {
-        if (progress <= 1) {
+        const newProgress = progress - 1;
+        setProgress(newProgress);
+
+        if (progress <= 0) {
             // TODO: 초기화 및 뒤로 가기 로직
             navigate('/fraud-analysis/landing');
             return;
         }
-        setProgress((p) => p - 1);
-        if (progress >= 7) navigate(-1);
+        if (progress === 6) {
+            navigate('/fraud-analysis/1-6');
+            return;
+        }
+        if(progress > 6){
+            navigate(`/fraud-analysis/survey/${newProgress}`);
+        }
+
     }, [progress, navigate]);
+
+    // const goToPrevStep = useCallback(() => {
+        
+    //     if (progress <= 1) {
+    //         // TODO: 초기화 및 뒤로 가기 로직
+    //         navigate('/fraud-analysis/landing');
+    //         return;
+    //     }
+    //     setProgress((p) => p - 1);
+    //     if (progress >= 7) navigate(-1);
+    // }, [progress, navigate]);
 
     // 훅이 반환하는 값들: 상태와 핸들러 함수
     return {

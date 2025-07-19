@@ -27,10 +27,10 @@ const ResponsibleTextArea = ({ rowCount=1, handleChange, placeholder="", preValu
             className="w-full p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100
                             text-lg font-medium leading-relaxed text-slate-950
                                     focus:bg-monochrome-200
-                                    placeholder-zinc-300"
+                                    placeholder-zinc-300
+                                    resize-none no-scrollbar"
             placeholder={placeholder}
             onChange={((e) => handleChangeValueHeight(e.target.value))} ref={textarea} defaultValue={preValue}/>
-            
     )
 }
 

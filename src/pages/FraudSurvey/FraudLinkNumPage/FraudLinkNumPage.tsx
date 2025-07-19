@@ -24,7 +24,7 @@ const FraudLinkNumPage = () => {
                 </span>
             </div>
 
-            <div className="flex flex-col w-full h-full gap-4 grow">
+            <div className="flex flex-col w-full h-full gap-4 pb-6">
 
                 <ResponsibleTextArea handleChange={handleLinkChange} placeholder={"링크 (URL)"} preValue={allAnswers["suspiciousLinks"] as string} />
 
