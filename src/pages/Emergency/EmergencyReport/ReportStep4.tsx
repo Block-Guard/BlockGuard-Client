@@ -1,20 +1,29 @@
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import RecommendedList from "./components/RecommendedList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReportOneCheck from "./components/ReportOneCheck";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipRedIcon from "../../../assets/icons/tip-red-icon.svg";
 import ReportActionItem from "./components/ReportActionItem";
 import Button from "../../../components/Button/Button";
 import TipPopover from "./components/TipPopover";
+import type { ReportPageProps } from "../../../types/reportTypes";
+import { useOutletContext } from "react-router-dom";
 
 const ReportStep4 = () => {
+  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
+
   const [isIssuedAccidentFactsConf, setIsIssuedAccidentFactsConf] =
     useState(false);
   const [didWrittenSubmission, setDidWrittenSubmission] = useState(false);
   const [didClaimForRelief, setDidClaimForRelief] = useState(false);
   const [hasBringRequiredDocs, setHasBringRequiredDocs] = useState(false);
 
+  // 서버에서 해당 상태값 받아오기
+
+  useEffect(() => {
+    setCurrentStepCompleted(isIssuedAccidentFactsConf && didWrittenSubmission);
+  }, [isIssuedAccidentFactsConf, didWrittenSubmission]);
   return (
     <div className="w-full flex flex-col mb-40">
       <div className="flex flex-col gap-[10px] p-6">

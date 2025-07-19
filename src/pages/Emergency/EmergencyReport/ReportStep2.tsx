@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import OpenedDescCard from "./components/OpenedDescCard";
 import ReportActionItem from "./components/ReportActionItem";
@@ -7,10 +7,19 @@ import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
 import Button from "../../../components/Button/Button";
 import TipPopover from "./components/TipPopover";
+import { useOutletContext } from "react-router-dom";
+import type { ReportPageProps } from "../../../types/reportTypes";
 
 const ReportStep2 = () => {
+  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
+
   const [isRequestedToStopPayment, setIsRequestedToStopPayment] =
     useState(false);
+  // 서버에서 해당 상태값 받아오기
+  useEffect(() => {
+    setCurrentStepCompleted(isRequestedToStopPayment);
+  }, [isRequestedToStopPayment]);
+
   return (
     <div className="w-full flex flex-col mb-40">
       <div className="flex flex-col gap-[10px] p-6">
