@@ -44,37 +44,42 @@ const router = createBrowserRouter([
   },
   {
     path: "/fraud-analysis",
-    element: <FraudLayout />,
     children: [
       {
-        path: "",
+        path: "landing",
         element: <FraudLandingPage />,
       },
       {
         path: "survey",
-        element: <FraudSurveyPage />,
+        element: <FraudLayout />,
+        children: [
+          {
+            path: "1-6",
+            element: <FraudSurveyPage />,
+          },
+          {
+            path: "7",
+            element: <FraudLinkNumPage />,
+          },
+          {
+            path: "8",
+            element: <FraudMessagePage />,
+          },
+          {
+            path: "9",
+            element: <FraudSituationPage />,
+          },
+          {
+            path: "9",
+            element: <FraudSituationPage />,
+          },
+        ],
       },
       {
-        path: "survey/7",
-        element: <FraudLinkNumPage />,
-      },
-      {
-        path: "survey/8",
-        element: <FraudMessagePage />,
-      },
-      {
-        path: "survey/9",
-        element: <FraudSituationPage />,
-      },
-      {
-        path: "survey/9",
-        element: <FraudSituationPage />,
-      },
-      {
-        path: "survey/result-loading",
-        element: <AnalysisLoadingPage />,
-      },
-    ],
+        path: "result-loading",
+        element: <AnalysisLoadingPage />
+      }
+    ]
   },
   {
     path: "/emergency",

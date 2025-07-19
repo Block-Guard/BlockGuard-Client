@@ -1,33 +1,31 @@
-import { STEP_CONFIG, useFraudStore } from "../../../../stores/fraudStore";
+import { STEP_CONFIG, useFraudSurveyContext } from "../../../../hooks/useFraudSurvey";
 
 interface SurveyButtonProps {
     text: string;
 }
 
-
 const SurveyButton = ({ text }: SurveyButtonProps) => {
-
-    // const { progress, currentStepAnswers,
-    // toggleAnswer, setSingleAnswer, setBooleanAnswer } = useFraudStore();
-    const { progress, currentStepAnswers,
-        toggleAnswer, setSingleAnswer } = useFraudStore();
+    const { allAnswers, updateAnswers, progress } = useFraudSurveyContext();
 
 
-    const currentConfig = STEP_CONFIG[progress];
-    const isSelected = currentStepAnswers.includes(text);
+    const currentConfig = STEP_CONFIG[progress as keyof typeof STEP_CONFIG];
+    const answerKey = currentConfig.keys[0];
+    const currentAnswers = (allAnswers[answerKey] as string[] | string) || [];
+
+    const isSelected = Array.isArray(currentAnswers)
+        ? currentAnswers.includes(text)
+        : currentAnswers === text;
 
     const handleClick = () => {
-        if (!currentConfig)
-            return;
-
         if (currentConfig.isMultiple) {
-            toggleAnswer(text);
+            const currentArray = (allAnswers[answerKey] as string[] || []);
+            const newAnswers = currentArray.includes(text)
+                ? currentArray.filter(a => a !== text)
+                : [...currentArray, text];
+            updateAnswers({ [answerKey]: newAnswers });
         } else {
-            if (isSelected) {
-                setSingleAnswer('');
-            } else {
-                setSingleAnswer(text);
-            }
+            const newAnswer = isSelected ? '' : text;
+            updateAnswers({ [answerKey]: newAnswer });
         }
     };
 

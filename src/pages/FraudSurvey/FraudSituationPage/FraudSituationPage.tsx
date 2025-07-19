@@ -1,5 +1,11 @@
-const FraudSituationPage = () => {
+import ResponsibleTextArea from "../../../components/TextArea/ResponsibleTextArea";
+import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 
+const FraudSituationPage = () => {
+    const { allAnswers, updateAnswers } = useFraudSurveyContext();
+    const handleSituationText = (value:string)=>{
+        updateAnswers({"additionalDescription" : value})
+    }
     return (
         <div className="flex flex-col w-full h-full px-6">
             <div className="mt-9 mb-9">
@@ -11,12 +17,10 @@ const FraudSituationPage = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-                <div className="w-full min-h-42 p-4 rounded-xl outline-2 outline-offset-[-2px] outline-gray-100 inline-flex justify-start items-start gap-1.5">
-                    <div className="text-zinc-300 text-lg font-medium leading-relaxed">
-                        (예시) “상대방이 경찰이라면서 굉장히 진지하고 다급하게 말했어요.”
-                    </div>
-                </div>
+            <div className="flex flex-col gap-4 pb-6">
+                <ResponsibleTextArea rowCount={5} handleChange={handleSituationText}
+                    preValue={allAnswers["additionalDescription"] as string}
+                    placeholder="(예시) “상대방이 경찰이라면서 굉장히 진지하고 다급하게 말했어요." />
             </div>
         </div>
     )
