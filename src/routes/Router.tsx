@@ -21,6 +21,7 @@ import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
 import ReportStep3 from "../pages/Emergency/EmergencyReport/ReportStep3";
 import ReportStep4 from "../pages/Emergency/EmergencyReport/ReportStep4";
 import EmergencyReportCompletionPage from "../pages/Emergency/EmergencyReport/EmergencyReportCompletionPage";
+import AnalysisResultPage from "../pages/FraudSurvey/AnalysisResultPage/AnalysisResultPage";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "result-loading",
         element: <AnalysisLoadingPage />
+      },
+      {
+        path: "result",
+        element: <AnalysisResultPage/>
       }
     ]
   },
