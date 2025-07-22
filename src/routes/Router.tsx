@@ -21,6 +21,8 @@ import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
 import ReportStep3 from "../pages/Emergency/EmergencyReport/ReportStep3";
 import ReportStep4 from "../pages/Emergency/EmergencyReport/ReportStep4";
 import EmergencyReportCompletionPage from "../pages/Emergency/EmergencyReport/EmergencyReportCompletionPage";
+import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
         element: <EmergencyMainPage />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/auth",
+    children: [{ path: "signup", element: <Signup /> }, {}],
   },
   {
     path: "/fraud-analysis",
@@ -77,9 +87,9 @@ const router = createBrowserRouter([
       },
       {
         path: "result-loading",
-        element: <AnalysisLoadingPage />
-      }
-    ]
+        element: <AnalysisLoadingPage />,
+      },
+    ],
   },
   {
     path: "/emergency",
