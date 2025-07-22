@@ -5,8 +5,8 @@ import WhiteX from "../../../assets/icons/x-white-icon.svg"
 import RiskChatBubble from "../../../assets/analysis-result/chat-bubble-result-risk.svg";
 import WarnChatBubble from "../../../assets/analysis-result/chat-bubble-result-warn.svg";
 import SafeChatBubble from "../../../assets/analysis-result/chat-bubble-result-safe.svg";
-import Blockee from "../../../assets/character-cropped-fit-image.svg";
-import Warning from "../../../assets/analysis-result/warning.svg";
+import BlockeeWarning from "../../../assets/characters/blockee-warning.svg";
+import BlockeeSafe from "../../../assets/characters/blockee-safe.svg";
 import PhoneCall from "../../../assets/icons/phone-call-icon.png";
 import Siren from "../../../assets/icons/siren-icon.svg";
 import SmartPhone from "../../../assets/analysis-result/smartphone-icon.png";
@@ -20,22 +20,28 @@ import ReactingCard from "./components/ReactingCard";
 
 const riskState = [
     {
+        state : "risk",
         bgColor: "#F24E4E",
         text: "사기 위험도가 높은 상황",
         bubbleChat: RiskChatBubble,
+        character : BlockeeWarning,
         boardImg: RiskRed,
         degree: 135,
     },
     {
+        state : "warn",
         bgColor: "#FFCD42",
         text: "사기 위험도 주의 상황",
         bubbleChat: WarnChatBubble,
+        character : BlockeeWarning,
         boardImg: RiskYellow,
         degree: 90,
     },
     {
+        state : "safe",
         bgColor: "#40D479",
         text: "사기 위험도가 낮은 상황",
+        character : BlockeeSafe,
         bubbleChat: SafeChatBubble,
         boardImg: RiskGreen,
         degree: 45,
@@ -87,6 +93,7 @@ const AnalysisResultPage = () => {
             flag = 2;
 
         flag = 2
+        riskState[flag].degree = dummyResponse.data.score * 180 / 100;
         setResultTheme(riskState[flag]);
     }, [])
 
@@ -101,7 +108,8 @@ const AnalysisResultPage = () => {
                 }
                 bgColor={resultTheme.bgColor}
                 title={
-                    <div className="text-white text-xl font-bold leading-loose">
+                    <div className="text-white text-sm font-bold leading-loose">
+                        {/* <div className="text-white text-xl font-bold leading-loose"> 폰트 크기 따른 헤더 크기 바뀜 문제*/} 
                         AI 분석 결과
                     </div>
                 }
@@ -112,18 +120,20 @@ const AnalysisResultPage = () => {
                 }
             />
 
-            <div className="mt-[57px] h-37" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
-                <div className="p-0">
+            {/* 그냥 말풍선과 캐릭터, 아이콘을 전부 하나로 합치는 것도 고려.. */}
+            <div className="h-37 flex justify-between items-end mt-[57px] pt-6 pl-6 pr-9 overflow-clip" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
+                <div className="h-full flex items-start">
                     <img src={resultTheme.bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
-                    <img src={Blockee} alt="캐릭터" className="w-28 h-24 z-0" />
-                    <img src={Warning} alt="위험 아이콘" className="w-12 h-10" />
+                </div>
+                <div className="h-full flex items-end">
+                    <img src={resultTheme.character} alt="캐릭터" className="w-28 h-24 relative top-4" />
                 </div>
             </div>
 
             {/* 여기까지 상단 안내 */}
 
-            <div className="flex flex-col items-center py-7.5 px-6">
-                <div className="text-3xl font-extrabold leading-10" style={{color:resultTheme.bgColor}}>
+            <div className="flex flex-col items-center py-7.5 px-6 z-10">
+                <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
                     {resultTheme.text}
                 </div>
 
@@ -140,9 +150,16 @@ const AnalysisResultPage = () => {
                     </div>
                 </div>
 
+                {resultTheme.state === "safe" ? 
+                (
+                    <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
+                        {dummyResponse.data.explanation}
+                    </div>
+                ): null}
+
                 <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
 
-                {resultTheme.bgColor !== "" ? (
+                {resultTheme.state !== "safe" ? (
                     <div className="w-full">
 
                         <div>
@@ -164,7 +181,7 @@ const AnalysisResultPage = () => {
                                 판단 키워드
                             </div>
 
-                            <div className="w-full px-4 py-3.5 bg-gray-100 rounded-2xl outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-start gap-2.5">
+                            <div className="w-full px-4 py-3.5 mb-7.5 bg-gray-100 rounded-2xl outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-start gap-2.5">
                                 <div className="flex text-lg font-bold leading-snug">
 
                                     {dummyResponse.data.keywords.map((keyWord, index) => {
@@ -185,7 +202,7 @@ const AnalysisResultPage = () => {
                     </div>
                 ) : null}
 
-                <div className="mt-7.5 text-center text-black text-xl font-bold leading-loose">
+                <div className="text-center text-black text-xl font-bold leading-loose">
                     AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
                 </div>
 
