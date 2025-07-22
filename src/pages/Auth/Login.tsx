@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import BlockeeIcon from "../../assets/characters/blockee-login.svg";
+import ToVisiblePwIcon from "../../assets/icons/to-visible-pw-icon.svg";
+import ToInvisiblePwIcon from "../../assets/icons/to-invisible-pw-icon.svg";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
+import InputBar from "../../components/InputBar/InputBar";
+import { loginApi } from "../../apis/auth";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
+  const [isPwVisible, setIsPwVisible] = useState(false);
   const [isIdSaved, setIsIdSaved] = useState(false);
   const [isFailedLogin, setIsFailedLogin] = useState(false);
 
@@ -24,15 +32,21 @@ const Login = () => {
     setPassword(e.target.value);
     setIsFailedLogin(false);
   };
-  const handleLogin = () => {
-    if (isIdSaved) {
-      localStorage.setItem("savedId", loginId);
-    } else {
-      localStorage.removeItem("savedId");
+  const handleLogin = async () => {
+    try {
+      const loginData = { email: loginId, password: password };
+      const response = await loginApi(loginData);
+      console.log(response);
+      if (isIdSaved) {
+        localStorage.setItem("savedId", loginId);
+      } else {
+        localStorage.removeItem("savedId");
+      }
+      navigate("/");
+    } catch (error) {
+      setIsFailedLogin(true);
+      console.error("로그인 실패 : ", error);
     }
-    // 서버에 로그인 요청. 실패하면 setIsFailedLogin을 true로
-    console.log("로그인 요청");
-    setIsFailedLogin(true);
   };
 
   useEffect(() => {
@@ -53,22 +67,25 @@ const Login = () => {
           Guard
         </h1>
         <div className="flex flex-col gap-3">
-          <input
-            className="border border-[#b2b2b2] px-7 py-5 rounded-xl text-[20px] placeholder:text-[#b2b2b2]"
+          <InputBar
             type="email"
-            value={loginId}
-            onChange={onChangeInputId}
+            input={loginId}
+            onChangeInput={onChangeInputId}
             placeholder="아이디 (이메일)"
           />
-          <div className="w-full">
-            <input
-              className="w-full border border-[#b2b2b2] px-7 py-5 rounded-xl text-[20px] placeholder:text-[#b2b2b2]"
-              type="password"
-              value={password}
-              onChange={onChangeInputPassword}
-              placeholder="비밀번호"
-            />
-          </div>
+          <InputBar
+            type={isPwVisible ? "text" : "password"}
+            input={password}
+            onChangeInput={onChangeInputPassword}
+            placeholder="비밀번호"
+            rightChild={
+              <img
+                className="absolute top-[50%] right-3 translate-[-50%]"
+                src={isPwVisible ? ToInvisiblePwIcon : ToVisiblePwIcon}
+                onClick={() => setIsPwVisible(!isPwVisible)}
+              />
+            }
+          />
           <div className="flex flex-row justify-between">
             <label className="flex items-center gap-[10px] cursor-pointer">
               <input
@@ -104,7 +121,7 @@ const Login = () => {
         <Button onClick={handleLogin} disabled={isFailedLogin}>
           로그인
         </Button>
-        <Button onClick={() => console.log("회원가입 하러가기")} isWhite>
+        <Button onClick={() => navigate("/auth/signup")} isWhite>
           회원가입하기
         </Button>
       </div>
