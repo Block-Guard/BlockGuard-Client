@@ -3,9 +3,17 @@ import Header from "../../../components/Header/Header";
 import LeftArrowIcon from "../../../assets/icons/arrow-left-white-icon.svg";
 import WhiteX from "../../../assets/icons/x-white-icon.svg"
 import RiskChatBubble from "../../../assets/analysis-result/chat-bubble-result-risk.svg";
+import Blockee from "../../../assets/character-cropped-fit-image.svg";
 import Warning from "../../../assets/analysis-result/warning.svg";
-import RightArrowIcon from "../../../assets/icons/arrow-right-site-blue-icon.svg"
+import PhoneCall from "../../../assets/icons/phone-call-icon.png";
+import Siren from "../../../assets/icons/siren-icon.svg";
+import SmartPhone from "../../../assets/analysis-result/smartphone-icon.png";
+import RiskRed from "../../../assets/analysis-result/risk-level-red.svg";
+import RiskYellow from "../../../assets/analysis-result/risk-level-red.svg";
+import RiskGreen from "../../../assets/analysis-result/risk-level-red.svg";
+
 import { useState } from "react";
+import ReactingCard from "./components/ReactingCard";
 
 
 
@@ -73,7 +81,7 @@ const AnalysisResultPage = () => {
             <div className="mt-[57px] h-37" style={{ backgroundColor: `${bgColor}` }}>
                 <div>
                     <img src={RiskChatBubble} alt="위험 경고문구" className="w-51 h-18" />
-
+                    <img src={Blockee} alt="캐릭터" className="w-28 h-24"/>
                     <img src={Warning} alt="위험 아이콘" className="w-12 h-10" />
                 </div>
             </div>
@@ -85,9 +93,10 @@ const AnalysisResultPage = () => {
                     사기 위험도가 높은 상황
                 </div>
                 <div>
-                    <img src="" alt="위험도 표" />
+                    <img src={RiskRed} alt="위험도 표" />
                 </div>
-                <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300"></div>
+
+                <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
 
                 {bgColor !== "" ? (
                     <div className="w-full">
@@ -101,8 +110,8 @@ const AnalysisResultPage = () => {
                                     {dummyResponse.data.estimatedFraudType}
                                 </div>
                             </div>
-                            <div className="w-80 px-4 py-3.5 bg-gray-100 rounded-2xl outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-start gap-2.5">
-                                해당 메시지는 검찰 또는 경찰을 사칭하여 고소장 접수,범죄 연루 등을 빌미로 개인정보-신분증, 계좌번호 등-나 ‘안전계좌 송금’을 요구해 금전을 탈취하는 피싱 사기 수법입니다.
+                            <div className="w-full px-4 py-3.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
+                                {dummyResponse.data.explanation}
                             </div>
                         </div>
 
@@ -117,9 +126,9 @@ const AnalysisResultPage = () => {
                                     {dummyResponse.data.keywords.map((keyWord, index) => {
                                         return (
                                             <span className="text-red-500">
-                                                {index === 0 ? "\"" : null}
+                                                {index === 0 ? "\"" : <>&nbsp;</>}
                                                 {keyWord}
-                                                {index !== dummyResponse.data.keywords.length - 1 ? "+" : "\""}
+                                                {index !== dummyResponse.data.keywords.length - 1 ? " + " : "\""}
                                             </span>)
                                     })} 등
                                 </div>
@@ -145,6 +154,29 @@ const AnalysisResultPage = () => {
                     로 확인 전화를 추천드려요.
                 </div>
             </div>
+            {/* 여기까지 사기 분석 결과 내용*/}
+            <div className="w-full h-96 px-6 py-7 bg-gradient-highlight-2 rounded-tl-[20px] rounded-tr-[20px] inline-flex flex-col justify-start items-center gap-7">
+                <div className="text-center justify-center text-white text-2xl font-bold leading-9">
+                    지금 이렇게 하세요
+                </div>
+                
+                <div className="w-full flex gap-2">
+                    <ReactingCard icon={<img className="w-6 h-7" src={PhoneCall} alt="전화 아이콘"/>} title={<>신고<br/>접수하기</>} btnText={"전화 연결"} handleBtn={function (): void {
+                        throw new Error("Function not implemented.");
+                    } }/>
+                    <ReactingCard icon={<img className="w-6 h-7" src={Siren} alt="사이렌 아이콘"/>} title={<>피해대응<br/>절차보기</>} btnText={"바로가기"} handleBtn={function (): void {
+                        throw new Error("Function not implemented.");
+                    } }/>
+                    <ReactingCard icon={<img className="w-6 h-7" src={SmartPhone} alt="스마트폰 아이콘"/>} title={<>보호자에게<br/>알리기</>} btnText={"공유하기"} handleBtn={function (): void {
+                        throw new Error("Function not implemented.");
+                    } }/>
+                </div>
+
+                <div className="text-center justify-center text-white text-base font-bold underline leading-normal">
+                    홈으로 돌아가기 
+                </div>
+            </div>
+    
         </div>
     )
 }
