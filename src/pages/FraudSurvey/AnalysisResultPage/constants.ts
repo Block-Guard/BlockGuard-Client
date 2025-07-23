@@ -1,6 +1,4 @@
 
-import PhoneCall from "../../../assets/icons/phone-call-icon.png";
-import Siren from "../../../assets/icons/siren-icon.svg";
 
 import BlockeeWarning from "../../../assets/characters/blockee-warning.svg";
 import BlockeeSafe from "../../../assets/characters/blockee-safe.svg";
@@ -8,12 +6,9 @@ import BlockeeSafe from "../../../assets/characters/blockee-safe.svg";
 import RiskChatBubble from "../../../assets/analysis-result/chat-bubble-result-risk.svg";
 import WarnChatBubble from "../../../assets/analysis-result/chat-bubble-result-warn.svg";
 import SafeChatBubble from "../../../assets/analysis-result/chat-bubble-result-safe.svg";
-import SmartPhone from "../../../assets/analysis-result/smartphone-icon.png";
 import RiskRed from "../../../assets/analysis-result/risk-level-red.svg";
 import RiskYellow from "../../../assets/analysis-result/risk-level-yellow.svg";
 import RiskGreen from "../../../assets/analysis-result/risk-level-green.svg";
-import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
-import FileIcon from "../../../assets/analysis-result/file-icon.png"
 
 
 export const riskState = [
@@ -56,5 +51,28 @@ export const dummyResponse = {
         "keywords": ["검찰", "송금", "서민금융"],
         "explanation": "검찰을 사칭해 송금 및 개인정보를 요구하며, 서민금융을 사유로 앱 설치를 유도하는 전형적인 사기입니다.",
         "recommendedAction": "즉시 앱 삭제 및 112에 신고하세요."
+    }
+}
+
+export const dummyGuardians = {
+    "code": 2010,
+    "message": "보호자 목록 조회가 완료되었습니다.",
+    "data": {
+        "guardians": [
+            {
+                "guardiansId": 1,
+                "name": "홍길동",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": false,
+                "profileImageUrl": "https://cdn.example.com/guardians/1/new-avatar.png"
+            },
+            {
+                "guardiansId": 2,
+                "name": "김철수",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": true,
+		        "profileImageUrl": null
+            }
+        ]
     }
 }

@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, type SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import TypeFeatureCard from "./components/TypeFeatureCard";
-
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
 import FileIcon from "../../../assets/analysis-result/file-icon.png"
 import { dummyResponse, riskState } from "./constants";
@@ -11,6 +10,7 @@ import { useScrollHeader } from "../../../hooks/useScrollHeader";
 import BottomCard from "./components/BottomCard";
 import FraudType from "./components/FraudType";
 import { ReportCallDrawer } from "./components/ReportCallDrawer";
+import { GuardianCallDrawer } from "./components/GuardianCallDrawer";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const AnalysisResultPage = () => {
 
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
-    
+
     const handleBackClick = () => {
         navigate(-1);
         // navigate("/fraud-analysis/survey/9");
@@ -49,10 +49,9 @@ const AnalysisResultPage = () => {
                 }
                 bgColor={`${overrideHeader ? '#fff' : resultTheme.bgColor}`}
                 title={
-                    <div className="text-sm font-bold leading-loose" style={{ color: `${overrideHeader ? '#000B25' : '#fff'}` }}>
-                        {/* <div className="text-white text-xl font-bold leading-loose"> 폰트 크기 따른 헤더 크기 바뀜 문제*/}
+                    <h1 className="text-xl font-bold leading-8" style={{ color: `${overrideHeader ? '#000B25' : '#fff'}` }}>
                         AI 분석 결과
-                    </div>
+                    </h1>
                 }
                 rightChild={
                     <button onClick={handleCloseClick}>
@@ -146,7 +145,7 @@ const AnalysisResultPage = () => {
 
             <BottomCard setOpenReportCall={setOpenReportCall} setOpenGuardianCall={setOpenGuardianCall} />
             <ReportCallDrawer openReportCall={openReportCall} setOpenReportCall={setOpenReportCall} />
-            <ReportCallDrawer openReportCall={openGuardianCall} setOpenReportCall={setOpenGuardianCall} />
+            <GuardianCallDrawer openGuardianCall={openGuardianCall} setOpenGuardianCall={setOpenGuardianCall} />
         </div>
     )
 }
