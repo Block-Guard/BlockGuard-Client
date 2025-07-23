@@ -24,6 +24,7 @@ import EmergencyReportCompletionPage from "../pages/Emergency/EmergencyReport/Em
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup/Signup";
 import SignupComplete from "../pages/Auth/Signup/SignupComplete";
+import SimulationMainPage from "../pages/Simulation/SimulationMain/SimulationMainPage";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "emergency",
         element: <EmergencyMainPage />,
+      },
+      {
+        path: "simulation",
+        element: <SimulationMainPage />,
       },
     ],
   },
