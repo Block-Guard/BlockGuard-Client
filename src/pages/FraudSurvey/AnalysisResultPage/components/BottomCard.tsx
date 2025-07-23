@@ -4,11 +4,16 @@ import Siren from "../../../../assets/icons/siren-icon.svg";
 import SmartPhone from "../../../../assets/analysis-result/smartphone-icon.png";
 import { useNavigate } from "react-router-dom";
 
-const BottomCard = () => {
+interface BottomCardProps{
+    setOpenReportCall: React.Dispatch<React.SetStateAction<boolean>>
+    setOpenGuardianCall: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const BottomCard = ({setOpenReportCall,setOpenGuardianCall}:BottomCardProps) => {
     const navigate = useNavigate();
     const handleHomeClick = () => navigate("/home");
-    const handleGuardianClick = () => console.log("보호자 바텀시트");
-    const handleCallClick = () => console.log("전화 태그 연결");
+    const handleGuardianClick = () => setOpenGuardianCall(true);
+    const handleCallClick = () => setOpenReportCall(true);
     const handleReportClick = () => navigate("/emergency/report-overview");
 
     return (

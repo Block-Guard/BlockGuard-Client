@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import Header from "../../../components/Header/Header";
 import TypeFeatureCard from "./components/TypeFeatureCard";
 
@@ -10,7 +10,7 @@ import { getTheme } from "../../../utils/fraudResult";
 import { useScrollHeader } from "../../../hooks/useScrollHeader";
 import BottomCard from "./components/BottomCard";
 import FraudType from "./components/FraudType";
-
+import { ReportCallDrawer } from "./components/ReportCallDrawer";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -18,6 +18,9 @@ const AnalysisResultPage = () => {
     const [resultTheme, setResultTheme] = useState(riskState[0]);
     const [overrideHeader, setOverrideHeader] = useState(false);
 
+    const [openReportCall, setOpenReportCall] = useState(false);
+    const [openGuardianCall, setOpenGuardianCall] = useState(false);
+    
     const handleBackClick = () => {
         navigate(-1);
         // navigate("/fraud-analysis/survey/9");
@@ -101,49 +104,7 @@ const AnalysisResultPage = () => {
                 <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
 
                 {resultTheme.state !== "safe" ? (
-                    <FraudType data={dummyResponse.data}/>
-
-                    // <div className="w-full">
-
-                    //     <div>
-                    //         <div className="text-slate-950 text-xl font-bold leading-loose">
-                    //             추정 사기 유형
-                    //         </div>
-                    //         <div className="w-full h-11 my-2.5 px-4 bg-blue-500 rounded-[10px] inline-flex justify-center items-center gap-1.5">
-                    //             <div className="text-white text-2xl font-bold leading-9">
-                    //                 {dummyResponse.data.estimatedFraudType}
-                    //             </div>
-                    //         </div>
-                    //         <div className="w-full px-4 py-3.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                    //             {dummyResponse.data.explanation}
-                    //         </div>
-                    //     </div>
-
-
-                    //     <div className="mt-7.5">
-                    //         <div className="text-slate-950 text-xl font-bold leading-loose">
-                    //             판단 키워드
-                    //         </div>
-
-                    //         <div className="w-full px-4 py-3.5 mb-7.5 bg-gray-100 rounded-2xl outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-start gap-2.5">
-                    //             <div className="flex text-lg font-bold leading-snug">
-
-                    //                 {dummyResponse.data.keywords.map((keyWord, index) => {
-                    //                     return (
-                    //                         <span className="text-red-500" key={keyWord}>
-                    //                             {index === 0 ? "\"" : <>&nbsp;</>}
-                    //                             {keyWord}
-                    //                             {index !== dummyResponse.data.keywords.length - 1 ? " + " : "\""}
-                    //                         </span>)
-                    //                 })} 등
-                    //             </div>
-
-                    //             <div className="text-slate-950 text-lg font-bold leading-snug">
-                    //                 → 고위험 패턴 {dummyResponse.data.keywords.length}건 일치
-                    //             </div>
-                    //         </div>
-                    //     </div>
-                    // </div>
+                    <FraudType data={dummyResponse.data} />
                 ) : null}
 
                 <div className="flex flex-col gap-2.5 w-full mb-7.5">
@@ -183,7 +144,9 @@ const AnalysisResultPage = () => {
                 </div>
             </div>
 
-            <BottomCard />
+            <BottomCard setOpenReportCall={setOpenReportCall} setOpenGuardianCall={setOpenGuardianCall} />
+            <ReportCallDrawer openReportCall={openReportCall} setOpenReportCall={setOpenReportCall} />
+            <ReportCallDrawer openReportCall={openGuardianCall} setOpenReportCall={setOpenGuardianCall} />
         </div>
     )
 }

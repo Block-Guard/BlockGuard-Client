@@ -4,4 +4,3 @@ export const getTheme = (riskLevel: string) => {
     if (riskLevel === "안전") return 2;
     return 0;
 };
-
