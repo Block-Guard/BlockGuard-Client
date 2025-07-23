@@ -38,6 +38,7 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberErrorMsg, setPhoneNumberErrorMsg] = useState("");
 
+  // 회원가입 요청 api
   const signupRequest = async () => {
     try {
       const userData = {
@@ -83,7 +84,7 @@ const Signup = () => {
   };
 
   const handleCheckIsEmailDuplicated = () => {
-    const response = isEmailDuplicated;
+    let response = true;
     // 만약 중복이 되었다면
     if (response) {
       setIsEmailChecked(true);
@@ -122,6 +123,7 @@ const Signup = () => {
     }
   };
 
+  // 회원가입 완료하는 버튼 클릭 시
   const handleToCompleteButton = () => {
     let isValid = true;
 
@@ -181,7 +183,9 @@ const Signup = () => {
           <div className="absolute bottom-16 w-full px-4">
             <Button
               onClick={handleToNextButton}
-              disabled={!inputEmail || !inputPw || !inputCheckPw}
+              disabled={
+                !inputEmail || !inputPw || !inputCheckPw || isEmailDuplicated
+              }
             >
               다음
             </Button>

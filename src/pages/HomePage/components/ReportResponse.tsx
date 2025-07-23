@@ -1,12 +1,35 @@
 import ReportProgressCard from "../../../components/ReportProgressCard/ReportProgressCard";
 import SirenIcon from "../../../assets/icons/siren-icon.svg";
 import RightArrowIcon from "../../../assets/icons/arrow-right-darkblue-icon.svg";
-
-let currentProgress = 3;
-let totalProgress = 4;
+import { getInProgressReportApi } from "../../../apis/emergency";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ReportResponse = () => {
-  const hasProgress = true;
+  const navigate = useNavigate();
+  const [inProgressStep, setInProgressStep] = useState<number>(0);
+  const [inProgressReportId, setInProgressReportId] = useState<number | null>(
+    0
+  );
+  const getInProgressReportState = async () => {
+    try {
+      const response = await getInProgressReportApi();
+      console.log(response);
+      if (response === null) {
+        setInProgressStep(0);
+        setInProgressReportId(null);
+      } else {
+        setInProgressStep(response!.reportId);
+        setInProgressReportId(response!.step);
+      }
+    } catch (error) {
+      console.error("진행중인 신고 조회 실패 : ", error);
+    }
+  };
+
+  useEffect(() => {
+    getInProgressReportState();
+  }, []);
 
   return (
     <div className="mx-6">
@@ -16,7 +39,10 @@ const ReportResponse = () => {
 
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-col justify-start items-start w-full px-5 py-4 bg-[#EEF1F3] rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60">
-          <div className="w-full flex flex-row justify-between items-center">
+          <div
+            className="w-full flex flex-row justify-between items-center"
+            onClick={() => navigate("/emergency")}
+          >
             <div className="flex flex-row gap-1">
               <div className="text-slate-950 text-xl font-bold leading-8">
                 긴급 신고/대응 바로가기
@@ -36,9 +62,8 @@ const ReportResponse = () => {
           </div>
         </div>
         <ReportProgressCard
-          hasProgress={hasProgress}
-          currentProgress={currentProgress}
-          totalProgress={totalProgress}
+          hasProgress={Boolean(inProgressReportId)}
+          currentStep={inProgressStep}
         />
       </div>
     </div>
