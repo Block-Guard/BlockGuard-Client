@@ -1,4 +1,4 @@
-import { dummyPhishingExam } from "../phishingExamList";
+import { dummyPhishingExam } from "../constants";
 import SimulationStart from "./components/SimulationStart";
 import PhishingExamCard from "./components/PhishingExamCard";
 
