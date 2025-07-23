@@ -33,8 +33,8 @@ export const ReportCallDrawer = ({ openReportCall, setOpenReportCall }: ReportCa
           </div>
 
           <div aria-label="공공기관 번호 리스트" className="flex flex-col gap-3 aria-describedby={undefined}">
-            <ReportCallItem icon={PhoneCall} text={"금융 감독원 (1132)"} handleCallClick={() => console.log("전화연결")} />
-            <ReportCallItem icon={PhoneCall} text={"경찰청 통합신고 대응센터 (112)"} handleCallClick={() => console.log("전화연결")} />
+            <ReportCallItem icon={PhoneCall} text={"금융 감독원 (1132)"} phoneNumber={"1132"}/>
+            <ReportCallItem icon={PhoneCall} text={"경찰청 통합신고 대응센터 (112)"} phoneNumber={"112"} />
           </div>
 
         </div>
