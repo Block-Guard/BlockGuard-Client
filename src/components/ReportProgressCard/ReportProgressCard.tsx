@@ -1,20 +1,51 @@
+import { useNavigate } from "react-router-dom";
 import RightArrowIcon from "../../assets/icons/arrow-right-darkblue-icon.svg";
+import { createNewReportApi } from "../../apis/emergency";
 
 type Props = {
   hasProgress: boolean;
-  currentProgress: number;
-  totalProgress: number;
+  currentStep: number;
 };
 
-const ReportProgressCard = ({
-  hasProgress,
-  currentProgress,
-  totalProgress,
-}: Props) => {
-  const progressPercentage = (currentProgress / totalProgress) * 100;
+const ReportProgressCard = ({ hasProgress, currentStep }: Props) => {
+  const navigate = useNavigate();
+  const progressPercentage = (currentStep / 5) * 100;
+  let currentStepTitle = "";
+
+  switch (currentStep) {
+    case 1:
+      currentStepTitle = "신고접수";
+      break;
+    case 2:
+      currentStepTitle = "계좌 지급정지 요청";
+      break;
+    case 3:
+      currentStepTitle = "추가피해 방지";
+      break;
+    case 4:
+      currentStepTitle = "피해구제 신청하기";
+      break;
+  }
+
+  const onClickButton = async () => {
+    if (currentStep === 0) {
+      try {
+        const response = await createNewReportApi();
+        console.log(response);
+        navigate("/emergency/report-overview");
+      } catch (error) {
+        console.error("신고 현황 생성 실패 : ", error);
+      }
+    } else {
+      navigate("/emergency/report-overview");
+    }
+  };
 
   return (
-    <div className="flex flex-col justify-start items-start w-full px-5 py-4 bg-[#EEF1F3] rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60">
+    <div
+      className="flex flex-col justify-start items-start w-full px-5 py-4 bg-[#EEF1F3] rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60"
+      onClick={onClickButton}
+    >
       <div className="w-full flex flex-row justify-between items-center">
         <div className="text-slate-950 text-xl font-bold leading-8">
           진행 중인 신고현황
@@ -39,11 +70,10 @@ const ReportProgressCard = ({
           </div>
           <div className="w-full flex flex-row items-center justify-between">
             <div className="bg-primary-400 rounded-3xl text-monochrome-100 py-[5px] px-[14px]">
-              추가 피해 방지하기
+              {currentStepTitle}
             </div>
             <span className="font-bold text-[16px] text-monochrome-700">
-              <span className="text-highlight-1">{currentProgress}</span>/
-              {totalProgress}단계
+              <span className="text-highlight-1">{currentStep}</span>/ 4단계
             </span>
           </div>
         </>

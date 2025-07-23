@@ -4,14 +4,36 @@ import EmergencyResponseStart from "./components/EmergencyResponseStart";
 import OrganCard from "./components/OrganCard";
 import QuickReportCard from "./components/QuickReportCard";
 import { dummyOrgan } from "../organList";
-
-let currentProgress = 3;
-let totalProgress = 4;
+import { useEffect, useState } from "react";
+import { getInProgressReportApi } from "../../../apis/emergency";
 
 const EmergencyMainPage = () => {
   const navigate = useNavigate();
-  // 테스트용. 추후 서버에서 받아오기
-  const hasProgress = false;
+  const [inProgressStepData, setInProgressStepData] = useState({
+    reportId: 0,
+    step: 1,
+  });
+
+  const getInProgressReportState = async () => {
+    try {
+      const response = await getInProgressReportApi();
+      console.log(response);
+      if (response === null) {
+        setInProgressStepData({ reportId: 0, step: 0 });
+      } else {
+        setInProgressStepData({
+          reportId: response!.reportId,
+          step: response!.step,
+        });
+      }
+    } catch (error) {
+      console.error("진행중인 신고 조회 실패 : ", error);
+    }
+  };
+
+  useEffect(() => {
+    getInProgressReportState();
+  }, []);
 
   const onClickToOrganList = () => {
     navigate("/emergency/organ-list");
@@ -20,13 +42,12 @@ const EmergencyMainPage = () => {
     <div className="px-6 mb-10">
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
       <div className="flex flex-col gap-8">
-        <EmergencyResponseStart />
+        <EmergencyResponseStart inProgressStep={inProgressStepData.step} />
         <div className="flex flex-col gap-[10px]">
           <h2 className="font-bold text-xl leading-8">나의 신고 현황</h2>
           <ReportProgressCard
-            hasProgress={hasProgress}
-            currentProgress={currentProgress}
-            totalProgress={totalProgress}
+            hasProgress={Boolean(inProgressStepData.reportId)}
+            currentStep={inProgressStepData.step}
           />
         </div>
         <div className="flex flex-col gap-[10px]">
