@@ -4,6 +4,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick: () => void;
   size?: "lg" | "sm";
+  isWhite?: boolean;
   isHighlight?: boolean;
   isBlur?: boolean;
   disabled?: boolean;
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   size = "lg",
+  isWhite = false,
   isHighlight = false,
   isBlur = false,
   disabled = false,
@@ -36,6 +38,13 @@ const Button: React.FC<ButtonProps> = ({
           className="button-bg-blur w-full py-[15px] text-[22px] text-monochrome-100 leading-8  font-semibold rounded-[15px] "
           onClick={onClick}
           disabled={disabled}
+        >
+          {children}
+        </button>
+      ) : isWhite ? (
+        <button
+          className={`w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
+          onClick={onClick}
         >
           {children}
         </button>
