@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       {isHighlight ? (
         <button
-          className={`bg-gradient-highlight w-full pt-2 pb-2 text-[18px] font-semibold leading-7 text-monochrome-100 rounded-[10px] cursor-pointer`}
+          className={`max-w-[800px] bg-gradient-highlight w-full pt-2 pb-2 text-[18px] font-semibold leading-7 text-monochrome-100 rounded-[10px] cursor-pointer`}
           onClick={onClick}
         >
           {children}
@@ -43,14 +43,14 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : isWhite ? (
         <button
-          className={`w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
+          className={`max-w-[800px] w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
           onClick={onClick}
         >
           {children}
         </button>
       ) : (
         <button
-          className={`${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
+          className={`max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
           onClick={onClick}
           disabled={disabled}
         >

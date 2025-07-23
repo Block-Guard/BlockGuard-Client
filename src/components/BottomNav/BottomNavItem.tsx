@@ -19,16 +19,15 @@ const BottomNavItem = ({
       case "홈":
         navigate("/home");
         break;
-      case "콘텐츠":
-        navigate("/contents");
-        break;
       case "긴급대응":
         navigate("/emergency");
+        break;
+      case "학습":
+        navigate("/simulation");
         break;
       case "마이":
         navigate("/my");
         break;
-
       default:
         return;
     }

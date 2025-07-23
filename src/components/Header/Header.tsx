@@ -15,7 +15,7 @@ const Header = ({
 }: Props) => {
   return (
     <header
-      className="w-full fixed flex flex-row items-center px-6 py-[19px] z-50"
+      className="w-full fixed flex flex-row items-center px-6 py-[19px] z-50 max-w-[800px]"
       style={{ background: `${bgColor}` }}
     >
       <div className="flex-1 flex justify-start">{leftChild}</div>

@@ -19,8 +19,8 @@ const BottomNav = () => {
     console.log(selected);
     if (
       selected === "/home" ||
-      selected === "/contents" ||
       selected === "/emergency" ||
+      selected === "/simulation" ||
       selected === "/my"
     ) {
       setSelectedMenu(selected);
@@ -50,8 +50,8 @@ const BottomNav = () => {
       <BottomNavItem
         imageOnSrc={ContentIconOn}
         imageOffSrc={ContentIconOff}
-        isSelected={selectedMenu === "/create"}
-        text="콘텐츠"
+        isSelected={selectedMenu === "/simulation"}
+        text="학습"
       />
 
       <BottomNavItem

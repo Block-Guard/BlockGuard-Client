@@ -25,6 +25,8 @@ import AnalysisResultPage from "../pages/FraudSurvey/AnalysisResultPage/Analysis
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup/Signup";
 import SignupComplete from "../pages/Auth/Signup/SignupComplete";
+import SimulationMainPage from "../pages/Simulation/SimulationMain/SimulationMainPage";
+import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSelect";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "emergency",
         element: <EmergencyMainPage />,
+      },
+      {
+        path: "simulation",
+        element: <SimulationMainPage />,
       },
     ],
   },
@@ -97,14 +103,13 @@ const router = createBrowserRouter([
       },
       {
         path: "result-loading",
-        element: <AnalysisLoadingPage />
+        element: <AnalysisLoadingPage />,
       },
       {
         path: "result",
-        element: <AnalysisResultPage/>
-      }
-    ]
-
+        element: <AnalysisResultPage />,
+      },
+    ],
   },
   {
     path: "/emergency",
@@ -143,6 +148,15 @@ const router = createBrowserRouter([
       {
         path: "report-completion",
         element: <EmergencyReportCompletionPage />,
+      },
+    ],
+  },
+  {
+    path: "/simulation",
+    children: [
+      {
+        path: "select-type",
+        element: <SimulationSelect />,
       },
     ],
   },
