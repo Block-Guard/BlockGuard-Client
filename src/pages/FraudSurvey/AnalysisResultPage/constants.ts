@@ -68,11 +68,39 @@ export const dummyGuardians = {
             },
             {
                 "guardiansId": 2,
-                "name": "김철수",
+                "name": "김철아",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": false,
+		        "profileImageUrl": null
+            },
+            {
+                "guardiansId": 3,
+                "name": "김철삼",
                 "phoneNumber": "010-1234-5678",
                 "isPrimary": true,
 		        "profileImageUrl": null
-            }
+            },
+            {
+                "guardiansId": 4,
+                "name": "김철사",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": false,
+		        "profileImageUrl": null
+            },
+            {
+                "guardiansId": 5,
+                "name": "김철오",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": false,
+		        "profileImageUrl": null
+            },
+            {
+                "guardiansId": 6,
+                "name": "김철육",
+                "phoneNumber": "010-1234-5678",
+                "isPrimary": false,
+		        "profileImageUrl": null
+            },
         ]
     }
 }

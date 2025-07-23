@@ -7,6 +7,9 @@ import DarkBlueX from "../../../../assets/icons/close-darkblue-icon.svg";
 import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
 import { dummyGuardians } from "../constants";
+import { GuardianCallItem } from "./GuardianCallItem";
+
+
 interface GuardianCallDrawerProps {
   openGuardianCall: boolean
   setOpenGuardianCall: React.Dispatch<React.SetStateAction<boolean>>
@@ -37,30 +40,25 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
           </div>
 
           <div aria-label="연락할 보호자 번호 리스트" className="flex flex-col gap-3 aria-describedby={undefined}">
-            {/* <ReportCallItem icon={PhoneCall} text={"금융 감독원 (1132)"} handleCallClick={() => console.log("전화연결")} /> */}
-            {/* <ReportCallItem icon={PhoneCall} text={"경찰청 통합신고 대응센터 (112)"} handleCallClick={() => console.log("전화연결")} /> */}
-
-            <div className="pb-7.5">
-              <div className="h-36 mb-7.5 flex items-center justify-center text-center text-zinc-300 text-lg font-bold leading-snug">
-                지금은 등록한 번호가 없습니다
-              </div>
-              <button className="w-full px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-center items-center">
-                <img src={Plus} alt="아이콘" />
-                <span className="text-gray-400 text-lg font-bold font-['Pretendard'] leading-snug">
-                  추가하기
-                </span>
-              </button>
-            </div>
-
             {
               guardians.length === 0 ? (
-                <div>
-                  <div className="w-80 px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-between items-center">
-                    추가하기
+                <div className="pb-7.5">
+                  <div className="h-36 mb-7.5 flex items-center justify-center text-center text-zinc-300 text-lg font-bold leading-snug">
+                    지금은 등록한 번호가 없습니다
                   </div>
+                  <button className="w-full px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-center items-center">
+                    <img src={Plus} alt="아이콘" />
+                    <span className="text-gray-400 text-lg font-bold leading-snug">
+                      추가하기
+                    </span>
+                  </button>
                 </div>
               ) : (
-                null
+                <div className="flex flex-col pb-7.5 gap-3">
+                  {guardians.map((guard) => 
+                    <GuardianCallItem icon={guard.profileImageUrl} text={guard.name} phoneNumber={guard.phoneNumber} isPrimary={guard.isPrimary} key={guard.guardiansId}/>
+                  )}
+                </div>
               )
             }
           </div>
