@@ -2,20 +2,33 @@ import Header from "../../../components/Header/Header";
 import LeftArrowIcon from "../../../assets/icons/arrow-left-darkblue-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { phishingTypeData } from "../constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
+import PhishingTypeCard from "./components/PhishingTypeCard";
+import SimulationLoading from "./components/SimulationLoading";
 
 const SimulationSelect = () => {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onClickSelectType = (selectedId: number) => {
-    if (selectedType === selectedId) {
-      setSelectedType(0);
-    } else {
-      setSelectedType(selectedId);
-    }
+  const onClickToSimulation = () => {
+    setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        // navigate("/");
+        // 시뮬레이션 페이지로 이동
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, navigate]);
+
+  if (isLoading) {
+    return <SimulationLoading />;
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -33,30 +46,15 @@ const SimulationSelect = () => {
         </h1>
         <div className="grid grid-cols-2 grid-flow-row gap-x-3 gap-y-4">
           {phishingTypeData.map((item) => (
-            <div
+            <PhishingTypeCard
               key={item.id}
-              className="bg-monochrome-200 py-[22px] flex flex-col items-center gap-1 rounded-[12px]"
-              style={{
-                background: selectedType === item.id ? "#87AEFD" : "#eef1f3",
-              }}
-              onClick={() => onClickSelectType(item.id)}
-            >
-              <img
-                className="w-[46px]"
-                src={
-                  selectedType === item.id
-                    ? item.selectedIcon
-                    : item.defaultIcon
-                }
-                alt="피싱 아이콘"
-              />
-              <span
-                className="whitespace-pre-line text-lg font-bold leading-[27px] text-center"
-                style={{ color: selectedType === item.id ? "#fff" : "#000" }}
-              >
-                {item.title}
-              </span>
-            </div>
+              selectedType={selectedType}
+              id={item.id}
+              title={item.title}
+              defaultIcon={item.defaultIcon}
+              selectedIcon={item.selectedIcon}
+              setSelectedType={setSelectedType}
+            />
           ))}
         </div>
       </div>
@@ -68,11 +66,7 @@ const SimulationSelect = () => {
               "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%)",
           }}
         >
-          <Button
-            onClick={() => console.log(selectedType, "번 타입 시뮬레이션")}
-          >
-            다음
-          </Button>
+          <Button onClick={onClickToSimulation}>다음</Button>
         </div>
       )}
     </div>
