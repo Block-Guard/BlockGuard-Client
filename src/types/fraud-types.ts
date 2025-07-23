@@ -22,3 +22,12 @@ export type FraudSurveyContextType = {
     updateAnswers: (newAnswer: Partial<SurveyAnswers>) => void;
     progress: number;
 };
+
+export interface FraudResultData {
+    riskLevel: string;
+    score: number;
+    estimatedFraudType: string;
+    keywords: string[];
+    explanation: string;
+    recommendedAction: string;
+}

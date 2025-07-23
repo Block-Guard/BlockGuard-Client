@@ -68,6 +68,7 @@
 
   /* 브랜드 gradient 정의 */
   --gradient-highlight: linear-gradient(120deg, #6697ff 5.35%, #9af2b5 100%);
+  --gradient-highlight-2: linear-gradient(180deg, #60a5fa, #86efac);
 
   /* Pretendard 폰트 정의 */
   --font-pretendard: "Pretendard", system-ui, sans-serif;
@@ -83,6 +84,10 @@
 /* 커스텀 gradient 클래스 */
 .bg-gradient-highlight {
   background: var(--gradient-highlight);
+}
+
+.bg-gradient-highlight-2 {
+  background: var(--gradient-highlight-2);
 }
 
 /* 반투명 버튼 스타일 */
