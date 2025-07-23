@@ -66,7 +66,7 @@ const ReportStepLayout = () => {
         }
         bgColor="#fff"
       />
-      <div className="fixed w-full mt-[65px]">
+      <div className="fixed w-full mt-[65px] z-51">
         <div className="h-[5px] bg-monochrome-300" />
         <div
           className="absolute left-0 top-0 rounded-r-[90px] h-[5px] bg-primary-400 z-10"
