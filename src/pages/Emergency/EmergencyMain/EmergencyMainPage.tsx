@@ -11,7 +11,7 @@ const EmergencyMainPage = () => {
   const navigate = useNavigate();
   const [inProgressStepData, setInProgressStepData] = useState({
     reportId: 0,
-    step: 1,
+    step: 0,
   });
 
   const getInProgressReportState = async () => {
