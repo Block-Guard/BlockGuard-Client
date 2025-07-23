@@ -43,8 +43,13 @@ const SignupStep1 = ({
           rightChild={
             <span
               className="absolute top-[50%] right-5 translate-y-[-50%] text-primary-400 font-normal text-lg"
-              onClick={handleCheckIsEmailDuplicated}
-              style={{ color: isEmailChecked ? "#b2b2b2" : "#437EFC" }}
+              onClick={() => {
+                inputEmail && handleCheckIsEmailDuplicated();
+              }}
+              style={{
+                color:
+                  isEmailChecked || inputEmail === "" ? "#b2b2b2" : "#437EFC",
+              }}
             >
               중복 확인
             </span>

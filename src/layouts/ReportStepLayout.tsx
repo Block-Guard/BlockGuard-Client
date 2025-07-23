@@ -15,6 +15,7 @@ const ReportStepLayout = () => {
   const [currentStepCompleted, setCurrentStepCompleted] =
     useState<boolean>(false);
   const mainRef = useRef<HTMLDivElement>(null);
+  const [isReportCompleted, setIsReportCompleted] = useState(false);
 
   useEffect(() => {
     const step = getStepFromUrl(location.pathname);
@@ -34,7 +35,11 @@ const ReportStepLayout = () => {
 
   const onClickNextButton = () => {
     if (currentStep === 4) {
-      navigate("/emergency/report-completion");
+      setIsReportCompleted(true);
+      const timer = setTimeout(() => {
+        navigate("/emergency/report-completion");
+      }, 500);
+      return () => clearTimeout(timer);
     } else {
       navigate(`/emergency/report-step/${currentStep + 1}`);
       setCurrentStepCompleted(false);
@@ -66,11 +71,13 @@ const ReportStepLayout = () => {
         }
         bgColor="#fff"
       />
-      <div className="fixed w-full mt-[65px]">
+      <div className="fixed w-full mt-[65px] z-51">
         <div className="h-[5px] bg-monochrome-300" />
         <div
-          className="absolute left-0 top-0 rounded-r-[90px] h-[5px] bg-primary-400 z-10"
-          style={{ width: `${(currentStep / 5) * 100}%` }}
+          className="absolute left-0 top-0 rounded-r-[90px] h-[5px] bg-primary-400 z-10 transition-all duration-300"
+          style={{
+            width: isReportCompleted ? "100%" : `${(currentStep / 5) * 100}%`,
+          }}
         />
       </div>
       <main
