@@ -18,6 +18,7 @@ const FraudMessagePage = () => {
   // 파일 변경 시 localStorage에 지속성을 부여하는 함수
   const updatePersistentState = async (filesToSave: File[]) => {
     if (filesToSave.length > 0) {
+      updateAnswers({imageUrls: filesToSave})
       const promises = filesToSave.map(file => {
         return new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
@@ -31,6 +32,7 @@ const FraudMessagePage = () => {
     } else {
       // 저장할 파일이 없으면 localStorage도 비움
       updateAnswers({ imageBase64: [] });
+      updateAnswers({imageUrls: []})
     }
   };
 

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
@@ -10,29 +10,81 @@ import FraudType from "./components/FraudType";
 import { ReportCallDrawer } from "./components/ReportCallDrawer";
 import { GuardianCallDrawer } from "./components/GuardianCallDrawer";
 import { TypeFeature } from "./components/TypeFeature";
+import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
+import { fraudAnalysisApi } from "../../../apis/fraud";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
-
+    const location = useLocation();
     const [resultTheme, setResultTheme] = useState(riskState[0]);
     const [overrideHeader, setOverrideHeader] = useState(false);
 
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
 
-    const handleBackClick = () => {
-        navigate(-1);
-        // navigate("/fraud-analysis/survey/9");
-    };
+    const [isLoading, setIsLoading] = useState(true);
+
+    const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
 
+    // for (const [key, value] of Object.entries(location.state ?? {})) {
+    //     console.log(key, value);
+    // }
+
+    const getResult = async (formData: FormData) => {
+        return await fraudAnalysisApi(formData);
+    }
+
     useEffect(() => {
-        const themeIndex = getTheme(dummyResponse.data.riskLevel as string)
-        riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
-        setResultTheme(riskState[themeIndex]);
+        const process = async () => {
+            try {
+                setIsLoading(true);
+                const formData = new FormData();
+                for (const [key, value] of Object.entries(location.state)) {
+                    // console.log(key, value);
+                    // 백엔드에 atmGuided 값 입력 안할 시 "" 인데 boolean인지 재확인 후 추가 처리.
+                    if (key === "imageBase64") {
+                        continue;
+                    }
+                    if (key === "imageUrls") {
+                        (value as File[]).forEach(file => {
+                            formData.append(key, file)
+                        });
+                    }
+                    else if (Array.isArray(value)) {
+                        (value as string[]).forEach(item => {
+                            formData.append(key, item);
+                        })
+                    }
+                    else {
+                        formData.append(key, String(value))
+                    }
+                }
+                const data = await getResult(formData);
+                const themeIndex = getTheme(data.riskLevel)
+                riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
+                setIsLoading(false);
+            }catch(error){
+                console.error("사기 분석 결과 페이지에서 로드 오류 발생", error);
+            }finally{
+                setIsLoading(false);
+            }
+        }
+
+        if(location.state){
+            process();
+        }
+
+        // const themeIndex = getTheme(dummyResponse.data.riskLevel as string)
+        // riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
+        // setResultTheme(riskState[themeIndex]);
     }, [])
 
     useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
+
+    if (isLoading) {
+        return <AnalysisLoadingPage />
+    }
 
     return (
         <div className="flex flex-col justify-between w-full h-full overflow-y-scroll">

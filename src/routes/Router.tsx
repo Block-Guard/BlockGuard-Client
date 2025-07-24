@@ -102,10 +102,6 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "result-loading",
-        element: <AnalysisLoadingPage />,
-      },
-      {
         path: "result",
         element: <AnalysisResultPage />,
       },

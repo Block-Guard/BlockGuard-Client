@@ -52,9 +52,9 @@ export const useFraudSurvey = () => {
     const goToNextStep = useCallback(() => {
         const newProgress = progress + 1;
         setProgress(newProgress);
-
+        console.log("디버깅용 answers : ", allAnswers)
         if (newProgress > 9) {
-            navigate("/fraud-analysis/result-loading");
+            navigate("/fraud-analysis/result", {state:allAnswers});
         } else if (newProgress > 6) {
             navigate(`/fraud-analysis/survey/${newProgress}`);
         }
