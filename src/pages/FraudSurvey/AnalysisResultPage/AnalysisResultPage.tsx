@@ -12,6 +12,7 @@ import { GuardianCallDrawer } from "./components/GuardianCallDrawer";
 import { TypeFeature } from "./components/TypeFeature";
 import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
 import { fraudAnalysisApi } from "../../../apis/fraud";
+import type { OptionSurveyData } from "../../../types/fraud-types";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const AnalysisResultPage = () => {
     const handleCloseClick = () => navigate("/home");
 
     /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
-    const initSurvey = {
+    const initSurvey: OptionSurveyData = {
         appType: "",// 설문 5 (선택)
         atmGuided: "false",// 설문 6 (선택)
         suspiciousLinks: "",// 설문 7 (선택)
@@ -38,51 +39,35 @@ const AnalysisResultPage = () => {
         // additionalDescription: "",
     }
 
+    const appendToFormData = (formData: FormData, key: string, value: any) => {
+        if (key === "atmGuided") {
+            formData.append(key, value === "네" ? "true" : "false");
+        } else if (key === "imageUrls" && value.length > 0) {
+            (value as File[]).forEach(file => formData.append(key, file));
+        } else if (Array.isArray(value)) {
+            (value as string[]).forEach(item => formData.append(key, item));
+        } else {
+            formData.append(key, String(value));
+        }
+    };
+
     const makeForm = () => {
         const formData = new FormData();
-        for (const [key, value] of Object.entries(location.state)) {
-            console.log(key, value);
-            if (key === "imageBase64") {
-                continue;
-            }
-            if (key === "atmGuided") {
-                if (value === "네")
-                    formData.append(key, String("true"));
-                else
-                    formData.append(key, String("false"));
-            }
-            if (key === "imageUrls") {
-                (value as File[]).forEach(file => {
-                    formData.append(key, file)
-                });
-            }
-            else if (Array.isArray(value)) {
-                (value as string[]).forEach(item => {
-                    formData.append(key, item);
-                })
-            }
-            else {
-                formData.append(key, String(value))
+        for (const [key, value] of Object.entries(location.state || {})) {
+            /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
+            if (key === "imageBase64") continue;
+            appendToFormData(formData, key, value);
+        }
+        // initSurvey 기본값 처리
+        const filledKeys = Object.keys(location.state || {});
+        for (const [key, value] of Object.entries(initSurvey)) {
+            if (!filledKeys.includes(key)) {
+                appendToFormData(formData, key, value);
             }
         }
-        const filledKeys = Object.keys(location.state);
-        for (const [key, value] of Object.entries(initSurvey)) {
-            // location.state에는 없었던 값들을 append.
-            if (!filledKeys.includes(key)) {
-                if (key === "imageUrls") {
-                    (value as File[]).forEach(file => {
-                        formData.append(key, file)
-                    });
-                }
-                else if (Array.isArray(value)) {
-                    (value as string[]).forEach(item => {
-                        formData.append(key, item);
-                    })
-                }
-                else {
-                    formData.append(key, String(value))
-                }
-            }
+
+        for (const [key, value] of formData.entries()) {
+            console.log(`FormData: ${key} = ${value}`);
         }
         return formData;
     }

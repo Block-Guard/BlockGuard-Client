@@ -37,6 +37,15 @@ export interface SurveyData {
     additionalDescription: string;
 }
 
+export interface OptionSurveyData{
+    appType: string;
+    atmGuided: string;
+    suspiciousLinks: string;
+    suspiciousPhoneNumbers: string;
+    imageUrls: File[];
+    messageContent: string;
+}
+
 export interface FraudResultData {
     riskLevel: string;
     score: number;
