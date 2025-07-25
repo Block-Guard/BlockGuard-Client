@@ -23,11 +23,34 @@ export type FraudSurveyContextType = {
     progress: number;
 };
 
+export interface SurveyData {
+    contactMethod: string;
+    counterpart: string;
+    requestedAction: string;
+    requestedInfo: string;
+    appType: string;
+    atmGuided: string;
+    suspiciousLinks: string;
+    suspiciousPhoneNumbers: string;
+    imageUrls: File[];
+    messageContent: string;
+    additionalDescription: string;
+}
+
+export interface OptionSurveyData{
+    appType: string;
+    atmGuided: string;
+    suspiciousLinks: string;
+    suspiciousPhoneNumbers: string;
+    imageUrls: File[];
+    messageContent: string;
+}
+
 export interface FraudResultData {
     riskLevel: string;
     score: number;
     estimatedFraudType: string;
     keywords: string[];
     explanation: string;
-    recommendedAction: string;
+    // recommendedAction: string;
 }

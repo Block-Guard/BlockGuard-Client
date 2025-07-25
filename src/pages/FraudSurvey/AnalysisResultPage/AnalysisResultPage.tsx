@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
@@ -10,29 +10,108 @@ import FraudType from "./components/FraudType";
 import { ReportCallDrawer } from "./components/ReportCallDrawer";
 import { GuardianCallDrawer } from "./components/GuardianCallDrawer";
 import { TypeFeature } from "./components/TypeFeature";
+import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
+import { fraudAnalysisApi } from "../../../apis/fraud";
+import type { FraudResultData, OptionSurveyData } from "../../../types/fraud-types";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
-
-    const [resultTheme, setResultTheme] = useState(riskState[0]);
+    const location = useLocation();
+    const [data, setData] = useState<FraudResultData>();
+    const [resultTheme, setResultTheme] = useState(riskState[1]);
     const [overrideHeader, setOverrideHeader] = useState(false);
 
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
 
-    const handleBackClick = () => {
-        navigate(-1);
-        // navigate("/fraud-analysis/survey/9");
-    };
+    const [isLoading, setIsLoading] = useState(true);
+
+    const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
 
+    /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
+    const initSurvey: OptionSurveyData = {
+        appType: "",// 설문 5 (선택)
+        atmGuided: "false",// 설문 6 (선택)
+        suspiciousLinks: "",// 설문 7 (선택)
+        suspiciousPhoneNumbers: "",// 설문 7 (선택)
+        imageUrls: [], // 설문 8 (선택)
+        messageContent: "",  // 설문 8 (선택)
+        // additionalDescription: "",
+    }
+
+    const appendToFormData = (formData: FormData, key: string, value: any) => {
+        if (key === "atmGuided") {
+            formData.append(key, value === "네" ? "true" : "false");
+        } else if (key === "imageUrls" && value.length > 0) {
+            (value as File[]).forEach(file => formData.append(key, file));
+        } else if (Array.isArray(value)) {
+            (value as string[]).forEach(item => formData.append(key, item));
+        } else {
+            formData.append(key, String(value));
+        }
+    };
+
+    const makeForm = () => {
+        const formData = new FormData();
+        for (const [key, value] of Object.entries(location.state || {})) {
+            /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
+            if (key === "imageBase64") continue;
+            appendToFormData(formData, key, value);
+        }
+        /**  initSurvey 기본값 처리 */
+        const filledKeys = Object.keys(location.state || {});
+        for (const [key, value] of Object.entries(initSurvey)) {
+            if (!filledKeys.includes(key)) {
+                appendToFormData(formData, key, value);
+            }
+        }
+
+        /** 디버깅용 fromData 내용 출력 */
+        for (const [key, value] of formData.entries()) {
+            console.log(`FormData: ${key} = ${value}`);
+        }
+        return formData;
+    }
+
+    const getResult = async (formData: FormData) => {
+        return await fraudAnalysisApi(formData);
+    }
+
     useEffect(() => {
-        const themeIndex = getTheme(dummyResponse.data.riskLevel as string)
-        riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
-        setResultTheme(riskState[themeIndex]);
+        const process = async () => {
+            try {
+                setIsLoading(true);
+                const formData = makeForm();
+                const response = await getResult(formData);
+                setData(response);
+
+                const themeIndex = getTheme(response.riskLevel)
+
+                const detailDegree = {...riskState[themeIndex], degree: (response.score * 180 / 100)}
+                setResultTheme(detailDegree);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
+                setData(dummyResponse.data);
+                const themeIndex = getTheme(dummyResponse.data.riskLevel);
+                setResultTheme(riskState[themeIndex]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        if (location.state) {
+            process();
+        }
+
     }, [])
 
     useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
+
+    if (isLoading) {
+        return <AnalysisLoadingPage />
+    }
 
     return (
         <div className="flex flex-col justify-between w-full h-full overflow-y-scroll">
@@ -94,18 +173,19 @@ const AnalysisResultPage = () => {
                 {resultTheme.state === "safe" ?
                     (
                         <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                            {dummyResponse.data.explanation}
+                            {data ? data.explanation : "설명 로드 실패" }
                         </div>
                     ) : null}
 
                 <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
 
                 {resultTheme.state !== "safe" ? (
-                    <FraudType data={dummyResponse.data} />
+                    <>
+                    {data ? <FraudType data={data} /> : null}
+                    </>
                 ) : null}
 
-                {resultTheme.state === "safe" || dummyResponse.data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature />}
-
+                {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature />}
 
                 {/* 여기부터 응답과 상관없음 */}
                 <div className="text-center text-black text-xl font-bold leading-loose">

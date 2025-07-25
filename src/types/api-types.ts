@@ -51,3 +51,13 @@ export interface EachReportStepResponse extends ApiBaseResponse {
     createdAt: string;
   };
 }
+
+export interface FruadAnalysisResponse extends ApiBaseResponse {
+  data: {
+    riskLevel: string;
+    score: number;
+    estimatedFraudType: string;
+    keywords: string[];
+    explanation: string;
+  }
+}

@@ -42,15 +42,14 @@ export const riskState = [
 ];
 
 export const dummyResponse = {
-    "code": 2014,
-    "message": "사기 분석이 완료되었습니다.",
+    "code": 404,
+    "message": "사기 분석에 오류가 발생하여 더미 데이터를 불러왔습니다.",
     "data": {
-        "riskLevel": "위험", // "주의", "안전"
-        "score": 94.2,
-        "estimatedFraudType": "기관 사칭형",//"PROSECUTOR_IMPERSONATION",
-        "keywords": ["검찰", "송금", "서민금융"],
-        "explanation": "검찰을 사칭해 송금 및 개인정보를 요구하며, 서민금융을 사유로 앱 설치를 유도하는 전형적인 사기입니다.",
-        "recommendedAction": "즉시 앱 삭제 및 112에 신고하세요."
+        "riskLevel": "주의", // "주의", "안전"
+        "score": 50.2,
+        "estimatedFraudType": "판단할 수 없음",
+        "keywords": ["재설문", "네트워크 점검"],
+        "explanation": "사기 분석 결과 로딩중입니다.",
     }
 }
 
