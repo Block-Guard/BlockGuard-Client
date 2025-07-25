@@ -27,9 +27,19 @@ const AnalysisResultPage = () => {
     const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
 
-    // for (const [key, value] of Object.entries(location.state ?? {})) {
-    //     console.log(key, value);
-    // }
+    let initSurvey = {
+        contactMethod: "",
+        counterpart: "",
+        requestedAction: [""],
+        requestedInfo: [""],
+        appType: "",// 설문 5 (선택)
+        atmGuided: "false",// 설문 6 (선택)
+        suspiciousLinks: [""],// 설문 7 (선택)
+        suspiciousPhoneNumbers: [""],// 설문 7 (선택)
+        imageUrls: [], // 설문 8 (선택)
+        messageContent: "",  // 설문 8 (선택)
+        additionalDescription: "",
+    }
 
     const getResult = async (formData: FormData) => {
         return await fraudAnalysisApi(formData);
@@ -40,32 +50,61 @@ const AnalysisResultPage = () => {
             try {
                 setIsLoading(true);
                 const formData = new FormData();
-                for (const [key, value] of Object.entries(location.state)) {
-                    console.log(key, value);
-                    // 백엔드에 atmGuided 값 입력 안할 시 "" 인데 boolean인지 재확인 후 추가 처리.
-                    if (key === "imageBase64") {
-                        continue;
-                    }
-                    if (key === "atmGuided") {
-                        if (value === "네")
-                            formData.append(key, String("true"));
-                        else
-                            formData.append(key, String("false"));
-                    }
-                    if (key === "imageUrls") {
-                        (value as File[]).forEach(file => {
-                            formData.append(key, file)
-                        });
-                    }
-                    else if (Array.isArray(value)) {
-                        (value as string[]).forEach(item => {
-                            formData.append(key, item);
-                        })
-                    }
-                    else {
-                        formData.append(key, String(value))
-                    }
-                }
+
+                initSurvey = location.state;
+                console.log(initSurvey);
+                // for (const [key, value] of Object.entries(initSurvey)) {
+                //     if (key === "atmGuided") {
+                //         if (value === "네")
+                //             formData.append(key, String("true"));
+                //         else
+                //             formData.append(key, String("false"));
+                //     }
+                //     if (key === "imageUrls") {
+                //         (value as File[]).forEach(file => {
+                //             formData.append(key, file)
+                //         });
+                //     }
+                //     else if (Array.isArray(value)) {
+                //         (value as string[]).forEach(item => {
+                //             formData.append(key, item);
+                //         })
+                //     }
+                //     if (location.state[key]) {
+                //         formData.append(key, location.state[key]);
+                //     }
+                //     else {
+                //         formData.append(key, String(value));
+                //     }
+                // }
+
+
+                // for (const [key, value] of Object.entries(location.state)) {
+                //     console.log(key, value);
+                //     if (key === "imageBase64") {
+                //         continue;
+                //     }
+                //     if (key === "atmGuided") {
+                //         if (value === "네")
+                //             formData.append(key, String("true"));
+                //         else
+                //             formData.append(key, String("false"));
+                //     }
+                //     if (key === "imageUrls") {
+                //         (value as File[]).forEach(file => {
+                //             formData.append(key, file)
+                //         });
+                //     }
+                //     else if (Array.isArray(value)) {
+                //         (value as string[]).forEach(item => {
+                //             formData.append(key, item);
+                //         })
+                //     }
+                //     else {
+                //         formData.append(key, String(value))
+                //     }
+                // }
+
                 const data = await getResult(formData);
                 const themeIndex = getTheme(data.riskLevel)
                 riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
