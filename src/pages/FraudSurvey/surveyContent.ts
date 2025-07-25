@@ -49,7 +49,7 @@ export const surveyContent = [
     },
     {
         question: "의심스러웠던 당시 상황을 자세히 진술해주세요",
-        isEssential: false,
+        isEssential: true,
         answers: [],
         progress: 9
     }

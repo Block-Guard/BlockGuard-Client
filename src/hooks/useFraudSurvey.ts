@@ -10,9 +10,9 @@ export const STEP_CONFIG = {
     4: { keys: ['requestedInfo'], isRequired: true, isMultiple: true },
     5: { keys: ['appType'], isRequired: false, isMultiple: false },
     6: { keys: ['atmGuided'], isRequired: false, isMultiple: false },
-    7: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: true },
+    7: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: "false" },
     8: { keys: ['messageContent', 'imageUrls'], isRequired: false, isMultiple: true },
-    9: { keys: ['additionalDescription'], isRequired: false, isMultiple: false },
+    9: { keys: ['additionalDescription'], isRequired: true, isMultiple: false },
 };
 
 export const useFraudSurveyContext = () => {

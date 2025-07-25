@@ -27,18 +27,64 @@ const AnalysisResultPage = () => {
     const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
 
-    let initSurvey = {
-        contactMethod: "",
-        counterpart: "",
-        requestedAction: [""],
-        requestedInfo: [""],
+    /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
+    const initSurvey = {
         appType: "",// 설문 5 (선택)
         atmGuided: "false",// 설문 6 (선택)
-        suspiciousLinks: [""],// 설문 7 (선택)
-        suspiciousPhoneNumbers: [""],// 설문 7 (선택)
+        suspiciousLinks: "",// 설문 7 (선택)
+        suspiciousPhoneNumbers: "",// 설문 7 (선택)
         imageUrls: [], // 설문 8 (선택)
         messageContent: "",  // 설문 8 (선택)
-        additionalDescription: "",
+        // additionalDescription: "",
+    }
+
+    const makeForm = () => {
+        const formData = new FormData();
+        for (const [key, value] of Object.entries(location.state)) {
+            console.log(key, value);
+            if (key === "imageBase64") {
+                continue;
+            }
+            if (key === "atmGuided") {
+                if (value === "네")
+                    formData.append(key, String("true"));
+                else
+                    formData.append(key, String("false"));
+            }
+            if (key === "imageUrls") {
+                (value as File[]).forEach(file => {
+                    formData.append(key, file)
+                });
+            }
+            else if (Array.isArray(value)) {
+                (value as string[]).forEach(item => {
+                    formData.append(key, item);
+                })
+            }
+            else {
+                formData.append(key, String(value))
+            }
+        }
+        const filledKeys = Object.keys(location.state);
+        for (const [key, value] of Object.entries(initSurvey)) {
+            // location.state에는 없었던 값들을 append.
+            if (!filledKeys.includes(key)) {
+                if (key === "imageUrls") {
+                    (value as File[]).forEach(file => {
+                        formData.append(key, file)
+                    });
+                }
+                else if (Array.isArray(value)) {
+                    (value as string[]).forEach(item => {
+                        formData.append(key, item);
+                    })
+                }
+                else {
+                    formData.append(key, String(value))
+                }
+            }
+        }
+        return formData;
     }
 
     const getResult = async (formData: FormData) => {
@@ -49,65 +95,10 @@ const AnalysisResultPage = () => {
         const process = async () => {
             try {
                 setIsLoading(true);
-                const formData = new FormData();
-
-                initSurvey = location.state;
-                console.log(initSurvey);
-                // for (const [key, value] of Object.entries(initSurvey)) {
-                //     if (key === "atmGuided") {
-                //         if (value === "네")
-                //             formData.append(key, String("true"));
-                //         else
-                //             formData.append(key, String("false"));
-                //     }
-                //     if (key === "imageUrls") {
-                //         (value as File[]).forEach(file => {
-                //             formData.append(key, file)
-                //         });
-                //     }
-                //     else if (Array.isArray(value)) {
-                //         (value as string[]).forEach(item => {
-                //             formData.append(key, item);
-                //         })
-                //     }
-                //     if (location.state[key]) {
-                //         formData.append(key, location.state[key]);
-                //     }
-                //     else {
-                //         formData.append(key, String(value));
-                //     }
-                // }
-
-
-                // for (const [key, value] of Object.entries(location.state)) {
-                //     console.log(key, value);
-                //     if (key === "imageBase64") {
-                //         continue;
-                //     }
-                //     if (key === "atmGuided") {
-                //         if (value === "네")
-                //             formData.append(key, String("true"));
-                //         else
-                //             formData.append(key, String("false"));
-                //     }
-                //     if (key === "imageUrls") {
-                //         (value as File[]).forEach(file => {
-                //             formData.append(key, file)
-                //         });
-                //     }
-                //     else if (Array.isArray(value)) {
-                //         (value as string[]).forEach(item => {
-                //             formData.append(key, item);
-                //         })
-                //     }
-                //     else {
-                //         formData.append(key, String(value))
-                //     }
-                // }
-
+                const formData = makeForm();
                 const data = await getResult(formData);
                 const themeIndex = getTheme(data.riskLevel)
-                riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
+                riskState[themeIndex].degree = data.score * 180 / 100;
                 setIsLoading(false);
             } catch (error) {
                 console.error("사기 분석 결과 페이지에서 로드 오류 발생", error);
