@@ -7,8 +7,8 @@ import type { FruadAnalysisResponse } from "../types/api-types";
 export const fraudAnalysisApi = async (formdata: FormData) => {
     try {
         const response = await axios.post<FruadAnalysisResponse>(
-            // "https://www.blockguard.shop/api/fraud-analysis", formdata,
-            "https://460b25b3-b735-4bd2-9e8c-00e88f644e33.mock.pstmn.io/api/fraud-analysis", formdata,
+            "https://www.blockguard.shop/api/fraud-analysis", formdata,
+            // "https://460b25b3-b735-4bd2-9e8c-00e88f644e33.mock.pstmn.io/api/fraud-analysis", formdata,
             {
                 headers: { "Content-Type": "multipart/form-data" },
             }
