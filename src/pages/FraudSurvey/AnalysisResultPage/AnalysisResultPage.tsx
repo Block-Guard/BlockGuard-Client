@@ -41,10 +41,16 @@ const AnalysisResultPage = () => {
                 setIsLoading(true);
                 const formData = new FormData();
                 for (const [key, value] of Object.entries(location.state)) {
-                    // console.log(key, value);
+                    console.log(key, value);
                     // 백엔드에 atmGuided 값 입력 안할 시 "" 인데 boolean인지 재확인 후 추가 처리.
                     if (key === "imageBase64") {
                         continue;
+                    }
+                    if (key === "atmGuided") {
+                        if (value === "네")
+                            formData.append(key, String("true"));
+                        else
+                            formData.append(key, String("false"));
                     }
                     if (key === "imageUrls") {
                         (value as File[]).forEach(file => {
@@ -64,14 +70,14 @@ const AnalysisResultPage = () => {
                 const themeIndex = getTheme(data.riskLevel)
                 riskState[themeIndex].degree = dummyResponse.data.score * 180 / 100;
                 setIsLoading(false);
-            }catch(error){
+            } catch (error) {
                 console.error("사기 분석 결과 페이지에서 로드 오류 발생", error);
-            }finally{
+            } finally {
                 setIsLoading(false);
             }
         }
 
-        if(location.state){
+        if (location.state) {
             process();
         }
 
