@@ -52,5 +52,5 @@ export interface FraudResultData {
     estimatedFraudType: string;
     keywords: string[];
     explanation: string;
-    recommendedAction: string;
+    // recommendedAction: string;
 }
