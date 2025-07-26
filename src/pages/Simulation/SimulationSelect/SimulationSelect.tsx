@@ -19,8 +19,13 @@ const SimulationSelect = () => {
   useEffect(() => {
     if (isLoading) {
       const timer = setTimeout(() => {
-        // navigate("/");
-        // 시뮬레이션 페이지로 이동
+        switch (selectedType) {
+          case 1:
+            navigate("/simulation/public-organ/respond-to-police");
+            break;
+          default:
+            navigate("/simulation/selet-type");
+        }
       }, 2000);
       return () => clearTimeout(timer);
     }
