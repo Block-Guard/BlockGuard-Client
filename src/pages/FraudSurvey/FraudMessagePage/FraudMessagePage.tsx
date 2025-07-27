@@ -18,7 +18,7 @@ const FraudMessagePage = () => {
   // 파일 변경 시 localStorage에 지속성을 부여하는 함수
   const updatePersistentState = async (filesToSave: File[]) => {
     if (filesToSave.length > 0) {
-      updateAnswers({imageUrls: filesToSave})
+      updateAnswers({imageFiles: filesToSave})
       const promises = filesToSave.map(file => {
         return new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
@@ -32,7 +32,7 @@ const FraudMessagePage = () => {
     } else {
       // 저장할 파일이 없으면 localStorage도 비움
       updateAnswers({ imageBase64: [] });
-      updateAnswers({imageUrls: []})
+      updateAnswers({imageFiles: []})
     }
   };
 
@@ -72,7 +72,10 @@ const FraudMessagePage = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-
+    if (localFiles.length > 2){
+      alert("현재 이미지는 최대 2장까지 첨부 가능합니다.")
+      return;
+    }
     const newFiles = Array.from(files);
     const updatedFiles = [...localFiles, ...newFiles];
     // 원본 파일은 로컬 상태에 저장
