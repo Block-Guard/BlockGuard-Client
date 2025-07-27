@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
-import { dummyResponse, riskState } from "./constants";
+import { dummyResponse, initSurvey, riskState } from "./constants";
 import { getTheme } from "../../../utils/fraudResult";
 import { useScrollHeader } from "../../../hooks/useScrollHeader";
 import BottomCard from "./components/BottomCard";
@@ -12,7 +12,7 @@ import { GuardianCallDrawer } from "./components/GuardianCallDrawer";
 import { TypeFeature } from "./components/TypeFeature";
 import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
 import { fraudAnalysisApi } from "../../../apis/fraud";
-import type { FraudResultData, OptionSurveyData } from "../../../types/fraud-types";
+import type { FraudResultData } from "../../../types/fraud-types";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -29,47 +29,28 @@ const AnalysisResultPage = () => {
     const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
 
-    /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
-    const initSurvey: OptionSurveyData = {
-        appType: "",// 설문 5 (선택)
-        atmGuided: "false",// 설문 6 (선택)
-        suspiciousLinks: "",// 설문 7 (선택)
-        suspiciousPhoneNumbers: "",// 설문 7 (선택)
-        imageUrls: [], // 설문 8 (선택)
-        messageContent: "",  // 설문 8 (선택)
-        // additionalDescription: "",
-    }
-
-    const appendToFormData = (formData: FormData, key: string, value: any) => {
-        if (key === "atmGuided") {
-            formData.append(key, value === "네" ? "true" : "false");
-        } else if (key === "imageUrls" && value.length > 0) {
-            (value as File[]).forEach(file => formData.append(key, file));
-        } else if (Array.isArray(value)) {
-            (value as string[]).forEach(item => formData.append(key, item));
-        } else {
-            formData.append(key, String(value));
-        }
-    };
-
     const makeForm = () => {
         const formData = new FormData();
+        /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
+        const stringSurvey = { ...initSurvey };
         for (const [key, value] of Object.entries(location.state || {})) {
             /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
             if (key === "imageBase64") continue;
-            appendToFormData(formData, key, value);
-        }
-        /**  initSurvey 기본값 처리 */
-        const filledKeys = Object.keys(location.state || {});
-        for (const [key, value] of Object.entries(initSurvey)) {
-            if (!filledKeys.includes(key)) {
-                appendToFormData(formData, key, value);
+            /**  initSurvey 기본값 처리 */
+            if (key === "atmGuided") {
+                stringSurvey["atmGuided"] = value === "네" ? "true" : "false";
+            } else if (key === "imageFiles") {
+                (value as File[]).forEach(file => formData.append(key, file));
             }
         }
-
+        formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
         /** 디버깅용 fromData 내용 출력 */
         for (const [key, value] of formData.entries()) {
-            console.log(`FormData: ${key} = ${value}`);
+            if (key !== "imageFiles") {
+                for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
+                    console.log(`FormData: ${key2} = ${value2}`);
+                }
+            }
         }
         return formData;
     }
@@ -88,7 +69,7 @@ const AnalysisResultPage = () => {
 
                 const themeIndex = getTheme(response.riskLevel)
 
-                const detailDegree = {...riskState[themeIndex], degree: (response.score * 180 / 100)}
+                const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
                 setResultTheme(detailDegree);
                 setIsLoading(false);
             } catch (error) {
@@ -173,7 +154,7 @@ const AnalysisResultPage = () => {
                 {resultTheme.state === "safe" ?
                     (
                         <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                            {data ? data.explanation : "설명 로드 실패" }
+                            {data ? data.explanation : "설명 로드 실패"}
                         </div>
                     ) : null}
 
@@ -181,7 +162,7 @@ const AnalysisResultPage = () => {
 
                 {resultTheme.state !== "safe" ? (
                     <>
-                    {data ? <FraudType data={data} /> : null}
+                        {data ? <FraudType data={data} /> : null}
                     </>
                 ) : null}
 

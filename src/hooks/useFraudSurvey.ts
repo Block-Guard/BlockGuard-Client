@@ -11,7 +11,7 @@ export const STEP_CONFIG = {
     5: { keys: ['appType'], isRequired: false, isMultiple: false },
     6: { keys: ['atmGuided'], isRequired: false, isMultiple: false },
     7: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: "false" },
-    8: { keys: ['messageContent', 'imageUrls'], isRequired: false, isMultiple: true },
+    8: { keys: ['messageContent', 'imageFiles'], isRequired: false, isMultiple: true },
     9: { keys: ['additionalDescription'], isRequired: true, isMultiple: false },
 };
 
