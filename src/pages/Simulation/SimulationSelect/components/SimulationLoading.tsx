@@ -1,4 +1,4 @@
-import BlockeeGlitered from "../../../../assets/characters/blockee-glitering.svg";
+import BlockeeGlitered from "@/assets/characters/blockee-glitering.svg";
 
 const SimulationLoading = () => {
   return (

@@ -27,6 +27,9 @@ import Signup from "../pages/Auth/Signup/Signup";
 import SignupComplete from "../pages/Auth/Signup/SignupComplete";
 import SimulationMainPage from "../pages/Simulation/SimulationMain/SimulationMainPage";
 import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSelect";
+import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
+import CallViewLayout from "../layouts/CallViewLayout";
+import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
 
 const router = createBrowserRouter([
   {
@@ -153,6 +156,26 @@ const router = createBrowserRouter([
       {
         path: "select-type",
         element: <SimulationSelect />,
+      },
+      {
+        path: "public-organ",
+        children: [
+          {
+            path: "respond-to-police",
+            element: <CallViewLayout />,
+            children: [{ index: true, element: <RespondToPolice /> }],
+          },
+        ],
+      },
+      {
+        path: "loan-investment",
+        children: [
+          {
+            path: "call-view-loan",
+            element: <CallViewLayout />,
+            children: [{ index: true, element: <CallViewLoan /> }],
+          },
+        ],
       },
     ],
   },
