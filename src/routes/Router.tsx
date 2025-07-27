@@ -30,6 +30,7 @@ import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSel
 import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
 import CallViewLayout from "../layouts/CallViewLayout";
 import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
+import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/AllowPermissionPage/AllowPermissionPage";
 
 const router = createBrowserRouter([
   {
@@ -175,6 +176,10 @@ const router = createBrowserRouter([
             element: <CallViewLayout />,
             children: [{ index: true, element: <CallViewLoan /> }],
           },
+          {
+            path: "fake-app-permmision",
+            element: <AllowPermissionPage/>
+          }
         ],
       },
     ],
