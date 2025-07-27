@@ -12,7 +12,6 @@ export interface StepConfig {
 
 export type Status = 'idle' | 'loading' | 'success' | 'error';
 
-
 export type AnswerValue = string | string[] | File[];
 export type SurveyAnswers = {
     [key: string]: AnswerValue | undefined;
@@ -23,27 +22,18 @@ export type FraudSurveyContextType = {
     progress: number;
 };
 
-export interface SurveyData {
+/** 사기 분석 api가 문자열 + 이미지(옵션)으로 변경 */
+export interface stringSurveyData {
     contactMethod: string;
     counterpart: string;
-    requestedAction: string;
-    requestedInfo: string;
+    requestedAction: string[];
+    requestedInfo: string[];
     appType: string;
     atmGuided: string;
     suspiciousLinks: string;
     suspiciousPhoneNumbers: string;
-    imageUrls: File[];
     messageContent: string;
     additionalDescription: string;
-}
-
-export interface OptionSurveyData{
-    appType: string;
-    atmGuided: string;
-    suspiciousLinks: string;
-    suspiciousPhoneNumbers: string;
-    imageUrls: File[];
-    messageContent: string;
 }
 
 export interface FraudResultData {
