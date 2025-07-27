@@ -19,8 +19,16 @@ const SimulationSelect = () => {
   useEffect(() => {
     if (isLoading) {
       const timer = setTimeout(() => {
-        // navigate("/");
-        // 시뮬레이션 페이지로 이동
+        switch (selectedType) {
+          case 1:
+            navigate("/simulation/public-organ/respond-to-police");
+            break;
+          case 3:
+            navigate("/simulation/loan-investment/call-view-loan");
+            break;
+          default:
+            navigate("/simulation/selet-type");
+        }
       }, 2000);
       return () => clearTimeout(timer);
     }
@@ -33,7 +41,13 @@ const SimulationSelect = () => {
   return (
     <div className="flex flex-col h-full">
       <Header
-        leftChild={<img src={LeftArrowIcon} onClick={() => navigate(-1)} />}
+        leftChild={
+          <img
+            src={LeftArrowIcon}
+            className="py-[5.5px] pr-1"
+            onClick={() => navigate("/simulation")}
+          />
+        }
       />
       <div
         className="flex flex-col gap-7 pb-30 px-6 mt-[72px] max-w-[800px]"
