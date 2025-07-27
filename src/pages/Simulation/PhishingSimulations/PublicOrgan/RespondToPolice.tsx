@@ -60,8 +60,8 @@ const RespondToPolice = () => {
   }, [isAnsweredPhone, callTime]);
 
   return (
-    <div className="h-dvh flex flex-col justify-between items-center px-8 pb-[34px] bg-[linear-gradient(180deg,_#7374AE_0%,_#342929_100%)]">
-      <div className="pt-10 flex flex-col text-monochrome-100 text-center">
+    <div className="h-dvh flex flex-col justify-between items-center px-8 pb-[34px]">
+      <div className="pt-18 flex flex-col text-monochrome-100 text-center">
         <span className="text-2xl font-medium h-[29px]">
           {isAnsweredPhone ? `00:0${callTime}` : ""}
         </span>

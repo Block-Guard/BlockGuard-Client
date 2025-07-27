@@ -27,7 +27,8 @@ import Signup from "../pages/Auth/Signup/Signup";
 import SignupComplete from "../pages/Auth/Signup/SignupComplete";
 import SimulationMainPage from "../pages/Simulation/SimulationMain/SimulationMainPage";
 import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSelect";
-import RespondToPolice from "../pages/Simulation/Simulations/PublicOrganSimulation/RespondToPolice";
+import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
+import CallViewLayout from "../layouts/CallViewLayout";
 
 const router = createBrowserRouter([
   {
@@ -164,7 +165,8 @@ const router = createBrowserRouter([
         children: [
           {
             path: "respond-to-police",
-            element: <RespondToPolice />,
+            element: <CallViewLayout />,
+            children: [{ index: true, element: <RespondToPolice /> }],
           },
         ],
       },
