@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import OnThePhoneComponent from "../../components/OnThePhoneComponent";
 import IncomingCallComponent from "../../components/IncomingCallComponent";
 import { useNavigate } from "react-router-dom";
+import { formatCallTime } from "../../../../utils/formatCallTime";
 
 const RespondToPolice = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const RespondToPolice = () => {
     <div className="h-dvh flex flex-col justify-between items-center px-8 pb-[34px]">
       <div className="pt-18 flex flex-col text-monochrome-100 text-center">
         <span className="text-2xl font-medium h-[29px]">
-          {isAnsweredPhone ? `00:0${callTime}` : ""}
+          {isAnsweredPhone ? `${formatCallTime(callTime)}` : ""}
         </span>
         <span className="text-[44px] font-semibold">112</span>
       </div>
