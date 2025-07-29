@@ -3,7 +3,7 @@ import Header from "../../../../../../components/Header/Header";
 import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import CloseIcon from "@/assets/icons/close-darkblue-icon.svg";
 import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.svg";
-import { permissionList } from "./constant";
+import { permissionList } from "../../constant";
 import PermissionItem from "./components/PermissionItem";
 import PermissionSwitch from "./components/PermissionSwitch";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const AllowPermissionPage = () => {
     const handleBackClick = () => navigate("/simulation/loan-investment");
     const handleCloseClick = () => {
         if(toggleAllValue){
-            navigate("/simulation/loan-investment/landing");
+            navigate("/simulation/loan-investment/fake-app-landing");
         }
         else{
             navigate("/simulation/loan-investment")

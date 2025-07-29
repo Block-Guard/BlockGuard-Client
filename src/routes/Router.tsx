@@ -14,7 +14,6 @@ import EmergencyReportOverviewPage from "../pages/Emergency/EmergencyReport/Emer
 import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
 import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
 import FraudSituationPage from "../pages/FraudSurvey/FraudSituationPage/FraudSituationPage";
-import AnalysisLoadingPage from "../pages/FraudSurvey/AnalysisLoadingPage/AnalysisLoadingPage";
 import ReportStep1 from "../pages/Emergency/EmergencyReport/ReportStep1";
 import ReportStepLayout from "../layouts/ReportStepLayout";
 import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
@@ -31,7 +30,8 @@ import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan
 import CallViewLayout from "../layouts/CallViewLayout";
 import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
 import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/AllowPermissionPage/AllowPermissionPage";
-import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/landingPage/FakeAppLandingPage";
+import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/FakeLandingPage/FakeAppLandingPage";
+import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/FakeHomePage/FakeHomePage";
 
 const router = createBrowserRouter([
   {
@@ -182,8 +182,12 @@ const router = createBrowserRouter([
             element: <AllowPermissionPage/>
           },
           {
-            path: "landing",
+            path: "fake-app-landing",
             element: <FakeAppLandingPage/>
+          },
+          {
+            path: "fake-app-home",
+            element: <FakeHomePage/>
           }
         ],
       },
