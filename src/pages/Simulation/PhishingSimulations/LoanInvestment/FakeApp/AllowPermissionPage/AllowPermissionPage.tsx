@@ -64,7 +64,7 @@ const AllowPermissionPage = () => {
             <main className="p-[18px] ">
                 <div className="flex items-center mt-[57px]">
                     <img src={FakeBankApp} alt="어플이미지" className="mr-6" />
-                    <div className="w-52 h-14 justify-start text-black text-xl font-medium font-['Pretendard'] leading-normal">
+                    <div className="w-52 h-14 justify-start text-black text-xl font-medium leading-normal">
                         XX은행에서 액세스하도록<br />
                         허용할 항목 선택
                     </div>

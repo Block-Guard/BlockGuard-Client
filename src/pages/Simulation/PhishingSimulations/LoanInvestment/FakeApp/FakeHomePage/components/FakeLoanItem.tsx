@@ -12,7 +12,7 @@ export const FakeLoanItem = ({icon, title, description}: FakeLoanItemProps) => {
 
     const handleClick = () =>{
         if(title === "대출 신청하기")
-            navigate("/home")
+            navigate("/simulation/loan-investment/fake-loan-invest")
         console.log("가짜 은행 상품 클릭", title);
     }
     return (

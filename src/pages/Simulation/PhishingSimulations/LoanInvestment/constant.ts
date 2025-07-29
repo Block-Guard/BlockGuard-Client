@@ -81,3 +81,41 @@ export const fakeLoanTiemList = [
         description: "대출금리 최소 연 2.3%~최대 6.9%상품",
     }
 ]
+
+export const loanInputInfoList = [
+    {
+        id: 0,
+        label: "이름",
+        placeholder: "예) 홍길동",
+    },
+    {
+        id: 1,
+        label: "휴대폰",
+        placeholder: "-없이 입력",
+    },
+    {
+        id: 2,
+        label: "주민번호",
+        placeholder: "",
+    },
+    {
+        id: 3,
+        label: "직장명/사업자명",
+        placeholder: "",
+    },
+    {
+        id: 4,
+        label: "연봉/매출",
+        placeholder: "",
+    },
+    {
+        id: 5,
+        label: "필요금액",
+        placeholder: "",
+    },
+    {
+        id: 6,
+        label: "대출신청 현황",
+        placeholder: "",
+    }
+]
