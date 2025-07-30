@@ -33,6 +33,7 @@ import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInv
 import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLandingPage/FakeAppLandingPage";
 import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
 import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
+import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/ExplainPhishPage/ExplainPhishPage";
 
 const router = createBrowserRouter([
   {
@@ -193,6 +194,10 @@ const router = createBrowserRouter([
           {
             path:"fake-loan-invest",
             element: <FakeLoanInvestPage/>
+          },
+          {
+            path:"explain-fraud",
+            element: <ExplainLoanPhishPage/>
           }
         ],
       },

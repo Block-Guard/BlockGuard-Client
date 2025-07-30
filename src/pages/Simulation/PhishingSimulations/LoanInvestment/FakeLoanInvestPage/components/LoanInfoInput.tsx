@@ -37,7 +37,7 @@ export const LoanInfoInput = ({ label, placeholder, inputState, inputStateSetter
                                     focus:bg-monochrome-200
                                     placeholder-zinc-300
                                     resize-none no-scrollbar
-                                    ${inputState ?  "bg-monochrome-200":"bg-white"}
+                                    ${info === "" ?  "bg-monochrome-200":"bg-white"}
                                     `}
                 placeholder={placeholder}
                 onChange={handleChange}
