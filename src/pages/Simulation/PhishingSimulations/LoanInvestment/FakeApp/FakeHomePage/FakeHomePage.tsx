@@ -62,17 +62,17 @@ const FakeHomePage = () => {
             {
                 fakeLoanTiemList.map((loanItem) => {
                     return (
-                        <>
+                        <div className="relative">
                             <FakeLoanItem icon={loanItem.icon} title={loanItem.title} description={loanItem.description} key={loanItem.id} />
                             {loanItem.id === 2 ? (
                                 <Lottie
                                     animationData={ClickAnimation}
                                     loop
                                     autoplay
-                                    className="fixed top-128 right-7 translate-[50%] w-40 pointer-events-none"
+                                    className="absolute left-64 bottom-13 translate-[50%] w-40 pointer-events-none"
                                 />
                             ) : null}
-                        </>
+                        </div>
                     )
                 })
             }

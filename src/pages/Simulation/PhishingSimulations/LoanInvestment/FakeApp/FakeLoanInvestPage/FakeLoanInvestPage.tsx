@@ -12,11 +12,8 @@ import ClickAnimation from "../../../../../../assets/lottie/click.json";
 const FakeLoanInvestPage = () => {
     const navigate = useNavigate();
     const [switches, setSwitches] = useState(Array(loanInputInfoList.length).fill(false))
-
+    const [isReminded, setIsreMinded] = useState(false);
     const toggleAllValue = switches.every(Boolean);
-    const toggleAll = (value: boolean) => {
-        setSwitches(Array(switches.length).fill(value))
-    }
 
     const toggleOne = (id: number) => {
         setSwitches(prev => {
@@ -28,10 +25,9 @@ const FakeLoanInvestPage = () => {
 
 
     const handleBtnClick = () => {
-
         if (!toggleAllValue) {
             /** 전부 내용이 없는 경우, 리마인드 */
-            console.log(123)
+            setIsreMinded(true)
         }
         else {
             /** 전부 내용이 있는 경우 팝업 */
@@ -69,22 +65,24 @@ const FakeLoanInvestPage = () => {
                             <div className="relative">
                                 <LoanInfoInput label={info.label} placeholder={info.placeholder}
                                     inputState={switches[info.id]} inputStateSetter={() => toggleOne(info.id)}
+                                    isReminded={isReminded}
                                     key={info.id} />
-                                    {info.id === 0 && !switches[info.id] ? (
-                                <Lottie
-                                    animationData={ClickAnimation}
-                                    loop
-                                    autoplay
-                                    className="absolute top-15 -left-7 w-40 pointer-events-none"
-                                />
-                            ) : null}
+
+                                {info.id === 0 && !switches[info.id] ? (
+                                    <Lottie
+                                        animationData={ClickAnimation}
+                                        loop
+                                        autoplay
+                                        className="absolute -top-7 -left-7 w-40 pointer-events-none z-50"
+                                    />
+                                ) : null}
                             </div>
                         )
                     })
                 }
             </div>
 
-            <div className="p-6 mt-[67px]">
+            <div className="p-6 mt-[57px] relative">
                 <Button
                     onClick={handleBtnClick}
                     size="lg"
@@ -92,12 +90,12 @@ const FakeLoanInvestPage = () => {
                 >
                     신청하기
                 </Button>
-                <Lottie
+                {toggleAllValue ? <Lottie
                     animationData={ClickAnimation}
                     loop
                     autoplay
-                    className="relative left-20 bottom-42 translate-[50%] w-40 pointer-events-none"
-                />
+                    className="absolute left-30 bottom-10 translate-[50%] w-40 pointer-events-none"
+                /> : null}
             </div>
 
         </div>
