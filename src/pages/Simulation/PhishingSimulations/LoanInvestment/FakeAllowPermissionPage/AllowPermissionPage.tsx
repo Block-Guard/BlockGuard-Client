@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../../../../../../components/Header/Header";
+import Header from "../../../../../components/Header/Header";
 import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import CloseIcon from "@/assets/icons/close-darkblue-icon.svg";
 import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.svg";
-import { permissionList } from "../../constant";
+import { permissionList } from "../constant";
 import PermissionItem from "./components/PermissionItem";
 import PermissionSwitch from "./components/PermissionSwitch";
 import { useState } from "react";
 import Lottie from "lottie-react";
-import ClickAnimation from "../../../../../../assets/lottie/click.json";
+import ClickAnimation from "../../../../../assets/lottie/click.json";
 
 const AllowPermissionPage = () => {
     const navigate = useNavigate();

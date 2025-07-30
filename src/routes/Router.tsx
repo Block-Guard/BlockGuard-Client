@@ -29,10 +29,10 @@ import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSel
 import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
 import CallViewLayout from "../layouts/CallViewLayout";
 import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
-import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/AllowPermissionPage/AllowPermissionPage";
-import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/FakeLandingPage/FakeAppLandingPage";
-import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/FakeHomePage/FakeHomePage";
-import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeApp/FakeLoanInvestPage/FakeLoanInvestPage";
+import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeAllowPermissionPage/AllowPermissionPage";
+import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLandingPage/FakeAppLandingPage";
+import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
+import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
 
 const router = createBrowserRouter([
   {

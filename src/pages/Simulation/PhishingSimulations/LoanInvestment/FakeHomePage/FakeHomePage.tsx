@@ -2,9 +2,9 @@ import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.
 import MenuIcon from "@/assets/simulation/loan-investment/menu-button-icon.svg";
 import FakeLoanImg from "@/assets/simulation/loan-investment/fake-loan-img.svg";
 import { FakeLoanItem } from "./components/FakeLoanItem";
-import { fakeLoanTiemList } from "../../constant";
+import { fakeLoanTiemList } from "../constant";
 import Lottie from "lottie-react";
-import ClickAnimation from "../../../../../../assets/lottie/click.json";
+import ClickAnimation from "../../../../../assets/lottie/click.json";
 const FakeHomePage = () => {
 
     return (

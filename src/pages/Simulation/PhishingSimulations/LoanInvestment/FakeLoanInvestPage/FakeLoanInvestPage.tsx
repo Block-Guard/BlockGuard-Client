@@ -4,10 +4,10 @@ import ArrowLeftDarkBlue from "@/assets/icons/arrow-left-darkblue-icon.svg"
 import { useNavigate } from "react-router-dom";
 import { LoanInfoInput } from "./components/LoanInfoInput";
 import { useState } from "react";
-import { loanInputInfoList } from "../../constant";
-import Button from "../../../../../../components/Button/Button";
+import { loanInputInfoList } from "../constant";
+import Button from "../../../../../components/Button/Button";
 import Lottie from "lottie-react";
-import ClickAnimation from "../../../../../../assets/lottie/click.json";
+import ClickAnimation from "../../../../../assets/lottie/click.json";
 
 const FakeLoanInvestPage = () => {
     const navigate = useNavigate();
