@@ -22,7 +22,7 @@ export const FakeLoanItem = ({icon, title, description}: FakeLoanItemProps) => {
                     <img src={icon} alt="아이콘" />
                 </div>
 
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-center ">
                     <div className="w-full h-9 text-slate-950 text-xl font-bold leading-normal tracking-tight">
                         {title}
                     </div>

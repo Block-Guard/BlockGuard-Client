@@ -40,7 +40,7 @@ const FakeLoanInvestPage = () => {
     }
     const handleBackClick = () => navigate("/simulation/loan-investment/fake-app-home")
     return (
-        <div>
+        <div className="h-[100vh]">
             <header className="fixed top-0 left-0 right-0 flex justify-between items-center h-[87px] px-6 py-4.5 z-50 bg-white">
                 <div className="flex items-center gap-3">
                     <img src={FakeBankApp} alt="앱아이콘" className="w-16 h-16" />
@@ -66,7 +66,7 @@ const FakeLoanInvestPage = () => {
                 {
                     loanInputInfoList.map((info) => {
                         return (
-                            <>
+                            <div className="relative">
                                 <LoanInfoInput label={info.label} placeholder={info.placeholder}
                                     inputState={switches[info.id]} inputStateSetter={() => toggleOne(info.id)}
                                     key={info.id} />
@@ -75,10 +75,10 @@ const FakeLoanInvestPage = () => {
                                     animationData={ClickAnimation}
                                     loop
                                     autoplay
-                                    className="absolute top-15 -left-7 translate-[50%] w-40 pointer-events-none"
+                                    className="absolute top-15 -left-7 w-40 pointer-events-none"
                                 />
                             ) : null}
-                            </>
+                            </div>
                         )
                     })
                 }

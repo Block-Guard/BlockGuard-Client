@@ -38,7 +38,7 @@ const AllowPermissionPage = () => {
         }
     };
     return (
-        <div className="flex flex-col justify-between w-full h-full overflow-y-scroll no-scrollbar">
+        <div className="flex flex-col justify-between w-full h-full overflow-y-scroll overflow-x-hidden no-scrollbar">
             <Header
                 leftChild={
                     <button onClick={handleBackClick}>
@@ -83,20 +83,18 @@ const AllowPermissionPage = () => {
                     <span className="relative bottom-1 text-center w-16 h-4 mr-7.5 text-slate-950 text-base font-medium leading-normal">
                         모두 허용
                     </span>
-                    <div>
+                    <div className="relative overflow-x-visible">
                         <PermissionSwitch isChecked={switches.every(Boolean)} handleCheck={() => toggleAll(!toggleAllValue)} />
                         {toggleAllValue ? null : (
                             <Lottie
                                 animationData={ClickAnimation}
                                 loop
                                 autoplay
-                                className="fixed bottom-40 right-10 translate-[50%] w-40 pointer-events-none"
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 pointer-events-none"
                             />
-                        )}
+                        )} 
                     </div>
-
                 </div>
-
             </main>
 
 
