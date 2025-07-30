@@ -14,7 +14,7 @@ const ProsecutorMessage = () => {
       setSelectedFirstStep(selected);
       const timer = setTimeout(() => {
         setStep(2);
-      }, 1000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   };
@@ -24,7 +24,7 @@ const ProsecutorMessage = () => {
       setSelectedSecondStep(selected);
       const timer = setTimeout(() => {
         setStep(6);
-      }, 1000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   };
@@ -38,7 +38,7 @@ const ProsecutorMessage = () => {
       case 6:
         const timer = setTimeout(() => {
           setStep(step + 1);
-        }, 1000);
+        }, 1500);
         return () => clearTimeout(timer);
     }
   }, [step, setStep]);
