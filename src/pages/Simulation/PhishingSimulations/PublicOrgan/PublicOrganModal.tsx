@@ -44,7 +44,7 @@ const PublicOrganModal = () => {
         </div>
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-[425px] bg-transparent border-none shadow-none"
+        className="sm:max-w-[425px] bg-transparent border-none shadow-none "
         showCloseButton={false}
         onInteractOutside={(e) => {
           if (isCorrected) e.preventDefault();
@@ -161,9 +161,8 @@ const PublicOrganModal = () => {
           >
             피해 유형 더 알아보기
           </button>
-        ) : (
-          selectedAnswer !== 0 &&
-          (selectedAnswer === 1 ? (
+        ) : selectedAnswer !== 0 ? (
+          selectedAnswer === 1 ? (
             <div className="w-full h-16 flex flex-row rounded-[90px] gap-[15px] bg-white text-[#437efc] text-[20px] font-semibold justify-center items-center">
               정답이에요!
               <img className="w-[43px]" src={Blockee} />
@@ -173,7 +172,9 @@ const PublicOrganModal = () => {
               다시 시도해보세요!
               <img className="w-[43px]" src={Blockee} />
             </div>
-          ))
+          )
+        ) : (
+          <div className="h-16" />
         )}
       </DialogContent>
     </Dialog>
