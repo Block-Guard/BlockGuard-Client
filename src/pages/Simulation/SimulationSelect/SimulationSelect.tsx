@@ -21,13 +21,13 @@ const SimulationSelect = () => {
       const timer = setTimeout(() => {
         switch (selectedType) {
           case 1:
-            navigate("/simulation/public-organ/respond-to-police");
+            navigate("/simulation/public-organ/step1");
             break;
           case 3:
-            navigate("/simulation/loan-investment/call-view-loan");
+            navigate("/simulation/loan-investment/step1");
             break;
           default:
-            navigate("/simulation/selet-type");
+            navigate("/simulation/select-type");
         }
       }, 2000);
       return () => clearTimeout(timer);

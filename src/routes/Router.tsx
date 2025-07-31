@@ -30,6 +30,8 @@ import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSel
 import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
 import CallViewLayout from "../layouts/CallViewLayout";
 import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
+import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
+import MessageViewLayout from "../layouts/MessageViewLayout";
 
 const router = createBrowserRouter([
   {
@@ -161,9 +163,14 @@ const router = createBrowserRouter([
         path: "public-organ",
         children: [
           {
-            path: "respond-to-police",
+            path: "step1",
             element: <CallViewLayout />,
             children: [{ index: true, element: <RespondToPolice /> }],
+          },
+          {
+            path: "step2",
+            element: <MessageViewLayout sender="검찰청" />,
+            children: [{ index: true, element: <ProsecutorMessage /> }],
           },
         ],
       },
@@ -171,7 +178,7 @@ const router = createBrowserRouter([
         path: "loan-investment",
         children: [
           {
-            path: "call-view-loan",
+            path: "step1",
             element: <CallViewLayout />,
             children: [{ index: true, element: <CallViewLoan /> }],
           },
