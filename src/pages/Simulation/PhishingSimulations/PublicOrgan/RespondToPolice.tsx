@@ -47,7 +47,7 @@ const RespondToPolice = () => {
     // 음성 재생이 끝나면 이동
     voice.onended = () => {
       voiceRef.current = null;
-      navigate("/simulation/select-type");
+      navigate("/simulation/public-organ/step2");
     };
   };
 

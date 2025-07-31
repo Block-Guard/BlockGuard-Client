@@ -35,6 +35,9 @@ import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment
 import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
 import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/ExplainPhishPage";
 import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
+import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
+import MessageViewLayout from "../layouts/MessageViewLayout";
+
 
 const router = createBrowserRouter([
   {
@@ -166,9 +169,14 @@ const router = createBrowserRouter([
         path: "public-organ",
         children: [
           {
-            path: "respond-to-police",
+            path: "step1",
             element: <CallViewLayout />,
             children: [{ index: true, element: <RespondToPolice /> }],
+          },
+          {
+            path: "step2",
+            element: <MessageViewLayout sender="검찰청" />,
+            children: [{ index: true, element: <ProsecutorMessage /> }],
           },
         ],
       },
@@ -176,7 +184,7 @@ const router = createBrowserRouter([
         path: "loan-investment",
         children: [
           {
-            path: "call-view-loan",
+            path: "step1",
             element: <CallViewLayout />,
             children: [{ index: true, element: <CallViewLoan /> }],
           },
