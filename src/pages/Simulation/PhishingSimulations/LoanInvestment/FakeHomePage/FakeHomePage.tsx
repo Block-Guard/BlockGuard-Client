@@ -57,8 +57,6 @@ const FakeHomePage = () => {
                 </div>
             </div>
 
-
-
             {
                 fakeLoanTiemList.map((loanItem) => {
                     return (
@@ -69,7 +67,7 @@ const FakeHomePage = () => {
                                     animationData={ClickAnimation}
                                     loop
                                     autoplay
-                                    className="absolute left-64 bottom-13 translate-[50%] w-40 pointer-events-none"
+                                    className="absolute right-7 bottom-13 translate-[50%] w-40 pointer-events-none"
                                 />
                             ) : null}
                         </div>
