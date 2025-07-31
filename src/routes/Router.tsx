@@ -33,8 +33,8 @@ import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInv
 import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLandingPage/FakeAppLandingPage";
 import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
 import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
-import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/ExplainPhishPage/ExplainPhishPage";
-import { explainPhishLoan } from "../pages/Simulation/PhishingSimulations/LoanInvestment/ExplainPhishPage/constant";
+import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/ExplainPhishPage";
+import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
 
 const router = createBrowserRouter([
   {
@@ -182,23 +182,35 @@ const router = createBrowserRouter([
           },
           {
             path: "fake-app-permmision",
-            element: <AllowPermissionPage/>
+            element: <AllowPermissionPage />
           },
           {
             path: "fake-app-landing",
-            element: <FakeAppLandingPage/>
+            element: <FakeAppLandingPage />
           },
           {
             path: "fake-app-home",
-            element: <FakeHomePage/>
+            element: <FakeHomePage />
           },
           {
-            path:"fake-loan-invest",
-            element: <FakeLoanInvestPage/>
+            path: "fake-loan-invest",
+            element: <FakeLoanInvestPage />
           },
           {
-            path:"explain-fraud",
-            element: <ExplainLoanPhishPage info={explainPhishLoan}/>
+            path: "explain-fraud",
+            element: <ExplainLoanPhishPage info={explainPhishLoan} />
+          },
+          {
+            path: "explain-fraud/2",
+            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />
+          },
+          {
+            path: "explain-fraud/3",
+            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />
+          },
+          {
+            path: "explain-fraud/4",
+            element: <ExplainLoanPhishPage info={explainPhishDeliCard} />
           }
         ],
       },

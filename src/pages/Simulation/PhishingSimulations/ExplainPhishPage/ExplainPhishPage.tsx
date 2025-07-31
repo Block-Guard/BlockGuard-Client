@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../../../../../components/Header/Header";
-import Button from "../../../../../components/Button/Button";
+import Header from "../../../../components/Header/Header";
+import Button from "../../../../components/Button/Button";
 
-import LeftArrowWhiteIcon from "../../../../../assets/icons/arrow-left-white-icon.svg";
-import Blockee from "../../../../../assets/character-cropped-fit-image.svg";
+import LeftArrowWhiteIcon from "../../../../assets/icons/arrow-left-white-icon.svg";
+import Blockee from "../../../../assets/character-cropped-fit-image.svg";
 import { MethodCard } from "./components/MethodCard";
 import { FeatureCard } from "./components/FeatureCard";
 import type { ExplainInfo } from "./constant";
@@ -28,16 +28,16 @@ const ExplainLoanPhishPage = ({info}:ExplainLoanPhishPageProps ) => {
                 }
                 bgColor="#437efc"
             />
-            <div className="flex flex-col gap-2.5 h-81.5 bg-primary-400 mt-[57px] px-6 pt-2 relative overflow-clip">
+            <div className="flex flex-col gap-2.5 h-82 bg-primary-400 mt-[57px] px-6 pt-2 relative overflow-clip">
                 {info.title}
-                <div className="z-10 leading-8">
+                <div className="z-10 leading-7">
                     {info.description}
                 </div>
-                <img src={Blockee} alt="캐릭터" className="absolute top-50 right-5 z-0" />
+                <img src={Blockee} alt="캐릭터" className="absolute top-52 right-2 z-0" />
             </div>
 
             <main className="w-full px-6">
-                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10">
+                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10 mb-2.5">
                     사기 방식은?
                 </div>
                 <div className="flex flex-col gap-[9px]">
@@ -46,14 +46,14 @@ const ExplainLoanPhishPage = ({info}:ExplainLoanPhishPageProps ) => {
                     }
                 </div>
 
-                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10">
+                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10 mb-2.5">
                     주요 특징은?
                 </div>
                 <div className="flex flex-col gap-2.5">
                     {info.features.map((feat)=> <FeatureCard title={feat.title} description={feat.description}/>)}
                 </div>
 
-                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10">
+                <div className="w-full text-stone-950 text-xl font-bold leading-loose mt-10 mb-2.5">
                     피해 예방 및 대응 요령을 알려드릴게요!
                 </div>
                 <div className="flex flex-col gap-2.5">
@@ -62,7 +62,7 @@ const ExplainLoanPhishPage = ({info}:ExplainLoanPhishPageProps ) => {
 
             </main>
 
-            <footer className="w-full flex flex-col gap-2.5 p-6 mt-15.5">
+            <footer className="w-full flex flex-col gap-2.5 p-6 mt-9.5">
                 <div className="flex flex-col text-center justify-center  text-xl font-bold leading-loose mb-[57px]">
                     <div>
                         <span className="text-stone-950">
