@@ -14,7 +14,6 @@ import EmergencyReportOverviewPage from "../pages/Emergency/EmergencyReport/Emer
 import FraudLinkNumPage from "../pages/FraudSurvey/FraudLinkNumPage/FraudLinkNumPage";
 import FraudMessagePage from "../pages/FraudSurvey/FraudMessagePage/FraudMessagePage";
 import FraudSituationPage from "../pages/FraudSurvey/FraudSituationPage/FraudSituationPage";
-import AnalysisLoadingPage from "../pages/FraudSurvey/AnalysisLoadingPage/AnalysisLoadingPage";
 import ReportStep1 from "../pages/Emergency/EmergencyReport/ReportStep1";
 import ReportStepLayout from "../layouts/ReportStepLayout";
 import ReportStep2 from "../pages/Emergency/EmergencyReport/ReportStep2";
@@ -30,8 +29,15 @@ import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSel
 import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
 import CallViewLayout from "../layouts/CallViewLayout";
 import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
+import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeAllowPermissionPage/AllowPermissionPage";
+import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLandingPage/FakeAppLandingPage";
+import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
+import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
+import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/ExplainPhishPage";
+import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
 import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
 import MessageViewLayout from "../layouts/MessageViewLayout";
+
 
 const router = createBrowserRouter([
   {
@@ -182,6 +188,38 @@ const router = createBrowserRouter([
             element: <CallViewLayout />,
             children: [{ index: true, element: <CallViewLoan /> }],
           },
+          {
+            path: "fake-app-permmision",
+            element: <AllowPermissionPage />
+          },
+          {
+            path: "fake-app-landing",
+            element: <FakeAppLandingPage />
+          },
+          {
+            path: "fake-app-home",
+            element: <FakeHomePage />
+          },
+          {
+            path: "fake-loan-invest",
+            element: <FakeLoanInvestPage />
+          },
+          {
+            path: "explain-fraud",
+            element: <ExplainLoanPhishPage info={explainPhishLoan} />
+          },
+          {
+            path: "explain-fraud/2",
+            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />
+          },
+          {
+            path: "explain-fraud/3",
+            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />
+          },
+          {
+            path: "explain-fraud/4",
+            element: <ExplainLoanPhishPage info={explainPhishDeliCard} />
+          }
         ],
       },
     ],
