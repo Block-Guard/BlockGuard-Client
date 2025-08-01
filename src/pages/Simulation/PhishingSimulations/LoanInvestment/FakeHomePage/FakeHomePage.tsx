@@ -22,7 +22,7 @@ const FakeHomePage = () => {
 
       <div className="relative">
         <div className="w-full h-2 bg-[#0154AA] mt-[87px] mb-10" />
-        <div className="fixed top-16 z-0 -right-1 flex justify-center items-end origin-top-left rotate-[9.45deg] rounded-[6px] w-28 h-17 bg-[#0154AA] py-1">
+        <div className="absolute top-16 z-0 -right-1 flex justify-center items-end origin-top-left rotate-[9.45deg] rounded-[6px] w-28 h-17 bg-[#0154AA] py-1">
           <div className="origin-top-left justify-start text-white text-2xl font-bold leading-9">
             youth
           </div>
@@ -71,7 +71,7 @@ const FakeHomePage = () => {
                 animationData={ClickAnimation}
                 loop
                 autoplay
-                className="absolute right-5 bottom-10 translate-[50%] w-25 pointer-events-none"
+                className="absolute right-4 bottom-8 translate-[50%] w-25 pointer-events-none"
               />
             ) : null}
           </div>

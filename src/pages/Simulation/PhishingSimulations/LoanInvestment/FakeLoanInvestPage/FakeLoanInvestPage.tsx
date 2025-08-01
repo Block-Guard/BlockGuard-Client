@@ -40,7 +40,7 @@ const FakeLoanInvestPage = () => {
       <header className="fixed top-0 left-0 right-0 flex justify-between items-center h-[87px] px-6 py-4.5 z-50 bg-white">
         <div className="flex items-center gap-3">
           <img src={FakeBankApp} alt="앱아이콘" className="w-16 h-16" />
-          <div className="justify-start text-black text-xl font-bold font-['Pretendard'] leading-normal">
+          <div className="justify-start text-black text-xl font-bold leading-normal">
             XX은행
           </div>
         </div>
@@ -76,7 +76,7 @@ const FakeLoanInvestPage = () => {
                   animationData={ClickAnimation}
                   loop
                   autoplay
-                  className="absolute -top-7 -left-7 w-40 pointer-events-none z-50"
+                  className="absolute top-4 -left-2 w-25 pointer-events-none z-40"
                 />
               ) : null}
             </div>
