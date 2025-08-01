@@ -196,7 +196,7 @@ const ProsecutorMessage = () => {
             </div>
           )}
           {step >= 7 && (
-            <PublicOrganModal isOpen={isModalOpen} onOpenChange={resetPage} />
+            <PublicOrganModal isModalOpen={isModalOpen} resetPage={resetPage} />
           )}
           {/* 스크롤 타겟 */}
           <div ref={bottomRef} />
