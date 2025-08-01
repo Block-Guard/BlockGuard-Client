@@ -3,7 +3,7 @@ import MenuIcon from "@/assets/simulation/loan-investment/menu-button-icon.svg";
 import ArrowLeftDarkBlue from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { LoanInfoInput } from "./components/LoanInfoInput";
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import { loanInputInfoList } from "../constant";
 import Button from "../../../../../components/Button/Button";
 import Lottie from "lottie-react";
