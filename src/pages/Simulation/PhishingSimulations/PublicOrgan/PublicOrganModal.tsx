@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../components/Button/Button";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-  DialogTrigger,
 } from "../../../../components/ui/dialog";
 
 import Blockee from "../../../../assets/character-cropped-fit-image.svg";
 import { useNavigate } from "react-router-dom";
 
-const PublicOrganModal = () => {
+type Props = {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+};
+
+const PublicOrganModal = ({ isOpen, onOpenChange }: Props) => {
   const navigate = useNavigate();
 
   const [selectedAnswer, setSelectedAnswer] = useState(0);
@@ -34,15 +37,19 @@ const PublicOrganModal = () => {
     return () => clearTimeout(timer);
   }, [selectedAnswer]);
 
+  const handleOpenChange = (open: boolean) => {
+    onOpenChange(open);
+
+    if (!open) {
+      console.log("모달이 닫혔습니다.");
+
+      setSelectedAnswer(0);
+      setIsCorrected(false);
+    }
+  };
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <div className="w-[120px] self-center">
-          <Button size="sm" onClick={() => {}}>
-            문제 풀러가기
-          </Button>
-        </div>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent
         className="sm:max-w-[425px] bg-transparent border-none shadow-none "
         showCloseButton={false}
