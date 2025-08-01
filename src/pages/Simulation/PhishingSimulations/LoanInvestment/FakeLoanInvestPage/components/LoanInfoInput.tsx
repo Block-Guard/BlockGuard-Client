@@ -18,11 +18,10 @@ export const LoanInfoInput = ({
   const textForm = useRef<HTMLInputElement>(null);
   const [info, setInfo] = useState("");
 
-  console.log(inputState); // 배포 에러 해결
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInfo(e.target.value);
-    inputStateSetter(true);
+    if(!inputState)
+      inputStateSetter(true);
   };
   return (
     <div className="flex flex-col">

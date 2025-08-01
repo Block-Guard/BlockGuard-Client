@@ -3,11 +3,12 @@ import MenuIcon from "@/assets/simulation/loan-investment/menu-button-icon.svg";
 import ArrowLeftDarkBlue from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { LoanInfoInput } from "./components/LoanInfoInput";
-import { useState } from "react";
+import { useState, type SetStateAction } from "react";
 import { loanInputInfoList } from "../constant";
 import Button from "../../../../../components/Button/Button";
 import Lottie from "lottie-react";
 import ClickAnimation from "../../../../../assets/lottie/click-black.json";
+import { FakeLoanModal } from "./components/FakeLoanModal";
 
 const FakeLoanInvestPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const FakeLoanInvestPage = () => {
     Array(loanInputInfoList.length).fill(false)
   );
   const [isReminded, setIsReMinded] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
   const toggleAllValue = switches.every(Boolean);
 
   const toggleOne = (id: number) => {
@@ -31,12 +33,14 @@ const FakeLoanInvestPage = () => {
       setIsReMinded(true);
     } else {
       /** 전부 내용이 있는 경우 팝업 */
+      setIsQuizOpen(true);
     }
   };
   const handleBackClick = () =>
     navigate("/simulation/loan-investment/fake-app-home");
   return (
     <div className="h-[100vh]">
+      <FakeLoanModal isQuizOpen={isQuizOpen} resetPage={setIsQuizOpen} />
       <header className="fixed top-0 left-0 right-0 flex justify-between items-center h-[87px] px-6 py-4.5 z-50 bg-white">
         <div className="flex items-center gap-3">
           <img src={FakeBankApp} alt="앱아이콘" className="w-16 h-16" />
@@ -93,7 +97,7 @@ const FakeLoanInvestPage = () => {
             animationData={ClickAnimation}
             loop
             autoplay
-            className="absolute left-30 bottom-10 translate-[50%] w-40 pointer-events-none"
+            className="absolute left-30 bottom-10 translate-[50%] w-25 pointer-events-none"
           />
         ) : null}
       </div>
