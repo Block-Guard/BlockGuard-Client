@@ -59,7 +59,7 @@ const OnThePhoneComponent = ({ needsKeypad = false }: Props) => {
                 animationData={ClickAnimation}
                 loop
                 autoplay
-                className="absolute bottom-17 right-10 translate-[50%] w-50 pointer-events-none"
+                className="absolute bottom-12 right-6 translate-[50%] w-25 pointer-events-none"
               />
             </div>
           )}
