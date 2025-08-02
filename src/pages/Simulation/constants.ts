@@ -35,10 +35,10 @@ import LoanInvestmentIcon from "@/assets/simulation/loan-investment-icon.png";
 import LoanInvestmentIconSelected from "@/assets/simulation/loan-investment-icon-selected.png";
 
 import CardDeliveryIcon from "@/assets/simulation/card-delivery-icon.png";
-// selected도 우선 동일 이미지 사용
+import CardDeliveryIconSelected from "@/assets/simulation/card-delivery-icon-selected.png";
 
 import RandomScenarioIcon from "@/assets/simulation/random-scenario-icon.png";
-// selected도 우선 동일 이미지 사용
+import RandomScenarioIconSelected from "@/assets/simulation/random-scenario-icon-selected.png";
 
 export const phishingTypeData = [
   {
@@ -63,12 +63,12 @@ export const phishingTypeData = [
     id: 4,
     title: `카드 배송\n사칭형`,
     defaultIcon: CardDeliveryIcon,
-    selectedIcon: CardDeliveryIcon,
+    selectedIcon: CardDeliveryIconSelected,
   },
   {
     id: 5,
     title: `랜덤 시나리오\n체험하기`,
     defaultIcon: RandomScenarioIcon,
-    selectedIcon: RandomScenarioIcon,
+    selectedIcon: RandomScenarioIconSelected,
   },
 ];
