@@ -33,7 +33,7 @@ export const FakeLoanModal = ({ isQuizOpen, resetPage }: FakeLoanModalProps) => 
             }
             onOpenChange={resetPage}
             option1={
-                // <span className="text-monochrome-600 text-base font-medium leading-tight">
+                // <span className="text-monochrome-600 text-base font-medium leading-tight"> 피그마 상 색깔이 mohochrome-600인게 있고, 700인게 있는데 확인이 필요할 듯.
                 <span className="text-base font-medium leading-tight">
                     앱을 설치하지 않고, <br />
                     직접 은행을 방문해 상담을 요청한다.

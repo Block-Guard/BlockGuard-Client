@@ -37,6 +37,7 @@ import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/Explai
 import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
 import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
 import MessageViewLayout from "../layouts/MessageViewLayout";
+import FakeBankMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeBankMessage/FakeBankMessagePage";
 
 
 const router = createBrowserRouter([
@@ -183,6 +184,11 @@ const router = createBrowserRouter([
       {
         path: "loan-investment",
         children: [
+          {
+            path: "fake-message",
+            element: <MessageViewLayout sender="02-851-5396" />,
+            children: [{ index: true, element: <FakeBankMessagePage/> }],
+          },
           {
             path: "step1",
             element: <CallViewLayout />,
