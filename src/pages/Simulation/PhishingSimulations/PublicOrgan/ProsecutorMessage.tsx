@@ -6,6 +6,7 @@ import PublicOrganModal from "./PublicOrganModal";
 import ReceivedMessage from "../../../../components/SimulationMessage/ReceivedMessage";
 import SelectSendMessage from "../../../../components/SimulationMessage/SelectSendMessage";
 import { publicOrganMsgs } from "../constants/publicOrganMsgs";
+import { MESSAGE_DELAY_MS } from "../constants/delay-ms";
 
 const ProsecutorMessage = () => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -17,7 +18,7 @@ const ProsecutorMessage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setStep(0);
-    }, 1500);
+    }, MESSAGE_DELAY_MS);
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,7 +27,7 @@ const ProsecutorMessage = () => {
       setSelectedFirstStepAnswer(selected);
       const timer = setTimeout(() => {
         setStep(2);
-      }, 1500);
+      }, MESSAGE_DELAY_MS);
       return () => clearTimeout(timer);
     }
   };
@@ -36,7 +37,7 @@ const ProsecutorMessage = () => {
       setSelectedSecondStepAnswer(selected);
       const timer = setTimeout(() => {
         setStep(6);
-      }, 1500);
+      }, MESSAGE_DELAY_MS);
       return () => clearTimeout(timer);
     }
   };
@@ -60,7 +61,7 @@ const ProsecutorMessage = () => {
       case 6:
         const timer = setTimeout(() => {
           setStep(step + 1);
-        }, 1500);
+        }, MESSAGE_DELAY_MS);
         return () => clearTimeout(timer);
       case 7:
         setIsModalOpen(true);
