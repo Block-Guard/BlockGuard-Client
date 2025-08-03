@@ -6,9 +6,8 @@ type Props = {
 };
 
 const WhiteKeypadButton = ({ mainText, subText, bgColor = "#e5e5e5", textColor = "#151515" }: Props) => {
-  console.log(mainText, typeof(mainText))
   return (
-    <div className="w-[81px] h-[81px] flex flex-col justify-center items-center rounded-full backdrop-blur-[6.2752px]"
+    <div className="min-w-16 min-h-16 max-w-20 max-h-20 flex flex-col justify-center items-center rounded-full backdrop-blur-[6.2752px]"
     style={{color: textColor, backgroundColor: bgColor}}>
       <span
         className="text-[35px]"
@@ -16,7 +15,7 @@ const WhiteKeypadButton = ({ mainText, subText, bgColor = "#e5e5e5", textColor =
       >
         {mainText}
       </span>
-      { mainText !== "*" && mainText !== "#" && typeof(mainText) !== "string" && (
+      { mainText !== "*" && mainText !== "#" && typeof(mainText) === "string" && (
         <span
           className="font-bold h-[15px]"
           style={{

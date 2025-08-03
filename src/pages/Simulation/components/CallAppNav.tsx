@@ -6,29 +6,31 @@ import VoiceMail from "../../../assets/simulation/phone-button-icons/voicemail-g
 
 export const CallAppNav = () => {
     return (
-        <nav className="w-full h-20 px-5 py-1 flex justify-around items-center">
-            <div className="flex flex-col justify-center items-center gap-2">
+        <nav className="fixed bottom-0 flex flex-row justify-between items-center
+        w-full h-10 pt-8 pl-5 pr-5 pb-13
+         bg-white box-border z-40">
+            <div className="w-16 h-11 flex flex-col justify-center items-center gap-2">
                 <img src={Favorite} alt="아이콘" className="w-6 h-6"/>
                 <span className="text-center justify-start text-neutral-400 text-[10px] font-medium">
                     즐겨찾기
                 </span>
             </div>
-            <div className="flex flex-col justify-center items-center gap-2">
+            <div className="w-16 h-11 flex flex-col justify-center items-center gap-2">
                 <img src={RecentCall} alt="아이콘"  className="w-6 h-6"/>
                 <span className="text-center justify-start text-neutral-400 text-[10px] font-medium">최근 통화</span>
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-2">
+            <div className="w-16 h-11 flex flex-col justify-center items-center gap-2">
                 <img src={Address} alt="아이콘"  className="w-6 h-6"/>
                 <span className="text-center justify-start text-neutral-400 text-[10px] font-medium">연락처</span>
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-2">
+            <div className="w-16 h-11 flex flex-col justify-center items-center gap-2">
                 <img src={KeyPad} alt="아이콘"  className="w-6 h-6"/>
                 <span className="text-center justify-start text-neutral-400 text-[10px] font-medium">키패드</span>
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-2">
+            <div className="w-16 h-11 flex flex-col justify-center items-center gap-2">
                 <img src={VoiceMail} alt="아이콘"  className="w-6 h-6"/>
                 <span className="text-center justify-start text-neutral-400 text-[10px] font-medium">음성 사서함</span>
             </div>

@@ -17,7 +17,7 @@ const CallApp = ({ phoneNumber }: CallAppProps) => {
     const navigate = useNavigate();
     const handleCall = () => navigate("/simulation/loan-investment/call-view");
     return (
-        <div className="h-[100vh] flex flex-col justify-between bg-white">
+        <div className="h-screen flex flex-col bg-white ">
             <Header
                 leftChild={
                     <img
@@ -30,15 +30,16 @@ const CallApp = ({ phoneNumber }: CallAppProps) => {
                 bgColor="white"
             />
 
-            <main className="mt-[68px] px-15">
-                <div className="flex justify-center items-center relative">
+            <main className="flex flex-col h-full justify-between mt-[68px] mb-22 px-15 py-2">
+
+                <div className="flex justify-start items-center relative mb-auto">
                     <div className="w-full bg-white text-center justify-start text-black text-4xl font-normal">
                         {phoneNumber}
                     </div>
                     <img src={AddAddressBlue} className="w-7 h-6 absolute -right-8" />
                 </div>
 
-                <div className="flex flex-col gap-10 mt-26">
+                <div className="flex flex-col justify-center items-center gap-10  box-border">
                     <div className="grid grid-cols-3 gap-y-5 gap-x-[26px] relative">
                         <ColoredKeypadButton mainText="1" />
                         <ColoredKeypadButton mainText="2" subText="A B C" />
