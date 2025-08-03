@@ -3,7 +3,7 @@ import { MessageContent } from "./components/MessageContent";
 import ClickAnimation from "../../../../../assets/lottie/click-black.json";
 import { useNavigate } from "react-router-dom";
 
-const FakeBankMessagePage = () => {
+const FakeAdMessagePage = () => {
     const navigate = useNavigate();
     const handleClickNumber = () => navigate("/simulation/loan-investment/call-app");
     return (
@@ -28,4 +28,4 @@ const FakeBankMessagePage = () => {
     )
 }
 
-export default FakeBankMessagePage;
+export default FakeAdMessagePage;

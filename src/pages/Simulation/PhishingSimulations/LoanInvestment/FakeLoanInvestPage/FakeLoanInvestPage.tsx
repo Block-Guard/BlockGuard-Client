@@ -97,7 +97,7 @@ const FakeLoanInvestPage = () => {
             animationData={ClickAnimation}
             loop
             autoplay
-            className="absolute left-30 bottom-10 translate-[50%] w-25 pointer-events-none"
+            className="absolute left-50 bottom-10 translate-[50%] w-25 pointer-events-none"
           />
         ) : null}
       </div>
