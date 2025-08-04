@@ -13,21 +13,11 @@ export const isBirthDateFormRight = (birthDate: string) => {
 export const formatPhoneNumber = (phoneNumber: string): string => {
   const onlyDigits = phoneNumber.replace(/\D/g, "");
 
-  if (onlyDigits.startsWith("02")) {
-    // 서울 번호 (10자리): 02-1234-5678
-    if (onlyDigits.length <= 2) return onlyDigits;
-    if (onlyDigits.length <= 6)
-      return onlyDigits.replace(/(\d{2})(\d{1,4})/, "$1-$2");
-    if (onlyDigits.length <= 10)
-      return onlyDigits.replace(/(\d{2})(\d{4})(\d{1,4})/, "$1-$2-$3");
-    return onlyDigits.slice(0, 10).replace(/(\d{2})(\d{4})(\d{4})/, "$1-$2-$3");
-  } else {
-    // 휴대폰 번호 (11자리): 010-1234-5678
-    if (onlyDigits.length <= 3) return onlyDigits;
-    if (onlyDigits.length <= 7)
-      return onlyDigits.replace(/(\d{3})(\d{1,4})/, "$1-$2");
-    if (onlyDigits.length <= 11)
-      return onlyDigits.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
-    return onlyDigits.slice(0, 11).replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-  }
+  // 휴대폰 번호 (11자리): 010-1234-5678
+  if (onlyDigits.length <= 3) return onlyDigits;
+  if (onlyDigits.length <= 7)
+    return onlyDigits.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+  if (onlyDigits.length <= 11)
+    return onlyDigits.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
+  return onlyDigits.slice(0, 11).replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 };

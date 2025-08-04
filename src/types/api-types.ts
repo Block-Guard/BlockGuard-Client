@@ -3,6 +3,13 @@ interface ApiBaseResponse {
   message: string;
 }
 
+// 이메일 중복 확인 api 응답
+export interface CheckEmailResponse extends ApiBaseResponse {
+  data: {
+    duplicated: boolean;
+  };
+}
+
 // 회원가입 api 응답
 export interface SignUpResponse extends ApiBaseResponse {
   data: {
@@ -59,5 +66,5 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
     estimatedFraudType: string;
     keywords: string[];
     explanation: string;
-  }
+  };
 }

@@ -1,8 +1,35 @@
-import type { LoginResponse, SignUpResponse } from "../types/api-types";
+import {
+  type CheckEmailResponse,
+  type LoginResponse,
+  type SignUpResponse,
+} from "../types/api-types";
 import axiosInstance from "./axiosInstance";
 
+const CHECK_EMAIL_API = "auth/register/check-email";
 const SIGNUP_API = "auth/register";
 const LOGIN_API = "auth/login";
+
+// 이메일 중복 확인 api
+export const checkEmailApi = async (email: string) => {
+  try {
+    const response = await axiosInstance.post<CheckEmailResponse>(
+      CHECK_EMAIL_API,
+      { email: email },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data.data.duplicated;
+  } catch (error: any) {
+    console.error(
+      "이메일 중복 확인 실패:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "이메일 중복 확인 중 오류 발생"
+    );
+  }
+};
 
 // 회원가입 api
 export const signupApi = async (userData: {

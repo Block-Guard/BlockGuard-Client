@@ -11,7 +11,7 @@ import {
 } from "../../../utils/authUtils";
 import SignupStep1 from "./SignupStep1";
 import SignupStep2 from "./SignupStep2";
-import { signupApi } from "../../../apis/auth";
+import { checkEmailApi, signupApi } from "../../../apis/auth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -37,6 +37,17 @@ const Signup = () => {
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberErrorMsg, setPhoneNumberErrorMsg] = useState("");
+
+  // 이메일 중복 확인 api
+  const checkIsEmailDuplicated = async () => {
+    try {
+      const response = await checkEmailApi(inputEmail);
+      console.log(response, "이메일 중복 확인 응답");
+      return response;
+    } catch (error) {
+      console.error("이메일 중복 확인 클라이언트 쪽 실패 : ", error);
+    }
+  };
 
   // 회원가입 요청 api
   const signupRequest = async () => {
@@ -83,8 +94,8 @@ const Signup = () => {
     setPhoneNumberErrorMsg("");
   };
 
-  const handleCheckIsEmailDuplicated = () => {
-    let response = true;
+  const handleCheckIsEmailDuplicated = async () => {
+    const response = await checkIsEmailDuplicated();
     // 만약 중복이 되었다면
     if (response) {
       setIsEmailChecked(true);
@@ -131,9 +142,9 @@ const Signup = () => {
       setBirthDateErrorMsg("형식에 맞게 입력해주세요.");
       isValid = false;
     }
-    if (phoneNumber.length < 12) {
+    if (phoneNumber.length < 13 || !phoneNumber.startsWith("010")) {
       console.log(phoneNumber);
-      setPhoneNumberErrorMsg("10자 이상이어야 합니다.");
+      setPhoneNumberErrorMsg("형식에 맞게 입력해주세요.");
       isValid = false;
     }
     if (isValid) {
