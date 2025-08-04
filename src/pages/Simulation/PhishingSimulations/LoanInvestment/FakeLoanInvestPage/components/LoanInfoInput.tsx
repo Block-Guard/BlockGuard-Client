@@ -20,7 +20,7 @@ export const LoanInfoInput = ({
   const textForm = useRef<HTMLInputElement>(null);
   const [info, setInfo] = useState("");
 
-  const handleFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFocus = () => {
     setInfo(example);
     if(!inputState)
       inputStateSetter(true);
