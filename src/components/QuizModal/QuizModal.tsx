@@ -107,7 +107,7 @@ const QuizModal = ({
           if (isCorrected) e.preventDefault();
         }}
       >
-        <div className="p-5 flex flex-col gap-5 items-center rounded-[20px] bg-monochrome-200">
+        <div className="py-5 px-[10px] flex flex-col gap-5 items-center rounded-[20px] bg-monochrome-200">
           {isCorrected ? (
             <div className="w-full flex flex-col items-center gap-[10px]">
               <img className="w-[43px]" src={Blockee} />
