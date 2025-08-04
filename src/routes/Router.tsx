@@ -45,6 +45,8 @@ import FakeAdMessagePage from "../pages/Simulation/PhishingSimulations/LoanInves
 import CallApp from "../pages/Simulation/components/CallApp";
 import BankerCallPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerCallPage/BankerCallPage";
 import BankerMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerMessagePage/BankerMessagePage";
+import ReceivedDeliveryMsg from "../pages/Simulation/CardDelivery/ReceivedDeliveryMsg";
+import FirstCardDeliveryMsg from "../pages/Simulation/CardDelivery/FirstCardDeliveryMsg";
 
 const router = createBrowserRouter([
   {
@@ -238,12 +240,22 @@ const router = createBrowserRouter([
             element: <ExplainLoanPhishPage info={explainPhishFamAqui} />,
           },
           {
-            path: "explain-fraud/3",
-            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />,
-          },
-          {
             path: "explain-fraud/4",
             element: <ExplainLoanPhishPage info={explainPhishDeliCard} />,
+          },
+        ],
+      },
+      {
+        path: "card-delivery",
+        children: [
+          {
+            path: "first-message",
+            element: <ReceivedDeliveryMsg />,
+          },
+          {
+            path: "first-message-view",
+            element: <MessageViewLayout sender="010-9809-XXXX" />,
+            children: [{ index: true, element: <FirstCardDeliveryMsg /> }],
           },
         ],
       },

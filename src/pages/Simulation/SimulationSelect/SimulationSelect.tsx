@@ -26,6 +26,9 @@ const SimulationSelect = () => {
           case 3:
             navigate("/simulation/loan-investment/step1");
             break;
+          case 4:
+            navigate("/simulation/card-delivery/first-message");
+            break;
           default:
             navigate("/simulation/select-type");
         }
