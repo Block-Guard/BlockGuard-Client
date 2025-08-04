@@ -62,7 +62,7 @@ const AllowPermissionPage = () => {
           animationData={ClickAnimation}
           loop
           autoplay
-          className="fixed -top-30 right-10 translate-[50%] w-40 pointer-events-none"
+          className="fixed -top-12 right-6 translate-[50%] w-25 pointer-events-none"
         />
       ) : null}
 

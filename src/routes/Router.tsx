@@ -28,7 +28,6 @@ import SimulationMainPage from "../pages/Simulation/SimulationMain/SimulationMai
 import SimulationSelect from "../pages/Simulation/SimulationSelect/SimulationSelect";
 import RespondToPolice from "../pages/Simulation/PhishingSimulations/PublicOrgan/RespondToPolice";
 import CallViewLayout from "../layouts/CallViewLayout";
-import CallViewLoan from "../pages/Simulation/PhishingSimulations/LoanInvestment/CallViewLoan";
 import AllowPermissionPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeAllowPermissionPage/AllowPermissionPage";
 import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLandingPage/FakeAppLandingPage";
 import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
@@ -37,6 +36,10 @@ import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/Explai
 import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
 import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
 import MessageViewLayout from "../layouts/MessageViewLayout";
+import FakeAdMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeAdMessage/FakeAdMessagePage";
+import CallApp from "../pages/Simulation/components/CallApp";
+import BankerCallPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerCallPage/BankerCallPage";
+import BankerMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerMessagePage/BankerMessagePage";
 
 
 const router = createBrowserRouter([
@@ -185,8 +188,22 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step1",
+            element: <MessageViewLayout sender="02-851-5396" />,
+            children: [{ index: true, element: <FakeAdMessagePage /> }],
+          },
+          {
+            path: "call-app",
+            element: <CallApp phoneNumber="02-851-5396" />,
+          },
+          {
+            path: "call-view",
             element: <CallViewLayout />,
-            children: [{ index: true, element: <CallViewLoan /> }],
+            children: [{ index: true, element: <BankerCallPage /> }],
+          },
+          {
+            path: "message-app",
+            element: <MessageViewLayout sender="홍길동" />,
+            children: [{ index: true, element: <BankerMessagePage /> }],
           },
           {
             path: "fake-app-permmision",
