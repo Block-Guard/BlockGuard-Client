@@ -52,7 +52,7 @@ const PublicOrganModal = ({ isModalOpen, resetPage }: Props) => {
       }
       option3={<>앱을 삭제하고 아무 일 없었던 척한다</>}
       correctAnswer={1}
-      navigateTo="/simulation/select-type"
+      navigateTo="/simulation/public-organ/explain-fraud"
     />
   );
 };

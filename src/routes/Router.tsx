@@ -33,14 +33,18 @@ import FakeAppLandingPage from "../pages/Simulation/PhishingSimulations/LoanInve
 import FakeHomePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeHomePage/FakeHomePage";
 import FakeLoanInvestPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeLoanInvestPage/FakeLoanInvestPage";
 import ExplainLoanPhishPage from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/ExplainPhishPage";
-import { explainPhishDeliCard, explainPhishFamAqui, explainPhishLoan, explainPhishPublicOrg } from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
+import {
+  explainPhishDeliCard,
+  explainPhishFamAqui,
+  explainPhishLoan,
+  explainPhishPublicOrg,
+} from "../pages/Simulation/PhishingSimulations/ExplainPhishPage/constant";
 import ProsecutorMessage from "../pages/Simulation/PhishingSimulations/PublicOrgan/ProsecutorMessage";
 import MessageViewLayout from "../layouts/MessageViewLayout";
 import FakeAdMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/FakeAdMessage/FakeAdMessagePage";
 import CallApp from "../pages/Simulation/components/CallApp";
 import BankerCallPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerCallPage/BankerCallPage";
 import BankerMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerMessagePage/BankerMessagePage";
-
 
 const router = createBrowserRouter([
   {
@@ -181,6 +185,10 @@ const router = createBrowserRouter([
             element: <MessageViewLayout sender="검찰청" />,
             children: [{ index: true, element: <ProsecutorMessage /> }],
           },
+          {
+            path: "explain-fraud",
+            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />,
+          },
         ],
       },
       {
@@ -207,36 +215,36 @@ const router = createBrowserRouter([
           },
           {
             path: "fake-app-permmision",
-            element: <AllowPermissionPage />
+            element: <AllowPermissionPage />,
           },
           {
             path: "fake-app-landing",
-            element: <FakeAppLandingPage />
+            element: <FakeAppLandingPage />,
           },
           {
             path: "fake-app-home",
-            element: <FakeHomePage />
+            element: <FakeHomePage />,
           },
           {
             path: "fake-loan-invest",
-            element: <FakeLoanInvestPage />
+            element: <FakeLoanInvestPage />,
           },
           {
             path: "explain-fraud",
-            element: <ExplainLoanPhishPage info={explainPhishLoan} />
+            element: <ExplainLoanPhishPage info={explainPhishLoan} />,
           },
           {
             path: "explain-fraud/2",
-            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />
+            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />,
           },
           {
             path: "explain-fraud/3",
-            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />
+            element: <ExplainLoanPhishPage info={explainPhishPublicOrg} />,
           },
           {
             path: "explain-fraud/4",
-            element: <ExplainLoanPhishPage info={explainPhishDeliCard} />
-          }
+            element: <ExplainLoanPhishPage info={explainPhishDeliCard} />,
+          },
         ],
       },
     ],
