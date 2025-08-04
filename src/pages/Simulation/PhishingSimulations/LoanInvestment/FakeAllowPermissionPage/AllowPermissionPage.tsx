@@ -29,8 +29,7 @@ const AllowPermissionPage = () => {
     });
   };
 
-  /** 이전 문자 메세지 페이지 퍼블리싱 후 수정할 것 */
-  const handleBackClick = () => navigate("/simulation/loan-investment");
+  const handleBackClick = () => navigate("/simulation/loan-investment/message-app");
   const handleCloseClick = () => {
     if (toggleAllValue) {
       navigate("/simulation/loan-investment/fake-app-landing");
@@ -39,7 +38,7 @@ const AllowPermissionPage = () => {
     }
   };
   return (
-    <div className="flex flex-col justify-between w-full h-full overflow-y-scroll overflow-x-hidden no-scrollbar">
+    <div className="relative flex flex-col justify-between w-full h-screen overflow-y-scroll overflow-x-hidden no-scrollbar">
       <Header
         leftChild={
           <button onClick={handleBackClick}>
@@ -62,7 +61,7 @@ const AllowPermissionPage = () => {
           animationData={ClickAnimation}
           loop
           autoplay
-          className="fixed -top-12 right-6 translate-[50%] w-25 pointer-events-none"
+          className="absolute -top-12 right-6 translate-[50%] w-25 pointer-events-none z-50 drop-shadow-[0_0_1px_black]"
         />
       ) : null}
 
@@ -105,7 +104,7 @@ const AllowPermissionPage = () => {
                 animationData={ClickAnimation}
                 loop
                 autoplay
-                className="absolute left-[30px] top-[30px] -translate-x-1/2 -translate-y-1/2 w-25 pointer-events-none"
+                className="absolute left-[30px] top-[30px] -translate-x-1/2 -translate-y-1/2 w-25 pointer-events-none z-10 drop-shadow-[0_0_1px_black]"
               />
             )}
           </div>

@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { formatCallTime } from "../../../../../utils/formatCallTime";
 import OnThePhoneComponentExtend from "./components/OnThePhoneComponentExtend";
-import { useNavigate } from "react-router-dom";
 import VoiceChatRenderer from "./components/VoiceChat";
 const BankerCallPage = () => {
     const [callTime, setCallTime] = useState(0);
     const [isNavigated, setIsNavigated] = useState(false);
-    const navigate = useNavigate();
 
     const arsVoice = "/sounds/iphone-ringtone.mp3";
     const arsRef = useRef<HTMLAudioElement | null>(null);
@@ -39,12 +37,6 @@ const BankerCallPage = () => {
         voice.play().catch((error) => {
             console.error("가짜 은행원 음성 로드 실패", error);
         });
-
-        // 음성 재생이 끝나면 이동
-        voice.onended = () => {
-            voiceRef.current = null;
-            navigate("/simulation/loan-investment/message-app");
-        };
     };
 
     useEffect(() => {

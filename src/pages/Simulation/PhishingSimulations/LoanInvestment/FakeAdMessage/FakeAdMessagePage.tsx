@@ -8,13 +8,12 @@ const FakeAdMessagePage = () => {
     const handleClickNumber = () => navigate("/simulation/loan-investment/call-app");
     return (
         <div className="w-full flex flex-col items-center">
-            <div className="absolute top-17 w-12 h-12 rounded-full border border-primary-400 border-dashed z-50" 
-                onClick={handleClickNumber}/>
             <Lottie
                 animationData={ClickAnimation}
                 loop
                 autoplay
-                className="absolute top-5 right-1/2 translate-[65%] w-25 pointer-events-none z-50"
+                className="absolute top-1 right-1/2 translate-[65%] w-25 z-50"
+                onClick={handleClickNumber}
               />
             <p className="text-[11px] text-monochrome-500 font-medium pt-4 pb-4">
                 10월 30일 (화) 오전 9:41

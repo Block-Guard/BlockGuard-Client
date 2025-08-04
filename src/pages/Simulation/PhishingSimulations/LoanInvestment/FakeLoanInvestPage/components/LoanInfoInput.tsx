@@ -6,6 +6,7 @@ interface LoanInfoInputProps {
   inputState: boolean;
   inputStateSetter: React.Dispatch<React.SetStateAction<boolean>>;
   isReminded: boolean;
+  example: string;
 }
 
 export const LoanInfoInput = ({
@@ -14,15 +15,17 @@ export const LoanInfoInput = ({
   inputState,
   inputStateSetter,
   isReminded,
+  example
 }: LoanInfoInputProps) => {
   const textForm = useRef<HTMLInputElement>(null);
   const [info, setInfo] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInfo(e.target.value);
+  const handleFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInfo(example);
     if(!inputState)
       inputStateSetter(true);
-  };
+  }
+
   return (
     <div className="flex flex-col">
       {info === "" && isReminded ? (
@@ -54,7 +57,8 @@ export const LoanInfoInput = ({
                                     }
                                     `}
         placeholder={placeholder}
-        onChange={handleChange}
+        onFocus={handleFocus}
+        value={info}
         ref={textForm}
       />
     </div>

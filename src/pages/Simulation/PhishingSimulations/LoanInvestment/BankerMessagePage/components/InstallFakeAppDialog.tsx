@@ -24,7 +24,7 @@ export const InstallFakeAppDialog = ({ isOpen, setIsOpen }: InstallFakeAppDialog
 
         intervalRef.current = setInterval(() => {
             setProgress(prev => {
-                const next = prev + (100/(3));
+                const next = prev + (100 / 7);
                 if (next >= 100) {
                     clearInterval(intervalRef.current!);
                     intervalRef.current = null;
@@ -32,10 +32,9 @@ export const InstallFakeAppDialog = ({ isOpen, setIsOpen }: InstallFakeAppDialog
                 }
                 return next;
             });
-        }, 100);
-
-        navigate("/simulation/loan-investment/fake-app-permmision")
+        }, 200);
     };
+    const handleOpenApp = () => navigate("/simulation/loan-investment/fake-app-permmision");
     const [progress, setProgress] = useState(0);
 
     return (
@@ -53,12 +52,21 @@ export const InstallFakeAppDialog = ({ isOpen, setIsOpen }: InstallFakeAppDialog
                                     이 애플리케이션을 설치하시겠습니까?
                                 </span>
                             ) : (
-                                <span className="text-black text-sm font-normal leading-none">
-                                    다운로드 하는 중...
-                                </span>
+                                <>
+                                    {
+                                        progress !== 100 ? (
+                                            <span className="text-black text-sm font-normal leading-none">
+                                                다운로드 하는 중...
+                                            </span>
+                                        ) : (
+                                            <span className="text-black text-sm font-normal leading-none">
+                                                다운로드가 완료되었습니다.
+                                            </span>
+                                        )
+                                    }
+                                </>
                             )
                         }
-
                     </div>
                 </div>
 
@@ -72,7 +80,6 @@ export const InstallFakeAppDialog = ({ isOpen, setIsOpen }: InstallFakeAppDialog
                             <div className="text-right justify-start text-sky-500 text-base font-semibold leading-none relative"
                                 onClick={handleInstall}>
                                 설치
-                                <div className="absolute -top-2 -translate-[15%] flex justify-center items-center w-12 h-12 rounded-full border border-primary-400 border-dashed z-10"></div>
                                 <Lottie
                                     animationData={ClickAnimation}
                                     loop
@@ -82,13 +89,29 @@ export const InstallFakeAppDialog = ({ isOpen, setIsOpen }: InstallFakeAppDialog
                             </div>
                         </div>
                     ) : (
-                        <div className="relative">
-                            <div className="w-full h-[5px] bg-neutral-200 rounded-2xl" />
-                            <div
-                                className="absolute w-full h-[5px] bg-primary-400 rounded-2xl transition-all duration-200"
-                                style={{ width: `${progress}%` }}
-                            />
-                        </div>
+                        <>
+                            {
+                                progress !== 100 ?
+                                    <div className="relative">
+                                        <div className="w-full h-[5px] bg-neutral-200 rounded-2xl" />
+                                        <div
+                                            className="absolute w-full h-[5px] bg-primary-400 rounded-2xl transition-all duration-200"
+                                            style={{ width: `${progress}%` }}
+                                        />
+                                    </div> : (
+                                        <div className="flex justify-around">
+                                            <div className="text-right justify-start text-sky-500 text-base font-semibold leading-none">
+                                                닫기
+                                            </div>
+                                            <div className="text-right justify-start text-sky-500 text-base font-semibold leading-none relative"
+                                                onClick={handleOpenApp}>
+                                                열기
+                                            </div>
+                                        </div>
+                                    )
+                            }
+                        </>
+
                     )}
 
                 </DialogFooter>
