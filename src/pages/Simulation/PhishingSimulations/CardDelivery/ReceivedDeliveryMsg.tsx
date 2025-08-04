@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import Header from "../../../components/Header/Header";
+import Header from "../../../../components/Header/Header";
 import LockScreen from "@/assets/simulation/phone-lock-screen.png";
 import LeftArrow from "@/assets/icons/arrow-left-white-icon.svg";
 import CloseIcon from "@/assets/icons/close-white-icon.svg";
 import MessageProfile from "@/assets/icons/message-profile-img.svg";
-import ClickAnimation from "../../../assets/lottie/click-black.json";
+import ClickAnimation from "../../../../assets/lottie/click-black.json";
 
 const ReceivedDeliveryMsg = () => {
   const navigate = useNavigate();

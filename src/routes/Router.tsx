@@ -45,8 +45,11 @@ import FakeAdMessagePage from "../pages/Simulation/PhishingSimulations/LoanInves
 import CallApp from "../pages/Simulation/components/CallApp";
 import BankerCallPage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerCallPage/BankerCallPage";
 import BankerMessagePage from "../pages/Simulation/PhishingSimulations/LoanInvestment/BankerMessagePage/BankerMessagePage";
-import ReceivedDeliveryMsg from "../pages/Simulation/CardDelivery/ReceivedDeliveryMsg";
-import FirstCardDeliveryMsg from "../pages/Simulation/CardDelivery/FirstCardDeliveryMsg";
+import ReceivedDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardDelivery/ReceivedDeliveryMsg";
+import FirstCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardDelivery/FirstCardDeliveryMsg";
+import FirstCardDeliveryCall from "../pages/Simulation/PhishingSimulations/CardDelivery/FirstCardDeliveryCall";
+import SecondCardDeliveryCall from "../pages/Simulation/PhishingSimulations/CardDelivery/SecondCardDeliveryCall";
+import SecondCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardDelivery/SecondCardDeliveryMsg";
 
 const router = createBrowserRouter([
   {
@@ -203,7 +206,12 @@ const router = createBrowserRouter([
           },
           {
             path: "call-app",
-            element: <CallApp phoneNumber="02-851-5396" />,
+            element: (
+              <CallApp
+                phoneNumber="02-851-5396"
+                navigateUrl="/simulation/loan-investment/call-view"
+              />
+            ),
           },
           {
             path: "call-view",
@@ -256,6 +264,34 @@ const router = createBrowserRouter([
             path: "first-message-view",
             element: <MessageViewLayout sender="010-9809-XXXX" />,
             children: [{ index: true, element: <FirstCardDeliveryMsg /> }],
+          },
+          {
+            path: "first-call",
+            element: <CallViewLayout />,
+            children: [{ index: true, element: <FirstCardDeliveryCall /> }],
+          },
+          {
+            path: "second-call-app",
+            element: (
+              <CallApp
+                phoneNumber="1899-6077"
+                navigateUrl="/simulation/card-delivery/second-call"
+              />
+            ),
+          },
+          {
+            path: "second-call",
+            element: <CallViewLayout />,
+            children: [{ index: true, element: <SecondCardDeliveryCall /> }],
+          },
+          {
+            path: "second-message-view",
+            element: <MessageViewLayout sender="1899-6077" />,
+            children: [{ index: true, element: <SecondCardDeliveryMsg /> }],
+          },
+          {
+            path: "explain-fraud",
+            element: <ExplainLoanPhishPage info={explainPhishDeliCard} />,
           },
         ],
       },
