@@ -55,7 +55,7 @@ const AllowPermissionPage = () => {
             <img src={CloseIcon} alt="창닫기" />
           </button>
         }
-        bgColor="none"
+        bgColor="#fff"
       />
       {switches.every(Boolean) ? (
         <Lottie
