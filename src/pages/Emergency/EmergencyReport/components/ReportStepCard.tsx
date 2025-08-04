@@ -3,6 +3,7 @@ import RightArrowIcon from "../../../../assets/icons/arrow-right-darkblue-sm-ico
 import { useNavigate } from "react-router-dom";
 
 type Props = {
+  reportId: number;
   step: number;
   title: string;
   desc: string;
@@ -10,7 +11,14 @@ type Props = {
   progressState: string;
 };
 
-const ReportStepCard = ({ step, title, desc, img, progressState }: Props) => {
+const ReportStepCard = ({
+  reportId,
+  step,
+  title,
+  desc,
+  img,
+  progressState,
+}: Props) => {
   const navigate = useNavigate();
   const [progressStateBg, setProgressStateBg] = useState(progressState);
   useEffect(() => {
@@ -29,10 +37,11 @@ const ReportStepCard = ({ step, title, desc, img, progressState }: Props) => {
     }
   }, [progressState]);
 
-  // 진행상태는 로직 만들 예정
   const onClickToReportStep = () => {
     if (step !== 1 && progressState === "미완료") return;
-    navigate(`/emergency/report-step/${step}`);
+    navigate(`/emergency/report-step/${step}`, {
+      state: { reportId: reportId },
+    });
   };
   return (
     <div

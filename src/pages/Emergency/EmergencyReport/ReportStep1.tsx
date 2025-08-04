@@ -1,5 +1,4 @@
 import RequiredActionCheck from "./components/RequiredActionCheck";
-import { useEffect, useState } from "react";
 import PhoneIcon from "../../../assets/report-guide/report-phone-icon.png";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipIcon from "../../../assets/icons/tip-blue-icon.svg";
@@ -11,19 +10,18 @@ import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
 
 const ReportStep1 = () => {
-  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
-
-  const [reportReceived, setReportReceived] = useState(false);
-  const [secureEvidence, setSecureEvidence] = useState(false);
-  const [caseFiled, setCaseFiled] = useState(false);
-  const [isEvidenceChecked, setIsEvidenceChecked] = useState(false);
-  const [haveIdChecked, setHaveIdChecked] = useState(false);
-
-  // 서버에서 해당 상태 값 받아오기
-
-  useEffect(() => {
-    setCurrentStepCompleted(reportReceived && secureEvidence && caseFiled);
-  }, [reportReceived, secureEvidence, caseFiled]);
+  const {
+    reportReceived,
+    setReportReceived,
+    secureEvidence,
+    setSecureEvidence,
+    caseFiled,
+    setCaseFiled,
+    isEvidenceChecked,
+    setIsEvidenceChecked,
+    haveIdChecked,
+    setHaveIdChecked,
+  } = useOutletContext<ReportPageProps>();
 
   return (
     <div className="w-full flex flex-col mb-40">

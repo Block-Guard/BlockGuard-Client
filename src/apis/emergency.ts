@@ -48,7 +48,7 @@ export const getEachReportStepApi = async (
 ) => {
   try {
     const response = await axiosInstance.get<EachReportStepResponse>(
-      REPORT_API + reportId + "/steps/" + stepNumber
+      REPORT_API + "/" + reportId + "/steps/" + stepNumber
     );
     console.log(response.data.data);
     return response.data.data;
@@ -65,13 +65,16 @@ export const updateEachReportStepApi = async (
   reportId: number,
   stepNumber: number,
   checkBoxes: boolean[],
+  recommendedCheckBoxes: boolean[],
   isCompleted: boolean
 ) => {
   try {
     const response = await axiosInstance.put<EachReportStepResponse>(
-      REPORT_API + reportId + "/steps/" + stepNumber,
+      REPORT_API + "/" + reportId + "/steps/" + stepNumber,
       {
         checkBoxes,
+        recommendedCheckBoxes:
+          recommendedCheckBoxes.length !== 0 ? recommendedCheckBoxes : null,
         isCompleted,
       },
       {

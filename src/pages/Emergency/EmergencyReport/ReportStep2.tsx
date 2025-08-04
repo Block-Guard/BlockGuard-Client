@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import OpenedDescCard from "./components/OpenedDescCard";
 import ReportActionItem from "./components/ReportActionItem";
@@ -11,14 +10,8 @@ import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
 
 const ReportStep2 = () => {
-  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
-
-  const [isRequestedToStopPayment, setIsRequestedToStopPayment] =
-    useState(false);
-  // 서버에서 해당 상태값 받아오기
-  useEffect(() => {
-    setCurrentStepCompleted(isRequestedToStopPayment);
-  }, [isRequestedToStopPayment]);
+  const { isRequestedToStopPayment, setIsRequestedToStopPayment } =
+    useOutletContext<ReportPageProps>();
 
   return (
     <div className="w-full flex flex-col mb-40">

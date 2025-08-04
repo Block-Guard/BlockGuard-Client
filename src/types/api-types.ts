@@ -54,6 +54,7 @@ export interface EachReportStepResponse extends ApiBaseResponse {
     reportId: number;
     step: number;
     checkBoxes: boolean[];
+    recommendedCheckBoxes: boolean[] | null;
     isCompleted: boolean;
     createdAt: string;
   };

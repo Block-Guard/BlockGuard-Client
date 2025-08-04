@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import RecommendedList from "./components/RecommendedList";
 import OpenedDescCard from "./components/OpenedDescCard";
@@ -13,21 +12,12 @@ import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
 
 const ReportStep3 = () => {
-  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
-
-  const [isBlockedBadApp, setBlockedBadApp] = useState(false);
-  const [
+  const {
+    isBlockedBadApp,
+    setIsBlockedBadApp,
     isRegisteredPersonalInformExposed,
     setIsRegisteredPersonalInformExposed,
-  ] = useState(false);
-
-  // 서버에서 해당 상태값 받아오기
-
-  useEffect(() => {
-    setCurrentStepCompleted(
-      isBlockedBadApp && isRegisteredPersonalInformExposed
-    );
-  }, [isBlockedBadApp, isRegisteredPersonalInformExposed]);
+  } = useOutletContext<ReportPageProps>();
 
   return (
     <div className="w-full flex flex-col mb-40">
@@ -53,9 +43,9 @@ const ReportStep3 = () => {
             </span>
             <RequiredActionCheck
               index={1}
-              title="지급정지 요청하기"
+              title="악성앱 차단하기"
               isDone={isBlockedBadApp}
-              setIsDone={setBlockedBadApp}
+              setIsDone={setIsBlockedBadApp}
             />
             <RequiredActionCheck
               index={2}

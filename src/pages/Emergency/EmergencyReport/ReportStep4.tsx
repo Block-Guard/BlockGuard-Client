@@ -1,6 +1,5 @@
 import RequiredActionCheck from "./components/RequiredActionCheck";
 import RecommendedList from "./components/RecommendedList";
-import { useEffect, useState } from "react";
 import ReportOneCheck from "./components/ReportOneCheck";
 import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipRedIcon from "../../../assets/icons/tip-red-icon.svg";
@@ -11,19 +10,18 @@ import type { ReportPageProps } from "../../../types/reportTypes";
 import { useOutletContext } from "react-router-dom";
 
 const ReportStep4 = () => {
-  const { setCurrentStepCompleted } = useOutletContext<ReportPageProps>();
-
-  const [isIssuedAccidentFactsConf, setIsIssuedAccidentFactsConf] =
-    useState(false);
-  const [didWrittenSubmission, setDidWrittenSubmission] = useState(false);
-  const [didClaimForRelief, setDidClaimForRelief] = useState(false);
-  const [hasBringRequiredDocs, setHasBringRequiredDocs] = useState(false);
-
-  // 서버에서 해당 상태값 받아오기
-
-  useEffect(() => {
-    setCurrentStepCompleted(isIssuedAccidentFactsConf && didWrittenSubmission);
-  }, [isIssuedAccidentFactsConf, didWrittenSubmission]);
+  const {
+    isIssuedAccidentFactsConf,
+    setIsIssuedAccidentFactsConf,
+    isIssuedAccidentFactsConfList,
+    setIsIssuedAccidentFactsConfList,
+    didWrittenSubmission,
+    setDidWrittenSubmission,
+    didClaimForRelief,
+    setDidClaimForRelief,
+    hasBringRequiredDocs,
+    setHasBringRequiredDocs,
+  } = useOutletContext<ReportPageProps>();
   return (
     <div className="w-full flex flex-col mb-40">
       <div className="flex flex-col gap-[10px] p-6">
@@ -82,8 +80,8 @@ const ReportStep4 = () => {
         </p>
         <ReportOneCheck
           title="사건사고사실확인원 발급️"
-          isChecked={isIssuedAccidentFactsConf}
-          setIsChecked={setIsIssuedAccidentFactsConf}
+          isChecked={isIssuedAccidentFactsConfList}
+          setIsChecked={setIsIssuedAccidentFactsConfList}
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />

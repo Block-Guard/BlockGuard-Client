@@ -17,7 +17,6 @@ const EmergencyMainPage = () => {
   const getInProgressReportState = async () => {
     try {
       const response = await getInProgressReportApi();
-      console.log(response);
       if (response === null) {
         setInProgressStepData({ reportId: 0, step: 0 });
       } else {

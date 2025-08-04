@@ -110,6 +110,7 @@ const EmergencyReportOverviewPage = () => {
         </h1>
         <div className="grid grid-cols-2 gap-3">
           <ReportStepCard
+            reportId={inProgressStepData.reportId}
             step={1}
             title="신고 접수"
             desc="경찰청/금융감독원에 피해상황을 즉시 신고해주세요."
@@ -117,6 +118,7 @@ const EmergencyReportOverviewPage = () => {
             progressState={stepState.first}
           />
           <ReportStepCard
+            reportId={inProgressStepData.reportId}
             step={2}
             title="계좌 지급정지 요청"
             desc="경찰청/금융감독원에 피해상황을 즉시 신고해주세요."
@@ -124,6 +126,7 @@ const EmergencyReportOverviewPage = () => {
             progressState={stepState.second}
           />
           <ReportStepCard
+            reportId={inProgressStepData.reportId}
             step={3}
             title="추가 피해 방지하기"
             desc="명의도용 등 2차 피해를 방지하기 위해 개인정보 보호 조치를 취하세요"
@@ -131,6 +134,7 @@ const EmergencyReportOverviewPage = () => {
             progressState={stepState.third}
           />
           <ReportStepCard
+            reportId={inProgressStepData.reportId}
             step={4}
             title="피해 구제신청"
             desc="피해금 환급을 위한 피해구제신청을 요청하세요 "

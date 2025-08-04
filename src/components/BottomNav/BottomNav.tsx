@@ -16,7 +16,6 @@ const BottomNav = () => {
 
   useEffect(() => {
     const selected = location.pathname;
-    console.log(selected);
     if (
       selected === "/home" ||
       selected === "/emergency" ||
