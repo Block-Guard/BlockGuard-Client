@@ -121,7 +121,7 @@ const QuizModal = ({
             </div>
           ) : (
             <>
-              <DialogTitle className="text-[20px] font-semibold leading-6">
+              <DialogTitle className="text-[20px] font-semibold leading-6 text-center">
                 {modalTitle}
               </DialogTitle>
               <div className="w-full flex flex-col gap-[5px]">
