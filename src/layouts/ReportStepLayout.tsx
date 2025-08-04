@@ -19,7 +19,6 @@ const ReportStepLayout = () => {
   const [stepTitle, setStepTitle] = useState<string>("");
   const [currentStepCompleted, setCurrentStepCompleted] =
     useState<boolean>(false);
-  const [isAlreadyCompleted, setIsAlreadyCompleted] = useState<boolean>(false);
   const mainRef = useRef<HTMLDivElement>(null);
   const [isReportCompleted, setIsReportCompleted] = useState(false);
 
@@ -103,7 +102,6 @@ const ReportStepLayout = () => {
     try {
       const response = await getEachReportStepApi(reportId, step);
       if (!response) return;
-      setIsAlreadyCompleted(response.isCompleted);
       switch (step) {
         case 1:
           setReportReceived(response.checkBoxes[0] || false);
