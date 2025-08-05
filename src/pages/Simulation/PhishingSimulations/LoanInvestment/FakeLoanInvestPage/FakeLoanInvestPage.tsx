@@ -105,7 +105,7 @@ const FakeLoanInvestPage = () => {
         <Button onClick={handleBtnClick} size="lg" isHighlight={false}>
           신청하기
         </Button>
-        {isAutoFilled ? (
+        {isAutoFilled && !isQuizOpen ? (
           <Lottie
             animationData={ClickAnimation}
             loop
