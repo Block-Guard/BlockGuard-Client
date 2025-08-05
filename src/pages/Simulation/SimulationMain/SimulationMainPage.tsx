@@ -1,10 +1,16 @@
 import { dummyPhishingExam } from "../constants";
 import SimulationStart from "./components/SimulationStart";
 import PhishingExamCard from "./components/PhishingExamCard";
+import { useEffect, useRef } from "react";
 
 const SimulationMainPage = () => {
+  const topRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
   return (
     <div className="px-6 mb-10">
+      <div ref={topRef} />
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">학습</h1>
       <div className="flex flex-col gap-[50px]">
         <SimulationStart />

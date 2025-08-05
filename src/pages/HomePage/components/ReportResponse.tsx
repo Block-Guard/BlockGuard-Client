@@ -7,20 +7,20 @@ import { useNavigate } from "react-router-dom";
 
 const ReportResponse = () => {
   const navigate = useNavigate();
-  const [inProgressStep, setInProgressStep] = useState<number>(0);
-  const [inProgressReportId, setInProgressReportId] = useState<number | null>(
-    0
-  );
+  const [inProgressStepData, setInProgressStepData] = useState({
+    reportId: 0,
+    step: 0,
+  });
   const getInProgressReportState = async () => {
     try {
       const response = await getInProgressReportApi();
-      console.log(response);
       if (response === null) {
-        setInProgressStep(0);
-        setInProgressReportId(null);
+        setInProgressStepData({ reportId: 0, step: 0 });
       } else {
-        setInProgressStep(response!.reportId);
-        setInProgressReportId(response!.step);
+        setInProgressStepData({
+          reportId: response!.reportId,
+          step: response!.step,
+        });
       }
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
@@ -62,8 +62,8 @@ const ReportResponse = () => {
           </div>
         </div>
         <ReportProgressCard
-          hasProgress={Boolean(inProgressReportId)}
-          currentStep={inProgressStep}
+          hasProgress={Boolean(inProgressStepData.reportId)}
+          currentStep={inProgressStepData.step}
         />
       </div>
     </div>
