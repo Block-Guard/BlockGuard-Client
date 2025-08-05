@@ -23,6 +23,9 @@ const SimulationSelect = () => {
           case 1:
             navigate("/simulation/public-organ/step1");
             break;
+          case 2:
+            navigate("/simulation/family-acquaintance/family-message");
+            break;
           case 3:
             navigate("/simulation/loan-investment/step1");
             break;
