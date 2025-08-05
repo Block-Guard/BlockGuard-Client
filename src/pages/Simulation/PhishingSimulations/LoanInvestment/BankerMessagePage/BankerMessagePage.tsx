@@ -4,24 +4,25 @@ import ClickAnimation from "../../../../../assets/lottie/click-black.json";
 import FakeProfile from "../../../../../assets/simulation/loan-investment/fake-banker-profile.svg";
 import DownLoadIcon from "../../../../../assets/simulation/loan-investment/download-blue-icon.svg";
 import { InstallFakeAppDialog } from "./components/InstallFakeAppDialog";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MESSAGE_DELAY_MS } from "../../constants/delay-ms";
 
 const BankerMessagePage = () => {
+  const bottomRef = useRef<HTMLDivElement | null>(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
   const FakeMessages = [
-    <div className="w-full flex flex-col gap-[30px] px-[15px]">
+    <div key={1} className="w-full flex flex-col gap-[30px] px-[15px]">
       <div className="whitespace-pre-line p-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
         안녕하세요~ <br />
         XX은행 상담원 홍길동입니다. <br />
         고객님께서 문의주신 대출신청 상담문의 안내드립니다^^
       </div>
     </div>,
-    <div className="w-full flex flex-col gap-[30px] px-[15px]">
+    <div key={2} className="w-full flex flex-col gap-[30px] px-[15px]">
       <img src={FakeProfile} alt="가짜프로필" className="w-40 h-44" />
     </div>,
-    <div className="w-full flex items-center gap-[10px] px-[15px]">
+    <div key={3} className="w-full flex items-center gap-[10px] px-[15px]">
       <div className="h-20 flex flex-col justify-between whitespace-pre-line px-4 py-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
         <div className="w-full text-monochrome-700 text-base font-normal leading-tight">
           XX은행 대출신청서.ZIP
@@ -41,7 +42,7 @@ const BankerMessagePage = () => {
         </button>
       </div>
     </div>,
-    <div className="w-full flex flex-col gap-[30px] px-[15px] mb-3">
+    <div key={4} className="w-full flex flex-col gap-[30px] px-[15px] mb-3">
       <div className="whitespace-pre-line p-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
         1. XX어플 설치파일 클릭 후 압축풀기
         <br />
@@ -58,13 +59,18 @@ const BankerMessagePage = () => {
     </div>,
   ];
 
-  useEffect(()=>{
+  const renderedMessages = useDelayRender(FakeMessages, MESSAGE_DELAY_MS);
+
+  useEffect(() => {
     setTimeout(() => {
       setIsAllLoaded(true);
-    }, 7500); 
-  },[])
+    }, 7500);
+  }, []);
 
-  const renderedMessages = useDelayRender(FakeMessages, MESSAGE_DELAY_MS);
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [renderedMessages]);
+
   return (
     <div className="w-full flex flex-col items-center">
       <p className="text-[11px] text-monochrome-500 font-medium pt-4 pb-4">
@@ -72,15 +78,16 @@ const BankerMessagePage = () => {
       </p>
       <div className="w-full flex flex-col gap-4 px-[15px] relative">
         {renderedMessages}
-        {
-          isOpenDialog || !isAllLoaded ? null : 
+        {isOpenDialog || !isAllLoaded ? null : (
           <Lottie
             animationData={ClickAnimation}
             loop
             autoplay
             className="absolute top-70 left-36 translate-[60%] w-25 pointer-events-none z-50"
           />
-        }
+        )}
+        {/* 바텀 스크롤 타겟 */}
+        <div ref={bottomRef} />
       </div>
 
       <InstallFakeAppDialog isOpen={isOpenDialog} setIsOpen={setIsOpenDialog} />

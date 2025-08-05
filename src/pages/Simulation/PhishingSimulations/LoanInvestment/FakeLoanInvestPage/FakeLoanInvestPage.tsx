@@ -17,7 +17,11 @@ const FakeLoanInvestPage = () => {
   );
   const [isReminded, setIsReMinded] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
-  const toggleAllValue = switches.every(Boolean);
+  const [isAutoFilled, setIsAutoFilled] = useState(false);
+
+  const [inputValues, setInputValues] = useState(
+    loanInputInfoList.map(() => "")
+  );
 
   const toggleOne = (id: number) => {
     setSwitches((prev) => {
@@ -27,8 +31,14 @@ const FakeLoanInvestPage = () => {
     });
   };
 
+  const handleAutoFill = () => {
+    setSwitches(Array(loanInputInfoList.length).fill(true));
+    setInputValues(loanInputInfoList.map((item) => item.example));
+    setIsAutoFilled(true);
+  };
+
   const handleBtnClick = () => {
-    if (!toggleAllValue) {
+    if (!isAutoFilled) {
       /** 전부 내용이 없는 경우, 리마인드 */
       setIsReMinded(true);
     } else {
@@ -52,7 +62,6 @@ const FakeLoanInvestPage = () => {
           <img src={MenuIcon} alt="가짜메뉴버튼" className="w-11 h-11" />
         </div>
       </header>
-
       <div className="flex justify-start items-center w-full h-16 mt-[87px] px-6 py-7.5 gap-3 bg-zinc-100 border-b border-neutral-400">
         <button onClick={handleBackClick}>
           <img src={ArrowLeftDarkBlue} alt="뒤로가기" className="w-2.5 h-5" />
@@ -61,7 +70,6 @@ const FakeLoanInvestPage = () => {
           대출신청
         </span>
       </div>
-
       <div className="flex flex-col p-6 gap-5">
         {loanInputInfoList.map((info) => {
           return (
@@ -71,28 +79,33 @@ const FakeLoanInvestPage = () => {
                 placeholder={info.placeholder}
                 inputState={switches[info.id]}
                 inputStateSetter={() => toggleOne(info.id)}
+                handlAutoFill={info.id === 0 ? handleAutoFill : undefined}
                 isReminded={isReminded}
-                example = {info.example}
+                value={inputValues[info.id]}
+                onChangeValue={(val: string) => {
+                  const newValues = [...inputValues];
+                  newValues[info.id] = val;
+                  setInputValues(newValues);
+                }}
                 key={info.id}
               />
-              {info.id === 0 && !switches[info.id] || (!switches[info.id] && (info.id > 0) && (switches[info.id - 1])) ? (
-                <Lottie
-                  animationData={ClickAnimation}
-                  loop
-                  autoplay
-                  className="absolute top-4 -left-2 w-25 pointer-events-none z-40"
-                />
-              ) : null}
             </div>
           );
         })}
       </div>
-
+      {!isAutoFilled && (
+        <Lottie
+          animationData={ClickAnimation}
+          loop
+          autoplay
+          className="absolute top-48 left-8 w-25 pointer-events-none z-40"
+        />
+      )}
       <div className="p-6 mt-[57px] relative">
         <Button onClick={handleBtnClick} size="lg" isHighlight={false}>
           신청하기
         </Button>
-        {toggleAllValue ? (
+        {isAutoFilled ? (
           <Lottie
             animationData={ClickAnimation}
             loop
