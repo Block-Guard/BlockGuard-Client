@@ -72,10 +72,10 @@ const FakeLoanInvestPage = () => {
                 inputState={switches[info.id]}
                 inputStateSetter={() => toggleOne(info.id)}
                 isReminded={isReminded}
+                example = {info.example}
                 key={info.id}
               />
-
-              {info.id === 0 && !switches[info.id] ? (
+              {info.id === 0 && !switches[info.id] || (!switches[info.id] && (info.id > 0) && (switches[info.id - 1])) ? (
                 <Lottie
                   animationData={ClickAnimation}
                   loop
