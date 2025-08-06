@@ -1,10 +1,12 @@
 import { useState } from "react";
 import SearchIcon from "../../../assets/icons/search-icon.svg";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const LinkNumberCheck = () => {
   const [urlNumber, setUrlNumber] = useState("");
-
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams();
   const isValidNumber = (inputs: string) => {
     if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(inputs))
       return false;
@@ -22,8 +24,14 @@ const LinkNumberCheck = () => {
     if (e.key === "Enter") {
       if (isValidNumber(urlNumber)) {
         console.log(urlNumber, "에 대한 전화 번호 분석 요청");
+        queryParams.set("url", "none");
+        queryParams.set("number", urlNumber.trim())
+        navigate(`/number-url-result?${queryParams.toString()}`);
       } else if (isValidUrl(urlNumber)) {
         console.log(urlNumber, "에 대한 URL 분석 요청");
+        queryParams.set("number", "none");
+        queryParams.set("url", urlNumber.trim())
+        navigate(`/number-url-result?${queryParams.toString()}`);
       }
       else {
         setUrlNumber("");

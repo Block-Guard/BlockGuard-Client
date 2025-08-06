@@ -53,6 +53,7 @@ import SecondCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardD
 import DaughterMessagePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/DaughterMessagePage";
 import RemoteAppPage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/RemoteAppPage";
 import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/AfterRemotePage";
+import NumberUrlResultPage from "../pages/NumberUrlResult/NumberUrlResultPage";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/number-url-result",
+    element: <NumberUrlResultPage />
   },
   {
     path: "/fraud-analysis",
@@ -201,7 +206,7 @@ const router = createBrowserRouter([
       },
       {
         path: "family-acquaintance",
-        children:[
+        children: [
           {
             path: "family-message",
             element: <MessageViewLayout sender="사랑하는 딸" />,
@@ -213,7 +218,7 @@ const router = createBrowserRouter([
           },
           {
             path: "after-remote",
-            element: <AfterRemotePage/>
+            element: <AfterRemotePage />
           },
           {
             path: "explain-fraud",
