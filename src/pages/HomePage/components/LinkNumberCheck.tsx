@@ -6,6 +6,7 @@ const LinkNumberCheck = () => {
 
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+
       alert(urlNumber); //임시
     }
   };

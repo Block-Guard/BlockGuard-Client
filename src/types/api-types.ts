@@ -60,6 +60,7 @@ export interface EachReportStepResponse extends ApiBaseResponse {
   };
 }
 
+/** 사기 분석 api 응답  */
 export interface FruadAnalysisResponse extends ApiBaseResponse {
   data: {
     riskLevel: string;
@@ -67,5 +68,11 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
     estimatedFraudType: string;
     keywords: string[];
     explanation: string;
+  };
+}
+/** 홈페이지 전화번호, url 분석 api 응답 */
+export interface UrlNumAnalysisResponse {
+  data: {
+    riskLevel: string;
   };
 }
