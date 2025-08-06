@@ -50,6 +50,9 @@ import FirstCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardDe
 import FirstCardDeliveryCall from "../pages/Simulation/PhishingSimulations/CardDelivery/FirstCardDeliveryCall";
 import SecondCardDeliveryCall from "../pages/Simulation/PhishingSimulations/CardDelivery/SecondCardDeliveryCall";
 import SecondCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardDelivery/SecondCardDeliveryMsg";
+import DaughterMessagePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/DaughterMessagePage";
+import RemoteAppPage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/RemoteAppPage";
+import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/AfterRemotePage";
 
 const router = createBrowserRouter([
   {
@@ -197,6 +200,28 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "family-acquaintance",
+        children:[
+          {
+            path: "family-message",
+            element: <MessageViewLayout sender="사랑하는 딸" />,
+            children: [{ index: true, element: <DaughterMessagePage /> }],
+          },
+          {
+            path: "remote-app",
+            element: <RemoteAppPage />,
+          },
+          {
+            path: "after-remote",
+            element: <AfterRemotePage/>
+          },
+          {
+            path: "explain-fraud",
+            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />
+          }
+        ],
+      },
+      {
         path: "loan-investment",
         children: [
           {
@@ -242,10 +267,6 @@ const router = createBrowserRouter([
           {
             path: "explain-fraud",
             element: <ExplainLoanPhishPage info={explainPhishLoan} />,
-          },
-          {
-            path: "explain-fraud/2",
-            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />,
           },
           {
             path: "explain-fraud/4",
