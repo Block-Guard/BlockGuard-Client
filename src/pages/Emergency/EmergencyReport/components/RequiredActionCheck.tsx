@@ -6,23 +6,52 @@ type Props = {
   title: string;
   isDone: boolean;
   setIsDone: (value: boolean) => void;
+  disabled?: boolean;
 };
 
-const RequiredActionCheck = ({ index, title, isDone, setIsDone }: Props) => {
+const RequiredActionCheck = ({
+  index,
+  title,
+  isDone,
+  setIsDone,
+  disabled = false,
+}: Props) => {
   const handleToCheck = () => {
-    setIsDone(!isDone);
+    if (!disabled) {
+      setIsDone(!isDone);
+    }
   };
   return (
     <div className="flex flex-row w-full gap-[6px]">
-      <div className="flex flex-row justify-center gap-2 px-[17px] py-[10px] bg-primary-200 rounded-[90px] text-[18px] font-bold leading-5 whitespace-nowrap">
-        <span className="text-primary-400">{index}</span>
-        {title}
+      <div
+        className={`flex flex-row justify-center gap-2 px-[17px] py-[10px] rounded-[90px] text-[18px] font-bold leading-5 whitespace-nowrap ${
+          disabled ? "bg-monochrome-300" : "bg-primary-200"
+        }`}
+      >
+        <span
+          className={`${disabled ? "text-monochrome-500" : "text-primary-400"}`}
+        >
+          {index}
+        </span>
+        <span className={disabled ? "text-monochrome-500" : ""}>{title}</span>
       </div>
       <div className="bg-monochrome-200 h-[1px] w-full self-center" />
       {isDone ? (
-        <img src={CheckedIcon} onClick={handleToCheck} />
+        <img
+          src={CheckedIcon}
+          onClick={handleToCheck}
+          className={`${
+            disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
+          }`}
+        />
       ) : (
-        <img src={UncheckedIcon} onClick={handleToCheck} />
+        <img
+          src={UncheckedIcon}
+          onClick={handleToCheck}
+          className={`${
+            disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
+          }`}
+        />
       )}
     </div>
   );

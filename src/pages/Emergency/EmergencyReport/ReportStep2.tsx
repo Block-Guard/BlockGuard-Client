@@ -11,8 +11,16 @@ import type { ReportPageProps } from "../../../types/reportTypes";
 import { useEffect, useRef } from "react";
 
 const ReportStep2 = () => {
-  const { isRequestedToStopPayment, setIsRequestedToStopPayment } =
-    useOutletContext<ReportPageProps>();
+  const {
+    serverCompletedSteps,
+    currentStep,
+    isRequestedToStopPayment,
+    setIsRequestedToStopPayment,
+  } = useOutletContext<ReportPageProps>();
+
+  // 서버에서 받아온 완료 상태인지 확인
+  const isCompletedByServer = serverCompletedSteps[currentStep] || false;
+
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
@@ -30,6 +38,7 @@ const ReportStep2 = () => {
           title="지급정지 요청하기"
           isDone={isRequestedToStopPayment}
           setIsDone={setIsRequestedToStopPayment}
+          disabled={isCompletedByServer}
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />

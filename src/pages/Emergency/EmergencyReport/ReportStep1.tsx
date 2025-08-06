@@ -12,6 +12,8 @@ import { useEffect, useRef } from "react";
 
 const ReportStep1 = () => {
   const {
+    serverCompletedSteps,
+    currentStep,
     reportReceived,
     setReportReceived,
     secureEvidence,
@@ -23,6 +25,9 @@ const ReportStep1 = () => {
     haveIdChecked,
     setHaveIdChecked,
   } = useOutletContext<ReportPageProps>();
+
+  // 서버에서 받아온 완료 상태인지 확인
+  const isCompletedByServer = serverCompletedSteps[currentStep] || false;
 
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -45,18 +50,21 @@ const ReportStep1 = () => {
           title="신고 접수하기"
           isDone={reportReceived}
           setIsDone={setReportReceived}
+          disabled={isCompletedByServer}
         />
         <RequiredActionCheck
           index={2}
           title="증거 확보하기"
           isDone={secureEvidence}
           setIsDone={setSecureEvidence}
+          disabled={isCompletedByServer}
         />
         <RequiredActionCheck
           index={3}
           title="경찰서 방문 및 사건접수"
           isDone={caseFiled}
           setIsDone={setCaseFiled}
+          disabled={isCompletedByServer}
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />

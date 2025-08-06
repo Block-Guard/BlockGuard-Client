@@ -14,11 +14,17 @@ import { useEffect, useRef } from "react";
 
 const ReportStep3 = () => {
   const {
+    serverCompletedSteps,
+    currentStep,
     isBlockedBadApp,
     setIsBlockedBadApp,
     isRegisteredPersonalInformExposed,
     setIsRegisteredPersonalInformExposed,
   } = useOutletContext<ReportPageProps>();
+
+  // 서버에서 받아온 완료 상태인지 확인
+  const isCompletedByServer = serverCompletedSteps[currentStep] || false;
+
   const topRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
@@ -52,12 +58,14 @@ const ReportStep3 = () => {
               title="악성앱 차단하기"
               isDone={isBlockedBadApp}
               setIsDone={setIsBlockedBadApp}
+              disabled={isCompletedByServer}
             />
             <RequiredActionCheck
               index={2}
               title="개인정보노출자 등록"
               isDone={isRegisteredPersonalInformExposed}
               setIsDone={setIsRegisteredPersonalInformExposed}
+              disabled={isCompletedByServer}
             />
           </div>
           <div className="flex flex-col gap-[10px]">

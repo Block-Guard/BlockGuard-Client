@@ -2,6 +2,10 @@ export interface ReportPageProps {
   reportId: number;
   setCurrentStepCompleted: (value: boolean) => void;
 
+  // 서버 완료 상태
+  serverCompletedSteps: { [key: number]: boolean };
+  currentStep: number;
+
   // Step 1 상태들
   reportReceived: boolean;
   setReportReceived: (value: boolean) => void;
