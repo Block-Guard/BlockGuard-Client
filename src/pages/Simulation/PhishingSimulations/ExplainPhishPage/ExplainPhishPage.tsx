@@ -7,6 +7,7 @@ import Blockee from "../../../../assets/character-cropped-fit-image.svg";
 import { MethodCard } from "./components/MethodCard";
 import { FeatureCard } from "./components/FeatureCard";
 import type { ExplainInfo } from "./constant";
+import { useEffect, useRef } from "react";
 
 interface ExplainLoanPhishPageProps {
   info: ExplainInfo;
@@ -17,9 +18,15 @@ const ExplainLoanPhishPage = ({ info }: ExplainLoanPhishPageProps) => {
   const handleBackClick = () => navigate(-1);
   const handleLearnClick = () => console.log("피해 사례 더보기");
   const handleQuitClick = () => navigate("/simulation");
-  console.log(info.title);
+  const topRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
+
   return (
     <div className="w-full h-full flex flex-col bg-white box-border">
+      <div ref={topRef} />
       <Header
         leftChild={
           <button onClick={handleBackClick}>

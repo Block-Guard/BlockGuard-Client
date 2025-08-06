@@ -11,7 +11,7 @@ const AfterRemotePage = () => {
     const navigate = useNavigate();
     const [isMessaged, setIsMessaged] = useState(false);
     const [isQuizOpen, setIsQuisOpen] = useState(false);
-    const handleBackClick = () => { navigate("/simulation/family-acquaintance/family-message") }
+    const handleBackClick = () => { navigate("/simulation/family-acquaintance/remote-app") }
     const handleCloseClick = () => { navigate("/simulation/select-type") }
     const handleQuizOpen = () => setIsQuisOpen(true);
 
