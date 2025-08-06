@@ -6,7 +6,6 @@ import { MESSAGE_DELAY_MS } from "../constants/delay-ms";
 import ReceivedMessage from "../../../../components/SimulationMessage/ReceivedMessage";
 import SelectSendMessage from "../../../../components/SimulationMessage/SelectSendMessage";
 import { familyAcquaintanceMsg } from "../constants/familyAcquaintanceMsg";
-
 import IdCardDummy from "../../../../assets/simulation/family-acquaintance/idcard-dummy-image.svg"
 import CreditCardDummy from "../../../../assets/simulation/family-acquaintance/credit-card-dummy-image.svg"
 

@@ -8,12 +8,14 @@ import LockIcon from "../../../../assets/simulation/family-acquaintance/lock-ico
 import { useNavigate } from "react-router-dom";
 import { RemoteAppPermissionModal } from "./RemoteAppPermissionModal";
 import { useState } from "react";
+import ClickAnimation from "../../../../assets/lottie/click-black.json";
+import Lottie from "lottie-react";
 const RemoteAppPage = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleBackClick = () => {navigate("/simulation/family-acquaintance/family-message")}
-    const handleCloseClick = () => {navigate("/simulation/select-type")}
-    const handleSendId = () => {setIsModalOpen(true)}
+    const handleBackClick = () => { navigate("/simulation/family-acquaintance/family-message") }
+    const handleCloseClick = () => { navigate("/simulation/select-type") }
+    const handleSendId = () => { setIsModalOpen(true) }
 
     return (
         <div className="relative flex flex-col justify-between w-full h-screen overflow-y-scroll overflow-x-hidden no-scrollbar">
@@ -57,7 +59,7 @@ const RemoteAppPage = () => {
 
                             <div className="flex items-center h-5 border gap-1 px-1 border-black">
                                 <img src={LockIcon} alt="아이콘"
-                                className="w-2.5 h-2.5"/>
+                                    className="w-2.5 h-2.5" />
                                 <span className="text-[#0080FF] text-xs font-normal leading-none">
                                     https://start.teamviewer.com
                                 </span>
@@ -94,10 +96,19 @@ const RemoteAppPage = () => {
                         </span>
                     </div>
 
-                    <button className="w-40 h-10 bg-[#0094FF] text-white text-center shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
-                    onClick={handleSendId}>
-                        내 ID 전송...
-                    </button>
+                    <div className="relative">
+                        <button className="w-40 h-10 bg-[#0094FF] text-white text-center shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
+                            onClick={handleSendId}>
+                            내 ID 전송...
+                        </button>
+                        <Lottie
+                            animationData={ClickAnimation}
+                            loop
+                            autoplay
+                            className="absolute -bottom-2 left-8 translate-[45%] w-25 z-50 pointer-events-none"
+                        />
+                    </div>
+
                 </div>
 
                 <div className="flex justify-start items-center gap-2.5 w-full h-16 border-t-2 p-6 text-center">
@@ -105,7 +116,7 @@ const RemoteAppPage = () => {
                     연결(보안 연결)할 준비가 되었습니다.
                 </div>
             </main>
-            <RemoteAppPermissionModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>
+            <RemoteAppPermissionModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
         </div>
     )
 }
