@@ -60,7 +60,12 @@ const ReportStep2 = () => {
             title="경찰청 통합신고 대응센터 (112)"
             emoticon={<img src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
-              <Button onClick={() => {}} size="sm">
+              <Button
+                onClick={() => {
+                  window.location.href = `tel:112`;
+                }}
+                size="sm"
+              >
                 바로 걸기
               </Button>
             }
@@ -80,7 +85,12 @@ const ReportStep2 = () => {
             title="금융감독원 콜센터 (1132)️️️️️️️️"
             emoticon={<img src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
-              <Button onClick={() => {}} size="sm">
+              <Button
+                onClick={() => {
+                  window.location.href = `tel:1132`;
+                }}
+                size="sm"
+              >
                 바로 걸기
               </Button>
             }
@@ -105,7 +115,15 @@ const ReportStep2 = () => {
             title="금융결제원 계좌 통합관리 서비스 ️️️️️️️️️️️️️"
             emoticon={<img src={WriteIcon} alt="이모티콘" />}
             shortcutButton={
-              <Button onClick={() => {}} size="sm">
+              <Button
+                onClick={() => {
+                  window.open(
+                    "https://www.payinfo.or.kr/payinfo.html",
+                    "_blank"
+                  );
+                }}
+                size="sm"
+              >
                 바로 가기
               </Button>
             }

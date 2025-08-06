@@ -213,7 +213,15 @@ const ReportStep4 = () => {
           title="채권소멸절차 개시공고 확인"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button
+              onClick={() => {
+                window.open(
+                  "https://www.fss.or.kr/fss/cvpl/stepNotice/list.do?menuNo=200581",
+                  "_blank"
+                );
+              }}
+              size="sm"
+            >
               바로 가기
             </Button>
           }

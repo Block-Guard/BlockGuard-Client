@@ -78,7 +78,12 @@ const ReportStep1 = () => {
             title="경찰청 통합신고 대응센터 (112)"
             emoticon={<img src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
-              <Button onClick={() => {}} size="sm">
+              <Button
+                onClick={() => {
+                  window.location.href = `tel:112`;
+                }}
+                size="sm"
+              >
                 바로 걸기
               </Button>
             }
@@ -87,7 +92,15 @@ const ReportStep1 = () => {
             title="경찰청 사이버 신고센터"
             emoticon={<img src={WriteIcon} alt="이모티콘" />}
             shortcutButton={
-              <Button onClick={() => {}} size="sm">
+              <Button
+                onClick={() => {
+                  window.open(
+                    "https://ecrm.police.go.kr/minwon/main",
+                    "_blank"
+                  );
+                }}
+                size="sm"
+              >
                 바로 가기
               </Button>
             }

@@ -179,7 +179,12 @@ const ReportStep3 = () => {
           title="‍개인정보노출자 사고예방시스템"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button
+              onClick={() => {
+                window.open("https://pd.fss.or.kr/", "_blank");
+              }}
+              size="sm"
+            >
               바로 가기
             </Button>
           }
@@ -228,7 +233,12 @@ const ReportStep3 = () => {
           title="‍계좌정보통합관리서비스"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button
+              onClick={() => {
+                window.open("https://www.payinfo.or.kr/", "_blank");
+              }}
+              size="sm"
+            >
               바로 가기
             </Button>
           }
@@ -279,7 +289,12 @@ const ReportStep3 = () => {
           title="‍‍명의도용방지서비스 (M-Safer)"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button
+              onClick={() => {
+                window.open("https://www.msafer.or.kr/index.do", "_blank");
+              }}
+              size="sm"
+            >
               바로 가기
             </Button>
           }
