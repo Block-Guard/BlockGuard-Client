@@ -5,14 +5,18 @@ export interface VoiceCallData {
 export const deliveryDriverCallFirstData = {
   voiceCall: `안녕하세요, 00카드 배송기사입니다.\n000님 맞으시죠?\n오늘 10시에 신청하신 카드 전달드리러 방문 예정인데, 자택에 계실예정이신가요? `,
   options: [
+    "“저랑 무슨 관련이 있는 건지 잘 모르겠습니다.”",
+    "“혹시 다른 사람과 착각하신 거 아닌가요?”",
     "“그런 카드 신청한 적이 없는데, 무슨 일이죠?”",
-    "“제가 아닌 것 같은데요..?”",
-    "“네? 카드 발급 신청한 적 없는데요?”",
   ],
 };
 export const deliveryDriverCallSecondData = {
   voiceCall: `본인이 발급하신게 아니라고요?\n분명히 본인 명의가 맞으신데...\n그럼 카드사 고객센터 1899-6077로 전화하셔서 직접 카드발급 취소요청을 해주셔야합니다.`,
-  options: ["“확인했습니다.”", "“전화해보겠습니다.”", "“네, 알겠습니다.”"],
+  options: [
+    "“혹시 이 번호가 진짜 카드사 번호 맞나요?\n…일단 걸어보겠습니다.”",
+    "“설마 제 명의가 도용된 건가요?\n바로 확인해보겠습니다.”",
+    "“네, 그럼 카드사에 직접 확인해보겠습니다.”",
+  ],
 };
 
 export const cardCompanyStaffCallData = {
