@@ -4,6 +4,7 @@ import AnalysisLoadingPage from "../FraudSurvey/AnalysisLoadingPage/AnalysisLoad
 import { useEffect, useState } from "react";
 import { numberAnalysisApi, urlAnalysisApi } from "../../apis/home";
 import { riskState } from "../FraudSurvey/AnalysisResultPage/constants";
+import Button from "../../components/Button/Button";
 
 const NumberUrlResultPage = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const NumberUrlResultPage = () => {
     const url = urlNumberParams.get('url') || 'url 아님';
     const number = urlNumberParams.get('number') || 'number 아님';
     const handleCloseClick = () => navigate("/home");
-
+    const handleReportClick = () => navigate("/emergency");
     const getNumberResult = async (inputs: string) => {
         return await numberAnalysisApi(inputs);
     }
@@ -80,8 +81,8 @@ const NumberUrlResultPage = () => {
             <div className="h-63 flex flex-col justify-between items-end mt-[57px] pt-6 px-6 overflow-clip" style={{ backgroundColor: `${riskLevel === "위험" ? "#F24E4E" : "#40D479"}` }}>
 
                 {url !== "none" ? (
-                    <div className="w-full inline-flex flex-col justify-center items-center gap-1.5 text-white text-base font-medium leading-normal p-2
-                border-b-1 border-white">
+                    <div className="w-full flex flex-col justify-center items-center gap-1.5 text-white text-base font-medium leading-normal p-2
+                border-b-1 border-white whitespace-pre text-ellipsis">
                         {url}
                     </div>
                 ) : (
@@ -91,22 +92,22 @@ const NumberUrlResultPage = () => {
                     </div>
                 )}
 
-                <div className="w-full flex justify-between">
+                <div className="w-full h-36 flex justify-between relative top-2">
                     <div className="h-full flex items-start">
                         {
                             riskLevel === "위험" ? (
                                 <img src={riskState[0].bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
                             ) : (
-                                <img src={riskState[2].bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
+                                <img src={riskState[2].bubbleChat} alt="안전 문구" className="w-51 h-18" />
                             )
                         }
                     </div>
                     <div className="h-full flex items-end">
                         {
                             riskLevel === "위험" ? (
-                                <img src={riskState[0].character} alt="위험 경고문구" className="w-51 h-18" />
+                                <img src={riskState[0].character} alt="위험 경고 캐릭터" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
                             ) : (
-                                <img src={riskState[2].character} alt="위험 경고문구" className="w-51 h-18" />
+                                <img src={riskState[2].character} alt="안전 캐릭터" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
                             )
                         }
                     </div>
@@ -117,9 +118,9 @@ const NumberUrlResultPage = () => {
             {/* 여기까지 상단 안내 */}
 
             <div className="flex flex-col items-center py-7.5 px-6 z-10" >
-                {/* <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
+                <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
                     {resultTheme.text}
-                </div> */}
+                </div>
 
                 {/* <div className="h-42">
                     <img src={resultTheme.boardImg} alt="위험도 표"
@@ -142,7 +143,13 @@ const NumberUrlResultPage = () => {
                     ) : null} */}
 
                 {/* 여기부터 응답과 상관없음 */}
-                <button>신고하기</button>
+                <Button
+                    onClick={handleReportClick}
+                    size="lg"
+                    isHighlight={false}
+                >
+                    신고하기
+                </Button>
             </div >
         </div >
     )
