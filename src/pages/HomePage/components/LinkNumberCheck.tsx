@@ -1,13 +1,37 @@
 import { useState } from "react";
 import SearchIcon from "../../../assets/icons/search-icon.svg";
+import { toast } from "sonner";
 
 const LinkNumberCheck = () => {
   const [urlNumber, setUrlNumber] = useState("");
 
+  const isValidNumber = (inputs: string) => {
+    if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(inputs))
+      return false;
+
+    return true;
+  }
+
+  const isValidUrl = (inputs: string) => {
+    if (!/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(inputs))
+      return false;
+    return true;
+  }
+
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (isValidNumber(urlNumber)) {
+        console.log(urlNumber, "에 대한 전화 번호 분석 요청");
+      } else if (isValidUrl(urlNumber)) {
+        console.log(urlNumber, "에 대한 URL 분석 요청");
+      }
+      else {
+        setUrlNumber("");
+        console.log(urlNumber)
+        console.log("올바르지 못한 형식")
 
-      alert(urlNumber); //임시
+        toast("URL/전화번호 형식이 유효하지 않습니다. 다시 입력해주세요.")
+      }
     }
   };
 
@@ -27,6 +51,7 @@ const LinkNumberCheck = () => {
           onChange={(e) => setUrlNumber(e.target.value)}
           onKeyDown={(e) => activeEnter(e)}
           placeholder="URL / 전화번호를 검색해보세요"
+          value={urlNumber}
         />
       </div>
       <div className="w-full h-0.5 bg-white rounded-[90px]" />
