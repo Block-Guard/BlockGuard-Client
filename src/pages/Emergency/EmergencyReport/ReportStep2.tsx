@@ -8,13 +8,19 @@ import Button from "../../../components/Button/Button";
 import TipPopover from "./components/TipPopover";
 import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
+import { useEffect, useRef } from "react";
 
 const ReportStep2 = () => {
   const { isRequestedToStopPayment, setIsRequestedToStopPayment } =
     useOutletContext<ReportPageProps>();
+  const topRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
 
   return (
     <div className="w-full flex flex-col mb-40">
+      <div ref={topRef} />
       <div className="flex flex-col gap-[10px] p-6">
         <span className="text-highlight-1 text-[16px] font-bold leading-5">
           필수 조치

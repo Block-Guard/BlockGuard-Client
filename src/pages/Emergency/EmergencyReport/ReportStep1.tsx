@@ -8,6 +8,7 @@ import ReportCheckList from "./components/ReportCheckList";
 import TipPopover from "./components/TipPopover";
 import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
+import { useEffect, useRef } from "react";
 
 const ReportStep1 = () => {
   const {
@@ -23,8 +24,18 @@ const ReportStep1 = () => {
     setHaveIdChecked,
   } = useOutletContext<ReportPageProps>();
 
+  const topRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
+
+  const handleOpenPdf = () => {
+    window.open("/files/사건사고사실확인원.pdf", "_blank");
+  };
+
   return (
     <div className="w-full flex flex-col mb-40">
+      <div ref={topRef} />
       <div className="flex flex-col gap-[10px] p-6">
         <span className="text-highlight-1 text-[16px] font-bold leading-5">
           필수 조치
@@ -152,7 +163,7 @@ const ReportStep1 = () => {
           title="사건사고사실 확인원"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button onClick={handleOpenPdf} size="sm">
               문서보기
             </Button>
           }

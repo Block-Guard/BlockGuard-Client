@@ -10,6 +10,7 @@ import WriteIcon from "../../../assets/report-guide/report-write-icon.png";
 import TipPopover from "./components/TipPopover";
 import { useOutletContext } from "react-router-dom";
 import type { ReportPageProps } from "../../../types/reportTypes";
+import { useEffect, useRef } from "react";
 
 const ReportStep3 = () => {
   const {
@@ -18,9 +19,14 @@ const ReportStep3 = () => {
     isRegisteredPersonalInformExposed,
     setIsRegisteredPersonalInformExposed,
   } = useOutletContext<ReportPageProps>();
+  const topRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
 
   return (
     <div className="w-full flex flex-col mb-40">
+      <div ref={topRef} />
       <div className="flex flex-col gap-[10px] p-6">
         <div className="flex flex-col gap-[30px]">
           <span className="font-semibold">

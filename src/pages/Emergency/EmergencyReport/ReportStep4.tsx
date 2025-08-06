@@ -8,6 +8,7 @@ import Button from "../../../components/Button/Button";
 import TipPopover from "./components/TipPopover";
 import type { ReportPageProps } from "../../../types/reportTypes";
 import { useOutletContext } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const ReportStep4 = () => {
   const {
@@ -22,8 +23,17 @@ const ReportStep4 = () => {
     hasBringRequiredDocs,
     setHasBringRequiredDocs,
   } = useOutletContext<ReportPageProps>();
+
+  const topRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    topRef.current?.scrollIntoView({ behavior: "instant" });
+  }, []);
+  const handleOpenPdf = () => {
+    window.open("/files/피해구제신청서.pdf", "_blank");
+  };
   return (
     <div className="w-full flex flex-col mb-40">
+      <div ref={topRef} />
       <div className="flex flex-col gap-[10px] p-6">
         <div className="flex flex-col gap-[30px]">
           <span className="font-semibold">
@@ -120,7 +130,7 @@ const ReportStep4 = () => {
           title="피해구제 신청서 작성예시"
           emoticon={<img src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
-            <Button onClick={() => {}} size="sm">
+            <Button onClick={handleOpenPdf} size="sm">
               바로 가기
             </Button>
           }
