@@ -1,22 +1,55 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { formatCallTime } from "../../../../utils/formatCallTime";
 import OnThePhoneComponentExtend from "../LoanInvestment/BankerCallPage/components/OnThePhoneComponentExtend";
+import SelectVoiceChat from "./SelectVoiceChat/SelectVoiceChat";
+import { cardCompanyStaffCallData } from "./SelectVoiceChat/voice-chat-data";
+import CardVoiceChatRenderer from "./CardVoiceChatRenderer";
 
 const SecondCardDeliveryCall = () => {
-  const navigate = useNavigate();
   const [callTime, setCallTime] = useState(0);
+  const [isStartedVoiceChat, setIsStartedVoiceChat] = useState(false);
+  const [isSecondStep, setIsSecondStep] = useState(false);
+
+  const arsVoiceRef = useRef<HTMLAudioElement | null>(null);
+  const staffVoiceRef = useRef<HTMLAudioElement | null>(null);
 
   // 추후 ars 음성이 필요함. ex) 0번을 눌러주세요.
-  const arsVoice = "/sounds/police-voice-exam.mp3";
+  const arsVoice = "/sounds/iphone-ringtone.mp3";
+  // 0번을 누르면 재생되면 직원 음성
+  const cardCompanyStaffVoice1 = "/sounds/police-voice-exam.mp3";
 
-  // ⬇️ 음성 처음 진입 시 한번만 재생
+  // 최초 진입 시 ARS 음성 재생 (한 번만)
   useEffect(() => {
     const audio = new Audio(arsVoice);
+    arsVoiceRef.current = audio;
     audio.play().catch((e) => {
-      console.warn("자동 재생이 차단되었을 수 있습니다:", e);
+      console.warn("ARS 자동 재생 실패:", e);
     });
+
+    return () => {
+      audio.pause();
+      arsVoiceRef.current = null;
+    };
   }, []);
+
+  // 키패드 눌렀을 때 직원 음성 재생
+  const handleClickKeypad = () => {
+    setIsStartedVoiceChat(true);
+
+    // 벨소리 중지
+    arsVoiceRef.current?.pause();
+    arsVoiceRef.current = null;
+
+    const audio = new Audio(cardCompanyStaffVoice1);
+    staffVoiceRef.current = audio;
+    audio.play().catch((e) => {
+      console.warn("직원 음성 재생 실패:", e);
+    });
+  };
+
+  const onClickToSecondStep = () => {
+    setIsSecondStep(true);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,12 +67,22 @@ const SecondCardDeliveryCall = () => {
         <span className="text-[40px] font-semibold">1899-6077</span>
       </div>
       {/* handleClick 로직은 추후 수정 예정 */}
-      <OnThePhoneComponentExtend
-        needsKeypad={true}
-        handleClick={() =>
-          navigate("/simulation/card-delivery/second-message-view")
-        }
-      />
+      {isStartedVoiceChat ? (
+        isSecondStep ? (
+          <CardVoiceChatRenderer />
+        ) : (
+          <SelectVoiceChat
+            caller="카드사 직원"
+            voiceChatData={cardCompanyStaffCallData}
+            onClickToNextStep={onClickToSecondStep}
+          />
+        )
+      ) : (
+        <OnThePhoneComponentExtend
+          needsKeypad={true}
+          handleClick={handleClickKeypad}
+        />
+      )}
     </div>
   );
 };
