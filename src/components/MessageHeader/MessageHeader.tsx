@@ -24,7 +24,10 @@ const MessageHeader = ({ sender }: Props) => {
         </div>
       </div>
       <div className="flex-1 flex justify-end">
-        <img src={CloseIcon} onClick={() => navigate(-1)} />
+        <img
+          src={CloseIcon}
+          onClick={() => navigate("/simulation/select-type")}
+        />
       </div>
     </header>
   );

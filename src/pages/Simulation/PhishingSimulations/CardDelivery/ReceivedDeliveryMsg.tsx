@@ -33,7 +33,12 @@ const ReceivedDeliveryMsg = () => {
             onClick={() => navigate(-1)}
           />
         }
-        rightChild={<img src={CloseIcon} onClick={() => navigate(-1)} />}
+        rightChild={
+          <img
+            src={CloseIcon}
+            onClick={() => navigate("/simulation/select-type")}
+          />
+        }
         bgColor="none"
       />
       <div className="w-full flex flex-col justify-center items-center pt-10 gap-4">
