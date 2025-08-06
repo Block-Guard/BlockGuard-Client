@@ -54,6 +54,8 @@ import DaughterMessagePage from "../pages/Simulation/PhishingSimulations/FamilyA
 import RemoteAppPage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/RemoteAppPage";
 import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/AfterRemotePage";
 import Onboarding from "../pages/Onboarding";
+import FindId from "../pages/Auth/FindId/FindId";
+import FindPassword from "../pages/Auth/FindPassword/FindPassword";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +103,14 @@ const router = createBrowserRouter([
           { index: true, element: <Signup /> },
           { path: "complete", element: <SignupComplete /> },
         ],
+      },
+      {
+        path: "find-id",
+        element: <FindId />,
+      },
+      {
+        path: "find-password",
+        element: <FindPassword />,
       },
     ],
   },

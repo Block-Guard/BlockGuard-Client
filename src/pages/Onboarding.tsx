@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import OnboardingIcon from "../assets/onboarding-icon.png";
 import Button from "../components/Button/Button";
+import { useEffect } from "react";
 
 const Onboarding = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("first-use", "false");
+  }, []);
+
   return (
     <div className="w-full h-[100vh] bg-primary-400 flex flex-col gap-13 justify-center items-center px-4">
       <div className="flex flex-col gap-5">

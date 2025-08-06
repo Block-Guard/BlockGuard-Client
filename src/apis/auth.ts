@@ -1,5 +1,6 @@
 import {
   type CheckEmailResponse,
+  type FindIdResponse,
   type LoginResponse,
   type SignUpResponse,
 } from "../types/api-types";
@@ -8,6 +9,8 @@ import axiosInstance from "./axiosInstance";
 const CHECK_EMAIL_API = "auth/register/check-email";
 const SIGNUP_API = "auth/register";
 const LOGIN_API = "auth/login";
+const FIND_ID_API = "auth/find-email";
+const FIND_PASSWORD_API = "auth/find-password";
 
 // 이메일 중복 확인 api
 export const checkEmailApi = async (email: string) => {
@@ -84,5 +87,47 @@ export const loginApi = async (loginData: {
   } catch (error: any) {
     console.error("로그인 실패:", error.response?.data || error.message);
     throw new Error(error.response?.data?.message || "로그인 중 오류 발생"); // 서버 문제(500 등)만 throw
+  }
+};
+
+// 아이디 찾기 api
+export const findIdApi = async (userData: {
+  name: string;
+  phoneNumber: string;
+  birthDate: string;
+}) => {
+  try {
+    const response = await axiosInstance.post<FindIdResponse>(
+      FIND_ID_API,
+      userData,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data.data.email;
+  } catch (error: any) {
+    console.error("아이디 찾기 실패:", error.response?.data || error.message);
+    throw new Error(
+      error.response?.data?.message || "아이디 찾기 중 오류 발생"
+    ); // 서버 문제(500 등)만 throw
+  }
+};
+
+// 비밀번호 찾기 api
+export const findPasswordApi = async (email: string) => {
+  try {
+    const response = await axiosInstance.post(
+      FIND_PASSWORD_API,
+      { email: email },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("비밀번호 찾기 실패:", error.response?.data || error.message);
+    throw new Error(
+      error.response?.data?.message || "비밀번호 찾기 중 오류 발생"
+    ); // 서버 문제(500 등)만 throw
   }
 };

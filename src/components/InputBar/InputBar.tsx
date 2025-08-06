@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  type: "email" | "password" | "text";
+  type: "email" | "password" | "text" | "number";
   input: string;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
