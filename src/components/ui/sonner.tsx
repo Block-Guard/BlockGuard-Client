@@ -15,7 +15,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--border-radius": "10px",
         } as React.CSSProperties
       }
+      duration={1500}
       toastOptions={{
+        duration: 1500,
         style: {
           fontFamily: "Pretendard",
           borderRadius: "10px",

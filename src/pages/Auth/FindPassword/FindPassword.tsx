@@ -20,7 +20,7 @@ const FindPassword = () => {
       toast("전송이 완료되었습니다.");
       const timer = setTimeout(() => {
         navigate("/login");
-      }, 3000);
+      }, 1500);
 
       return () => clearTimeout(timer);
     } catch (error) {
