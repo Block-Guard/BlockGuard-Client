@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchIcon from "../../../assets/icons/search-icon.svg";
-import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const LinkNumberCheck = () => {
   const [urlNumber, setUrlNumber] = useState("");
@@ -22,26 +22,31 @@ const LinkNumberCheck = () => {
 
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (isValidNumber(urlNumber)) {
-        console.log(urlNumber, "에 대한 전화 번호 분석 요청");
-        queryParams.set("url", "none");
-        queryParams.set("number", urlNumber.trim())
-        navigate(`/number-url-result?${queryParams.toString()}`);
-      } else if (isValidUrl(urlNumber)) {
-        console.log(urlNumber, "에 대한 URL 분석 요청");
-        queryParams.set("number", "none");
-        queryParams.set("url", urlNumber.trim())
-        navigate(`/number-url-result?${queryParams.toString()}`);
-      }
-      else {
-        setUrlNumber("");
-        console.log(urlNumber)
-        console.log("올바르지 못한 형식")
-
-        toast("URL/전화번호 형식이 유효하지 않습니다. 다시 입력해주세요.")
-      }
+      handleSearch();
     }
   };
+
+  const handleSearch = () => {
+    if (isValidNumber(urlNumber)) {
+      console.log(urlNumber, "에 대한 전화 번호 분석 요청");
+      queryParams.set("url", "none");
+      queryParams.set("number", urlNumber.trim())
+      navigate(`/number-url-result?${queryParams.toString()}`);
+    } else if (isValidUrl(urlNumber)) {
+      console.log(urlNumber, "에 대한 URL 분석 요청");
+      queryParams.set("number", "none");
+      queryParams.set("url", urlNumber.trim())
+      navigate(`/number-url-result?${queryParams.toString()}`);
+    }
+    else {
+      setUrlNumber("");
+      console.log(urlNumber)
+      console.log("올바르지 못한 형식")
+
+      toast("URL/전화번호 형식이 유효하지 않습니다. 다시 입력해주세요.")
+     
+    }
+  }
 
   return (
     <div
@@ -52,7 +57,6 @@ const LinkNumberCheck = () => {
         클릭 한 번으로 위험 확인
       </div>
       <div className="flex flex-row text-white/50 text-sm font-medium leading-none">
-        <img src={SearchIcon} className="mr-1" alt="돋보기 아이콘" />
         <input
           type="text"
           className="w-full focus:outline-none focus:ring-0 text-white text-sm font-medium leading-none"
@@ -61,6 +65,9 @@ const LinkNumberCheck = () => {
           placeholder="URL / 전화번호를 검색해보세요"
           value={urlNumber}
         />
+        <button onClick={handleSearch}>
+          <img src={SearchIcon} className="mr-1" alt="돋보기 아이콘" />
+        </button>
       </div>
       <div className="w-full h-0.5 bg-white rounded-[90px]" />
     </div>

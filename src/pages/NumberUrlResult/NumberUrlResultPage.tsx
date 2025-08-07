@@ -4,18 +4,23 @@ import AnalysisLoadingPage from "../FraudSurvey/AnalysisLoadingPage/AnalysisLoad
 import { useEffect, useState } from "react";
 import { numberAnalysisApi, urlAnalysisApi } from "../../apis/home";
 import { riskState } from "../FraudSurvey/AnalysisResultPage/constants";
+import IndicatorArrow from "../../assets/analysis-result/indicator-arrow.svg"
 import Button from "../../components/Button/Button";
 
 const NumberUrlResultPage = () => {
     const navigate = useNavigate();
     const [urlNumberParams] = useSearchParams();
-    const [riskLevel, setRiskLevel] = useState<string | undefined>("");
+    const [riskLevel, setRiskLevel] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(true);
 
     const url = urlNumberParams.get('url') || 'url 아님';
     const number = urlNumberParams.get('number') || 'number 아님';
     const handleCloseClick = () => navigate("/home");
-    const handleReportClick = () => navigate("/emergency");
+
+    const handleReportClick = () => {
+        console.log("외부 페이지로 이동")
+    }
+
     const getNumberResult = async (inputs: string) => {
         return await numberAnalysisApi(inputs);
     }
@@ -34,15 +39,16 @@ const NumberUrlResultPage = () => {
                 else if (number !== "none") {
                     response = await getNumberResult(url);
                 }
-                setRiskLevel(response?.riskLevel);
+
+                if (response?.riskLevel === "위험")
+                    setRiskLevel(0);
+                else
+                    setRiskLevel(2);
 
                 setIsLoading(false);
             } catch (error) {
                 console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
-                setRiskLevel("안전");
-                // setData(dummyResponse.data);
-                // const themeIndex = getTheme(dummyResponse.data.riskLevel);
-                // setResultTheme(riskState[themeIndex]);
+                setRiskLevel(2); // 일단 위험
             } finally {
                 setIsLoading(false);
             }
@@ -60,9 +66,9 @@ const NumberUrlResultPage = () => {
     }
 
     return (
-        <div className="flex flex-col justify-between w-screen h-screen">
+        <div className="flex flex-col w-screen h-screen">
             <Header
-                bgColor={riskLevel === "위험" ? "#F24E4E" : "#40D479"}
+                bgColor={riskState[riskLevel].bgColor}
                 title={
                     <h1 className="text-xl font-bold leading-8 text-white">
                         AI 분석 결과
@@ -78,11 +84,11 @@ const NumberUrlResultPage = () => {
                 }
             />
 
-            <div className="h-63 flex flex-col justify-between items-end mt-[57px] pt-6 px-6 overflow-clip" style={{ backgroundColor: `${riskLevel === "위험" ? "#F24E4E" : "#40D479"}` }}>
+            <div className="h-63 flex flex-col justify-between items-end mt-[57px] pt-6 px-6 overflow-clip" style={{ backgroundColor: `${riskState[riskLevel].bgColor}` }}>
 
                 {url !== "none" ? (
-                    <div className="w-full flex flex-col justify-center items-center gap-1.5 text-white text-base font-medium leading-normal p-2
-                border-b-1 border-white whitespace-pre text-ellipsis">
+                    <div className="w-full justify-center items-center gap-1.5 text-white text-base font-medium leading-normal p-2
+                border-b-1 border-white line-clamp-3 break-words">
                         {url}
                     </div>
                 ) : (
@@ -94,22 +100,10 @@ const NumberUrlResultPage = () => {
 
                 <div className="w-full h-36 flex justify-between relative top-2">
                     <div className="h-full flex items-start">
-                        {
-                            riskLevel === "위험" ? (
-                                <img src={riskState[0].bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
-                            ) : (
-                                <img src={riskState[2].bubbleChat} alt="안전 문구" className="w-51 h-18" />
-                            )
-                        }
+                        <img src={riskState[riskLevel].bubbleChat} alt="안전 문구" className="w-51 h-18" />
                     </div>
                     <div className="h-full flex items-end">
-                        {
-                            riskLevel === "위험" ? (
-                                <img src={riskState[0].character} alt="위험 경고 캐릭터" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
-                            ) : (
-                                <img src={riskState[2].character} alt="안전 캐릭터" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
-                            )
-                        }
+                        <img src={riskState[riskLevel].character} alt="위험 경고 캐릭터" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
                     </div>
                 </div>
 
@@ -118,38 +112,61 @@ const NumberUrlResultPage = () => {
             {/* 여기까지 상단 안내 */}
 
             <div className="flex flex-col items-center py-7.5 px-6 z-10" >
-                <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
-                    {resultTheme.text}
+                <div className="text-3xl font-extrabold leading-10" style={{ color: riskState[riskLevel].bgColor }}>
+                    {riskState[riskLevel].text2}
                 </div>
 
-                {/* <div className="h-42">
-                    <img src={resultTheme.boardImg} alt="위험도 표"
+                <div className="h-42 relative">
+                    <img src={riskState[riskLevel].boardImg} alt="위험도 표"
                         className="z-0" />
                     <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
                         <img src={IndicatorArrow} alt="위험지시핀"
-                            className="absolute"
+                            className="absolute left-4"
                             style={{
-                                transform: `rotate(${resultTheme.degree}deg)`,
+                                transform: `rotate(${riskState[riskLevel].degree}deg)`,
                                 transformOrigin: "95% center",
                             }} />
                     </div>
-                </div> */}
+                </div>
+                <div className="w-full px-10 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
+                    {riskLevel === 0 ?
+                        (
+                            <>
+                                {
+                                    url !== "none" ? (
+                                        "이 URL은 사기피해가 의심되는 위험 URL이에요. 각별한 주의가 필요해요."
+                                    ) : (
+                                        "이 전화번호는 사기피해가 의심되는 위험 번호예요. 각별한 주의가 필요해요."
+                                    )
+                                }
+                            </>
 
-                {/* {resultTheme.state === "safe" ?
-                    (
-                        <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                            {data ? data.explanation : "설명 로드 실패"}
-                        </div>
-                    ) : null} */}
+                        ) : (
+                            <>
+                                {
+                                    url !== "none" ? (
+                                        "분석결과 안전한 URL로,\n 피해사례 등록이나 의심요소가 없어요."
+                                    ) : (
+                                        "분석결과 안전한 전화번호로,\n 피해사례 등록이나 의심요소가 없어요."
+                                    )
+                                }
+                            </>
+                        )
+                    }
+                </div>
 
-                {/* 여기부터 응답과 상관없음 */}
-                <Button
-                    onClick={handleReportClick}
-                    size="lg"
-                    isHighlight={false}
-                >
-                    신고하기
-                </Button>
+                <div className="w-full h-full mt-9">
+                    <Button
+                        onClick={handleReportClick}
+                        size="lg"
+                        isHighlight={false}
+                    >
+                        <a href="https://www.counterscam112.go.kr/report/reportGuide.do?type=itg">
+                            신고하기
+                        </a>
+                    </Button>
+                </div>
+
             </div >
         </div >
     )
