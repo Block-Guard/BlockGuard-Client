@@ -138,12 +138,12 @@ const AnalysisResultPage = () => {
                     {resultTheme.text}
                 </div>
 
-                <div className="h-42">
+                <div className="h-42 relative">
                     <img src={resultTheme.boardImg} alt="위험도 표"
                         className="z-0" />
                     <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
                         <img src={IndicatorArrow} alt="위험지시핀"
-                            className="absolute"
+                            className="absolute left-2"
                             style={{
                                 transform: `rotate(${resultTheme.degree}deg)`,
                                 transformOrigin: "95% center",
