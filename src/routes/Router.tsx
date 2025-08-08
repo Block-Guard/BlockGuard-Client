@@ -53,6 +53,7 @@ import SecondCardDeliveryMsg from "../pages/Simulation/PhishingSimulations/CardD
 import DaughterMessagePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/DaughterMessagePage";
 import RemoteAppPage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/RemoteAppPage";
 import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/AfterRemotePage";
+import NumberUrlResultPage from "../pages/NumberUrlResult/NumberUrlResultPage";
 import Onboarding from "../pages/Onboarding";
 import FindId from "../pages/Auth/FindId/FindId";
 import FindPassword from "../pages/Auth/FindPassword/FindPassword";
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
         element: <FindPassword />,
       },
     ],
+  },
+  {
+    path: "/number-url-result",
+    element: <NumberUrlResultPage />
   },
   {
     path: "/fraud-analysis",

@@ -127,7 +127,7 @@ const AnalysisResultPage = () => {
                     <img src={resultTheme.bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
                 </div>
                 <div className="h-full flex items-end">
-                    <img src={resultTheme.character} alt="캐릭터" className="w-28 h-24 relative top-4" />
+                    <img src={resultTheme.character} alt="캐릭터" className="relative top-4" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
                 </div>
             </div>
 
@@ -138,12 +138,12 @@ const AnalysisResultPage = () => {
                     {resultTheme.text}
                 </div>
 
-                <div className="h-42">
+                <div className="h-42 relative">
                     <img src={resultTheme.boardImg} alt="위험도 표"
                         className="z-0" />
                     <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
                         <img src={IndicatorArrow} alt="위험지시핀"
-                            className="absolute"
+                            className="absolute left-2"
                             style={{
                                 transform: `rotate(${resultTheme.degree}deg)`,
                                 transformOrigin: "95% center",
