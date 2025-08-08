@@ -71,7 +71,7 @@ const SignupStep2 = ({
         <h2 className="text-[18px] font-semibold leading-[27px]">생년월일</h2>
         <div className="flex flex-col gap-1">
           <InputBar
-            type="text"
+            type="number"
             input={birthDate}
             onChangeInput={onChangeBirthDate}
             placeholder="ex) 20010101"

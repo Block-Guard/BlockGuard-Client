@@ -7,7 +7,7 @@ import EmergencyIconOn from "../../assets/icons/emergency-Interact-icon-on.svg";
 import EmergencyIconOff from "../../assets/icons/emergency-Interact-icon-off.svg";
 import ContentIconOn from "../../assets/icons/contents-icon-on.svg";
 import ContentIconOff from "../../assets/icons/contents-icon-off.svg";
-import MyIconOn from "../../assets/icons/my-icon-off.svg"; // 아이콘 추가해야함
+import MyIconOn from "../../assets/icons/my-icon-on.svg";
 import MyIconOff from "../../assets/icons/my-icon-off.svg";
 
 const BottomNav = () => {
@@ -20,7 +20,7 @@ const BottomNav = () => {
       selected === "/home" ||
       selected === "/emergency" ||
       selected === "/simulation" ||
-      selected === "/my"
+      selected === "/mypage"
     ) {
       setSelectedMenu(selected);
     }
@@ -29,7 +29,7 @@ const BottomNav = () => {
   return (
     <div
       className="flex flex-row justify-between items-center
-        h-10 pt-8 pl-5 pr-5 pb-13
+        pt-3 pl-5 pr-5 pb-13
          bg-white border-t border-gray-200 box-border z-50"
     >
       <BottomNavItem
@@ -56,7 +56,7 @@ const BottomNav = () => {
       <BottomNavItem
         imageOnSrc={MyIconOn}
         imageOffSrc={MyIconOff}
-        isSelected={selectedMenu === "/my"}
+        isSelected={selectedMenu === "/mypage"}
         text="마이"
       />
     </div>

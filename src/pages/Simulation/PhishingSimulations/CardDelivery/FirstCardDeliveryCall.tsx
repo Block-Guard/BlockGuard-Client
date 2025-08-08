@@ -3,53 +3,73 @@ import { useNavigate } from "react-router-dom";
 import { formatCallTime } from "../../../../utils/formatCallTime";
 import OnThePhoneComponent from "../../components/OnThePhoneComponent";
 import IncomingCallComponent from "../../components/IncomingCallComponent";
+import SelectVoiceChat from "./SelectVoiceChat/SelectVoiceChat";
+import {
+  deliveryDriverCallFirstData,
+  deliveryDriverCallSecondData,
+} from "./SelectVoiceChat/voice-chat-data";
 
 const FirstCardDeliveryCall = () => {
   const navigate = useNavigate();
   const [isAnsweredPhone, setIsAnsweredPhone] = useState(false);
   const [callTime, setCallTime] = useState(0);
+  const [isStartedVoiceChat, setIsStartedVoiceChat] = useState(false);
+  const [isSecondStep, setIsSecondStep] = useState(false);
 
   const ringtoneRef = useRef<HTMLAudioElement | null>(null);
-  const voiceRef = useRef<HTMLAudioElement | null>(null);
+  const voice1Ref = useRef<HTMLAudioElement | null>(null);
+  const voice2Ref = useRef<HTMLAudioElement | null>(null);
 
   const ringtone = "/sounds/iphone-ringtone.mp3";
-  // 추후 경찰 음성 필요
-  const policeVoice = "/sounds/police-voice-exam.mp3";
+  // 추후 배송기사 음성
+  const deliveryDriverVoice1 = "/sounds/police-voice-exam.mp3";
+  const deliveryDriverVoice2 = "/sounds/police-voice-exam.mp3";
 
   // 벨소리 재생
   useEffect(() => {
-    ringtoneRef.current = new Audio(ringtone);
-    ringtoneRef.current.play().catch((error) => {
+    const audio = new Audio(ringtone);
+    ringtoneRef.current = audio;
+    audio.play().catch((error) => {
       console.error("Ringtone playback failed:", error);
     });
 
     return () => {
-      ringtoneRef.current?.pause();
+      audio.pause();
       ringtoneRef.current = null;
     };
   }, []);
 
-  // 응답 클릭 시 화면이 변경되며 경찰 음성 재생됨
   const onClickToRespond = () => {
     setIsAnsweredPhone(true);
-    // 벨소리 중단
-    if (ringtoneRef.current) {
-      ringtoneRef.current.pause();
-      ringtoneRef.current.currentTime = 0;
-    }
-    // 경찰 음성 재생
-    const voice = new Audio(policeVoice);
-    voiceRef.current = voice;
-    voice.play().catch((error) => {
-      console.error("Police voice playback failed:", error);
+
+    // 벨소리 중지
+    ringtoneRef.current?.pause();
+    ringtoneRef.current = null;
+
+    // 음성1 재생
+    const audio1 = new Audio(deliveryDriverVoice1);
+    voice1Ref.current = audio1;
+    audio1.play().catch((error) => {
+      console.error("Voice1 playback failed:", error);
     });
 
-    // 음성 재생이 끝나면 이동
-    voice.onended = () => {
-      voiceRef.current = null;
-      // 추후에 바뀔 예정
-      navigate("/simulation/card-delivery/second-call-app");
-    };
+    // 1초 뒤에 대화 인터페이스 시작
+    const timer = setTimeout(() => {
+      setIsStartedVoiceChat(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  };
+
+  const onClickToSecondStep = () => {
+    setIsSecondStep(true);
+
+    // 음성2 재생
+    const audio2 = new Audio(deliveryDriverVoice2);
+    voice2Ref.current = audio2;
+    audio2.play().catch((error) => {
+      console.error("Voice2 playback failed:", error);
+    });
   };
 
   useEffect(() => {
@@ -69,7 +89,23 @@ const FirstCardDeliveryCall = () => {
         </span>
         <span className="text-[40px] font-semibold">010-9809-XXXX</span>
       </div>
-      {isAnsweredPhone ? (
+      {isStartedVoiceChat ? (
+        isSecondStep ? (
+          <SelectVoiceChat
+            caller="배송기사"
+            voiceChatData={deliveryDriverCallSecondData}
+            onClickToNextStep={() =>
+              navigate("/simulation/card-delivery/second-call-app")
+            }
+          />
+        ) : (
+          <SelectVoiceChat
+            caller="배송기사"
+            voiceChatData={deliveryDriverCallFirstData}
+            onClickToNextStep={onClickToSecondStep}
+          />
+        )
+      ) : isAnsweredPhone ? (
         <OnThePhoneComponent />
       ) : (
         <IncomingCallComponent onClickToRespond={onClickToRespond} />

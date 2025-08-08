@@ -26,7 +26,7 @@ const BottomNavItem = ({
         navigate("/simulation");
         break;
       case "마이":
-        navigate("/my");
+        navigate("/mypage");
         break;
       default:
         return;
@@ -36,8 +36,8 @@ const BottomNavItem = ({
     <>
       {isSelected ? (
         <button
-          className="flex flex-col w-25 h-7 justify-center items-center 
-                bg-[#FFFFFF] rounded-[10px] cursor-pointer"
+          className="flex flex-col w-25 justify-center items-center 
+                bg-[#FFFFFF] rounded-[10px] gap-1 cursor-pointer"
           onClick={handleClick}
         >
           <img className="w-6 h-6" src={imageOnSrc} />
@@ -47,7 +47,7 @@ const BottomNavItem = ({
         </button>
       ) : (
         <button
-          className="flex flex-col w-25 h-7 justify-center items-center cursor-pointer"
+          className="flex flex-col w-25 justify-center items-center gap-1 cursor-pointer"
           onClick={handleClick}
         >
           <img className="w-6 h-6" src={imageOffSrc} />

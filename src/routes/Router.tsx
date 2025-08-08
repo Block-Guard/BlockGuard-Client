@@ -54,6 +54,10 @@ import DaughterMessagePage from "../pages/Simulation/PhishingSimulations/FamilyA
 import RemoteAppPage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/RemoteAppPage";
 import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcquaintance/AfterRemotePage";
 import NumberUrlResultPage from "../pages/NumberUrlResult/NumberUrlResultPage";
+import Onboarding from "../pages/Onboarding";
+import FindId from "../pages/Auth/FindId/FindId";
+import FindPassword from "../pages/Auth/FindPassword/FindPassword";
+import MyPage from "../pages/MyPage/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -62,22 +66,34 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
   },
   {
-    path: "/",
     element: <MainLayout />,
     children: [
       {
-        path: "home",
+        path: "/home",
         element: <HomePage />,
       },
       {
-        path: "emergency",
+        path: "/emergency",
         element: <EmergencyMainPage />,
       },
       {
-        path: "simulation",
+        path: "/simulation",
         element: <SimulationMainPage />,
       },
+      {
+        path: "/mypage",
+        element: <MyPage />,
+      },
     ],
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/onboarding",
+    element: <Onboarding />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/login",
@@ -92,6 +108,14 @@ const router = createBrowserRouter([
           { index: true, element: <Signup /> },
           { path: "complete", element: <SignupComplete /> },
         ],
+      },
+      {
+        path: "find-id",
+        element: <FindId />,
+      },
+      {
+        path: "find-password",
+        element: <FindPassword />,
       },
     ],
   },
@@ -218,12 +242,12 @@ const router = createBrowserRouter([
           },
           {
             path: "after-remote",
-            element: <AfterRemotePage />
+            element: <AfterRemotePage />,
           },
           {
             path: "explain-fraud",
-            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />
-          }
+            element: <ExplainLoanPhishPage info={explainPhishFamAqui} />,
+          },
         ],
       },
       {

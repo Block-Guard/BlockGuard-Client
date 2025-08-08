@@ -104,8 +104,10 @@ const Login = () => {
               <span className="text-[16px] text-primary-400">아이디 저장</span>
             </label>
             <div className="flex flex-row gap-[10px] text-monochrome-500 text-[16px]">
-              <span>아이디 찾기</span>
-              <span>비밀번호 찾기</span>
+              <span onClick={() => navigate("/auth/find-id")}>아이디 찾기</span>
+              <span onClick={() => navigate("/auth/find-password")}>
+                비밀번호 찾기
+              </span>
             </div>
           </div>
         </div>

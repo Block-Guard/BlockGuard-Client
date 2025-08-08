@@ -29,6 +29,13 @@ export interface LoginResponse extends ApiBaseResponse {
   };
 }
 
+// 아이디 찾기 api 응답
+export interface FindIdResponse extends ApiBaseResponse {
+  data: {
+    email: string;
+  };
+}
+
 // 진행중인 신고 현황 조회 api 응답
 export interface InProgressReportResponse extends ApiBaseResponse {
   data: {

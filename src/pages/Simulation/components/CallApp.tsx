@@ -27,7 +27,12 @@ const CallApp = ({ phoneNumber, navigateUrl }: CallAppProps) => {
             onClick={() => navigate(-1)}
           />
         }
-        rightChild={<img src={CloseIcon} onClick={() => navigate(-1)} />}
+        rightChild={
+          <img
+            src={CloseIcon}
+            onClick={() => navigate("/simulation/select-type")}
+          />
+        }
         bgColor="white"
       />
 
