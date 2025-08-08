@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import type { MypageMenuType } from "../constants/mypage-types";
+import { toast } from "sonner";
 
 type Props = {
   title: string;
@@ -6,6 +8,8 @@ type Props = {
 };
 
 const SettingsSectionPanel = ({ title, menus }: Props) => {
+  const navigate = useNavigate();
+
   const handleClickMenu = (menu: string) => {
     switch (menu) {
       case "회원정보 수정":
@@ -27,7 +31,9 @@ const SettingsSectionPanel = ({ title, menus }: Props) => {
         window.open("/files/블락가드_개인정보처리방침.pdf", "_blank");
         break;
       case "로그아웃":
-        console.log("로그아웃하기");
+        localStorage.clear();
+        toast("로그아웃 되었습니다.");
+        navigate("/login");
         break;
       case "계정 탈퇴":
         console.log("계정 탈퇴하기");

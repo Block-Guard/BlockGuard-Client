@@ -78,8 +78,19 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
   };
 }
 /** 홈페이지 전화번호, url 분석 api 응답 */
-export interface UrlNumAnalysisResponse {
+export interface UrlNumAnalysisResponse extends ApiBaseResponse {
   data: {
     riskLevel: string;
+  };
+}
+
+// 마이페이지 유저 정보 조회
+export interface GetUserInfoResponse extends ApiBaseResponse {
+  data: {
+    email: string;
+    name: string;
+    birthDate: string;
+    phoneNumber: string;
+    profileImageUrl: string | null;
   };
 }
