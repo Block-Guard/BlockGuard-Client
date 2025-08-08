@@ -29,8 +29,7 @@ const BottomNav = () => {
   return (
     <div
       className="flex flex-row justify-between items-center
-        pt-3 pl-5 pr-5 pb-13
-         bg-white border-t border-gray-200 box-border z-50"
+        pt-3 pl-5 pr-5 pb-5 bg-white border-t border-gray-200 box-border z-50"
     >
       <BottomNavItem
         imageOnSrc={HomeIconOn}
