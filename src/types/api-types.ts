@@ -83,3 +83,35 @@ export interface UrlNumAnalysisResponse {
     riskLevel: string;
   };
 }
+
+/** 뉴스 목록 조회 API 응답 중 뉴스 데이터 타입*/
+export interface NewsItem {
+  id: number;
+  title: string;
+  publishedAt: string;
+  url: string;
+  newspaper: string;
+  imageUrl: string | null;
+}
+
+/** 뉴스 목록 조회 API 응답 */
+export interface NewsListResponse {
+  data: {
+    news: NewsItem[],
+    pageable: {
+      page: number;
+      size: number;
+      totalElements: number;
+      totalPages: number;
+    },
+    sort: string;
+  }
+}
+
+/** 뉴스 목록 조회 API 응답 */
+export interface SelectedNewsResponse {
+  data: NewsItem[]
+  // data: {
+  //   news: NewsItem[]
+  // }
+}
