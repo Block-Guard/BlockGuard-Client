@@ -13,13 +13,13 @@ const SettingsSectionPanel = ({ title, menus }: Props) => {
   const handleClickMenu = (menu: string) => {
     switch (menu) {
       case "회원정보 수정":
-        console.log("회원정보 수정하기");
+        navigate("/mypage/edit-user-info");
         break;
       case "보호자 등록 / 수정":
-        console.log("보호자 등록 / 수정하기");
+        navigate("/mypage/edit-nok");
         break;
       case "사기 분석 기록":
-        console.log("사기 분석 기록 보기");
+        navigate("/mypage/check-fraud-analysis-report");
         break;
       case "1:1 문의":
         console.log("1:1 문의하기");

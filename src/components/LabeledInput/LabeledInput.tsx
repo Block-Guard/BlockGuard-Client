@@ -6,6 +6,7 @@ type Props = {
   input: string;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  disabled?: boolean;
 };
 
 const LabeledInput = ({
@@ -14,16 +15,18 @@ const LabeledInput = ({
   input,
   onChangeInput,
   placeholder,
+  disabled = false,
 }: Props) => {
   return (
     <div className="flex flex-col gap-[6px]">
       <h2 className="text-[18px] font-semibold leading-[27px]">{label}</h2>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <InputBar
           type={type}
           input={input}
           onChangeInput={onChangeInput}
           placeholder={placeholder}
+          disabled={disabled}
         />
       </div>
     </div>

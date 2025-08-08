@@ -58,6 +58,10 @@ import Onboarding from "../pages/Onboarding";
 import FindId from "../pages/Auth/FindId/FindId";
 import FindPassword from "../pages/Auth/FindPassword/FindPassword";
 import MyPage from "../pages/MyPage/MyPage";
+import EditUserInfoPage from "../pages/MyPage/EditUserInfoPage";
+import EditNOKPage from "../pages/MyPage/EditNOKPage";
+import CheckFraudAnalysisReport from "../pages/MyPage/CheckFraudAnalysisReport";
+import ChangePasswordPage from "../pages/MyPage/ChangePasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +86,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/mypage",
-        element: <MyPage />,
+        children: [
+          { index: true, element: <MyPage /> },
+          { path: "edit-user-info", element: <EditUserInfoPage /> },
+          {
+            path: "change-password",
+            element: <ChangePasswordPage />,
+          },
+          {
+            path: "edit-nok",
+            element: <EditNOKPage />,
+          },
+        ],
       },
     ],
     errorElement: <NotFound />,
@@ -90,10 +105,6 @@ const router = createBrowserRouter([
   {
     path: "/onboarding",
     element: <Onboarding />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
   },
   {
     path: "/login",
@@ -121,7 +132,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/number-url-result",
-    element: <NumberUrlResultPage />
+    element: <NumberUrlResultPage />,
   },
   {
     path: "/fraud-analysis",
@@ -344,6 +355,15 @@ const router = createBrowserRouter([
             element: <ExplainLoanPhishPage info={explainPhishDeliCard} />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/mypage",
+    children: [
+      {
+        path: "check-fraud-analysis-report",
+        element: <CheckFraudAnalysisReport />,
       },
     ],
   },
