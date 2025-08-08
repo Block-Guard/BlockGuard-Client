@@ -56,6 +56,7 @@ import AfterRemotePage from "../pages/Simulation/PhishingSimulations/FamilyAcqua
 import Onboarding from "../pages/Onboarding";
 import FindId from "../pages/Auth/FindId/FindId";
 import FindPassword from "../pages/Auth/FindPassword/FindPassword";
+import MyPage from "../pages/MyPage/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -64,20 +65,23 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
   },
   {
-    path: "/",
     element: <MainLayout />,
     children: [
       {
-        path: "home",
+        path: "/home",
         element: <HomePage />,
       },
       {
-        path: "emergency",
+        path: "/emergency",
         element: <EmergencyMainPage />,
       },
       {
-        path: "simulation",
+        path: "/simulation",
         element: <SimulationMainPage />,
+      },
+      {
+        path: "/mypage",
+        element: <MyPage />,
       },
     ],
     errorElement: <NotFound />,
