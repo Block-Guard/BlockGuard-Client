@@ -1,15 +1,10 @@
 import FraudCheck from "./FraudCheck";
 import LinkNumberCheck from "./LinkNumberCheck";
 import ShieldImg from "../../../assets/home-background-shield-image.svg";
-import type { RefObject } from "react";
 
-type HomeCheckProps = {
-  topRef: RefObject<HTMLDivElement | null>;
-};
-const HomeCheck = ({ topRef }: HomeCheckProps) => {
+const HomeCheck = () => {
   return (
     <div className="w-full relative p-6 pb-9 bg-blue-500">
-      <div ref={topRef} />
       <div className="justify-start font-ncs-radhiumz text-blue-50 text-base leading-loose">
         Block Guard
       </div>

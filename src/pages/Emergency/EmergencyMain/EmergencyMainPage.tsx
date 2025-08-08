@@ -4,11 +4,10 @@ import EmergencyResponseStart from "./components/EmergencyResponseStart";
 import OrganCard from "./components/OrganCard";
 import QuickReportCard from "./components/QuickReportCard";
 import { dummyOrgan } from "../organList";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getInProgressReportApi } from "../../../apis/emergency";
 
 const EmergencyMainPage = () => {
-  const topRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
   const [inProgressStepData, setInProgressStepData] = useState({
     reportId: 0,
@@ -32,7 +31,6 @@ const EmergencyMainPage = () => {
   };
 
   useEffect(() => {
-    topRef.current?.scrollIntoView({ behavior: "instant" });
     getInProgressReportState();
   }, []);
 
@@ -41,7 +39,6 @@ const EmergencyMainPage = () => {
   };
   return (
     <div className="px-6 mb-10">
-      <div ref={topRef} />
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
       <div className="flex flex-col gap-8">
         <EmergencyResponseStart inProgressStep={inProgressStepData.step} />
