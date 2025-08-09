@@ -20,7 +20,9 @@ const BottomNav = () => {
       selected === "/home" ||
       selected === "/emergency" ||
       selected === "/simulation" ||
-      selected === "/mypage"
+      selected === "/mypage" ||
+      selected === "/mypage/edit-user-info" ||
+      selected === "/mypage/change-password"
     ) {
       setSelectedMenu(selected);
     }
@@ -55,7 +57,11 @@ const BottomNav = () => {
       <BottomNavItem
         imageOnSrc={MyIconOn}
         imageOffSrc={MyIconOff}
-        isSelected={selectedMenu === "/mypage"}
+        isSelected={
+          selectedMenu === "/mypage" ||
+          selectedMenu === "/mypage/edit-user-info" ||
+          selectedMenu === "/mypage/change-password"
+        }
         text="마이"
       />
     </div>

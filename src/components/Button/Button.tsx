@@ -2,6 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   children: React.ReactNode;
+  type?: "submit" | "reset" | "button" | undefined;
   onClick: () => void;
   size?: "lg" | "sm";
   isWhite?: boolean;
@@ -12,6 +13,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   children,
+  type,
   onClick,
   size = "lg",
   isWhite = false,
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       {isHighlight ? (
         <button
+          type={type}
           className={`max-w-[800px] bg-gradient-highlight w-full pt-2 pb-2 text-[18px] font-semibold leading-7 text-monochrome-100 rounded-[10px] cursor-pointer`}
           onClick={onClick}
         >
@@ -35,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : isBlur ? (
         <button
+          type={type}
           className="button-bg-blur w-full py-[15px] text-[22px] text-monochrome-100 leading-8  font-semibold rounded-[15px] "
           onClick={onClick}
           disabled={disabled}
@@ -43,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : isWhite ? (
         <button
+          type={type}
           className={`max-w-[800px] w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
           onClick={onClick}
         >
@@ -50,6 +55,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : (
         <button
+          type={type}
           className={`max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
           onClick={onClick}
           disabled={disabled}

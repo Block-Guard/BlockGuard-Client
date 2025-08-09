@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import BlockeeIcon from "../../assets/characters/blockee-login.svg";
-import ToVisiblePwIcon from "../../assets/icons/to-visible-pw-icon.svg";
-import ToInvisiblePwIcon from "../../assets/icons/to-invisible-pw-icon.svg";
+import BlockeeIcon from "@/assets/characters/blockee-login.svg";
+import ToVisiblePwIcon from "@/assets/icons/to-visible-pw-icon.svg";
+import ToInvisiblePwIcon from "@/assets/icons/to-invisible-pw-icon.svg";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import InputBar from "../../components/InputBar/InputBar";

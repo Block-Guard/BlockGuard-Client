@@ -78,12 +78,27 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
   };
 }
 /** 홈페이지 전화번호, url 분석 api 응답 */
-export interface UrlNumAnalysisResponse {
+export interface UrlNumAnalysisResponse extends ApiBaseResponse {
   data: {
     riskLevel: string;
   };
 }
 
+// 마이페이지 유저 정보 조회
+export interface GetUserInfoResponse extends ApiBaseResponse {
+  data: {
+    email: string;
+    name: string;
+    birthDate: string;
+    phoneNumber: string;
+    profileImageUrl: string | null;
+  };
+}
+
+// 유저 정보 / 비밀번호 변경 수정
+export interface EditUserInfoResponse extends ApiBaseResponse {
+  data: null;
+}
 /** 뉴스 목록 조회 API 응답 중 뉴스 데이터 타입*/
 export interface NewsItem {
   id: number;
@@ -97,20 +112,20 @@ export interface NewsItem {
 /** 뉴스 목록 조회 API 응답 */
 export interface NewsListResponse {
   data: {
-    news: NewsItem[],
+    news: NewsItem[];
     pageableInfo: {
       page: number;
       size: number;
       totalElements: number;
       totalPages: number;
-    },
+    };
     sort: string;
-  }
+  };
 }
 
 /** 뉴스 목록 조회 API 응답 */
 export interface SelectedNewsResponse {
-  data: NewsItem[]
+  data: NewsItem[];
   // data: {
   //   news: NewsItem[]
   // }
