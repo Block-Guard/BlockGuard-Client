@@ -16,7 +16,6 @@ import type { FraudResultData } from "../../../types/fraud-types";
 import Button from "../../../components/Button/Button";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 
-
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
     const { allAnswers } = useFraudSurveyContext();
@@ -60,7 +59,6 @@ const AnalysisResultPage = () => {
         }
 
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
-        /** 디버깅용 fromData 내용 출력 */
         console.log("디버깅용 formData 출력");
         for (const [key, value] of formData.entries()) {
             if (key !== "imageFiles") {
@@ -83,9 +81,7 @@ const AnalysisResultPage = () => {
                 const formData = makeForm();
                 const response = await getResult(formData);
                 setData(response);
-
                 const themeIndex = getTheme(response.riskLevel)
-
                 const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
                 setResultTheme(detailDegree);
                 setIsLoading(false);

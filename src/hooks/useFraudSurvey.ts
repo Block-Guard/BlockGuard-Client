@@ -90,6 +90,7 @@ export const useFraudSurvey = () => {
     // 훅이 반환하는 값들: 상태와 핸들러 함수
     return {
         progress,
+        setProgress,
         allAnswers,
         updateAnswers,
         canProceed,

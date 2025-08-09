@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Button from "../components/Button/Button";
 import LeftArrowIcon from "../assets/icons/arrow-left-darkblue-icon.svg";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useFraudSurvey } from "../hooks/useFraudSurvey";
 import Header from "../components/Header/Header";
 
@@ -19,6 +19,7 @@ const FraudLayout = () => {
   const location = useLocation();
   const {
     progress,
+    setProgress,
     allAnswers,
     updateAnswers,
     canProceed,
@@ -48,6 +49,23 @@ const FraudLayout = () => {
     [allAnswers, updateAnswers, progress]
   );
 
+  useEffect(()=>{
+    // 새로고침되어서 progress가 1로 초기화된 경우 처리
+    if(progress === 1){
+      if (location.pathname === "/fraud-analysis/survey/1-10"){
+        setProgress(1);
+    } 
+    else if(location.pathname !== "/fraud-analysis/survey/result"){
+      // "/fraud-analysis/survey/11, 12, 13 경우"
+      const curProgress = location.pathname.split("/").at(3);
+      if(curProgress){
+        console.log("새로고침된 경우 progress 재설정", curProgress)
+        setProgress(parseInt(curProgress));
+      }
+    }
+  }
+  }, [])
+
   return (
     <div className="flex flex-col justify-between w-full h-full">
       {location.pathname === "/fraud-analysis/survey/result" ? (
@@ -73,6 +91,7 @@ const FraudLayout = () => {
         className="h-[calc(100vh-140px)] bg-[#ffffff] 
         overflow-hidden overflow-y-auto no-scrollbar mt-15"
       >
+         현재 progress : {progress}
         <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
         <div className="ml-6 mr-6 mb-8">
