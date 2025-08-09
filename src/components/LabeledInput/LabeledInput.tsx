@@ -2,11 +2,12 @@ import InputBar from "../InputBar/InputBar";
 
 type Props = {
   label: string;
-  type: "text" | "number";
+  type: "text" | "number" | "password";
   input: string;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   disabled?: boolean;
+  rightChild?: React.ReactNode;
 };
 
 const LabeledInput = ({
@@ -16,6 +17,7 @@ const LabeledInput = ({
   onChangeInput,
   placeholder,
   disabled = false,
+  rightChild,
 }: Props) => {
   return (
     <div className="flex flex-col gap-[6px]">
@@ -27,6 +29,7 @@ const LabeledInput = ({
           onChangeInput={onChangeInput}
           placeholder={placeholder}
           disabled={disabled}
+          rightChild={rightChild}
         />
       </div>
     </div>

@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
+import Button from "../../components/Button/Button";
+import LabeledInput from "../../components/LabeledInput/LabeledInput";
 import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
-import { useState } from "react";
-import InputBar from "../../components/InputBar/InputBar";
 import ToVisiblePwIcon from "@/assets/icons/to-visible-pw-icon.svg";
 import ToInvisiblePwIcon from "@/assets/icons/to-invisible-pw-icon.svg";
-import Button from "../../components/Button/Button";
+import { toast } from "sonner";
+import { isPasswordFormRight } from "../../utils/authUtils";
+import { updatePasswordApi } from "../../apis/mypage";
 
 type InputPassword = {
   currentPassword: string;
@@ -41,6 +44,7 @@ const ChangePasswordPage = () => {
       };
     });
   };
+
   const handlePwVisible = (key: keyof IsVisiblePassword, value: boolean) => {
     setIsPwVisible((prev) => {
       if (!prev) return prev;
@@ -50,6 +54,39 @@ const ChangePasswordPage = () => {
       };
     });
   };
+
+  const handleUpdatePassword = async () => {
+    if (!isPasswordFormRight(inputPassword.newPassword)) {
+      toast("새 비밀번호를 조건에 맞게 입력해주세요.");
+      return;
+    }
+    if (inputPassword.newPassword !== inputPassword.checkPassword) {
+      toast("새 비밀번호와 확인이 일치해야 합니다.");
+      return;
+    }
+    try {
+      const response = await updatePasswordApi(
+        inputPassword.currentPassword,
+        inputPassword.newPassword
+      );
+      if (response === undefined) {
+        toast("현재 비밀번호 값이 일치하지 않습니다.");
+      } else {
+        toast(
+          <>
+            비밀번호가 변경되었습니다.
+            <br />
+            다시 로그인해주세요.
+          </>
+        );
+        localStorage.clear();
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("비밀번호 변경 api 클라이언트 측 오류메시지", error);
+    }
+  };
+
   return (
     <div className="bg-[#f1f4ff] min-h-[calc(100vh-85px)]">
       <Header
@@ -69,10 +106,8 @@ const ChangePasswordPage = () => {
       />
       <div className="flex flex-col gap-4 px-6 pb-14">
         <div className="flex flex-col gap-[6px] mt-24">
-          <h2 className="text-[18px] font-semibold leading-[27px]">
-            현재 비밀번호
-          </h2>
-          <InputBar
+          <LabeledInput
+            label="현재 비밀번호"
             type={isPwVisible.isCurrentVisible ? "text" : "password"}
             input={inputPassword.currentPassword}
             onChangeInput={(e) =>
@@ -98,10 +133,8 @@ const ChangePasswordPage = () => {
           />
         </div>
         <div className="flex flex-col gap-[6px]">
-          <h2 className="text-[18px] font-semibold leading-[27px]">
-            새 비밀번호
-          </h2>
-          <InputBar
+          <LabeledInput
+            label="새 비밀번호"
             type={isPwVisible.isNewVisible ? "text" : "password"}
             input={inputPassword.newPassword}
             onChangeInput={(e) =>
@@ -122,10 +155,8 @@ const ChangePasswordPage = () => {
           />
         </div>
         <div className="flex flex-col gap-[6px] mb-20">
-          <h2 className="text-[18px] font-semibold leading-[27px]">
-            새 비밀번호 확인
-          </h2>
-          <InputBar
+          <LabeledInput
+            label="새 비밀번호 확인"
             type={isPwVisible.isCheckVisible ? "text" : "password"}
             input={inputPassword.checkPassword}
             onChangeInput={(e) =>
@@ -147,7 +178,18 @@ const ChangePasswordPage = () => {
             }
           />
         </div>
-        <Button onClick={() => {}}>변경사항 저장</Button>
+        <Button
+          onClick={handleUpdatePassword}
+          disabled={
+            !(
+              inputPassword.currentPassword &&
+              inputPassword.newPassword &&
+              inputPassword.checkPassword
+            )
+          }
+        >
+          변경사항 저장
+        </Button>
       </div>
     </div>
   );

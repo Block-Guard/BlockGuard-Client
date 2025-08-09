@@ -95,7 +95,7 @@ export interface GetUserInfoResponse extends ApiBaseResponse {
   };
 }
 
-// 유저 정보 수정
+// 유저 정보 / 비밀번호 변경 수정
 export interface EditUserInfoResponse extends ApiBaseResponse {
   data: null;
 }
