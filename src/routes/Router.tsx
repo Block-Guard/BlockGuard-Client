@@ -58,6 +58,8 @@ import Onboarding from "../pages/Onboarding";
 import FindId from "../pages/Auth/FindId/FindId";
 import FindPassword from "../pages/Auth/FindPassword/FindPassword";
 import MyPage from "../pages/MyPage/MyPage";
+import NewsHomePage from "../pages/News/NewsHomePage";
+import RecentNewsPage from "../pages/News/RecentNewsPage";
 
 const router = createBrowserRouter([
   {
@@ -202,6 +204,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/news",
+    children:[
+      {
+        path:"home",
+        element: <NewsHomePage/>,
+      },
+      {
+        path:"recent",
+        element: <RecentNewsPage/>
+      }
+    ]
+  },
+
   {
     path: "/simulation",
     children: [
