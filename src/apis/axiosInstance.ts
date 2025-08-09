@@ -19,6 +19,14 @@ axiosInstance.interceptors.request.use(
       if (!config.headers) config.headers = {} as AxiosRequestHeaders;
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    //  FormData면 Content-Type 제거해서 브라우저가 boundary 포함해 셋팅하도록
+    if (config.data instanceof FormData) {
+      // 대소문자 모두 방어
+      delete config.headers?.["Content-Type"];
+      delete config.headers?.["content-type"];
+    }
+
     return config;
   },
   (error) => Promise.reject(error)

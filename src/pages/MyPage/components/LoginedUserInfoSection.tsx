@@ -10,8 +10,14 @@ const LoginedUserInfoSection = ({ userInfo }: Props) => {
     userInfo && (
       <div className="flex flex-col items-center">
         <img
-          className="w-45 rounded-full"
+          className="rounded-full"
           src={userInfo?.profileImageUrl || BlockeeMyPage}
+          style={{
+            width: userInfo.profileImageUrl ? "118px" : "175px",
+            height: userInfo.profileImageUrl ? "118px" : "",
+            marginTop: userInfo.profileImageUrl ? "18px" : "",
+            marginBottom: userInfo.profileImageUrl ? "18px" : "",
+          }}
         />
         <h2 className="font-semibold text-[20px]">{userInfo?.name} 님</h2>
         <span className="text-[#00487C]">{userInfo?.email}</span>

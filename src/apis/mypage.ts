@@ -1,12 +1,17 @@
 import axiosInstance from "./axiosInstance";
-import type { GetUserInfoResponse } from "../types/api-types";
+import {
+  type EditUserInfoResponse,
+  type GetUserInfoResponse,
+} from "../types/api-types";
+import type { EditUserInfoPayload } from "../types/user-info-types";
 
-const GET_USER_INFO_API = "users/me";
+const USER_INFO_API = "users/me";
 
+// 회원정보 조회 api
 export const getUserInfoApi = async () => {
   try {
     const response = await axiosInstance.get<GetUserInfoResponse>(
-      GET_USER_INFO_API,
+      USER_INFO_API,
       {
         headers: { "Content-Type": "application/json" },
       }
@@ -16,6 +21,33 @@ export const getUserInfoApi = async () => {
   } catch (error: any) {
     console.error(
       "마이페이지 진입 시 유저 정보 조회 실패:",
+      error.response?.data || error.message
+    );
+  }
+};
+
+// 회원정보 수정 api
+export const editUserInfoApi = async (payload: EditUserInfoPayload) => {
+  const formData = new FormData();
+  formData.append("name", payload.name);
+  formData.append("birthDate", payload.birthDate);
+  formData.append("phoneNumber", payload.phoneNumber);
+  if (payload.profileImage)
+    formData.append("profileImage", payload.profileImage);
+
+  try {
+    const response = await axiosInstance.put<EditUserInfoResponse>(
+      USER_INFO_API,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    console.log(response.data.message);
+    return response.data.message;
+  } catch (error: any) {
+    console.error(
+      "유저 정보 수정 실패:",
       error.response?.data || error.message
     );
   }

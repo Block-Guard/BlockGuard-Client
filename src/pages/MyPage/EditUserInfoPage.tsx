@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import type { UserInfoType } from "../../types/user-info-types";
-import { getUserInfoApi } from "../../apis/mypage";
+import { editUserInfoApi, getUserInfoApi } from "../../apis/mypage";
 import SettingsLoading from "./SettingsLoading";
 import LabeledInput from "../../components/LabeledInput/LabeledInput";
 import { formatPhoneNumber } from "../../utils/authUtils";
@@ -10,13 +10,16 @@ import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import BlockeeProfileImg from "@/assets/characters/blockee-mypage.png";
 import EditProfileImgIcon from "@/assets/icons/edit-profilte-img-icon.svg";
 import EditPasswordIcon from "@/assets/icons/edit-pw-icon.svg";
-import RightArrowIcon from "../../assets/icons/arrow-right-darkblue-icon.svg";
+import RightArrowIcon from "@/assets/icons/arrow-right-darkblue-icon.svg";
 import Button from "../../components/Button/Button";
+import { toast } from "sonner";
 
 const EditUserInfoPage = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState<UserInfoType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [newProfileImg, setNewProfileImg] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getUserInfo();
@@ -32,6 +35,13 @@ const EditUserInfoPage = () => {
     }
   };
 
+  const openFilePicker = () => fileInputRef.current?.click();
+  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.files?.[0]) {
+      setNewProfileImg(e.target.files?.[0]);
+    }
+  };
+
   const handleChangeInput = (key: keyof UserInfoType, value: string) => {
     setUserInfo((prev) => {
       if (!prev) return prev;
@@ -40,6 +50,32 @@ const EditUserInfoPage = () => {
         [key]: value,
       };
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(userInfo?.birthDate.length, userInfo?.phoneNumber.length);
+    if (
+      userInfo?.birthDate.length !== 8 ||
+      userInfo?.phoneNumber.length !== 13
+    ) {
+      toast("형식에 맞춰 수정해주세요.");
+      return;
+    }
+    if (!userInfo) return;
+    const formData = {
+      name: userInfo.name,
+      birthDate: userInfo.birthDate,
+      phoneNumber: userInfo.phoneNumber,
+      profileImage: newProfileImg || null,
+    };
+    try {
+      await editUserInfoApi(formData);
+      toast("회원정보가 수정되었습니다.");
+      navigate("/mypage");
+    } catch (error) {
+      console.error("회원정보 수정 클라이언트 측 에러 메시지", error);
+    }
   };
 
   if (isLoading) {
@@ -63,12 +99,39 @@ const EditUserInfoPage = () => {
         bgColor="#F1F4FF"
       />
       {userInfo && (
-        <form className="flex flex-col px-6 py-18">
-          <div className="relative w-50 self-center">
-            <img src={BlockeeProfileImg} />
+        <form className="flex flex-col px-6 py-18" onSubmit={handleSubmit}>
+          <div className="relative w-50 self-center" onClick={openFilePicker}>
+            <img
+              className="rounded-full"
+              style={{
+                width: newProfileImg || userInfo.profileImageUrl ? "150px" : "",
+                height:
+                  newProfileImg || userInfo.profileImageUrl ? "150px" : "",
+                margin: newProfileImg || userInfo.profileImageUrl ? "auto" : "",
+                marginTop:
+                  newProfileImg || userInfo.profileImageUrl ? "30px" : "",
+                marginBottom:
+                  newProfileImg || userInfo.profileImageUrl ? "20px" : "",
+              }}
+              src={
+                newProfileImg
+                  ? URL.createObjectURL(newProfileImg)
+                  : userInfo.profileImageUrl || BlockeeProfileImg
+              }
+            />
             <img
               className="absolute bottom-4 right-8"
+              style={{
+                bottom: newProfileImg ? "27px" : "",
+              }}
               src={EditProfileImgIcon}
+            />
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleFileChange}
             />
           </div>
           <div className="flex flex-col gap-4 mt-4 mb-14">
@@ -119,6 +182,7 @@ const EditUserInfoPage = () => {
             <img src={RightArrowIcon} />
           </div>
           <Button
+            type="submit"
             onClick={() => {
               onsubmit;
             }}

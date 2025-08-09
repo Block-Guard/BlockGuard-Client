@@ -94,3 +94,8 @@ export interface GetUserInfoResponse extends ApiBaseResponse {
     profileImageUrl: string | null;
   };
 }
+
+// 유저 정보 수정
+export interface EditUserInfoResponse extends ApiBaseResponse {
+  data: null;
+}
