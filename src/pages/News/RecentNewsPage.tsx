@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import LeftArrowIcon from "../../assets/icons/arrow-left-darkblue-icon.svg";
 import SortIcon from "../../assets/news/sort-icon.svg";
 import NewsCardItem from "./components/NewsCardItem";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getNewsListApi } from "../../apis/news";
 import type { NewsItem } from "../../types/api-types";
+import { PageIndexItem } from "./components/PageIndexItem";
 
 const dummyData = [
     {
@@ -28,20 +29,35 @@ const dummyData = [
 ]
 
 const RecentNewsPage = () => {
-    const navigate = useNavigate();
-    const [newsData, setNewsData] = useState<NewsItem[]>([]);
-    const handleBackClick = () => navigate(-1)
-    const handleCategory = (selectedCategory: string) => setCategory(selectedCategory);
-    const handleSortClick = () => setSort(!sort);
     const categoryList = [
         "전체", "보이스 피싱", "메신저 피싱", "스미싱", "기타"
     ];
-
-
+    const navigate = useNavigate();
+    const topRef = useRef<HTMLDivElement | null>(null);
+    const [newsData, setNewsData] = useState<NewsItem[]>([]);
+    const [categoryParams] = useSearchParams();
     const [page, setPage] = useState(1);
     const [sort, setSort] = useState(true)
-    const [category, setCategory] = useState(categoryList[0]);
+    const [category, setCategory] = useState(categoryParams.get("category") || categoryList[0]);
+    const [totalPages, setTotalPages] = useState(1);
 
+    const handleBackClick = () => navigate(-1)
+    const handleCategory = (selectedCategory: string) => {
+        setPage(1);
+        setCategory(selectedCategory);
+    }
+    const handleSortClick = () => setSort(!sort);
+    const handlePrePage = () => {
+        if (page !== 1)
+            setPage(page - 1);
+    }
+    const handleNextPage = () => {
+        if (page !== totalPages)
+            setPage(page + 1);
+    }
+
+    const start = Math.max(1, page - 2);
+    const end = Math.min(totalPages, start + 4);
 
     const getNewsList = async (page: number, sort: boolean, category: string) => {
         if (sort) {
@@ -57,6 +73,7 @@ const RecentNewsPage = () => {
             try {
                 const response = getNewsList(page, sort, category);
                 setNewsData((await response).news)
+                setTotalPages((await response).pageableInfo.totalPages);
                 console.log("전체 뉴스 조회 요청", page, sort, category)
             } catch (error) {
                 console.error("전체 뉴스 리스트 조회 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
@@ -64,10 +81,12 @@ const RecentNewsPage = () => {
             }
         }
         process();
+        topRef.current?.scrollIntoView({ behavior: "instant" });
     }, [category, page, sort])
 
     return (
-        <div className="flex flex-col w-screen h-screen box-border">
+        <div className="flex flex-col w-screen h-screen box-border" >
+            <div ref={topRef} />
             <Header
                 leftChild={
                     <button onClick={handleBackClick}>
@@ -104,7 +123,7 @@ const RecentNewsPage = () => {
 
                 <div className="w-full h-[5px] bg-[#E4E7E9] rounded-[90px] relative bottom-[5px]" />
 
-                <button className="inline-flex justify-start text-gray-900/50 text-sm font-norma mt-10.5 gap-2"
+                <button className="inline-flex justify-start text-gray-900/50 text-sm font-norma mt-9.5 gap-2"
                     onClick={handleSortClick}>
                     <img src={SortIcon} alt="정렬 아이콘" className="w-4.5 h-4.5" />
                     {
@@ -121,37 +140,17 @@ const RecentNewsPage = () => {
 
             <footer className="w-full h-[88px] flex justify-between border-t-1 border-#E4E7E9] px-6 pt-4 pb-10.5">
 
-                <button onClick={handleBackClick}>
+                <button onClick={handlePrePage}>
                     <svg className={page === 1 ? 'text-[#D9D9D9]' : 'text-[#79818A]'} width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 17.5195L1 9.51953L9 1.51953" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
-                    <div className="flex justify-center items-center w-8 h-8 bg-[#D3E1FF] rounded-full
-                    text-center text-primary-400 text-lg font-bold leading-snug">
-                        1
-                    </div>
-                    
-                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full
-                    text-center text-[#79818A] text-lg font-bold leading-snug">
-                        2
-                    </div>
-                    
-                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full
-                    text-center text-[#79818A] text-lg font-bold leading-snug">
-                        3
-                    </div>
-                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full
-                    text-center text-[#79818A] text-lg font-bold leading-snug">
-                        4
-                    </div>
-
-                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full
-                    text-center text-[#79818A] text-lg font-bold leading-snug">
-                        5
-                    </div>
-
-                <button onClick={handleBackClick}>
-                    <svg className={page === 5 ? 'text-[#D9D9D9]' : 'text-[#79818A]'} width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* 5개.  */}
+                {
+                    Array.from({ length: end - start + 1 }, (_, i) => start + i).map((num) => <PageIndexItem pageNumber={num} currentPage={page} setPage={setPage} key={num}/>)
+                }
+                <button onClick={handleNextPage}>
+                    <svg className={page === totalPages ? 'text-[#D9D9D9]' : 'text-[#79818A]'} width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.794433 1L6.79443 7L0.794434 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>

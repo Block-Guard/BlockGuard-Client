@@ -98,7 +98,7 @@ export interface NewsItem {
 export interface NewsListResponse {
   data: {
     news: NewsItem[],
-    pageable: {
+    pageableInfo: {
       page: number;
       size: number;
       totalElements: number;

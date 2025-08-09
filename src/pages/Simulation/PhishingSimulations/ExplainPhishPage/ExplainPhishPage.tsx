@@ -16,11 +16,15 @@ interface ExplainLoanPhishPageProps {
 const ExplainLoanPhishPage = ({ info }: ExplainLoanPhishPageProps) => {
   const navigate = useNavigate();
   const handleBackClick = () => navigate(-1);
-  const handleLearnClick = () => console.log("피해 사례 더보기");
+  const handleLearnClick = () => {
+    console.log(info.category, "유형 뉴스 기사로 이동")
+    navigate(`/news/recent?category=${info.category}`)
+  }
   const handleQuitClick = () => navigate("/simulation");
   const topRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    console.log("렌더링 시점 info:", info);
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NewsLinesItem from "./NewsLinesItem";
 import type { NewsItem } from "../../../types/api-types";
 import { getSelectedNewsApi } from "../../../apis/news";
+import { useNavigate } from "react-router-dom";
 
 const dummyData = [
   {
@@ -25,7 +26,9 @@ const dummyData = [
 
 
 const NewsLines = () => {
+  const navigate = useNavigate();
   const [selectedNews, setSelectedNews] = useState<NewsItem[]>([]);
+  const handleMoreNews = () => navigate("/news/home")
   const getSelectedNews = async () => {
     return await getSelectedNewsApi();
   }
@@ -53,6 +56,7 @@ const NewsLines = () => {
           type="button"
           aria-label="뉴스 페이지로 이동"
           className="text-center text-gray-200 text-sm font-medium hover:cursor-pointer"
+          onClick={handleMoreNews}
         >
           전체보기
         </button>
