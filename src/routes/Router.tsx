@@ -153,19 +153,11 @@ const router = createBrowserRouter([
             element: <FraudSituationPage />,
           },
           {
-            path: "14",
-            element: <FraudSituationPage />,
+            path: "result",
+            element: <AnalysisResultPage />,
           },
-                {
-        path: "result",
-        element: <AnalysisResultPage />,
-      },
         ],
       },
-      // {
-      //   path: "result",
-      //   element: <AnalysisResultPage />,
-      // },
     ],
   },
   {
@@ -210,14 +202,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/news",
-    children:[
+    children: [
       {
-        path:"home",
-        element: <NewsHomePage/>,
+        path: "home",
+        element: <NewsHomePage />,
       },
       {
-        path:"recent",
-        element: <RecentNewsPage/>
+        path: "recent",
+        element: <RecentNewsPage />
       }
     ]
   },
