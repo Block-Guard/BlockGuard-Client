@@ -62,6 +62,9 @@ import EditUserInfoPage from "../pages/MyPage/EditUserInfoPage";
 import EditNOKPage from "../pages/MyPage/EditNOKPage";
 import CheckFraudAnalysisReport from "../pages/MyPage/CheckFraudAnalysisReport";
 import ChangePasswordPage from "../pages/MyPage/ChangePasswordPage";
+import NewsHomePage from "../pages/News/NewsHomePage";
+import RecentNewsPage from "../pages/News/RecentNewsPage";
+
 
 const router = createBrowserRouter([
   {
@@ -213,6 +216,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/news",
+    children:[
+      {
+        path:"home",
+        element: <NewsHomePage/>,
+      },
+      {
+        path:"recent",
+        element: <RecentNewsPage/>
+      }
+    ]
+  },
+
   {
     path: "/simulation",
     children: [

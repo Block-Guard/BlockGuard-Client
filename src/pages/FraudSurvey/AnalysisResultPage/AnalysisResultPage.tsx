@@ -13,6 +13,7 @@ import { TypeFeature } from "./components/TypeFeature";
 import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
 import { fraudAnalysisApi } from "../../../apis/fraud";
 import type { FraudResultData } from "../../../types/fraud-types";
+import Button from "../../../components/Button/Button";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,10 @@ const AnalysisResultPage = () => {
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/9");
     const handleCloseClick = () => navigate("/home");
-
+    const handleLearnClick = () => {
+        // 일단 전체로 처리. 추후 사기 분석 결과 유형이 뉴스와 대응되면 추가.
+        navigate(`/news/recent?category=전체`)
+    }
     const makeForm = () => {
         const formData = new FormData();
         /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
@@ -167,6 +171,10 @@ const AnalysisResultPage = () => {
                 ) : null}
 
                 {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature />}
+
+                <Button onClick={handleLearnClick} size="lg" isHighlight={false}>
+                    관련 피해 사례 더보기
+                </Button>
 
                 {/* 여기부터 응답과 상관없음 */}
                 <div className="text-center text-black text-xl font-bold leading-loose">
