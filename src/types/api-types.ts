@@ -98,7 +98,7 @@ export interface GetUserInfoResponse extends ApiBaseResponse {
 // 유저 정보 / 비밀번호 변경 수정
 export interface EditUserInfoResponse extends ApiBaseResponse {
   data: null;
-
+}
 /** 뉴스 목록 조회 API 응답 중 뉴스 데이터 타입*/
 export interface NewsItem {
   id: number;
@@ -112,21 +112,21 @@ export interface NewsItem {
 /** 뉴스 목록 조회 API 응답 */
 export interface NewsListResponse {
   data: {
-    news: NewsItem[],
+    news: NewsItem[];
     pageableInfo: {
       page: number;
       size: number;
       totalElements: number;
       totalPages: number;
-    },
+    };
     sort: string;
-  }
+  };
 }
 
 /** 뉴스 목록 조회 API 응답 */
 export interface SelectedNewsResponse {
-  data: NewsItem[]
+  data: NewsItem[];
   // data: {
   //   news: NewsItem[]
   // }
-
+}
