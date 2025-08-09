@@ -19,6 +19,12 @@ const FraudSurveyPage = () => {
             {" (선택)"}
           </span>
         )}
+        {
+          currentSurvey?.isMultiple && 
+          <span className="text-zinc-300 text-2xl font-bold leading-9">
+            {" (복수선택 가능)"}
+          </span>
+        }
       </div>
 
       <div className="flex flex-col gap-4 pb-4">

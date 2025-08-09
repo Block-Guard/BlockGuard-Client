@@ -17,7 +17,6 @@ export type FraudSurveyContextType = {
 
 const FraudLayout = () => {
   const location = useLocation();
-
   const {
     progress,
     allAnswers,
@@ -40,7 +39,6 @@ const FraudLayout = () => {
     goToNextStep();
   };
 
-  // 4. Context로 전달하는 값을 최소화
   const contextValue = useMemo(
     () => ({
       allAnswers,
@@ -52,6 +50,10 @@ const FraudLayout = () => {
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
+      {location.pathname === "/fraud-analysis/survey/result" ? (
+      <Outlet context={contextValue} />
+    ) : (
+        <>
       <Header
         leftChild={
           <button onClick={handleBackClick}>
@@ -63,16 +65,16 @@ const FraudLayout = () => {
         <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
         <div
           className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
-          style={{ width: `${(progress / 9) * 100}%` }}
+          style={{ width: `${(progress / 13) * 100}%` }}
         />
       </div>
+
       <main
         className="h-[calc(100vh-140px)] bg-[#ffffff] 
         overflow-hidden overflow-y-auto no-scrollbar mt-15"
       >
         <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
-      {location.pathname === "/fraud-analysis" ? null : (
         <div className="ml-6 mr-6 mb-8">
           <Button
             onClick={handleBtnClick}
@@ -83,8 +85,10 @@ const FraudLayout = () => {
             다음
           </Button>
         </div>
-      )}
+      </>
+    )}
     </div>
+
   );
 };
 export default FraudLayout;

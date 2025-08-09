@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
@@ -14,10 +14,19 @@ import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
 import { fraudAnalysisApi } from "../../../apis/fraud";
 import type { FraudResultData } from "../../../types/fraud-types";
 import Button from "../../../components/Button/Button";
+import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
+
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { allAnswers } = useFraudSurveyContext();
+    const booleanAnswer = [
+        "pressuredInfo",
+        "appOrLinkRequest",
+        "thirdPartyConnect",
+        "authorityPressure",
+        "accountOrLinkRequest",
+    ]
     const [data, setData] = useState<FraudResultData>();
     const [resultTheme, setResultTheme] = useState(riskState[1]);
     const [overrideHeader, setOverrideHeader] = useState(false);
@@ -27,28 +36,32 @@ const AnalysisResultPage = () => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const handleBackClick = () => navigate("/fraud-analysis/survey/9");
+    const handleBackClick = () => navigate("/fraud-analysis/survey/13");
     const handleCloseClick = () => navigate("/home");
     const handleLearnClick = () => {
         // 일단 전체로 처리. 추후 사기 분석 결과 유형이 뉴스와 대응되면 추가.
         navigate(`/news/recent?category=전체`)
     }
+
     const makeForm = () => {
         const formData = new FormData();
-        /** 선택 값인 항목으로, location.state에 없을 경우 기본 값 처리용 */
-        const stringSurvey = { ...initSurvey };
-        for (const [key, value] of Object.entries(location.state || {})) {
+        type SurveyKey = typeof initSurvey & {[key:string]:string|string[]|boolean};
+        const stringSurvey : SurveyKey = { ...initSurvey };
+
+        for (const [key, value] of Object.entries(allAnswers)) {
             /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
             if (key === "imageBase64") continue;
             /**  initSurvey 기본값 처리 */
-            if (key === "atmGuided") {
-                stringSurvey["atmGuided"] = value === "네" ? "true" : "false";
+            if (booleanAnswer.includes(key)) {
+                stringSurvey[key] = (value === "네");
             } else if (key === "imageFiles") {
                 (value as File[]).forEach(file => formData.append(key, file));
             }
         }
+
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
         /** 디버깅용 fromData 내용 출력 */
+        console.log("디버깅용 formData 출력");
         for (const [key, value] of formData.entries()) {
             if (key !== "imageFiles") {
                 for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
@@ -86,7 +99,7 @@ const AnalysisResultPage = () => {
             }
         }
 
-        if (location.state) {
+        if (allAnswers) {
             process();
         }
 
@@ -136,6 +149,8 @@ const AnalysisResultPage = () => {
             </div>
 
             {/* 여기까지 상단 안내 */}
+            
+                
 
             <div className="flex flex-col items-center py-7.5 px-6 z-10">
                 <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>

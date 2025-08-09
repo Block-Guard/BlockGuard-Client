@@ -7,7 +7,7 @@ import Header from "../../../components/Header/Header";
 const FraudLandingPage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/fraud-analysis/survey/1-6");
+    navigate("/fraud-analysis/survey/1-10");
   };
   return (
     <div className="w-full h-full flex bg-primary-400 box-border">

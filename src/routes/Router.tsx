@@ -137,31 +137,35 @@ const router = createBrowserRouter([
         element: <FraudLayout />,
         children: [
           {
-            path: "1-6",
+            path: "1-10",
             element: <FraudSurveyPage />,
           },
           {
-            path: "7",
+            path: "11",
             element: <FraudLinkNumPage />,
           },
           {
-            path: "8",
+            path: "12",
             element: <FraudMessagePage />,
           },
           {
-            path: "9",
+            path: "13",
             element: <FraudSituationPage />,
           },
           {
-            path: "9",
+            path: "14",
             element: <FraudSituationPage />,
           },
-        ],
-      },
-      {
+                {
         path: "result",
         element: <AnalysisResultPage />,
       },
+        ],
+      },
+      // {
+      //   path: "result",
+      //   element: <AnalysisResultPage />,
+      // },
     ],
   },
   {

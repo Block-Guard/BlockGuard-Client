@@ -8,11 +8,17 @@ export const STEP_CONFIG = {
     2: { keys: ['counterpart'], isRequired: true, isMultiple: false },
     3: { keys: ['requestedAction'], isRequired: true, isMultiple: true },
     4: { keys: ['requestedInfo'], isRequired: true, isMultiple: true },
-    5: { keys: ['appType'], isRequired: false, isMultiple: false },
-    6: { keys: ['atmGuided'], isRequired: false, isMultiple: false },
-    7: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: "false" },
-    8: { keys: ['messageContent', 'imageFiles'], isRequired: false, isMultiple: true },
-    9: { keys: ['additionalDescription'], isRequired: true, isMultiple: false },
+    5: { keys: ['linkType'], isRequired: false, isMultiple: false },
+
+    6: { keys: ['pressuredInfo'], isRequired: false, isMultiple: false },
+    7: { keys: ['appOrLinkRequest'], isRequired: false, isMultiple: false },
+    8: { keys: ['thirdPartyConnect'], isRequired: false, isMultiple: false },
+    9: { keys: ['authorityPressure'], isRequired: false, isMultiple: false },
+    10: { keys: ['accountOrLinkRequest'], isRequired: false, isMultiple: false },
+
+    11: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: "false" },
+    12: { keys: ['messageContent', 'imageFiles'], isRequired: false, isMultiple: true },
+    13: { keys: ['additionalDescription'], isRequired: true, isMultiple: false },
 };
 
 export const useFraudSurveyContext = () => {
@@ -53,9 +59,10 @@ export const useFraudSurvey = () => {
         const newProgress = progress + 1;
         setProgress(newProgress);
         console.log("디버깅용 answers : ", allAnswers)
-        if (newProgress > 9) {
-            navigate("/fraud-analysis/result", {state:allAnswers});
-        } else if (newProgress > 6) {
+        if (newProgress > 13) {
+            // navigate("/fraud-analysis/result", {state:allAnswers});
+            navigate("/fraud-analysis/survey/result");
+        } else if (newProgress > 10) {
             navigate(`/fraud-analysis/survey/${newProgress}`);
         }
     }, [progress, navigate]);
@@ -70,11 +77,11 @@ export const useFraudSurvey = () => {
             navigate('/fraud-analysis/landing');
             return;
         }
-        if (newProgress === 6) {
-            navigate('/fraud-analysis/survey/1-6');
+        if (newProgress === 10) {
+            navigate('/fraud-analysis/survey/1-10');
             return;
         }
-        if(newProgress > 6){
+        if(newProgress > 10){
             navigate(`/fraud-analysis/survey/${newProgress}`);
         }
 
