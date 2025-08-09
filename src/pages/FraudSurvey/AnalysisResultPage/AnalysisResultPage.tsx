@@ -36,7 +36,11 @@ const AnalysisResultPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/13");
-    const handleCloseClick = () => navigate("/home");
+    /** 사기 분석 결과 얻은 후, localStorage 내 설문 초기화 */
+    const handleCloseClick = () => {
+        localStorage.removeItem("surveyAnswers");
+        navigate("/home");
+    }
     const handleLearnClick = () => {
         // 일단 전체로 처리. 추후 사기 분석 결과 유형이 뉴스와 대응되면 추가.
         navigate(`/news/recent?category=전체`)

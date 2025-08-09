@@ -91,7 +91,6 @@ const FraudLayout = () => {
         className="h-[calc(100vh-140px)] bg-[#ffffff] 
         overflow-hidden overflow-y-auto no-scrollbar mt-15"
       >
-         현재 progress : {progress}
         <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
       </main>
         <div className="ml-6 mr-6 mb-8">
