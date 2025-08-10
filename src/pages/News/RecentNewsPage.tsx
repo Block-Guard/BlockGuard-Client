@@ -94,36 +94,35 @@ const RecentNewsPage = () => {
                     </button>
                 }
             />
-            <main className="mt-[57px] px-6 pb-6">
-                <div className="h-9 flex justify-around text-lg font-semibold leading-relaxed overflow-x-scroll no-scrollbar">
-                    {
-                        categoryList.map((item) => {
-                            return (
-                                <>
-                                    {
-                                        item === category ? (
-                                            <div className="flex flex-col justify-between items-center text-primary-400 leading-tight"
-                                                onClick={() => handleCategory(item)}>
-                                                {item}
-                                                <div className="w-[120%] h-[5px] bg-primary-400 rounded-[90px] relative z-10" />
-                                            </div>
-                                        ) : (
-                                            <div className="flex flex-col text-[#79818A] leading-tight"
-                                                onClick={() => handleCategory(item)}>
-                                                {item}
-                                            </div>
-                                        )
-                                    }
-                                </>
-                            )
-                        }
+            <div className="w-full bg-white mt-[57px] fixed h-9 flex justify-around text-lg font-semibold leading-relaxed overflow-x-scroll no-scrollbar z-10" >
+                {
+                    categoryList.map((item) => {
+                        return (
+                            <>
+                                {
+                                    item === category ? (
+                                        <div className="flex flex-col justify-between items-center text-primary-400 leading-tight relative z-10"
+                                            onClick={() => handleCategory(item)}>
+                                            {item}
+                                            <div className="absolute w-[120%] h-[5px] bg-primary-400 rounded-[90px] top-[31px] z-50" />
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col text-[#79818A] leading-tight"
+                                            onClick={() => handleCategory(item)}>
+                                            {item}
+                                        </div>
+                                    )
+                                }
+                            </>
                         )
                     }
-                </div>
-
-                <div className="w-full h-[5px] bg-[#E4E7E9] rounded-[90px] relative bottom-[5px]" />
-
-                <button className="inline-flex justify-start text-gray-900/50 text-sm font-norma mt-9.5 gap-2"
+                    )
+                }
+                <div className="w-full h-[5px] bg-[#E4E7E9] rounded-[90px] fixed top-[88px] z-0" />
+            </div>
+           
+            <main className="mt-[57px] px-6 pb-6">
+                <button className="inline-flex justify-start text-gray-900/50 text-sm font-norma mt-16.5 gap-2"
                     onClick={handleSortClick}>
                     <img src={SortIcon} alt="정렬 아이콘" className="w-4.5 h-4.5" />
                     {
@@ -147,7 +146,7 @@ const RecentNewsPage = () => {
                 </button>
                 {/* 5개.  */}
                 {
-                    Array.from({ length: end - start + 1 }, (_, i) => start + i).map((num) => <PageIndexItem pageNumber={num} currentPage={page} setPage={setPage} key={num}/>)
+                    Array.from({ length: end - start + 1 }, (_, i) => start + i).map((num) => <PageIndexItem pageNumber={num} currentPage={page} setPage={setPage} key={num} />)
                 }
                 <button onClick={handleNextPage}>
                     <svg className={page === totalPages ? 'text-[#D9D9D9]' : 'text-[#79818A]'} width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">

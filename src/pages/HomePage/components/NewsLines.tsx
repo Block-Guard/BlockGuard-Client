@@ -62,7 +62,7 @@ const NewsLines = () => {
         </button>
       </div>
 
-      <div className="flex flex-row overflow-x-scroll gap-x-4 pb-3">
+      <div className="grid grid-rows-2 grid-flow-col overflow-x-scroll gap-x-2.5 gap-y-2.5 pb-3">
         {
           selectedNews.map((news) => {
             return <NewsLinesItem title={news.title} publishedAt={news.publishedAt}

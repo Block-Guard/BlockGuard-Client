@@ -22,7 +22,7 @@ const NewsLinesItem = ({title, publishedAt, url, newspaper, imageUrl}: NewsCardI
             }
 
             <div className="flex flex-col justify-between items-start pt-2.5 pl-3 pr-3 pb-4">
-                <div className="h-11 text-slate-950 text-base font-bold leading-snug">
+                <div className="h-11 text-slate-950 text-base font-bold leading-snug line-clamp-2">
                     {title}
                 </div>
 

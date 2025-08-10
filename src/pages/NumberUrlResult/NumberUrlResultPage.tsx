@@ -48,7 +48,7 @@ const NumberUrlResultPage = () => {
                 setIsLoading(false);
             } catch (error) {
                 console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
-                setRiskLevel(2); // 일단 위험
+                setRiskLevel(0); // 일단 위험
             } finally {
                 setIsLoading(false);
             }

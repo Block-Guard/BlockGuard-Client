@@ -48,8 +48,14 @@ export const initSurvey: stringSurveyData = {
     counterpart: "",
     requestedAction: [],
     requestedInfo: [],
-    appType: "",
-    atmGuided: "false",
+
+    LinkType: "",
+    pressuredInfo: false,
+    appOrLinkRequest: false,
+    thirdPartyConnect: false,
+    authorityPressure: false,
+    accountOrLinkRequest: false,
+
     suspiciousLinks: "",
     suspiciousPhoneNumbers: "",
     messageContent: "",

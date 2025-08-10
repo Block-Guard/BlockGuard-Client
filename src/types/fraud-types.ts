@@ -28,8 +28,16 @@ export interface stringSurveyData {
     counterpart: string;
     requestedAction: string[];
     requestedInfo: string[];
-    appType: string;
-    atmGuided: string;
+
+
+    LinkType: string;
+    pressuredInfo: boolean;
+    appOrLinkRequest: boolean;
+    thirdPartyConnect: boolean;
+    authorityPressure: boolean;
+    accountOrLinkRequest: boolean;
+
+
     suspiciousLinks: string;
     suspiciousPhoneNumbers: string;
     messageContent: string;

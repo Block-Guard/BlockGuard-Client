@@ -5,7 +5,7 @@ import type { UrlNumAnalysisResponse } from "../types/api-types";
 export const numberAnalysisApi = async (targetNumber: string) => {
     try {
         const response = await axios.post<UrlNumAnalysisResponse>(
-            "https://www.blockguard.shop/api/fraud/number", targetNumber
+            "https://www.blockguard.shop/api/fraud/number", {phoneNumber :targetNumber}
         );
         return response.data.data;
 
@@ -20,7 +20,7 @@ export const numberAnalysisApi = async (targetNumber: string) => {
 export const urlAnalysisApi = async (targetUrl: string) => {
     try {
         const response = await axios.post<UrlNumAnalysisResponse>(
-            "https://www.blockguard.shop/api/fraud/url", targetUrl
+            "https://www.blockguard.shop/api/fraud/url", {url :targetUrl}
         );
         return response.data.data;
 

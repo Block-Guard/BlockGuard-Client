@@ -7,15 +7,14 @@ const LinkNumberCheck = () => {
   const [urlNumber, setUrlNumber] = useState("");
   const navigate = useNavigate();
   const queryParams = new URLSearchParams();
+  
   const isValidNumber = (inputs: string) => {
-    if (!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(inputs))
-      return false;
-
-    return true;
-  }
+    const digitsOnly = inputs.replace(/[^0-9]/g, ""); // 그냥 숫자만 받게
+    return /^(?:\d{9,11})$/.test(digitsOnly); // 9~11자리로 제한
+  };
 
   const isValidUrl = (inputs: string) => {
-    if (!/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(inputs))
+    if (!/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(inputs))
       return false;
     return true;
   }
@@ -44,7 +43,7 @@ const LinkNumberCheck = () => {
       console.log("올바르지 못한 형식")
 
       toast("URL/전화번호 형식이 유효하지 않습니다. 다시 입력해주세요.")
-     
+
     }
   }
 
