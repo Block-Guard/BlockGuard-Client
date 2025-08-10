@@ -7,7 +7,7 @@ import SettingsLoading from "./SettingsLoading";
 import LabeledInput from "../../components/LabeledInput/LabeledInput";
 import { formatPhoneNumber } from "../../utils/authUtils";
 import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
-import BlockeeProfileImg from "@/assets/characters/blockee-mypage.png";
+import BlockeeProfile from "@/assets/characters/default-profile-img.png";
 import EditProfileImgIcon from "@/assets/icons/edit-profilte-img-icon.svg";
 import EditPasswordIcon from "@/assets/icons/edit-pw-icon.svg";
 import RightArrowIcon from "@/assets/icons/arrow-right-darkblue-icon.svg";
@@ -100,30 +100,17 @@ const EditUserInfoPage = () => {
       />
       {userInfo && (
         <form className="flex flex-col px-6 py-18" onSubmit={handleSubmit}>
-          <div className="relative w-50 self-center" onClick={openFilePicker}>
+          <div className="relative w-40 self-center" onClick={openFilePicker}>
             <img
-              className="rounded-full"
-              style={{
-                width: newProfileImg || userInfo.profileImageUrl ? "150px" : "",
-                height:
-                  newProfileImg || userInfo.profileImageUrl ? "150px" : "",
-                margin: newProfileImg || userInfo.profileImageUrl ? "auto" : "",
-                marginTop:
-                  newProfileImg || userInfo.profileImageUrl ? "30px" : "",
-                marginBottom:
-                  newProfileImg || userInfo.profileImageUrl ? "20px" : "",
-              }}
+              className="rounded-full w-40 h-40"
               src={
                 newProfileImg
                   ? URL.createObjectURL(newProfileImg)
-                  : userInfo.profileImageUrl || BlockeeProfileImg
+                  : userInfo.profileImageUrl || BlockeeProfile
               }
             />
             <img
-              className="absolute bottom-4 right-8"
-              style={{
-                bottom: newProfileImg ? "27px" : "",
-              }}
+              className="absolute bottom-0 right-1"
               src={EditProfileImgIcon}
             />
             <input
