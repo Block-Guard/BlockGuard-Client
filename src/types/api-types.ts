@@ -77,6 +77,7 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
     explanation: string;
   };
 }
+
 /** 홈페이지 전화번호, url 분석 api 응답 */
 export interface UrlNumAnalysisResponse extends ApiBaseResponse {
   data: {
@@ -130,3 +131,4 @@ export interface SelectedNewsResponse {
   //   news: NewsItem[]
   // }
 }
+

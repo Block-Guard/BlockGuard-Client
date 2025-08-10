@@ -8,6 +8,7 @@ import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
 import { dummyGuardians } from "../constants";
 import { GuardianCallItem } from "./GuardianCallItem";
+import { useEffect, useState } from "react";
 
 
 interface GuardianCallDrawerProps {
@@ -16,11 +17,31 @@ interface GuardianCallDrawerProps {
 }
 
 export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: GuardianCallDrawerProps) => {
-  // const [guardians, setGuardians] = useState(dummyGuardians.data.guardians)
-  const guardians = dummyGuardians.data.guardians;
+  const [guardians, setGuardians] = useState(dummyGuardians.data.guardians)
+  // const guardians = dummyGuardians.data.guardians;
   const handleCloseClick = () => {
     setOpenGuardianCall(false);
   }
+
+  /** axios instance에 로그인 여부, 토큰 재발급 로직 추가해야 할듯 */
+  const isLoggedIn = () =>{
+    const token = localStorage.getItem("accessToken");
+    if(!token || false)
+      return false;
+    else
+      return true;
+  }
+
+  const getGuardians = () =>{
+
+  }
+
+  useEffect(()=>{
+    if(isLoggedIn()){
+      const response = getGuardians();
+      // setGuardians(response);
+    }
+  }, [])
 
   return (
     <Drawer open={openGuardianCall} onOpenChange={setOpenGuardianCall}>

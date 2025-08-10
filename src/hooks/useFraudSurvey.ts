@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { type FraudSurveyContextType, type SurveyAnswers } from "../layouts/FraudLayout"; // 타입과 설정은 공유
+import type { FraudSurveyContextType, SurveyAnswers } from "../types/fraud-types";
 
 // STEP_CONFIG: 각 단계가 사용할 key들을 명시
 export const STEP_CONFIG = {

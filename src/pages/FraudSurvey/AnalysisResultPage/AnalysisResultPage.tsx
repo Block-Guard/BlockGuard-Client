@@ -192,7 +192,7 @@ const AnalysisResultPage = () => {
                 </Button>
 
                 {/* 여기부터 응답과 상관없음 */}
-                <div className="text-center text-black text-xl font-bold leading-loose">
+                <div className="mt-3 text-center text-black text-xl font-bold leading-loose">
                     AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
                 </div>
 
