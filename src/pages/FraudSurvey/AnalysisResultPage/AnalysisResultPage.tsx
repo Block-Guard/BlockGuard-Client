@@ -63,14 +63,14 @@ const AnalysisResultPage = () => {
         }
 
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
-        console.log("디버깅용 formData 출력");
-        for (const [key, value] of formData.entries()) {
-            if (key !== "imageFiles") {
-                for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
-                    console.log(`FormData: ${key2} = ${value2}`);
-                }
-            }
-        }
+        // console.log("디버깅용 formData 출력");
+        // for (const [key, value] of formData.entries()) {
+        //     if (key !== "imageFiles") {
+        //         for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
+        //             console.log(`FormData: ${key2} = ${value2}`);
+        //         }
+        //     }
+        // }
         return formData;
     }
 
@@ -80,23 +80,27 @@ const AnalysisResultPage = () => {
 
     useEffect(() => {
         const process = async () => {
-            try {
-                setIsLoading(true);
-                const formData = makeForm();
-                const response = await getResult(formData);
-                setData(response);
-                const themeIndex = getTheme(response.riskLevel)
-                const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
-                setResultTheme(detailDegree);
-                setIsLoading(false);
-            } catch (error) {
-                console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
-                setData(dummyResponse.data);
-                const themeIndex = getTheme(dummyResponse.data.riskLevel);
-                setResultTheme(riskState[themeIndex]);
-            } finally {
-                setIsLoading(false);
-            }
+            //테스트용
+            setIsLoading(false);
+            setData(dummyResponse.data);
+
+            // try {
+            //     setIsLoading(true);
+            //     const formData = makeForm();
+            //     const response = await getResult(formData);
+            //     setData(response);
+            //     const themeIndex = getTheme(response.riskLevel)
+            //     const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
+            //     setResultTheme(detailDegree);
+            //     setIsLoading(false);
+            // } catch (error) {
+            //     console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
+            //     setData(dummyResponse.data);
+            //     const themeIndex = getTheme(dummyResponse.data.riskLevel);
+            //     setResultTheme(riskState[themeIndex]);
+            // } finally {
+            //     setIsLoading(false);
+            // }
         }
 
         if (allAnswers) {

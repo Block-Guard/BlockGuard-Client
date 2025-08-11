@@ -6,10 +6,11 @@ import {
 import DarkBlueX from "../../../../assets/icons/close-darkblue-icon.svg";
 import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
-import { dummyGuardians } from "../constants";
 import { GuardianCallItem } from "./GuardianCallItem";
 import { useEffect, useState } from "react";
-
+import { getGuardiansListApi, postGuardianApi } from "../../../../apis/guardians";
+import type { GuardianItem } from "../../../../types/api-types";
+import { useNavigate } from "react-router-dom";
 
 interface GuardianCallDrawerProps {
   openGuardianCall: boolean
@@ -17,38 +18,69 @@ interface GuardianCallDrawerProps {
 }
 
 export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: GuardianCallDrawerProps) => {
-  const [guardians, setGuardians] = useState(dummyGuardians.data.guardians)
-  // const guardians = dummyGuardians.data.guardians;
+  const navigate = useNavigate();
+  const [guardians, setGuardians] = useState<GuardianItem[]>([])
   const handleCloseClick = () => {
     setOpenGuardianCall(false);
   }
 
-  /** axios instance에 로그인 여부, 토큰 재발급 로직 추가해야 할듯 */
-  const isLoggedIn = () =>{
-    const token = localStorage.getItem("accessToken");
-    if(!token || false)
+  /** ✔ 추가하기 눌렀을 때, 마이페이지로 이동하는거라면 삭제 할 것 */
+  const handleAddGuardian = () => {
+    console.log("보호자 추가 테스트용 성공");
+    const formData = new FormData();
+    formData.append("name", "text10");
+    formData.append("phoneNumber", "010-1234-5678");
+    postGuardianApi(formData);
+  }
+
+  const handleLoginClick = () => navigate("/login");
+
+  /** 토큰 만료 시간 판별 */
+  const isTokenValid = (token: string) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now();
+    } catch {
       return false;
-    else
+    }
+  };
+
+  /** axios instance에 로그인 여부, 토큰 재발급 api 추가해야 할듯 */
+  const isLoggedIn = () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token || !isTokenValid(token)) {
+      return false;
+    }
+    else {
       return true;
+    }
   }
 
-  const getGuardians = () =>{
-
-  }
-
-  useEffect(()=>{
-    if(isLoggedIn()){
-      const response = getGuardians();
-      // setGuardians(response);
+  useEffect(() => {
+    const process = async () => {
+      try {
+        setGuardians([]);
+        const response = await getGuardiansListApi();
+        console.log("불러온 보호자 목록 : ", response)
+        setGuardians(response.guardians);
+      } catch (err) {
+        console.error("보호자 목록 조회 중 에러 발생 : ", err);
+        setGuardians([]);
+      }
+    }
+    if (isLoggedIn()) {
+      process();
     }
   }, [])
 
+
   return (
     <Drawer open={openGuardianCall} onOpenChange={setOpenGuardianCall}>
-      <DrawerContent aria-label="보호자에게 알리기" className=" bg-[#EEF1F3]">
-        <div className="flex flex-col justify-start px-6 bg-[#EEF1F3]">
+      <DrawerContent aria-label="보호자에게 알리기" className=" bg-[#EEF1F3]"
+      >
+        <div className="flex flex-col px-6 bg-[#EEF1F3]">
 
-          <div className="flex-4 flex justify-center items-center mb-7.5 ">
+          <div className="flex-4 flex justify-center items-center mb-7.5">
             <div className="flex-1 flex justify-start">
               <img src={LinkIcon} alt="아이콘" className="w-6 h-6" />
             </div>
@@ -60,28 +92,53 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
             </button>
           </div>
 
-          <div aria-label="연락할 보호자 번호 리스트" className="flex flex-col gap-3 aria-describedby={undefined}">
-            {
-              guardians.length === 0 ? (
-                <div className="pb-7.5">
-                  <div className="h-36 mb-7.5 flex items-center justify-center text-center text-zinc-300 text-lg font-bold leading-snug">
-                    지금은 등록한 번호가 없습니다
+          <div aria-label="연락할 보호자 번호 리스트" className="overflow-y-auto"
+            style={{
+              flex: 1,
+              minHeight: 0,
+              maxHeight: "calc(80vh - 120px)",
+              paddingBottom: "20px"
+            }}>
+            <div className="flex flex-col gap-3 pb-6">
+              {
+                (!guardians || guardians?.length === 0) ? (
+                  <div className="pb-7.5">
+                    {isLoggedIn() ? (
+                      <>
+                        <div className="h-36 mb-7.5 flex items-center justify-center text-center text-zinc-300 text-lg font-bold leading-snug">
+                          지금은 등록한 번호가 없습니다
+                        </div>
+                        <button className="w-full px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-center items-center"
+                          onClick={handleAddGuardian}>
+                          <img src={Plus} alt="아이콘" />
+                          <span className="text-gray-400 text-lg font-bold leading-snug">
+                            추가하기
+                          </span>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="h-36 mb-7.5 flex items-center justify-center text-center text-zinc-300 text-lg font-bold leading-snug">
+                          로그인 후 이용가능한 서비스입니다.
+                        </div>
+                        <button className="w-full px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-center items-center"
+                          onClick={handleLoginClick}>
+                          <span className="text-gray-400 text-lg font-bold leading-snug">
+                            로그인하기
+                          </span>
+                        </button>
+                      </>
+                    )}
                   </div>
-                  <button className="w-full px-3 py-3 bg-gray-200 rounded-2xl inline-flex justify-center items-center">
-                    <img src={Plus} alt="아이콘" />
-                    <span className="text-gray-400 text-lg font-bold leading-snug">
-                      추가하기
-                    </span>
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col pb-7.5 gap-3">
-                  {guardians.map((guard) => 
-                    <GuardianCallItem icon={guard.profileImageUrl} text={guard.name} phoneNumber={guard.phoneNumber} isPrimary={guard.isPrimary} key={guard.guardiansId}/>
-                  )}
-                </div>
-              )
-            }
+                ) : (
+                  <>
+                    {guardians?.map((guard) =>
+                      <GuardianCallItem icon={guard.profileImageUrl} text={guard.name} phoneNumber={guard.phoneNumber} isPrimary={guard.isPrimary} key={guard.guardiansId} />
+                    )}
+                  </>
+                )
+              }
+            </div>
           </div>
 
         </div>

@@ -1,4 +1,4 @@
-interface ApiBaseResponse {
+export interface ApiBaseResponse {
   code: number;
   message: string;
 }
@@ -111,7 +111,7 @@ export interface NewsItem {
 }
 
 /** 뉴스 목록 조회 API 응답 */
-export interface NewsListResponse {
+export interface NewsListResponse extends ApiBaseResponse{
   data: {
     news: NewsItem[];
     pageableInfo: {
@@ -125,10 +125,23 @@ export interface NewsListResponse {
 }
 
 /** 뉴스 목록 조회 API 응답 */
-export interface SelectedNewsResponse {
+export interface SelectedNewsResponse extends ApiBaseResponse {
   data: NewsItem[];
   // data: {
   //   news: NewsItem[]
   // }
 }
 
+export interface GuardianItem {
+  guardiansId: number;
+	name: string;
+	phoneNumber: string;
+	isPrimary: boolean;
+	profileImageUrl: string;
+}
+
+export interface GuardiansListResponse extends ApiBaseResponse{
+  data: {
+   guardians: GuardianItem[];
+  }
+}
