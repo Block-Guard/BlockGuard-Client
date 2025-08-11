@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { type NOKInfoType } from "../../types/nok-info-types";
 import EmptyNokListCard from "./components/EmptyNokListCard";
 import RegisterNewNokCard from "./components/RegisterNewNokCard";
-import { toast } from "sonner";
+import { getGuardiansListApi } from "../../apis/guardians";
 
 const EditNOKPage = () => {
   const navigate = useNavigate();
@@ -18,12 +18,20 @@ const EditNOKPage = () => {
     "isPrimary"
   );
   const [addNokMode, setAddNokMode] = useState(false);
+  const [isChangedFlag, setIsChangedFlag] = useState(false);
 
-  const getNokList = async () => {};
+  const getNokList = async () => {
+    try {
+      const response = await getGuardiansListApi();
+      if (response) setNokList(response);
+    } catch (error) {
+      console.error("보호자 목록 조회 클라이언트 측 오류 메시지", error);
+    }
+  };
 
   useEffect(() => {
     getNokList();
-  }, []);
+  }, [isChangedFlag]);
 
   return (
     <div className="bg-[#f1f4ff] min-h-[calc(100vh-85px)]">
@@ -44,15 +52,23 @@ const EditNOKPage = () => {
       />
       <main className="px-7 pt-22 pb-30 flex flex-col gap-9">
         {addNokMode ? (
-          <RegisterNewNokCard />
+          <RegisterNewNokCard
+            setAddNokMode={setAddNokMode}
+            setIsChangedFlag={setIsChangedFlag}
+          />
         ) : nokList.length !== 0 ? (
           <>
-            <div className="flex flex-col gap-[11px]">
-              <span className="text-[16px] text-[#6e6e6e] font-semibold">
-                대표 보호자
-              </span>
-              <NOKInfoCard nokInfo={primaryNokInfo[0]} />
-            </div>
+            {primaryNokInfo[0] && (
+              <div className="flex flex-col gap-[11px]">
+                <span className="text-[16px] text-[#6e6e6e] font-semibold">
+                  대표 보호자
+                </span>
+                <NOKInfoCard
+                  nokInfo={primaryNokInfo[0]}
+                  setIsChangedFlag={setIsChangedFlag}
+                />
+              </div>
+            )}
             {nonPrimaryNokInfoList.length !== 0 && (
               <div className="flex flex-col gap-[11px]">
                 <span className="text-[16px] text-[#6e6e6e] font-semibold">
@@ -60,7 +76,11 @@ const EditNOKPage = () => {
                 </span>
                 <div className="flex flex-col gap-5">
                   {nonPrimaryNokInfoList.map((nok) => (
-                    <NOKInfoCard key={nok.guardiansId} nokInfo={nok} />
+                    <NOKInfoCard
+                      key={nok.guardiansId}
+                      nokInfo={nok}
+                      setIsChangedFlag={setIsChangedFlag}
+                    />
                   ))}
                 </div>
               </div>
@@ -72,19 +92,25 @@ const EditNOKPage = () => {
       </main>
       {addNokMode ? (
         <div
-          className="absolute bottom-20 w-full px-7 pt-6 pb-8"
+          className="absolute bottom-20 w-full flex flex-col px-7 pt-6 pb-8 gap-3"
           style={{
             background:
               "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%)",
           }}
         >
+          {/* 수동으로 form을 submit하도록 수정 */}
           <Button
             onClick={() => {
-              toast("새로운 보호자가 등록되었습니다.");
-              setAddNokMode(false);
+              const form = document.getElementById(
+                "register-nok-form"
+              ) as HTMLFormElement;
+              if (form) form.requestSubmit();
             }}
           >
             + 추가하기
+          </Button>
+          <Button isWhite={true} onClick={() => setAddNokMode(false)}>
+            취소하기
           </Button>
         </div>
       ) : (

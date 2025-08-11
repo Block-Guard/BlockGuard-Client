@@ -54,7 +54,6 @@ const EditUserInfoPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userInfo?.birthDate.length, userInfo?.phoneNumber.length);
     if (
       userInfo?.birthDate.length !== 8 ||
       userInfo?.phoneNumber.length !== 13

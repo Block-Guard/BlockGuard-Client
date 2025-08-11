@@ -5,3 +5,9 @@ export interface NOKInfoType {
   isPrimary: boolean;
   profileImageUrl: string | null;
 }
+
+export interface NOKFormType {
+  name: string;
+  phoneNumber: string;
+  profileImage: File | null;
+}

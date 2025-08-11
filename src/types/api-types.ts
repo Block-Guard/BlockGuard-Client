@@ -1,3 +1,5 @@
+import type { NOKInfoType } from "./nok-info-types";
+
 interface ApiBaseResponse {
   code: number;
   message: string;
@@ -129,4 +131,14 @@ export interface SelectedNewsResponse {
   // data: {
   //   news: NewsItem[]
   // }
+}
+
+// 보호자 등록 api 응답
+export interface CreateNewGuardianResponse extends ApiBaseResponse {
+  data: NOKInfoType & { createdAt: string };
+}
+
+// 보호자 조회 api 응답
+export interface GetGuardiansListResponse extends ApiBaseResponse {
+  data: { guardians: NOKInfoType[] };
 }

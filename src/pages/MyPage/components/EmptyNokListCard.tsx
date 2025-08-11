@@ -9,9 +9,7 @@ const EmptyNokListCard = ({ setAddNokMode }: Props) => {
   return (
     <div className="flex flex-col px-6 py-[21px] bg-white rounded-[12px] shadow-[0_2px_19px_rgba(0,0,0,0.25)]">
       <img src={BlockeeGlitering} alt="" />
-      <Button onClick={() => setAddNokMode(true)}>
-        + 보호자 추가 등록하기
-      </Button>
+      <Button onClick={() => setAddNokMode(true)}>+ 보호자 등록하기</Button>
       <span className="text-[15px] leading-5 text-[#a0a0a0] text-center mt-[21px]">
         등록된 보호자가 없어요.
         <br />
