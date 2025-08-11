@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
-import { dummyResponse, initSurvey, riskState } from "./constants";
+import { initSurvey, riskState } from "./constants";
 import { getTheme } from "../../../utils/fraudResult";
 import { useScrollHeader } from "../../../hooks/useScrollHeader";
 import BottomCard from "./components/BottomCard";
@@ -85,6 +85,7 @@ const AnalysisResultPage = () => {
             // 테스트용
             // setIsLoading(false);
             // setData(dummyResponse.data);
+
             try {
                 setIsLoading(true);
                 const formData = makeForm();

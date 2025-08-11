@@ -39,11 +39,3 @@ export interface FraudResultData {
     explanation: string;
     // recommendedAction: string;
 }
-
-export interface GuardianItem{
-    guardiansId: number;
-	name: string;
-	phoneNumber: string;
-	isPrimary: boolean;
-	profileImageUrl: string;
-}

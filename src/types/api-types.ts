@@ -135,20 +135,6 @@ export interface SelectedNewsResponse extends ApiBaseResponse {
   // }
 }
 
-export interface GuardianItem {
-  guardiansId: number;
-	name: string;
-	phoneNumber: string;
-	isPrimary: boolean;
-	profileImageUrl: string;
-}
-
-export interface GuardiansListResponse extends ApiBaseResponse{
-  data: {
-   guardians: GuardianItem[];
-  }
-}
-
 // 보호자 등록 api 응답
 export interface CreateNewGuardianResponse extends ApiBaseResponse {
   data: NOKInfoType & { createdAt: string };

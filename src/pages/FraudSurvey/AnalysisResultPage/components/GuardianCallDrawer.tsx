@@ -8,9 +8,9 @@ import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
 import { GuardianCallItem } from "./GuardianCallItem";
 import { useEffect, useState } from "react";
-import { getGuardiansListApi, postGuardianApi } from "../../../../apis/guardians";
-import type { GuardianItem } from "../../../../types/api-types";
+import { getGuardiansListApi} from "../../../../apis/guardians";
 import { useNavigate } from "react-router-dom";
+import type { NOKInfoType } from "../../../../types/nok-info-types";
 
 interface GuardianCallDrawerProps {
   openGuardianCall: boolean
@@ -19,18 +19,19 @@ interface GuardianCallDrawerProps {
 
 export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: GuardianCallDrawerProps) => {
   const navigate = useNavigate();
-  const [guardians, setGuardians] = useState<GuardianItem[]>([])
+  const [guardians, setGuardians] = useState<NOKInfoType[]>([])
   const handleCloseClick = () => {
     setOpenGuardianCall(false);
   }
 
   /** ✔ 추가하기 눌렀을 때, 마이페이지로 이동하는거라면 삭제 할 것 */
   const handleAddGuardian = () => {
-    console.log("보호자 추가 테스트용 성공");
-    const formData = new FormData();
-    formData.append("name", "text10");
-    formData.append("phoneNumber", "010-1234-5678");
-    postGuardianApi(formData);
+    // console.log("보호자 추가 테스트용 성공");
+    // const formData = new FormData();
+    // formData.append("name", "text10");
+    // formData.append("phoneNumber", "010-1234-5678");
+    // postGuardianApi(formData);
+    navigate("/mypage");
   }
 
   const handleLoginClick = () => navigate("/login");
@@ -62,7 +63,8 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
         setGuardians([]);
         const response = await getGuardiansListApi();
         console.log("불러온 보호자 목록 : ", response)
-        setGuardians(response.guardians);
+        if(response)
+          setGuardians(response);
       } catch (err) {
         console.error("보호자 목록 조회 중 에러 발생 : ", err);
         setGuardians([]);
