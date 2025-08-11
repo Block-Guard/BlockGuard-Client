@@ -3,23 +3,25 @@ import React from "react";
 interface ButtonProps {
   children: React.ReactNode;
   type?: "submit" | "reset" | "button" | undefined;
-  onClick: () => void;
+  onClick?: () => void;
   size?: "lg" | "sm";
   isWhite?: boolean;
   isHighlight?: boolean;
   isBlur?: boolean;
   disabled?: boolean;
+  form?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  type,
+  type = "button",
   onClick,
   size = "lg",
   isWhite = false,
   isHighlight = false,
   isBlur = false,
   disabled = false,
+  form,
 }) => {
   const fontSize = size === "lg" ? "22px" : "14px";
   const fontWeight = size === "lg" ? "font-semibold" : "font-normal";
@@ -30,6 +32,7 @@ const Button: React.FC<ButtonProps> = ({
     <>
       {isHighlight ? (
         <button
+          form={form}
           type={type}
           className={`max-w-[800px] bg-gradient-highlight w-full pt-2 pb-2 text-[18px] font-semibold leading-7 text-monochrome-100 rounded-[10px] cursor-pointer`}
           onClick={onClick}
@@ -38,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : isBlur ? (
         <button
+          form={form}
           type={type}
           className="button-bg-blur w-full py-[15px] text-[22px] text-monochrome-100 leading-8  font-semibold rounded-[15px] "
           onClick={onClick}
@@ -47,6 +51,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : isWhite ? (
         <button
+          form={form}
           type={type}
           className={`max-w-[800px] w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
           onClick={onClick}
@@ -55,6 +60,7 @@ const Button: React.FC<ButtonProps> = ({
         </button>
       ) : (
         <button
+          form={form}
           type={type}
           className={`max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
           onClick={onClick}
