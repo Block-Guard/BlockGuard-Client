@@ -6,12 +6,13 @@ import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.
 import { permissionList } from "../constant";
 import PermissionItem from "./components/PermissionItem";
 import PermissionSwitch from "./components/PermissionSwitch";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import ClickAnimation from "../../../../../assets/lottie/click.json";
 
 const AllowPermissionPage = () => {
   const navigate = useNavigate();
+  const bottomRef = useRef<HTMLDivElement | null>(null);
   const [switches, setSwitches] = useState(
     Array(permissionList.length).fill(false)
   );
@@ -37,6 +38,11 @@ const AllowPermissionPage = () => {
       navigate("/simulation/loan-investment");
     }
   };
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
     <div className="relative flex flex-col justify-between w-full h-screen overflow-y-scroll overflow-x-hidden no-scrollbar">
       <Header
@@ -109,6 +115,8 @@ const AllowPermissionPage = () => {
             )}
           </div>
         </div>
+           {/* 바텀 스크롤 타겟 */}
+        <div ref={bottomRef} />
       </main>
     </div>
   );

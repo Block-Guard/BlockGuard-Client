@@ -15,7 +15,7 @@ interface ExplainLoanPhishPageProps {
 
 const ExplainLoanPhishPage = ({ info }: ExplainLoanPhishPageProps) => {
   const navigate = useNavigate();
-  const handleBackClick = () => navigate(-1);
+  const handleBackClick = () => navigate("/home");
   const handleLearnClick = () => {
     console.log(info.category, "유형 뉴스 기사로 이동")
     navigate(`/news/recent?category=${info.category}`)
