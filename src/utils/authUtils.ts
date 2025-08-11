@@ -21,3 +21,8 @@ export const formatPhoneNumber = (phoneNumber: string): string => {
     return onlyDigits.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
   return onlyDigits.slice(0, 11).replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 };
+
+export const checkNicknameFormRight = (nickname: string) => {
+  const regex = /^[a-zA-Z0-9가-힣]{1,12}$/;
+  return regex.test(nickname);
+};
