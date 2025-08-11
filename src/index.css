@@ -75,6 +75,13 @@
 
   /* NCS Radhiumz 폰트 정의 : 홈화면 타이틀 */
   --font-ncs-radhiumz: "NCS Radhiumz", "Pretendard", system-ui, sans-serif;
+
+  --animate-floating: floating 2s ease-in-out infinite;
+  @keyframes floating {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(0); }
+    50%{ transform: translateY(-20px); }
+  }
 }
 
 @utility no-scrollbar {

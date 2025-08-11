@@ -13,7 +13,7 @@ const FraudLinkNumPage = () => {
     }
 
     return (
-        <div className="flex flex-col w-full h-full px-6 overflow-y-scroll">
+        <div className="flex flex-col w-full h-full px-6 overflow-y-scroll no-scrollbar">
             <div className="mt-9 mb-9">
                 <span className="text-slate-950 text-2xl font-bold leading-9">
                     의심스러운 링크나 전화번호를
