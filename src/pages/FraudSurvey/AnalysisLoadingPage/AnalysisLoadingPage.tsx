@@ -20,7 +20,7 @@ const AnalysisLoadingPage = () => {
             잠시만 기다려주세요
           </p>
         </div>
-        <img src={BlockeeGlitered} alt="캐릭터" />
+        <img src={BlockeeGlitered} alt="캐릭터" className="animate-floating"/>
       </div>
     </div>
   );

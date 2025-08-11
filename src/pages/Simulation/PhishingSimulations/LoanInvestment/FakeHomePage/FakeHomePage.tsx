@@ -59,7 +59,7 @@ const FakeHomePage = () => {
 
       {fakeLoanTiemList.map((loanItem) => {
         return (
-          <div className="relative">
+          <div className="relative" key={loanItem.id}>
             <FakeLoanItem
               icon={loanItem.icon}
               title={loanItem.title}

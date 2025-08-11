@@ -11,6 +11,7 @@ const BankerMessagePage = () => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
+
   const FakeMessages = [
     <div key={1} className="w-full flex flex-col gap-[30px] px-[15px]">
       <div className="whitespace-pre-line p-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
@@ -36,7 +37,6 @@ const BankerMessagePage = () => {
       <div className="relative">
         <button
           className="flex justify-center items-center w-7 h-7 bg-[#e9e9eb] rounded-full border-[0.30px] border-neutral-400/40"
-          onClick={() => setIsOpenDialog(true)}
         >
           <img src={DownLoadIcon} alt="다운로드" className="" />
         </button>
@@ -59,7 +59,12 @@ const BankerMessagePage = () => {
     </div>,
   ];
 
-  const renderedMessages = useDelayRender(FakeMessages, MESSAGE_DELAY_MS);
+  const [renderedMessages, isDone] = useDelayRender(FakeMessages, MESSAGE_DELAY_MS);
+
+  const handleOpenDialog = () =>{
+    if(isDone)
+      setIsOpenDialog(true)
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -83,7 +88,8 @@ const BankerMessagePage = () => {
             animationData={ClickAnimation}
             loop
             autoplay
-            className="absolute top-70 left-36 translate-[60%] w-25 pointer-events-none z-50"
+            className="absolute top-70 left-36 translate-[60%] w-25 z-50"
+            onClick={handleOpenDialog}
           />
         )}
         {/* 바텀 스크롤 타겟 */}

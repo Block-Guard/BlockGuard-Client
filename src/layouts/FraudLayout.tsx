@@ -5,16 +5,6 @@ import { useEffect, useMemo } from "react";
 import { useFraudSurvey } from "../hooks/useFraudSurvey";
 import Header from "../components/Header/Header";
 
-export type AnswerValue = string | string[] | File[];
-export type SurveyAnswers = {
-  [key: string]: AnswerValue | undefined;
-};
-export type FraudSurveyContextType = {
-  allAnswers: SurveyAnswers;
-  updateAnswers: (newAnswer: Partial<SurveyAnswers>) => void;
-  progress: number;
-};
-
 const FraudLayout = () => {
   const location = useLocation();
   const {

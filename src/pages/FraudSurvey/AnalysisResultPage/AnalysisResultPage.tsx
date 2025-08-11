@@ -15,6 +15,7 @@ import { fraudAnalysisApi } from "../../../apis/fraud";
 import type { FraudResultData } from "../../../types/fraud-types";
 import Button from "../../../components/Button/Button";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
+import AnalysisErrorPage from "../AnalysisErrorPage/AnalysisErrorPage";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -34,6 +35,7 @@ const AnalysisResultPage = () => {
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
 
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/13");
     /** 사기 분석 결과 얻은 후, localStorage 내 설문 초기화 */
@@ -63,14 +65,14 @@ const AnalysisResultPage = () => {
         }
 
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
-        console.log("디버깅용 formData 출력");
-        for (const [key, value] of formData.entries()) {
-            if (key !== "imageFiles") {
-                for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
-                    console.log(`FormData: ${key2} = ${value2}`);
-                }
-            }
-        }
+        // console.log("디버깅용 formData 출력");
+        // for (const [key, value] of formData.entries()) {
+        //     if (key !== "imageFiles") {
+        //         for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
+        //             console.log(`FormData: ${key2} = ${value2}`);
+        //         }
+        //     }
+        // }
         return formData;
     }
 
@@ -80,6 +82,9 @@ const AnalysisResultPage = () => {
 
     useEffect(() => {
         const process = async () => {
+            // 테스트용
+            // setIsLoading(false);
+            // setData(dummyResponse.data);
             try {
                 setIsLoading(true);
                 const formData = makeForm();
@@ -90,10 +95,8 @@ const AnalysisResultPage = () => {
                 setResultTheme(detailDegree);
                 setIsLoading(false);
             } catch (error) {
-                console.error("사기 분석 결과 페이지에서 로드 오류 발생 - 더미데이터 로드", error);
-                setData(dummyResponse.data);
-                const themeIndex = getTheme(dummyResponse.data.riskLevel);
-                setResultTheme(riskState[themeIndex]);
+                console.error("사기 분석 결과 페이지에서 로드 오류 발생 오류페이지 로드", error);
+                setIsError(true);
             } finally {
                 setIsLoading(false);
             }
@@ -109,6 +112,8 @@ const AnalysisResultPage = () => {
 
     if (isLoading) {
         return <AnalysisLoadingPage />
+    }else if(isError){
+        return <AnalysisErrorPage/>
     }
 
     return (
@@ -150,8 +155,6 @@ const AnalysisResultPage = () => {
 
             {/* 여기까지 상단 안내 */}
             
-                
-
             <div className="flex flex-col items-center py-7.5 px-6 z-10">
                 <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
                     {resultTheme.text}
@@ -192,7 +195,7 @@ const AnalysisResultPage = () => {
                 </Button>
 
                 {/* 여기부터 응답과 상관없음 */}
-                <div className="text-center text-black text-xl font-bold leading-loose">
+                <div className="mt-3 text-center text-black text-xl font-bold leading-loose">
                     AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
                 </div>
 

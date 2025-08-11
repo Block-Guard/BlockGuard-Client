@@ -1,3 +1,4 @@
+
 import type { NOKInfoType } from "./nok-info-types";
 
 interface ApiBaseResponse {
@@ -79,6 +80,7 @@ export interface FruadAnalysisResponse extends ApiBaseResponse {
     explanation: string;
   };
 }
+
 /** 홈페이지 전화번호, url 분석 api 응답 */
 export interface UrlNumAnalysisResponse extends ApiBaseResponse {
   data: {
@@ -112,7 +114,7 @@ export interface NewsItem {
 }
 
 /** 뉴스 목록 조회 API 응답 */
-export interface NewsListResponse {
+export interface NewsListResponse extends ApiBaseResponse{
   data: {
     news: NewsItem[];
     pageableInfo: {
@@ -126,11 +128,25 @@ export interface NewsListResponse {
 }
 
 /** 뉴스 목록 조회 API 응답 */
-export interface SelectedNewsResponse {
+export interface SelectedNewsResponse extends ApiBaseResponse {
   data: NewsItem[];
   // data: {
   //   news: NewsItem[]
   // }
+}
+
+export interface GuardianItem {
+  guardiansId: number;
+	name: string;
+	phoneNumber: string;
+	isPrimary: boolean;
+	profileImageUrl: string;
+}
+
+export interface GuardiansListResponse extends ApiBaseResponse{
+  data: {
+   guardians: GuardianItem[];
+  }
 }
 
 // 보호자 등록 api 응답
@@ -142,3 +158,4 @@ export interface CreateNewGuardianResponse extends ApiBaseResponse {
 export interface GetGuardiansListResponse extends ApiBaseResponse {
   data: { guardians: NOKInfoType[] };
 }
+

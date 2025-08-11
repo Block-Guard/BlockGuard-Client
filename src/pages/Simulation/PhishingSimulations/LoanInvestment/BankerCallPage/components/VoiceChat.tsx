@@ -26,8 +26,13 @@ const VoiceChats = [
 
 const VoiceChatRenderer = () => {
     const navigate = useNavigate();
-    const handleClickScreen = () => navigate("/simulation/loan-investment/message-app");
-    const renderedChats = useDelayRender(VoiceChats, MESSAGE_DELAY_MS);
+    const [renderedChats, isDone] = useDelayRender(VoiceChats, MESSAGE_DELAY_MS);
+
+    const handleClickScreen = () => {
+        if(isDone)
+            navigate("/simulation/loan-investment/message-app");
+    }
+    
     return (
         <div className="h-[50%] flex flex-col justify-start items-start gap-2.5 mb-25" onClick={handleClickScreen}>
             <div className="flex w-full gap-5 mb-2.5">
