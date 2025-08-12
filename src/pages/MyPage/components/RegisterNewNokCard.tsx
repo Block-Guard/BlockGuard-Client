@@ -19,6 +19,7 @@ const RegisterNewNokCard = ({ setAddNokMode, setIsChangedFlag }: Props) => {
     name: "",
     phoneNumber: "",
     profileImage: null,
+    isDefaultImage: false,
   });
   const [nokProfileImg, setNokProfileImg] = useState<File | null>(null);
 
@@ -57,6 +58,7 @@ const RegisterNewNokCard = ({ setAddNokMode, setIsChangedFlag }: Props) => {
       name: newNokInfo.name,
       phoneNumber: newNokInfo.phoneNumber,
       profileImage: nokProfileImg || null,
+      isDefaultImage: false,
     };
     try {
       const response = await createNewNokApi(formData);

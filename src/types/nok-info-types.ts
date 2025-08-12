@@ -10,4 +10,5 @@ export interface NOKFormType {
   name: string;
   phoneNumber: string;
   profileImage: File | null;
+  isDefaultImage: boolean;
 }

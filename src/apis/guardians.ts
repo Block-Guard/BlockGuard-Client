@@ -92,8 +92,10 @@ export const updateGuardinaInfoApi = async (
   const formData = new FormData();
   formData.append("name", payload.name);
   formData.append("phoneNumber", payload.phoneNumber);
-  if (payload.profileImage)
+  if (payload.profileImage) {
     formData.append("profileImage", payload.profileImage);
+  }
+  formData.append("isDefaultImage", String(payload.isDefaultImage));
 
   try {
     const response = await axiosInstance.put<CreateNewGuardianResponse>(

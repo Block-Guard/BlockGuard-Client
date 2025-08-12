@@ -35,6 +35,7 @@ export const editUserInfoApi = async (payload: EditUserInfoPayload) => {
   formData.append("phoneNumber", payload.phoneNumber);
   if (payload.profileImage)
     formData.append("profileImage", payload.profileImage);
+  formData.append("isDefaultImage", String(payload.isDefaultImage));
 
   try {
     const response = await axiosInstance.put<EditUserInfoResponse>(

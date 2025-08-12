@@ -12,4 +12,5 @@ export interface EditUserInfoPayload {
   birthDate: string;
   phoneNumber: string;
   profileImage?: File | null; // 선택
+  isDefaultImage: string;
 }

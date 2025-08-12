@@ -13,12 +13,17 @@ import EditPasswordIcon from "@/assets/icons/edit-pw-icon.svg";
 import RightArrowIcon from "@/assets/icons/arrow-right-darkblue-icon.svg";
 import Button from "../../components/Button/Button";
 import { toast } from "sonner";
+import MyPageMenuPopover from "./components/MyPageMenuPopover";
 
 const EditUserInfoPage = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState<UserInfoType>();
+  const [previousProfileImg, setPreviousProfileImg] = useState<string | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [newProfileImg, setNewProfileImg] = useState<File | null>(null);
+  const [wantDefaultImg, setWantDefaultImg] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -28,8 +33,11 @@ const EditUserInfoPage = () => {
   const getUserInfo = async () => {
     try {
       const response = await getUserInfoApi();
-      setUserInfo(response);
-      setIsLoading(false);
+      if (response) {
+        setUserInfo(response);
+        setPreviousProfileImg(response?.profileImageUrl);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.error("유저 정보 조회 클라이언트 측 오류 메시지", error);
     }
@@ -39,6 +47,7 @@ const EditUserInfoPage = () => {
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files?.[0]) {
       setNewProfileImg(e.target.files?.[0]);
+      setWantDefaultImg(false);
     }
   };
 
@@ -67,6 +76,7 @@ const EditUserInfoPage = () => {
       birthDate: userInfo.birthDate,
       phoneNumber: userInfo.phoneNumber,
       profileImage: newProfileImg || null,
+      isDefaultImage: String(wantDefaultImg),
     };
     try {
       await editUserInfoApi(formData);
@@ -99,27 +109,46 @@ const EditUserInfoPage = () => {
       />
       {userInfo && (
         <form className="flex flex-col px-6 py-18" onSubmit={handleSubmit}>
-          <div className="relative w-40 self-center" onClick={openFilePicker}>
-            <img
-              className="rounded-full w-40 h-40"
-              src={
-                newProfileImg
-                  ? URL.createObjectURL(newProfileImg)
-                  : userInfo.profileImageUrl || BlockeeProfile
-              }
-            />
-            <img
-              className="absolute bottom-0 right-1"
-              src={EditProfileImgIcon}
-            />
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleFileChange}
-            />
-          </div>
+          <MyPageMenuPopover
+            popoverTrigger={
+              <div className="relative w-40 self-center">
+                <img
+                  className="rounded-full w-40 h-40"
+                  src={
+                    newProfileImg
+                      ? URL.createObjectURL(newProfileImg)
+                      : previousProfileImg || BlockeeProfile
+                  }
+                />
+                <img
+                  className="absolute bottom-0 right-1"
+                  src={EditProfileImgIcon}
+                />
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleFileChange}
+                />
+              </div>
+            }
+            popoverContent={
+              <div className="flex flex-col gap-1 text-[16px] leading-9">
+                <span onClick={openFilePicker}>파일 선택</span>
+                <span
+                  onClick={() => {
+                    setNewProfileImg(null);
+                    setWantDefaultImg(true);
+                    setPreviousProfileImg(null);
+                  }}
+                >
+                  기본 이미지 적용
+                </span>
+              </div>
+            }
+          />
+
           <div className="flex flex-col gap-4 mt-4 mb-14">
             <LabeledInput
               label="이름"

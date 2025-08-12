@@ -8,10 +8,9 @@ import {
 type Props = {
   popoverTrigger: React.ReactNode;
   popoverContent: React.ReactNode;
-  isPrimary: boolean;
 };
 
-const NokInfoPopover = ({ popoverTrigger, popoverContent }: Props) => {
+const MyPageMenuPopover = ({ popoverTrigger, popoverContent }: Props) => {
   return (
     <Popover>
       <PopoverTrigger asChild>{popoverTrigger}</PopoverTrigger>
@@ -24,4 +23,4 @@ const NokInfoPopover = ({ popoverTrigger, popoverContent }: Props) => {
   );
 };
 
-export default NokInfoPopover;
+export default MyPageMenuPopover;

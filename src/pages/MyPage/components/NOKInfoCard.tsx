@@ -1,7 +1,7 @@
 import BlockeeProfile from "@/assets/characters/default-profile-img.png";
 import ViewMoreIcon from "@/assets/icons/view-more-icon.svg";
 import type { NOKInfoType } from "../../../types/nok-info-types";
-import NokInfoPopover from "./NokInfoPopover";
+import MyPageMenuPopover from "./MyPageMenuPopover";
 import {
   deleteGuardianApi,
   updateIsGuardianPrimary,
@@ -66,7 +66,7 @@ const NOKInfoCard = ({ nokInfo, setIsChangedFlag }: Props) => {
           )}
         </div>
       </div>
-      <NokInfoPopover
+      <MyPageMenuPopover
         popoverTrigger={<img src={ViewMoreIcon} />}
         popoverContent={
           <div className="flex flex-col gap-1 text-[16px] leading-9">
@@ -80,7 +80,6 @@ const NOKInfoCard = ({ nokInfo, setIsChangedFlag }: Props) => {
             <span onClick={deleteGuardian}>보호자 삭제</span>
           </div>
         }
-        isPrimary={nokInfo.isPrimary}
       />
     </div>
   );

@@ -10,6 +10,7 @@ import BlockeeProfile from "@/assets/characters/default-profile-img.png";
 import EditProfileImgIcon from "@/assets/icons/edit-profilte-img-icon.svg";
 import Button from "../../../components/Button/Button";
 import { updateGuardinaInfoApi } from "../../../apis/guardians";
+import MyPageMenuPopover from "./MyPageMenuPopover";
 
 type Props = {
   nokInfoProps: NOKInfoType;
@@ -27,6 +28,10 @@ const EditNokInfoCard = ({
     phoneNumber: nokInfoProps.phoneNumber,
   });
   const [nokProfileImg, setNokProfileImg] = useState<File | null>(null);
+  const [previousProfileImg, setPreviousProfileImg] = useState<string | null>(
+    nokInfoProps.profileImageUrl
+  );
+  const [wantDefaultImg, setWantDefaultImg] = useState(false);
 
   const profileImgInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,6 +39,7 @@ const EditNokInfoCard = ({
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files?.[0]) {
       setNokProfileImg(e.target.files?.[0]);
+      setWantDefaultImg(false);
     }
   };
 
@@ -63,6 +69,7 @@ const EditNokInfoCard = ({
       name: nokInfo.name,
       phoneNumber: nokInfo.phoneNumber,
       profileImage: nokProfileImg || null,
+      isDefaultImage: wantDefaultImg,
     };
     try {
       const response = await updateGuardinaInfoApi(
@@ -86,27 +93,45 @@ const EditNokInfoCard = ({
         onSubmit={submitToEditNokInfo}
       >
         <div className="flex flex-row items-center justify-start gap-6 ml-1">
-          <div className="relative" onClick={openFilePicker}>
-            <img
-              className="w-25 h-25 rounded-full"
-              src={
-                nokProfileImg
-                  ? URL.createObjectURL(nokProfileImg)
-                  : nokInfoProps.profileImageUrl || BlockeeProfile
-              }
-            />
-            <img
-              className="absolute bottom-0 right-[3px] w-6 h-6"
-              src={EditProfileImgIcon}
-            />
-            <input
-              ref={profileImgInputRef}
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleFileChange}
-            />
-          </div>
+          <MyPageMenuPopover
+            popoverTrigger={
+              <div className="relative">
+                <img
+                  className="w-25 h-25 rounded-full"
+                  src={
+                    nokProfileImg
+                      ? URL.createObjectURL(nokProfileImg)
+                      : previousProfileImg || BlockeeProfile
+                  }
+                />
+                <img
+                  className="absolute bottom-0 right-[3px] w-6 h-6"
+                  src={EditProfileImgIcon}
+                />
+                <input
+                  ref={profileImgInputRef}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleFileChange}
+                />
+              </div>
+            }
+            popoverContent={
+              <div className="flex flex-col gap-1 text-[16px] leading-9">
+                <span onClick={openFilePicker}>파일 선택</span>
+                <span
+                  onClick={() => {
+                    setNokProfileImg(null);
+                    setWantDefaultImg(true);
+                    setPreviousProfileImg(null);
+                  }}
+                >
+                  기본 이미지 적용
+                </span>
+              </div>
+            }
+          />
           <div className="flex flex-col gap-2">
             <span className="text-[17px] text-[#79818A] font-semibold leading-[22.5px]">
               {nokInfo.name}
