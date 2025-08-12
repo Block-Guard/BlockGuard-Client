@@ -13,6 +13,7 @@ const EmergencyMainPage = () => {
     reportId: 0,
     step: 0,
   });
+  const [isLogined, setIsLogined] = useState(false);
 
   const getInProgressReportState = async () => {
     try {
@@ -25,8 +26,10 @@ const EmergencyMainPage = () => {
           step: response!.step,
         });
       }
+      setIsLogined(true);
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
+      setIsLogined(false);
     }
   };
 
@@ -42,13 +45,16 @@ const EmergencyMainPage = () => {
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
       <div className="flex flex-col gap-8">
         <EmergencyResponseStart inProgressStep={inProgressStepData.step} />
-        <div className="flex flex-col gap-[10px]">
-          <h2 className="font-bold text-xl leading-8">나의 신고 현황</h2>
-          <ReportProgressCard
-            hasProgress={Boolean(inProgressStepData.reportId)}
-            currentStep={inProgressStepData.step}
-          />
-        </div>
+        {isLogined && (
+          <div className="flex flex-col gap-[10px]">
+            <h2 className="font-bold text-xl leading-8">나의 신고 현황</h2>
+            <ReportProgressCard
+              hasProgress={Boolean(inProgressStepData.reportId)}
+              currentStep={inProgressStepData.step}
+            />
+          </div>
+        )}
+
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-row gap-2 items-center">
             <h2 className="font-bold text-xl leading-8">바로 신고</h2>

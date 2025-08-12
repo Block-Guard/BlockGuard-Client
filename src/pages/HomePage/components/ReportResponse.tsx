@@ -11,6 +11,7 @@ const ReportResponse = () => {
     reportId: 0,
     step: 0,
   });
+  const [isLogined, setIsLogined] = useState(false);
   const getInProgressReportState = async () => {
     try {
       const response = await getInProgressReportApi();
@@ -22,8 +23,10 @@ const ReportResponse = () => {
           step: response!.step,
         });
       }
+      setIsLogined(true);
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
+      setIsLogined(false);
     }
   };
 
@@ -61,10 +64,12 @@ const ReportResponse = () => {
             버튼을 눌러 바로 신고 조치를 취할 수 있어요
           </div>
         </div>
-        <ReportProgressCard
-          hasProgress={Boolean(inProgressStepData.reportId)}
-          currentStep={inProgressStepData.step}
-        />
+        {isLogined && (
+          <ReportProgressCard
+            hasProgress={Boolean(inProgressStepData.reportId)}
+            currentStep={inProgressStepData.step}
+          />
+        )}
       </div>
     </div>
   );
