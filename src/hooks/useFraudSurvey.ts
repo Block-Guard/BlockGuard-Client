@@ -60,6 +60,7 @@ export const useFraudSurvey = () => {
         console.log("테스트 - 현재 답변들 : ", allAnswers)
         setProgress(newProgress);
         if (newProgress > 13) {
+            setProgress(13);
             navigate("/fraud-analysis/survey/result");
         } else if (newProgress > 10) {
             navigate(`/fraud-analysis/survey/${newProgress}`);

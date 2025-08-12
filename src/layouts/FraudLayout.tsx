@@ -68,7 +68,6 @@ const FraudLayout = () => {
                 <img src={LeftArrowIcon} alt="뒤로가기" />
               </button>
             }
-            title={<p>progress : {progress}</p>}
           />
           
           <div className="w-full h-1.5 fixed mt-[57px]">
