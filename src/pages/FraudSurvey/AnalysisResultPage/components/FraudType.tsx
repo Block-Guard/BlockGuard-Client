@@ -1,12 +1,28 @@
-interface FraudTypeProps{
-    data:FraudResultData
+interface FraudTypeProps {
+    data: FraudResultData
 }
 
 import type { FraudResultData } from "../../../../types/fraud-types";
 
-const FraudType = ({data}:FraudTypeProps) => {
+const FraudType = ({ data }: FraudTypeProps) => {
 
-    const {estimatedFraudType, explanation, keywords} = data;
+    const { estimatedFraudType, explanation, keywords } = data;
+
+    const makeForm = (keywords: string[]) => {
+        let str = "";
+        keywords.map((word, index) => {
+            if (index === 0) {
+                str += `"${word}`;
+            }
+            else if (index === keywords.length - 1) {
+                str += `${word}"`;
+            }
+            else {
+                str += ` + ${word} + `
+            }
+        })
+        return str;
+    }
 
     return (
         <div className="w-full">
@@ -32,15 +48,10 @@ const FraudType = ({data}:FraudTypeProps) => {
 
                 <div className="w-full px-4 py-3.5 mb-7.5 bg-gray-100 rounded-2xl outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-start gap-2.5">
                     <div className="flex text-lg font-bold leading-snug">
-
-                        {keywords.map((keyWord, index) => {
-                            return (
-                                <span className="text-red-500" key={keyWord}>
-                                    {index === 0 ? "\"" : <>&nbsp;</>}
-                                    {keyWord}
-                                    {index !== keywords.length - 1 ? " + " : "\""}
-                                </span>)
-                        })} 등
+                        <span className="text-red-500">
+                            {makeForm(keywords)}
+                        </span>
+                        
                     </div>
 
                     <div className="text-slate-950 text-lg font-bold leading-snug">

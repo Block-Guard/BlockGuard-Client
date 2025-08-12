@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MESSAGE_DELAY_MS } from "../constants/delay-ms";
+import { VOICECHAT_DELAY_MS } from "../constants/delay-ms";
 import VoiceFrequency from "@/assets/simulation/phone-button-icons/voice-frequency-sign.svg";
 
 const CardVoiceChatRenderer = () => {
@@ -28,7 +28,7 @@ const CardVoiceChatRenderer = () => {
       audio.onended = () => {
         // step 0 끝 → 딜레이 후 step 1
         if (currentStep === 0) {
-          setTimeout(() => setRenderStep(1), MESSAGE_DELAY_MS);
+          setTimeout(() => setRenderStep(1), VOICECHAT_DELAY_MS);
         }
       };
 
@@ -110,10 +110,10 @@ const CardVoiceChatRenderer = () => {
             className="flex flex-col justify-center items-center gap-3"
             onClick={clickToNextPage}
           >
-            <p className="text-xl font-bold text-white w-full text-center">
+            <p className="text-xl font-bold text-white w-full text-center animate-pulse">
               클릭해주세요!
             </p>
-            <p className="text-[15px] text-white">
+            <p className="text-[15px] text-white animate-pulse">
               바로 문자 화면으로 넘어갑니다.
             </p>
           </div>

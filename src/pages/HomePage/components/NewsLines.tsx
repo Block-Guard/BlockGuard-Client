@@ -55,7 +55,7 @@ const NewsLines = () => {
         <button
           type="button"
           aria-label="뉴스 페이지로 이동"
-          className="text-center text-gray-200 text-sm font-medium hover:cursor-pointer"
+          className="text-center text-[#A9A9A9] text-sm font-medium hover:cursor-pointer"
           onClick={handleMoreNews}
         >
           전체보기

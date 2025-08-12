@@ -13,7 +13,6 @@ import { TypeFeature } from "./components/TypeFeature";
 import AnalysisLoadingPage from "../AnalysisLoadingPage/AnalysisLoadingPage";
 import { fraudAnalysisApi } from "../../../apis/fraud";
 import type { FraudResultData } from "../../../types/fraud-types";
-import Button from "../../../components/Button/Button";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 import AnalysisErrorPage from "../AnalysisErrorPage/AnalysisErrorPage";
 
@@ -43,10 +42,6 @@ const AnalysisResultPage = () => {
         localStorage.removeItem("surveyAnswers");
         navigate("/home");
     }
-    const handleLearnClick = () => {
-        // 일단 전체로 처리. 추후 사기 분석 결과 유형이 뉴스와 대응되면 추가.
-        navigate(`/news/recent?category=전체`)
-    }
 
     const makeForm = () => {
         const formData = new FormData();
@@ -60,19 +55,25 @@ const AnalysisResultPage = () => {
             if (booleanAnswer.includes(key)) {
                 stringSurvey[key] = (value === "네");
             } else if (key === "imageFiles") {
-                (value as File[]).forEach(file => formData.append(key, file));
+                if(value?.length !== 0)
+                    (value as File[]).forEach(file => formData.append(key, file));
+            }
+            else if(value && (typeof value === "string" || (Array.isArray(value) && value.every(item => typeof item === 'string')))){
+                stringSurvey[key] = value;
             }
         }
-
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
-        // console.log("디버깅용 formData 출력");
-        // for (const [key, value] of formData.entries()) {
-        //     if (key !== "imageFiles") {
-        //         for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
-        //             console.log(`FormData: ${key2} = ${value2}`);
-        //         }
-        //     }
-        // }
+        console.log("디버깅용 formData 출력");
+         for (const [key, value] of formData.entries()) {
+            console.log("formData key값 : ", key);
+             if (key !== "imageFiles") {
+                 for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
+                     console.log(`FormData 중 ${key}를 키값으로 갖는 데이터 : ${key2} = ${value2}`);
+                 }
+             }else if(key === "imageFiles"){
+                console.log("key 값이 이미지파일인 경우 : ", typeof value);
+             }
+         }
         return formData;
     }
 
@@ -85,11 +86,11 @@ const AnalysisResultPage = () => {
             // 테스트용
             // setIsLoading(false);
             // setData(dummyResponse.data);
-
             try {
                 setIsLoading(true);
                 const formData = makeForm();
                 const response = await getResult(formData);
+                console.log("사기 분석 요청 결과 : ", response)
                 setData(response);
                 const themeIndex = getTheme(response.riskLevel)
                 const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
@@ -189,14 +190,11 @@ const AnalysisResultPage = () => {
                     </>
                 ) : null}
 
+                {/* 여기부터 응답과 상관없음 */}
+
                 {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature />}
 
-                <Button onClick={handleLearnClick} size="lg" isHighlight={false}>
-                    관련 피해 사례 더보기
-                </Button>
-
-                {/* 여기부터 응답과 상관없음 */}
-                <div className="mt-3 text-center text-black text-xl font-bold leading-loose">
+                <div className="text-center text-black text-xl font-bold leading-loose">
                     AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
                 </div>
 

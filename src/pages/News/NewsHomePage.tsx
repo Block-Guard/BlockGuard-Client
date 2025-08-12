@@ -92,7 +92,7 @@ const NewsHomePage = () => {
                     <h1 className=" text-monochrome-700 text-xl font-bold leading-loose ">
                         최신 기사
                     </h1>
-                    <p className="text-zinc-300 text-sm font-medium"
+                    <p className="text-[#A9A9A9] text-sm font-medium"
                     onClick={handleMoreNews}>
                         더보기
                     </p>

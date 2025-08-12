@@ -1,7 +1,7 @@
 import useDelayRender from "../../../../../../hooks/useDelayRender";
 import VoiceFrequency from "../../../../../../assets/simulation/phone-button-icons/voice-frequency-sign.svg";
 import { useNavigate } from "react-router-dom";
-import { MESSAGE_DELAY_MS } from "../../../constants/delay-ms";
+import { VOICECHAT_DELAY_MS } from "../../../constants/delay-ms";
 
 const VoiceChats = [
   <div className="w-full p-2.5 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center gap-2.5">
@@ -18,14 +18,15 @@ const VoiceChats = [
     제가 신청절차 도와드릴거라 지금 문자로 신청서 파일 하나 보내드릴건데 확인
     한번해주겠습니까”
   </div>,
-  <div className="w-full flex p-4 justify-center items-center text-center text-white">
+  <div className="w-full flex p-4 justify-center items-center text-center text-white
+  animate-pulse">
     화면을 클릭해 진행해주세요
   </div>,
 ];
 
 const VoiceChatRenderer = () => {
   const navigate = useNavigate();
-  const [renderedChats, isDone] = useDelayRender(VoiceChats, MESSAGE_DELAY_MS);
+  const [renderedChats, isDone] = useDelayRender(VoiceChats, VOICECHAT_DELAY_MS);
 
   const handleClickScreen = () => {
     if (isDone) navigate("/simulation/loan-investment/message-app");

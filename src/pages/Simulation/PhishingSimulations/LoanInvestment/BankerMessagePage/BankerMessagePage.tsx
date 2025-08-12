@@ -15,7 +15,6 @@ const BankerMessagePage = () => {
   const FakeMessages = [
     <div key={1} className="w-full flex flex-col gap-[30px] px-[15px]">
       <div className="whitespace-pre-line p-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
-        안녕하세요~ <br />
         XX은행 상담원 OOO입니다. <br />
         고객님께서 문의주신 대출신청 상담문의 안내드립니다^^
       </div>
@@ -88,7 +87,7 @@ const BankerMessagePage = () => {
             animationData={ClickAnimation}
             loop
             autoplay
-            className="absolute top-70 left-36 translate-[60%] w-25 z-50"
+            className="absolute top-62 left-36 translate-[60%] w-25 z-50"
             onClick={handleOpenDialog}
           />
         )}

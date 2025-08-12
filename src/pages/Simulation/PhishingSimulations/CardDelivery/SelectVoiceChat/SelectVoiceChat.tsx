@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import VoiceFrequency from "@/assets/simulation/phone-button-icons/voice-frequency-sign.svg";
-import { MESSAGE_DELAY_MS } from "../../constants/delay-ms";
+import { VOICECHAT_DELAY_MS } from "../../constants/delay-ms";
 import type { VoiceCallData } from "./voice-chat-data";
 
 type SelectVoiceChatProps = {
@@ -29,7 +29,7 @@ const SelectVoiceChat = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsRenderedSelectButton(true);
-    }, MESSAGE_DELAY_MS);
+    }, VOICECHAT_DELAY_MS);
     return () => clearTimeout(timer);
   }, [voiceChatData]);
   return (
@@ -66,7 +66,7 @@ const SelectVoiceChat = ({
       )}
       {selectedResponse && (
         <p
-          className="text-xl font-bold text-white w-full text-center py-5"
+          className="text-xl font-bold text-white w-full text-center py-5 animate-pulse"
           onClick={handleClick}
         >
           클릭해주세요!

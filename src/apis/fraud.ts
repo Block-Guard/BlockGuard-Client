@@ -5,6 +5,7 @@ const FRAUD_RESULT_API = "https://www.blockguard.shop/api/fraud-analysis";
 /** 사기분석 설문 전송, 결과 수신 api */
 export const fraudAnalysisApi = async (formdata: FormData) => {
     try {
+        console.log("사기 분석 api 요청 시작")
         const response = await axios.post<FruadAnalysisResponse>(
             FRAUD_RESULT_API, formdata,
             {
