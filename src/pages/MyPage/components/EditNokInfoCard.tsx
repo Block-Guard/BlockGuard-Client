@@ -11,6 +11,7 @@ import EditProfileImgIcon from "@/assets/icons/edit-profilte-img-icon.svg";
 import Button from "../../../components/Button/Button";
 import { updateGuardinaInfoApi } from "../../../apis/guardians";
 import MyPageMenuPopover from "./MyPageMenuPopover";
+import { maskPhoneNumber } from "../../../utils/utils";
 
 type Props = {
   nokInfoProps: NOKInfoType;
@@ -137,7 +138,7 @@ const EditNokInfoCard = ({
               {nokInfo.name}
             </span>
             <span className="text-[15px] text-[#79818A] leading-[22.5px]">
-              {nokInfo.phoneNumber}
+              {maskPhoneNumber(nokInfo.phoneNumber)}
             </span>
           </div>
         </div>

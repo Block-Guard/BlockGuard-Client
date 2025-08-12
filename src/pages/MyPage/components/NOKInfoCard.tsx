@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import EditNokInfoCard from "./EditNokInfoCard";
 import { toast } from "sonner";
+import { maskPhoneNumber } from "../../../utils/utils";
 
 type Props = {
   nokInfo: NOKInfoType;
@@ -57,7 +58,7 @@ const NOKInfoCard = ({ nokInfo, setIsChangedFlag }: Props) => {
         <div className="relative flex flex-col gap-[3px] justify-center">
           <span className="text-lg font-semibold">{nokInfo.name}</span>
           <span className="text-[17px] text-[#00487C]">
-            {nokInfo.phoneNumber}
+            {maskPhoneNumber(nokInfo.phoneNumber)}
           </span>
           {nokInfo.isPrimary && (
             <div className="absolute top-2.5 -right-9 rounded-sm bg-primary-400 text-white text-[10px] font-semibold py-1 px-2">
