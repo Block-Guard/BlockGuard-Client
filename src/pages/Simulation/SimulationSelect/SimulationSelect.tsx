@@ -19,7 +19,13 @@ const SimulationSelect = () => {
   useEffect(() => {
     if (isLoading) {
       const timer = setTimeout(() => {
-        switch (selectedType) {
+        let scenario: number;
+        if (selectedType === 5) {
+          scenario = Math.floor(Math.random() * 4) + 1;
+        } else {
+          scenario = selectedType;
+        }
+        switch (scenario) {
           case 1:
             navigate("/simulation/public-organ/step1");
             break;
@@ -32,6 +38,8 @@ const SimulationSelect = () => {
           case 4:
             navigate("/simulation/card-delivery/first-message");
             break;
+          case 5:
+
           default:
             navigate("/simulation/select-type");
         }
