@@ -17,21 +17,20 @@ const FirstCardDeliveryCall = () => {
   const [isSecondStep, setIsSecondStep] = useState(false);
 
   const ringtoneRef = useRef<HTMLAudioElement | null>(null);
-  const voice1Ref = useRef<HTMLAudioElement | null>(null);
-  const voice2Ref = useRef<HTMLAudioElement | null>(null);
+  const voiceRef = useRef<HTMLAudioElement | null>(null);
 
   const ringtone = "/sounds/iphone-ringtone.mp3";
   // 추후 배송기사 음성
-  const deliveryDriverVoice1 = "/sounds/police-voice-exam.mp3";
-  const deliveryDriverVoice2 = "/sounds/police-voice-exam.mp3";
+  const deliveryDriverVoice1 =
+    "/sounds/card-delivery/card-delivery-driver1.m4a";
+  const deliveryDriverVoice2 =
+    "/sounds/card-delivery/card-delivery-driver2.m4a";
 
   // 벨소리 재생
   useEffect(() => {
     const audio = new Audio(ringtone);
     ringtoneRef.current = audio;
-    audio.play().catch((error) => {
-      console.error("Ringtone playback failed:", error);
-    });
+    audio.play().catch((e) => console.error("Ringtone playback failed:", e));
 
     return () => {
       audio.pause();
@@ -39,46 +38,65 @@ const FirstCardDeliveryCall = () => {
     };
   }, []);
 
+  const stopVoice = () => {
+    voiceRef.current?.pause();
+    voiceRef.current = null;
+  };
+
   const onClickToRespond = () => {
     setIsAnsweredPhone(true);
-
     // 벨소리 중지
     ringtoneRef.current?.pause();
     ringtoneRef.current = null;
 
-    // 음성1 재생
-    const audio1 = new Audio(deliveryDriverVoice1);
-    voice1Ref.current = audio1;
-    audio1.play().catch((error) => {
-      console.error("Voice1 playback failed:", error);
-    });
-
-    // 1초 뒤에 대화 인터페이스 시작
-    const timer = setTimeout(() => {
-      setIsStartedVoiceChat(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    // 1초 뒤 대화 인터페이스 시작
+    setTimeout(() => setIsStartedVoiceChat(true), 1000);
   };
 
   const onClickToSecondStep = () => {
-    setIsSecondStep(true);
-
-    // 음성2 재생
-    const audio2 = new Audio(deliveryDriverVoice2);
-    voice2Ref.current = audio2;
-    audio2.play().catch((error) => {
-      console.error("Voice2 playback failed:", error);
-    });
+    setIsSecondStep(true); // 실제 재생은 아래 useEffect가 담당
   };
 
+  // step 변화에 따라 해당 음성만 재생, 이전 것은 항상 중지
   useEffect(() => {
-    if (isAnsweredPhone) {
-      const timer = setTimeout(() => {
-        setCallTime((prev) => prev + 1);
-      }, 1000);
-      return () => clearTimeout(timer);
+    if (!isStartedVoiceChat) {
+      stopVoice();
+      return;
     }
+
+    // step1/step2에 맞는 소스 선택
+    const src = isSecondStep ? deliveryDriverVoice2 : deliveryDriverVoice1;
+
+    // 이전 음성 정지
+    stopVoice();
+
+    // 새 음성 재생
+    const audio = new Audio(src);
+    voiceRef.current = audio;
+    audio.play().catch((e) => console.error("Voice playback failed:", e));
+
+    // 다음 변경/언마운트 시 정리
+    return () => {
+      audio.pause();
+      if (voiceRef.current === audio) voiceRef.current = null;
+    };
+  }, [isStartedVoiceChat, isSecondStep]);
+
+  // 다른 페이지로 이동할 때(언마운트) 전체 오디오 종료
+  useEffect(() => {
+    return () => {
+      ringtoneRef.current?.pause();
+      voiceRef.current?.pause();
+      ringtoneRef.current = null;
+      voiceRef.current = null;
+    };
+  }, []);
+
+  // 통화 시간
+  useEffect(() => {
+    if (!isAnsweredPhone) return;
+    const t = setTimeout(() => setCallTime((p) => p + 1), 1000);
+    return () => clearTimeout(t);
   }, [isAnsweredPhone, callTime]);
 
   return (

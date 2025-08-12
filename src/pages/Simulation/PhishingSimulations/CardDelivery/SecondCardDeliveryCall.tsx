@@ -14,9 +14,23 @@ const SecondCardDeliveryCall = () => {
   const staffVoiceRef = useRef<HTMLAudioElement | null>(null);
 
   // 추후 ars 음성이 필요함. ex) 0번을 눌러주세요.
-  const arsVoice = "/sounds/iphone-ringtone.mp3";
+  const arsVoice = "/sounds/card-delivery/ringtone-card.m4a";
   // 0번을 누르면 재생되면 직원 음성
-  const cardCompanyStaffVoice1 = "/sounds/police-voice-exam.mp3";
+  const cardCompanyStaffVoice1 = "/sounds/card-delivery/card-employee1.m4a";
+
+  useEffect(() => {
+    return () => {
+      arsVoiceRef.current?.pause();
+      staffVoiceRef.current?.pause();
+      arsVoiceRef.current = null;
+      staffVoiceRef.current = null;
+    };
+  }, []);
+
+  const stopVoice = () => {
+    staffVoiceRef.current?.pause();
+    staffVoiceRef.current = null;
+  };
 
   // 최초 진입 시 ARS 음성 재생 (한 번만)
   useEffect(() => {
@@ -48,6 +62,7 @@ const SecondCardDeliveryCall = () => {
   };
 
   const onClickToSecondStep = () => {
+    stopVoice();
     setIsSecondStep(true);
   };
 

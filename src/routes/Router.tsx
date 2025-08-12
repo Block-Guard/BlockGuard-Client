@@ -65,7 +65,6 @@ import ChangePasswordPage from "../pages/MyPage/ChangePasswordPage";
 import NewsHomePage from "../pages/News/NewsHomePage";
 import RecentNewsPage from "../pages/News/RecentNewsPage";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -221,9 +220,9 @@ const router = createBrowserRouter([
       },
       {
         path: "recent",
-        element: <RecentNewsPage />
-      }
-    ]
+        element: <RecentNewsPage />,
+      },
+    ],
   },
 
   {
@@ -298,7 +297,7 @@ const router = createBrowserRouter([
           },
           {
             path: "message-app",
-            element: <MessageViewLayout sender="홍길동" />,
+            element: <MessageViewLayout sender="OOO" />,
             children: [{ index: true, element: <BankerMessagePage /> }],
           },
           {

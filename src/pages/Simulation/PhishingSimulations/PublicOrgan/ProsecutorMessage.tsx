@@ -12,7 +12,6 @@ const ProsecutorMessage = () => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const [step, setStep] = useState<number | undefined>();
   const [selectedFirstStepAnswer, setSelectedFirstStepAnswer] = useState(0);
-  const [selectedSecondStepAnswer, setSelectedSecondStepAnswer] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -32,19 +31,8 @@ const ProsecutorMessage = () => {
     }
   };
 
-  const onClickSecondStep = (selected: number) => {
-    if (selectedSecondStepAnswer === 0) {
-      setSelectedSecondStepAnswer(selected);
-      const timer = setTimeout(() => {
-        setStep(6);
-      }, MESSAGE_DELAY_MS);
-      return () => clearTimeout(timer);
-    }
-  };
-
   const resetPage = () => {
     setSelectedFirstStepAnswer(0);
-    setSelectedSecondStepAnswer(0);
     setIsModalOpen(false);
     setStep(undefined);
     setTimeout(() => {
@@ -56,14 +44,11 @@ const ProsecutorMessage = () => {
     switch (step) {
       case 0:
       case 2:
-      case 3:
-      case 4:
-      case 6:
         const timer = setTimeout(() => {
           setStep(step + 1);
         }, MESSAGE_DELAY_MS);
         return () => clearTimeout(timer);
-      case 7:
+      case 3:
         setIsModalOpen(true);
         break;
     }
@@ -84,7 +69,13 @@ const ProsecutorMessage = () => {
           5월 31일 (토) 오후 3:26
         </p>
         <div className="w-full flex flex-col gap-[30px] px-[15px]">
-          <ReceivedMessage content={publicOrganMsgs.step0} />
+          <div className="flex flex-col gap-[10px]">
+            <div className="relative h-[310px] w-[270px]">
+              <img className="absolute top-0 left-4" src={MsgImg1} />
+              <img className="absolute bottom-0 right-4 z-10" src={MsgImg2} />
+            </div>
+            <ReceivedMessage content={publicOrganMsgs.step0} />
+          </div>
           {step >= 1 && (
             <SelectSendMessage
               option1={publicOrganMsgs.step1.answer1}
@@ -94,33 +85,8 @@ const ProsecutorMessage = () => {
               handleToSelectOption={onClickFirstStep}
             />
           )}
-          <div className="flex flex-col gap-[10px]">
-            {step >= 2 && <ReceivedMessage content={publicOrganMsgs.step2} />}
-            {step >= 3 && <ReceivedMessage content={publicOrganMsgs.step3} />}
-            {step >= 4 && (
-              <div className="flex flex-col gap-[10px]">
-                <ReceivedMessage content={publicOrganMsgs.step4} />
-                <div className="relative h-[310px] w-[270px]">
-                  <img className="absolute top-0 left-4" src={MsgImg1} />
-                  <img
-                    className="absolute bottom-0 right-4 z-10"
-                    src={MsgImg2}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-          {step >= 5 && (
-            <SelectSendMessage
-              option1={publicOrganMsgs.step5.answer1}
-              option2={publicOrganMsgs.step5.answer2}
-              option3={publicOrganMsgs.step5.answer3}
-              selectedOption={selectedSecondStepAnswer}
-              handleToSelectOption={onClickSecondStep}
-            />
-          )}
-          {step >= 6 && <ReceivedMessage content={publicOrganMsgs.step6} />}
-          {step >= 7 && (
+          {step >= 2 && <ReceivedMessage content={publicOrganMsgs.step2} />}
+          {step >= 3 && (
             <PublicOrganModal isModalOpen={isModalOpen} resetPage={resetPage} />
           )}
           {/* 스크롤 타겟 */}

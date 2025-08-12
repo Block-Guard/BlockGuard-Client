@@ -16,7 +16,7 @@ const BankerMessagePage = () => {
     <div key={1} className="w-full flex flex-col gap-[30px] px-[15px]">
       <div className="whitespace-pre-line p-3 max-w-[300px] w-fit bg-[#e9e9eb] rounded-[20px] text-[15px] text-start">
         안녕하세요~ <br />
-        XX은행 상담원 홍길동입니다. <br />
+        XX은행 상담원 OOO입니다. <br />
         고객님께서 문의주신 대출신청 상담문의 안내드립니다^^
       </div>
     </div>,
@@ -35,9 +35,7 @@ const BankerMessagePage = () => {
         </div>
       </div>
       <div className="relative">
-        <button
-          className="flex justify-center items-center w-7 h-7 bg-[#e9e9eb] rounded-full border-[0.30px] border-neutral-400/40"
-        >
+        <button className="flex justify-center items-center w-7 h-7 bg-[#e9e9eb] rounded-full border-[0.30px] border-neutral-400/40">
           <img src={DownLoadIcon} alt="다운로드" className="" />
         </button>
       </div>
@@ -59,12 +57,14 @@ const BankerMessagePage = () => {
     </div>,
   ];
 
-  const [renderedMessages, isDone] = useDelayRender(FakeMessages, MESSAGE_DELAY_MS);
+  const [renderedMessages, isDone] = useDelayRender(
+    FakeMessages,
+    MESSAGE_DELAY_MS
+  );
 
-  const handleOpenDialog = () =>{
-    if(isDone)
-      setIsOpenDialog(true)
-  }
+  const handleOpenDialog = () => {
+    if (isDone) setIsOpenDialog(true);
+  };
 
   useEffect(() => {
     setTimeout(() => {

@@ -9,48 +9,67 @@ const CardVoiceChatRenderer = () => {
   const voiceRef = useRef<HTMLAudioElement | null>(null);
 
   const voices = [
-    "/sounds/police-voice-exam.mp3", // voice2
-    "/sounds/police-voice-exam.mp3", // voice3
-    "/sounds/police-voice-exam.mp3", // voice4
+    "/sounds/card-delivery/card-employee2.m4a",
+    "/sounds/card-delivery/card-employee3.m4a",
   ];
 
-  const playVoiceWithDelay = (index: number) => {
-    const audio = new Audio(voices[index]);
-    voiceRef.current = audio;
-
-    audio
-      .play()
-      .catch((err) => console.warn(`음성${index + 2} 재생 실패:`, err));
-
-    audio.onended = () => {
-      // 다음 음성으로 넘어가기 전 delay
-      if (renderStep < 2) {
-        setTimeout(() => {
-          setRenderStep((prev) => prev + 1);
-        }, MESSAGE_DELAY_MS);
-      }
-    };
-  };
-
-  // 최초 renderStep이 0일 때 voice2 재생 시작
+  // step에 맞는 음성 재생 (있는 경우에만)
   useEffect(() => {
-    playVoiceWithDelay(renderStep);
+    // 현재 step에 재생할 음성이 있으면 새로 틀기
+    if (renderStep < voices.length) {
+      // 새 음성을 틀기 전에 이전 음성 정지
+      voiceRef.current?.pause();
 
-    return () => {
-      // 컴포넌트 언마운트 또는 음성 변경 시 이전 음성 정지
-      if (voiceRef.current) {
-        voiceRef.current.pause();
-        voiceRef.current = null;
-      }
-    };
+      const audio = new Audio(voices[renderStep]);
+      voiceRef.current = audio;
+
+      // 이 step이 끝났을 때 다음 step으로
+      const currentStep = renderStep; // 캡처
+      audio.onended = () => {
+        // step 0 끝 → 딜레이 후 step 1
+        if (currentStep === 0) {
+          setTimeout(() => setRenderStep(1), MESSAGE_DELAY_MS);
+        }
+      };
+
+      audio
+        .play()
+        .catch((err) => console.warn(`음성${renderStep + 2} 재생 실패:`, err));
+
+      // cleanup에서 pause 하지 않음 (다음 step이 '무음'일 때도 계속 들리게 유지)
+      return () => {
+        audio.onended = null; // 리스너만 정리
+      };
+    }
+
+    // 이 step에 음성이 없으면 아무것도 하지 않음 (이전 음성 계속 재생)
+    return;
   }, [renderStep]);
 
+  // 5초 후 step2로 강제 전환 (음성 종료와 무관)
+  useEffect(() => {
+    if (renderStep !== 1) return;
+    const t = setTimeout(() => setRenderStep(2), 5000);
+    return () => clearTimeout(t);
+  }, [renderStep]);
+
+  // 언마운트 시에는 반드시 정지
+  useEffect(() => {
+    return () => {
+      voiceRef.current?.pause();
+      voiceRef.current = null;
+    };
+  }, []);
+
   const clickToNextPage = () => {
+    // 페이지 이동 전 안전하게 정지 (선택적)
+    voiceRef.current?.pause();
+    voiceRef.current = null;
     navigate("/simulation/card-delivery/second-message-view");
   };
 
   return (
-    <div className="h-[50%] flex flex-col justify-start items-start gap-2.5 mb-25">
+    <div className="h-[60%] flex flex-col justify-start items-start gap-2.5 mb-25">
       <div className="flex flex-row justify-between items-center w-full mb-5">
         <span className="text-stone-200 text-xl font-medium min-w-fit mr-2">
           카드사 직원
@@ -68,7 +87,7 @@ const CardVoiceChatRenderer = () => {
         </div>
       )}
 
-      {renderStep === 1 && (
+      {renderStep >= 1 && (
         <div className="w-full py-6 px-4 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center gap-2.5 font-semibold">
           확인해봤는데, 고객님 명의로 마스터카드가 하나 발급된 정보가
           존재합니다.
