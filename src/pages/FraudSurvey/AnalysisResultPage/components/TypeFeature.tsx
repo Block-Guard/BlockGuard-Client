@@ -1,8 +1,13 @@
 import TypeFeatureCard from "./TypeFeatureCard"
-import FileIcon from "../../../../assets/analysis-result/file-icon.png"
+import NewsIcon from "../../../../assets/analysis-result/news-icon.svg"
+import { useNavigate } from "react-router-dom"
 
 export const TypeFeature = () => {
-    const handleNewsClick = () => console.log("아마 뉴스로 이동일듯?")
+    const navigate = useNavigate();
+    const handleLearnClick = () => {
+        // 일단 전체로 처리. 추후 사기 분석 결과 유형이 뉴스와 대응되면 추가.
+        navigate(`/news/recent?category=전체`)
+    }
 
     return (
         <div className="flex flex-col gap-2.5 w-full mb-7.5">
@@ -20,9 +25,10 @@ export const TypeFeature = () => {
                 content={<>개인정보를 빼내어 범죄에 악용하거나 <br />명의도용을 위해 신분증이나 계좌를 요청해요 </>} />
 
             <button className="w-full h-11 my-2.5 px-4 bg-blue-500 rounded-[10px] inline-flex justify-center items-center gap-1.5"
-                onClick={handleNewsClick}>
+                onClick={handleLearnClick}>
                 <div className="flex items-center text-white text-2xl font-bold leading-9 gap-1.5">
-                    <img src={FileIcon} alt="아이콘" className="w-6 h-6" /> 관련 피해 사례 더보기
+                    <img src={NewsIcon} alt="아이콘" className="w-6 h-6" />
+                    관련 피해 사례 더보기
                 </div>
             </button>
         </div>

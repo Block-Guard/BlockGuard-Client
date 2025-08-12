@@ -297,7 +297,7 @@ const router = createBrowserRouter([
           },
           {
             path: "message-app",
-            element: <MessageViewLayout sender="OOO" />,
+            element: <MessageViewLayout sender="은행 상담원" />,
             children: [{ index: true, element: <BankerMessagePage /> }],
           },
           {

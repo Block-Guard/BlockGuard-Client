@@ -77,7 +77,7 @@ const AfterRemotePage = () => {
 
                 {/* 자동으로 넘어가게 할 시 제거 */}
                 {isMessaged &&
-                    <div className="w-full h-full flex p-4 justify-center items-center text-center text-monochrome-600"
+                    <div className="w-full h-full flex p-4 justify-center items-center text-center text-monochrome-600 animate-pulse"
                         onClick={handleQuizOpen} >
                         화면을 클릭해 진행해주세요
                     </div>}

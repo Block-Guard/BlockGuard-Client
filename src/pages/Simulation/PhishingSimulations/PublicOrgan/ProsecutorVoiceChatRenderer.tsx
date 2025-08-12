@@ -70,10 +70,10 @@ const ProsecutorVoiceChatRenderer = () => {
               className="flex flex-col justify-center items-center gap-3"
               onClick={clickToNextPage}
             >
-              <p className="text-xl font-bold text-white w-full text-center">
+              <p className="text-xl font-bold text-white w-full text-center animate-pulse">
                 클릭해주세요!
               </p>
-              <p className="text-[15px] text-white">
+              <p className="text-[15px] text-white animate-pulse">
                 바로 문자 화면으로 넘어갑니다.
               </p>
             </div>

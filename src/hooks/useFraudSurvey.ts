@@ -57,10 +57,9 @@ export const useFraudSurvey = () => {
 
     const goToNextStep = useCallback(() => {
         const newProgress = progress + 1;
+        console.log("테스트 - 현재 답변들 : ", allAnswers)
         setProgress(newProgress);
-        console.log("디버깅용 answers : ", allAnswers)
         if (newProgress > 13) {
-            // navigate("/fraud-analysis/result", {state:allAnswers});
             navigate("/fraud-analysis/survey/result");
         } else if (newProgress > 10) {
             navigate(`/fraud-analysis/survey/${newProgress}`);

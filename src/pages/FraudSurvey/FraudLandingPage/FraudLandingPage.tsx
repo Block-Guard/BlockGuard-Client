@@ -48,7 +48,7 @@ const FraudLandingPage = () => {
           <div className="flex justify-end z-0 my-10">
             <img src={Blockee} width="144px" height="126px" />
           </div>
-          <div className="flex justify-center text-white/50 text-xl font-semibold leading-loose">
+          <div className="flex justify-center text-white/50 text-xl font-semibold leading-loose animate-pulse">
             화면을 터치하여 시작하세요!
           </div>
         </div>
