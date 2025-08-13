@@ -49,6 +49,11 @@ const Login = () => {
     }
   };
 
+  const goHomeWithoutLogin = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   useEffect(() => {
     if (isFailedLogin) {
       const timer = setTimeout(() => {
@@ -126,6 +131,12 @@ const Login = () => {
         <Button onClick={() => navigate("/auth/signup")} isWhite>
           회원가입하기
         </Button>
+        <span
+          className="text-primary-400 leading-6 text-center underline underline-offset-3"
+          onClick={goHomeWithoutLogin}
+        >
+          로그인 없이 이용하기
+        </span>
       </div>
     </div>
   );
