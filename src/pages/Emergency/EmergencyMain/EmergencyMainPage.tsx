@@ -62,8 +62,18 @@ const EmergencyMainPage = () => {
               꼭 필요한 상황에만 걸어주세요!
             </p>
           </div>
-          <QuickReportCard title="경찰서 (112)" />
-          <QuickReportCard title="금융감독원 (1132)" />
+          <QuickReportCard
+            title="경찰서 (112)"
+            handleToCall={() => {
+              window.location.href = `tel:112`;
+            }}
+          />
+          <QuickReportCard
+            title="금융감독원 (1132)"
+            handleToCall={() => {
+              window.location.href = `tel:1132`;
+            }}
+          />
         </div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-row justify-between items-center">

@@ -3,12 +3,10 @@ import PhoneCallIcon from "../../../../assets/icons/phone-call-icon.png";
 
 type Props = {
   title: string;
+  handleToCall: () => void;
 };
 
-const QuickReportCard = ({ title }: Props) => {
-  const handleToCall = (title: string) => {
-    console.log(title, "에 전화하기");
-  };
+const QuickReportCard = ({ title, handleToCall }: Props) => {
   return (
     <div className="flex flex-row bg-primary-200 rounded-2xl border-blur-sm py-3 px-[13px] justify-between items-center">
       <div className="flex flex-row gap-3">
@@ -18,7 +16,7 @@ const QuickReportCard = ({ title }: Props) => {
         </span>
       </div>
       <div className="w-[75px]">
-        <Button onClick={() => handleToCall(title)} size="sm">
+        <Button onClick={handleToCall} size="sm">
           바로 걸기
         </Button>
       </div>
