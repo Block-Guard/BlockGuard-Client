@@ -46,7 +46,16 @@ const EditUserInfoPage = () => {
   const openFilePicker = () => fileInputRef.current?.click();
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files?.[0]) {
-      setNewProfileImg(e.target.files?.[0]);
+      const file = e.target.files[0];
+      const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+      const ext = file.name.split(".").pop()?.toLowerCase();
+
+      if (!ext || !allowedExtensions.includes(ext)) {
+        toast("jpg, jpeg, png, webp 형식의 이미지만 업로드할 수 있습니다.");
+        return;
+      }
+
+      setNewProfileImg(file);
       setWantDefaultImg(false);
     }
   };
