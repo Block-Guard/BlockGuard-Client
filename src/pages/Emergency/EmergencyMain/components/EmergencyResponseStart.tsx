@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { createNewReportApi } from "../../../../apis/emergency";
 
 type Props = {
-  inProgressStep: number;
+  inProgressStep: number | undefined;
 };
 
 const EmergencyResponseStart = ({ inProgressStep }: Props) => {
   const navigate = useNavigate();
 
   const onClickButton = async () => {
-    if (inProgressStep === 0) {
+    if (inProgressStep === undefined) {
       try {
         const response = await createNewReportApi();
         console.log(response);
@@ -39,7 +39,7 @@ const EmergencyResponseStart = ({ inProgressStep }: Props) => {
         alt="긴급 신고/대응 시작하기 아이콘"
       />
       <Button onClick={onClickButton} isBlur={true}>
-        {inProgressStep === 0 ? "시작하기" : "이어하기"}
+        {inProgressStep === undefined ? "시작하기" : "이어하기"}
       </Button>
     </div>
   );

@@ -6,25 +6,18 @@ import QuickReportCard from "./components/QuickReportCard";
 import { dummyOrgan } from "../organList";
 import { useEffect, useState } from "react";
 import { getInProgressReportApi } from "../../../apis/emergency";
+import type { InProgressStepData } from "../../../types/reportTypes";
 
 const EmergencyMainPage = () => {
   const navigate = useNavigate();
-  const [inProgressStepData, setInProgressStepData] = useState({
-    reportId: 0,
-    step: 0,
-  });
+  const [inProgressStepData, setInProgressStepData] =
+    useState<InProgressStepData | null>(null);
   const [isLogined, setIsLogined] = useState(false);
-
   const getInProgressReportState = async () => {
     try {
       const response = await getInProgressReportApi();
-      if (response === null) {
-        setInProgressStepData({ reportId: 0, step: 0 });
-      } else {
-        setInProgressStepData({
-          reportId: response!.reportId,
-          step: response!.step,
-        });
+      if (response !== undefined) {
+        setInProgressStepData(response);
       }
       setIsLogined(true);
     } catch (error) {
@@ -44,14 +37,11 @@ const EmergencyMainPage = () => {
     <div className="px-6 mb-10">
       <h1 className="font-bold text-2xl leading-9 mt-1 mb-4">긴급대응</h1>
       <div className="flex flex-col gap-8">
-        <EmergencyResponseStart inProgressStep={inProgressStepData.step} />
+        <EmergencyResponseStart inProgressStep={inProgressStepData?.step} />
         {isLogined && (
           <div className="flex flex-col gap-[10px]">
             <h2 className="font-bold text-xl leading-8">나의 신고 현황</h2>
-            <ReportProgressCard
-              hasProgress={Boolean(inProgressStepData.reportId)}
-              currentStep={inProgressStepData.step}
-            />
+            <ReportProgressCard inProgressStepData={inProgressStepData} />
           </div>
         )}
 

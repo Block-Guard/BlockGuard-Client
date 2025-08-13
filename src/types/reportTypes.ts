@@ -1,3 +1,9 @@
+export interface InProgressStepData {
+  reportId: number;
+  step: number;
+  createdAt: string;
+}
+
 export interface ReportPageProps {
   reportId: number;
   setCurrentStepCompleted: (value: boolean) => void;

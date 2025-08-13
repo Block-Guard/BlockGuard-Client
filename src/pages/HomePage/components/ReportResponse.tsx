@@ -4,24 +4,18 @@ import RightArrowIcon from "../../../assets/icons/arrow-right-darkblue-icon.svg"
 import { getInProgressReportApi } from "../../../apis/emergency";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type { InProgressStepData } from "../../../types/reportTypes";
 
 const ReportResponse = () => {
   const navigate = useNavigate();
-  const [inProgressStepData, setInProgressStepData] = useState({
-    reportId: 0,
-    step: 0,
-  });
+  const [inProgressStepData, setInProgressStepData] =
+    useState<InProgressStepData | null>(null);
   const [isLogined, setIsLogined] = useState(false);
   const getInProgressReportState = async () => {
     try {
       const response = await getInProgressReportApi();
-      if (response === null) {
-        setInProgressStepData({ reportId: 0, step: 0 });
-      } else {
-        setInProgressStepData({
-          reportId: response!.reportId,
-          step: response!.step,
-        });
+      if (response !== undefined) {
+        setInProgressStepData(response);
       }
       setIsLogined(true);
     } catch (error) {
@@ -65,10 +59,7 @@ const ReportResponse = () => {
           </div>
         </div>
         {isLogined && (
-          <ReportProgressCard
-            hasProgress={Boolean(inProgressStepData.reportId)}
-            currentStep={inProgressStepData.step}
-          />
+          <ReportProgressCard inProgressStepData={inProgressStepData} />
         )}
       </div>
     </div>

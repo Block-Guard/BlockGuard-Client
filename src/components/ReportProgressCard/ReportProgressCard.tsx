@@ -1,18 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import RightArrowIcon from "../../assets/icons/arrow-right-darkblue-icon.svg";
 import { createNewReportApi } from "../../apis/emergency";
+import type { InProgressStepData } from "../../types/reportTypes";
+import { formatDate, formatTime } from "../../utils/utils";
 
 type Props = {
-  hasProgress: boolean;
-  currentStep: number;
+  inProgressStepData: InProgressStepData | null;
 };
 
-const ReportProgressCard = ({ hasProgress, currentStep }: Props) => {
+const ReportProgressCard = ({ inProgressStepData }: Props) => {
   const navigate = useNavigate();
-  const progressPercentage = (currentStep / 5) * 100;
+  const progressPercentage =
+    inProgressStepData && (inProgressStepData.step / 5) * 100;
+
+  const inProgressDate = formatDate(inProgressStepData?.createdAt);
+  const inProgressTime = formatTime(inProgressStepData?.createdAt);
+
   let currentStepTitle = "";
 
-  switch (currentStep) {
+  switch (inProgressStepData?.step) {
     case 1:
       currentStepTitle = "신고접수";
       break;
@@ -28,7 +34,7 @@ const ReportProgressCard = ({ hasProgress, currentStep }: Props) => {
   }
 
   const onClickButton = async () => {
-    if (currentStep === 0) {
+    if (!inProgressStepData) {
       try {
         const response = await createNewReportApi();
         console.log(response);
@@ -54,12 +60,16 @@ const ReportProgressCard = ({ hasProgress, currentStep }: Props) => {
           <img src={RightArrowIcon} alt="오른쪽 화살표" />
         </button>
       </div>
-      {hasProgress ? (
+      {inProgressStepData ? (
         <>
           <div className="flex flex-row gap-2 leading-6 items-center">
-            <span className="text-monochrome-500 font-normal">25.07.07</span>
+            <span className="text-monochrome-500 font-normal">
+              {inProgressDate}
+            </span>
             <div className="w-[1px] h-[16px] bg-monochrome-400" />
-            <span className="text-monochrome-500 font-normal">16:22</span>
+            <span className="text-monochrome-500 font-normal">
+              {inProgressTime}
+            </span>
           </div>
           <div className="w-full relative my-[10px]">
             <div className="h-[5px] rounded-[90px] bg-monochrome-300" />
@@ -73,7 +83,10 @@ const ReportProgressCard = ({ hasProgress, currentStep }: Props) => {
               {currentStepTitle}
             </div>
             <span className="font-bold text-[16px] text-monochrome-700">
-              <span className="text-highlight-1">{currentStep}</span>/ 4단계
+              <span className="text-highlight-1">
+                {inProgressStepData.step}
+              </span>
+              / 4단계
             </span>
           </div>
         </>
