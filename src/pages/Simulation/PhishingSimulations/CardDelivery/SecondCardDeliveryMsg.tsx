@@ -21,7 +21,14 @@ const SecondCardDeliveryMsg = () => {
       <div className="w-full px-[15px]">
         <div className="flex flex-col gap-[10px]">
           <ReceivedMessage
-            content={`[WEB발신] https://www.kca.go.kr/home/main.do`}
+            content={
+              <span className="text-primary-400">
+                [WEB발신]{" "}
+                <span className="underline underline-offset-2">
+                  https://www.kca.go.kr/home/main.do
+                </span>
+              </span>
+            }
           />
           <img className="w-[70%]" src={CardDeliveryMsgLinkImg} />
         </div>

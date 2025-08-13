@@ -1,5 +1,5 @@
 type Props = {
-  content: string;
+  content: string | React.ReactNode;
 };
 
 const ReceivedMessage = ({ content }: Props) => {
