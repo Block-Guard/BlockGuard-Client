@@ -35,7 +35,7 @@ const ReportStep4 = () => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
   const handleOpenPdf = () => {
-    window.open("/files/피해구제신청서.pdf", "_blank");
+    window.open("/files/damage-relief-application.pdf", "_blank");
   };
   return (
     <div className="w-full flex flex-col mb-40">

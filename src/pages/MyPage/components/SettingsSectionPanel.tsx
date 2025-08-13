@@ -23,12 +23,16 @@ const SettingsSectionPanel = ({ title, menus }: Props) => {
         break;
       case "1:1 문의":
         console.log("1:1 문의하기");
+        window.open(
+          "https://docs.google.com/forms/d/e/1FAIpQLSc8wVuMOD68WBVtVXAbjr6vU3YQahF0NZG1ZBu5l7yuigQD-w/viewform?usp=send_form",
+          "_blank"
+        );
         break;
       case "서비스 이용약관":
-        window.open("/files/블락가드_서비스_이용약관.pdf", "_blank");
+        window.open("/files/terms-of-service.pdf", "_blank");
         break;
       case "개인정보 처리방침":
-        window.open("/files/블락가드_개인정보처리방침.pdf", "_blank");
+        window.open("/files/privacy-policy.pdf", "_blank");
         break;
       case "로그아웃":
         localStorage.clear();

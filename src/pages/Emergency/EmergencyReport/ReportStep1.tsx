@@ -36,7 +36,7 @@ const ReportStep1 = () => {
   }, []);
 
   const handleOpenPdf = () => {
-    window.open("/files/사건사고사실확인원.pdf", "_blank");
+    window.open("/files/incident-report.pdf", "_blank");
   };
 
   return (
