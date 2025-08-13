@@ -1,4 +1,4 @@
-import BlockeeGlitered from "@/assets/characters/blockee-glitering.svg";
+import BlockeeGlitered from "@/assets/characters/blockee-glitering.png";
 
 const SimulationLoading = () => {
   return (
@@ -10,7 +10,7 @@ const SimulationLoading = () => {
           </h1>
           <p className="font-semibold text-sm leading-4">잠시만 기다려주세요</p>
         </div>
-        <img src={BlockeeGlitered} alt="캐릭터" className="animate-floating"/>
+        <img src={BlockeeGlitered} alt="캐릭터" className="animate-floating" />
       </div>
     </div>
   );

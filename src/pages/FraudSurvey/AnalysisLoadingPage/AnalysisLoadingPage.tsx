@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import LeftArrowIcon from "../../../assets/icons/arrow-left-darkblue-icon.svg";
-import BlockeeGlitered from "../../../assets/characters/blockee-glitering.svg";
+import BlockeeGlitered from "../../../assets/characters/blockee-glitering.png";
 import Header from "../../../components/Header/Header";
 const AnalysisLoadingPage = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const AnalysisLoadingPage = () => {
             잠시만 기다려주세요
           </p>
         </div>
-        <img src={BlockeeGlitered} alt="캐릭터" className="animate-floating"/>
+        <img src={BlockeeGlitered} alt="캐릭터" className="animate-floating" />
       </div>
     </div>
   );

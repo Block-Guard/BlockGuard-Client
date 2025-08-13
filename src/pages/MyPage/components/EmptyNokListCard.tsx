@@ -1,4 +1,4 @@
-import BlockeeGlitering from "@/assets/characters/blockee-glitering.svg";
+import BlockeeGlitering from "@/assets/characters/blockee-glitering.png";
 import Button from "../../../components/Button/Button";
 
 type Props = {

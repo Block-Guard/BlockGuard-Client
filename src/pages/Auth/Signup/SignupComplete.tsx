@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import BlockeeCompletionIcon from "../../../assets/characters/blockee-glitering.svg";
+import BlockeeCompletionIcon from "../../../assets/characters/blockee-glitering.png";
 import { useEffect } from "react";
 
 const SignupComplete = () => {
