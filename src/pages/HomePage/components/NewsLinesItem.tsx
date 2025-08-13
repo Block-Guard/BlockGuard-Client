@@ -18,7 +18,8 @@ const NewsLinesItem = ({title, publishedAt, url, newspaper, imageUrl}: NewsCardI
             className="self-stretch h-40 rounded-tl-[20px] rounded-tr-[20px] border-1 border-[#E4E7E9]"/>
             :
             <img src={imageUrl} alt="뉴스 이미지"
-            className="self-stretch h-40 rounded-tl-[20px] rounded-tr-[20px] border-1 border-[#E4E7E9]"/>
+            className="self-stretch h-40 rounded-tl-[20px] rounded-tr-[20px] border-1 border-[#E4E7E9] object-cover
+            "/>
             }
 
             <div className="flex flex-col justify-between items-start pt-2.5 pl-3 pr-3 pb-4">
