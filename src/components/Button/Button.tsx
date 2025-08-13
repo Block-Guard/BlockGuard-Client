@@ -8,6 +8,7 @@ interface ButtonProps {
   isWhite?: boolean;
   isHighlight?: boolean;
   isBlur?: boolean;
+  nonCompleted?: boolean;
   disabled?: boolean;
   form?: string;
 }
@@ -20,13 +21,15 @@ const Button: React.FC<ButtonProps> = ({
   isWhite = false,
   isHighlight = false,
   isBlur = false,
+  nonCompleted = false,
   disabled = false,
   form,
 }) => {
   const fontSize = size === "lg" ? "22px" : "14px";
   const fontWeight = size === "lg" ? "font-semibold" : "font-normal";
   const paddingClass = size === "lg" ? "py-3" : "py-2 px-[10px]";
-  const isDiabled = disabled ? "bg-monochrome-400" : "bg-primary-400";
+  const isDiabled =
+    disabled || nonCompleted ? "bg-monochrome-400" : "bg-primary-400";
 
   return (
     <>
@@ -54,6 +57,15 @@ const Button: React.FC<ButtonProps> = ({
           form={form}
           type={type}
           className={`max-w-[800px] w-full ${paddingClass} text-[${fontSize}] ${fontWeight} bg-monochrome-100 text-primary-400 rounded-xl cursor-pointer border border-[#437efc]`}
+          onClick={onClick}
+        >
+          {children}
+        </button>
+      ) : nonCompleted ? (
+        <button
+          form={form}
+          type={type}
+          className={`max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
           onClick={onClick}
         >
           {children}

@@ -103,7 +103,7 @@ const ReportStepLayout = () => {
           </div>
           <Button
             onClick={() => onClickNextButton(currentStepCompleted)}
-            disabled={!currentStepCompleted}
+            nonCompleted={!currentStepCompleted}
           >
             {currentStep === 4 ? "완료" : "다음 단계"}
           </Button>

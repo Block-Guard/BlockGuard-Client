@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export const useReportStepNavigation = (
   reportId: number,
@@ -57,7 +58,10 @@ export const useReportStepNavigation = (
   };
 
   const onClickNextButton = async (currentStepCompleted: boolean) => {
-    if (!currentStepCompleted) return;
+    if (!currentStepCompleted) {
+      toast("필수 조치를 완료 후 모두 체크해주세요!");
+      return;
+    }
 
     try {
       // 현재 step 데이터 저장
