@@ -17,6 +17,12 @@
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Pretendard";
@@ -60,7 +66,7 @@
   --color-monochrome-400: #d9d9d9;
   --color-monochrome-500: #979fa7;
   --color-monochrome-600: #79818a;
-  --color- : #000b25;
+  --color-: #000b25;
 
   /* 브랜드 컬러 - highlight */
   --color-highlight-1: #f24e4e;
@@ -78,9 +84,15 @@
 
   --animate-floating: floating 2s ease-in-out infinite;
   @keyframes floating {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(0); }
-    50%{ transform: translateY(-20px); }
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 }
 
@@ -111,7 +123,6 @@
 .border-blur-sm {
   border: 1px solid rgba(255, 255, 255, 0.57);
 }
-
 
 :root {
   background-color: #ffffff;
