@@ -26,9 +26,9 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
     setOpenGuardianCall(false);
   }
 
-  /** ✔ 추가하기 눌렀을 때, 마이페이지로 이동하는거라면 삭제 할 것 */
+  /** ✔ 추가하기 눌렀을 때 */
   const handleAddGuardian = () => {
-    navigate("/mypage");
+    navigate("/mypage/edit-nok");
   }
 
   const handleLoginClick = () => navigate("/login");

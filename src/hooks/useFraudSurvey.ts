@@ -16,7 +16,7 @@ export const STEP_CONFIG = {
     9: { keys: ['authorityPressure'], isRequired: false, isMultiple: false },
     10: { keys: ['accountOrLinkRequest'], isRequired: false, isMultiple: false },
 
-    11: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: "false" },
+    11: { keys: ['suspiciousLinks', 'suspiciousPhoneNumbers'], isRequired: false, isMultiple: false },
     12: { keys: ['messageContent', 'imageFiles'], isRequired: false, isMultiple: true },
     13: { keys: ['additionalDescription'], isRequired: true, isMultiple: false },
 };
