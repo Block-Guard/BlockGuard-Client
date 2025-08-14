@@ -45,8 +45,8 @@ const AnalysisResultPage = () => {
 
     const makeForm = () => {
         const formData = new FormData();
-        type SurveyKey = typeof initSurvey & {[key:string]:string|string[]|boolean};
-        const stringSurvey : SurveyKey = { ...initSurvey };
+        type SurveyKey = typeof initSurvey & { [key: string]: string | string[] | boolean };
+        const stringSurvey: SurveyKey = { ...initSurvey };
 
         for (const [key, value] of Object.entries(allAnswers)) {
             /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
@@ -55,25 +55,25 @@ const AnalysisResultPage = () => {
             if (booleanAnswer.includes(key)) {
                 stringSurvey[key] = (value === "네");
             } else if (key === "imageFiles") {
-                if(value?.length !== 0)
+                if (value?.length !== 0)
                     (value as File[]).forEach(file => formData.append(key, file));
             }
-            else if(value && (typeof value === "string" || (Array.isArray(value) && value.every(item => typeof item === 'string')))){
+            else if (value && (typeof value === "string" || (Array.isArray(value) && value.every(item => typeof item === 'string')))) {
                 stringSurvey[key] = value;
             }
         }
         formData.append("fraudAnalysisRequest", JSON.stringify(stringSurvey));
         console.log("디버깅용 formData 출력");
-         for (const [key, value] of formData.entries()) {
+        for (const [key, value] of formData.entries()) {
             console.log("formData key값 : ", key);
-             if (key !== "imageFiles") {
-                 for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
-                     console.log(`FormData 중 ${key}를 키값으로 갖는 데이터 : ${key2} = ${value2}`);
-                 }
-             }else if(key === "imageFiles"){
+            if (key !== "imageFiles") {
+                for (const [key2, value2] of Object.entries(JSON.parse(value as string))) {
+                    console.log(`FormData 중 ${key}를 키값으로 갖는 데이터 : ${key2} = ${value2}`);
+                }
+            } else if (key === "imageFiles") {
                 console.log("key 값이 이미지파일인 경우 : ", typeof value);
-             }
-         }
+            }
+        }
         return formData;
     }
 
@@ -114,8 +114,8 @@ const AnalysisResultPage = () => {
 
     if (isLoading) {
         return <AnalysisLoadingPage />
-    }else if(isError){
-        return <AnalysisErrorPage/>
+    } else if (isError) {
+        return <AnalysisErrorPage />
     }
 
     return (
@@ -156,7 +156,7 @@ const AnalysisResultPage = () => {
             </div>
 
             {/* 여기까지 상단 안내 */}
-            
+
             <div className="flex flex-col items-center py-7.5 px-6 z-10">
                 <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
                     {resultTheme.text}
@@ -164,7 +164,7 @@ const AnalysisResultPage = () => {
 
                 <div className="h-42 relative">
                     <img src={resultTheme.boardImg} alt="위험도 표"
-                        className="z-0" />
+                        className="z-0 w-85 h-41" />
                     <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
                         <img src={IndicatorArrow} alt="위험지시핀"
                             className="absolute left-2"
@@ -192,7 +192,7 @@ const AnalysisResultPage = () => {
 
                 {/* 여기부터 응답과 상관없음 */}
 
-                {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature />}
+                {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature fraudType={data.estimatedFraudType} />}
 
                 <div className="text-center text-black text-xl font-bold leading-loose">
                     AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
