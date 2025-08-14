@@ -2,6 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { useFraudSurveyContext } from './useFraudSurvey';
 import { toast } from 'sonner';
 
+export interface ImageState {
+    file: File;
+    previewUrl: string;
+}
+
+const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5MB
+
 // Base64를 File 객체로 변환하는 헬퍼 함수
 const base64ToFile = async (base64: string, index: number): Promise<File> => {
     const res = await fetch(base64);
@@ -18,11 +25,6 @@ const fileToBase64 = (file: File): Promise<string> => {
         reader.onerror = (error) => reject(error);
     });
 };
-
-export interface ImageState {
-    file: File;
-    previewUrl: string;
-}
 
 export const useImageSave = (maxFiles: number) => {
     const { allAnswers, updateAnswers } = useFraudSurveyContext();
@@ -44,9 +46,7 @@ export const useImageSave = (maxFiles: number) => {
             }
             setIsInitializing(false);
         };
-
         restoreState();
-
         // 클린업: 컴포넌트 언마운트 시 모든 blob URL 해제
         return () => {
             images.forEach(image => URL.revokeObjectURL(image.previewUrl));
@@ -74,15 +74,18 @@ export const useImageSave = (maxFiles: number) => {
 
     const addFiles = useCallback((newFiles: File[]) => {
         if (images.length + newFiles.length > maxFiles) {
-            toast(`이미지는 최대 ${maxFiles}장까지 첨부 가능합니다.`)
+            toast(`이미지는 최대 ${maxFiles}장까지 첨부 가능합니다.`);
             return;
         }
-
+        const isOversize = newFiles.find(file=>file.size > FILE_SIZE_LIMIT)
+        if(isOversize){
+            toast(`이미지 용량은 최대 5MB까지 첨부 가능합니다.`)
+            return;
+        }
         const newImageStates = newFiles.map(file => ({
             file,
             previewUrl: URL.createObjectURL(file),
         }));
-
         setImages(prevImages => [...prevImages, ...newImageStates]);
     }, [images.length, maxFiles]);
 
