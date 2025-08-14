@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <div className="flex flex-col">
       <img className="w-25 mt-4 mb-2" src={BlockeeIcon} alt="블록이사진" />
-      <main className="flex flex-col px-4 gap-8">
+      <main className="flex flex-col px-4 gap-6">
         <h1 className="text-primary-400 text-[54px] font-ncs-radhiumz leading-[57px]">
           Block
           <br />
@@ -117,7 +117,7 @@ const Login = () => {
           </div>
         </div>
       </main>
-      <div className="absolute bottom-16 w-full flex flex-col gap-4 px-4">
+      <div className="absolute bottom-5 w-full flex flex-col gap-4 px-4">
         {isFailedLogin && (
           <p className="text-[#F24E4E] text-sm text-center font-semibold leading-[21px] mb-1">
             아이디 또는 비밀번호를 다시 확인하세요.
