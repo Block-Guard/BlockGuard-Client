@@ -6,11 +6,11 @@ import type { FraudFeature, ScamType } from "../../../../types/fraud-types";
 import { fraudFeatureList, scamTypes } from "../constants";
 import { createScamMapImmutable } from "../../../../utils/fraudResult";
 
-interface TypeFeatureProps{
+interface TypeFeatureProps {
     fraudType: string;
 }
 
-export const TypeFeature = ({fraudType}:TypeFeatureProps) => {
+export const TypeFeature = ({ fraudType }: TypeFeatureProps) => {
     const navigate = useNavigate();
 
     const [features] = useState<FraudFeature[]>(fraudFeatureList[fraudType as ScamType])
@@ -22,10 +22,10 @@ export const TypeFeature = ({fraudType}:TypeFeatureProps) => {
     const handleLearnClick = () => {
         const topName = findTopLevelNameFromMap(fraudType)
         console.log("fraudType, topName : ", fraudType, topName)
-        if(topName){
+        if (topName) {
             navigate(`/news/recent?category=${topName}`);
         }
-        else{
+        else {
             navigate(`/news/recent?category=전체`);
         }
     }
@@ -35,16 +35,13 @@ export const TypeFeature = ({fraudType}:TypeFeatureProps) => {
             <div className="text-slate-950 text-xl font-bold leading-loose">
                 이 유형의 주요 특징은?
             </div>
-            <TypeFeatureCard
-                title={features[0].title}
-                content={features[0].content} />
-            <TypeFeatureCard
-                title={features[1].title}
-                content={features[1].content} />
-            <TypeFeatureCard
-                title={features[2].title}
-                content={features[2].content} />
-
+            {
+                features.map((feat) => {
+                    return (<TypeFeatureCard
+                        title={feat.title}
+                        content={feat.content} />)
+                })
+            }
             <button className="w-full h-11 my-2.5 px-4 bg-blue-500 rounded-[10px] inline-flex justify-center items-center gap-1.5"
                 onClick={handleLearnClick}>
                 <div className="flex items-center text-white text-2xl font-bold leading-9 gap-1.5">
