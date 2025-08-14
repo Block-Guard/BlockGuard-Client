@@ -12,12 +12,8 @@ const FraudSurveyPage = () => {
         <span className="text-slate-950 text-2xl font-bold leading-9">
           {currentSurvey?.question}
         </span>
-        {currentSurvey?.isEssential ? (
+        {currentSurvey?.isEssential && (
           <span className="text-red-500 text-2xl font-bold leading-9">*</span>
-        ) : (
-          <span className="text-zinc-300 text-2xl font-bold leading-9">
-            {" (선택)"}
-          </span>
         )}
         {
           currentSurvey?.isMultiple && 

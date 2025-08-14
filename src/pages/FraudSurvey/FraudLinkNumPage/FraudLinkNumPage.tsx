@@ -19,9 +19,6 @@ const FraudLinkNumPage = () => {
                     의심스러운 링크나 전화번호를
                     입력해주세요
                 </span>
-                <span className="text-zinc-300 text-2xl font-bold leading-9">
-                    {" (선택)"}
-                </span>
             </div>
 
             <div className="flex flex-col w-full h-full gap-4 pb-6">

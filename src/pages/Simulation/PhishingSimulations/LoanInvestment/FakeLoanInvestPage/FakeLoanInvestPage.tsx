@@ -73,7 +73,7 @@ const FakeLoanInvestPage = () => {
       <div className="flex flex-col p-6 gap-5">
         {loanInputInfoList.map((info) => {
           return (
-            <div className="relative">
+            <div className="relative" key={info.id}>
               <LoanInfoInput
                 label={info.label}
                 placeholder={info.placeholder}
@@ -87,7 +87,6 @@ const FakeLoanInvestPage = () => {
                   newValues[info.id] = val;
                   setInputValues(newValues);
                 }}
-                key={info.id}
               />
             </div>
           );

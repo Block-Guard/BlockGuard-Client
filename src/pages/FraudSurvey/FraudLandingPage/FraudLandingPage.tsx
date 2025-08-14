@@ -23,7 +23,7 @@ const FraudLandingPage = () => {
         className="flex flex-col justify-between h-[calc(100vh-57px)] border-box p-6 mt-[57px]"
         onClick={handleClick}
       >
-        <div>
+        <div className="relative">
           <div className="text-white text-3xl font-extrabold leading-loose">
             AI 사기유형 진단 서비스
           </div>
@@ -32,7 +32,7 @@ const FraudLandingPage = () => {
             의심스러운 연락을 받았다면 <br /> 지금 피싱여부를 진단해보세요!
           </div>
 
-          <img src={HomeBgShieild} className="absolute right-0 top-33" />
+          <img src={HomeBgShieild} className="absolute -right-6 top-33 " />
         </div>
 
         <div>

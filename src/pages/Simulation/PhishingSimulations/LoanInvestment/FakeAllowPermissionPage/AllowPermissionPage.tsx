@@ -43,6 +43,15 @@ const AllowPermissionPage = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  useEffect(()=>{
+    if(switches.every(Boolean)){
+      const timer = setTimeout(()=>{
+          navigate("/simulation/loan-investment/fake-app-landing");
+        }, 1500)
+        return () => clearTimeout(timer);
+    }
+  }, [switches])
+
   return (
     <div className="relative flex flex-col justify-between w-full h-screen overflow-y-scroll overflow-x-hidden no-scrollbar">
       <Header
@@ -62,15 +71,6 @@ const AllowPermissionPage = () => {
         }
         bgColor="#fff"
       />
-      {switches.every(Boolean) ? (
-        <Lottie
-          animationData={ClickAnimation}
-          loop
-          autoplay
-          className="absolute -top-12 right-6 translate-[50%] w-25 pointer-events-none z-50 drop-shadow-[0_0_1px_black]"
-        />
-      ) : null}
-
       <main className="p-[18px] ">
         <div className="flex items-center mt-[57px]">
           <img src={FakeBankApp} alt="어플이미지" className="mr-6" />
