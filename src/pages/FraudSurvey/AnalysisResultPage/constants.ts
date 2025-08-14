@@ -3,9 +3,14 @@ import BlockeeSafe from "../../../assets/characters/blockee-safe.svg";
 import RiskChatBubble from "../../../assets/analysis-result/chat-bubble-result-risk.svg";
 import WarnChatBubble from "../../../assets/analysis-result/chat-bubble-result-warn.svg";
 import SafeChatBubble from "../../../assets/analysis-result/chat-bubble-result-safe.svg";
-import RiskRed from "../../../assets/analysis-result/risk-level-red.svg";
-import RiskYellow from "../../../assets/analysis-result/risk-level-yellow.svg";
-import RiskGreen from "../../../assets/analysis-result/risk-level-green.svg";
+
+// import RiskRed from "../../../assets/analysis-result/risk-level-red.svg";
+// import RiskYellow from "../../../assets/analysis-result/risk-level-yellow.svg";
+// import RiskGreen from "../../../assets/analysis-result/risk-level-green.svg";
+import RiskRed from "../../../assets/analysis-result/risk-level-red.png";
+import RiskYellow from "../../../assets/analysis-result/risk-level-yellow.png";
+import RiskGreen from "../../../assets/analysis-result/risk-level-green.png";
+
 import type { stringSurveyData } from "../../../types/fraud-types";
 
 
