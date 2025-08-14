@@ -1,4 +1,3 @@
-
 import type { NOKInfoType } from "./nok-info-types";
 
 interface ApiBaseResponse {
@@ -44,7 +43,7 @@ export interface InProgressReportResponse extends ApiBaseResponse {
   data: {
     reportId: number;
     step: number;
-    createdAt: string;
+    updatedAt: string;
   } | null;
 }
 
@@ -114,7 +113,7 @@ export interface NewsItem {
 }
 
 /** 뉴스 목록 조회 API 응답 */
-export interface NewsListResponse extends ApiBaseResponse{
+export interface NewsListResponse extends ApiBaseResponse {
   data: {
     news: NewsItem[];
     pageableInfo: {
@@ -144,4 +143,3 @@ export interface CreateNewGuardianResponse extends ApiBaseResponse {
 export interface GetGuardiansListResponse extends ApiBaseResponse {
   data: { guardians: NOKInfoType[] };
 }
-

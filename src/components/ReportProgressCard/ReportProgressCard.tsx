@@ -13,8 +13,8 @@ const ReportProgressCard = ({ inProgressStepData }: Props) => {
   const progressPercentage =
     inProgressStepData && (inProgressStepData.step / 5) * 100;
 
-  const inProgressDate = formatDate(inProgressStepData?.createdAt);
-  const inProgressTime = formatTime(inProgressStepData?.createdAt);
+  const inProgressDate = formatDate(inProgressStepData?.updatedAt);
+  const inProgressTime = formatTime(inProgressStepData?.updatedAt);
 
   let currentStepTitle = "";
 

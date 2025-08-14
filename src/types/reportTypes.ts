@@ -1,7 +1,7 @@
 export interface InProgressStepData {
   reportId: number;
   step: number;
-  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ReportPageProps {
