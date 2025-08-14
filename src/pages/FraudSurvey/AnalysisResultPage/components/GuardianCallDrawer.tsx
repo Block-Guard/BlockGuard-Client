@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { getGuardiansListApi} from "../../../../apis/guardians";
 import { useNavigate } from "react-router-dom";
 import type { NOKInfoType } from "../../../../types/nok-info-types";
+import { getUserInfoApi } from "../../../../apis/mypage";
 
 interface GuardianCallDrawerProps {
   openGuardianCall: boolean
@@ -19,18 +20,14 @@ interface GuardianCallDrawerProps {
 
 export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: GuardianCallDrawerProps) => {
   const navigate = useNavigate();
-  const [guardians, setGuardians] = useState<NOKInfoType[]>([])
+  const [guardians, setGuardians] = useState<NOKInfoType[]>([]);
+  const [userName, setUserName] = useState("사용자");
   const handleCloseClick = () => {
     setOpenGuardianCall(false);
   }
 
   /** ✔ 추가하기 눌렀을 때, 마이페이지로 이동하는거라면 삭제 할 것 */
   const handleAddGuardian = () => {
-    // console.log("보호자 추가 테스트용 성공");
-    // const formData = new FormData();
-    // formData.append("name", "text10");
-    // formData.append("phoneNumber", "010-1234-5678");
-    // postGuardianApi(formData);
     navigate("/mypage");
   }
 
@@ -63,8 +60,14 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
         setGuardians([]);
         const response = await getGuardiansListApi();
         console.log("불러온 보호자 목록 : ", response)
+
         if(response)
           setGuardians(response);
+
+        const userInfoResponse = await getUserInfoApi();
+        if(userInfoResponse)
+          setUserName(userInfoResponse.name);
+
       } catch (err) {
         console.error("보호자 목록 조회 중 에러 발생 : ", err);
         setGuardians([]);
@@ -135,7 +138,8 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
                 ) : (
                   <>
                     {guardians?.map((guard) =>
-                      <GuardianCallItem icon={guard.profileImageUrl} text={guard.name} phoneNumber={guard.phoneNumber} isPrimary={guard.isPrimary} key={guard.guardiansId} />
+                      <GuardianCallItem icon={guard.profileImageUrl} text={guard.name} phoneNumber={guard.phoneNumber} isPrimary={guard.isPrimary} 
+                      userName={userName} key={guard.guardiansId} />
                     )}
                   </>
                 )

@@ -9,6 +9,7 @@ const FraudMessagePage = () => {
 
   const [localFiles, setLocalFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleMsgText = (value:string) =>{
@@ -109,9 +110,6 @@ const FraudMessagePage = () => {
       <div className="mt-9 mb-9">
         <span className="text-slate-950 text-2xl font-bold leading-9">
           문자 내용을 입력해 주세요
-        </span>
-        <span className="text-zinc-300 text-2xl font-bold leading-9">
-          {" (선택)"}
         </span>
         <div className="text-gray-400 text-lg font-medium leading-relaxed">
           붙여넣기 또는 캡처 이미지를 첨부해 주세요!

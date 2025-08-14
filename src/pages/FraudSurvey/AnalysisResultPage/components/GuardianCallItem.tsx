@@ -5,9 +5,10 @@ interface GuardianCallItemProps {
     icon?: string | null;
     text: string;
     phoneNumber: string;
+    userName: string;
 }
 
-export const GuardianCallItem = ({ isPrimary, icon = UserIcon, text, phoneNumber }: GuardianCallItemProps) => {
+export const GuardianCallItem = ({ isPrimary, icon = UserIcon, text, phoneNumber, userName }: GuardianCallItemProps) => {
     if (icon === null) {
         icon = UserIcon;
     }
@@ -16,7 +17,7 @@ export const GuardianCallItem = ({ isPrimary, icon = UserIcon, text, phoneNumber
     }
     // eslint-disable-next-line no-useless-escape
     const primaryText = `\(가족 대표\)`
-    const msgTemplate = "[블락 가드] 조사결과 사기 위험 단계입니다.";
+    const msgTemplate = `[Block Guard] 보호대상자(${userName}) 통화/문자에서 고위험 사기 징후 감지 즉시 확인 바랍니다`;
     const encodedMsg = encodeURIComponent(msgTemplate);
     
     return (
