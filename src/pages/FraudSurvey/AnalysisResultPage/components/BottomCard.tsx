@@ -1,7 +1,7 @@
 import ReactingCard from "./ReactingCard";
-import PhoneCall from "../../../../assets/icons/phone-call-icon.png";
+import PhoneCall from "../../../../assets/icons/phone-call-icon.svg";
 import Siren from "../../../../assets/icons/siren-icon.svg";
-import SmartPhone from "../../../../assets/analysis-result/smartphone-icon.png";
+import Guardian from "../../../../assets/icons/guardian-icon.svg";
 import { useNavigate } from "react-router-dom";
 
 interface BottomCardProps{
@@ -25,7 +25,7 @@ const BottomCard = ({setOpenReportCall,setOpenGuardianCall}:BottomCardProps) => 
             <div className="w-full flex justify-between gap-2">
                 <ReactingCard icon={<img className="w-6 h-7" src={PhoneCall} alt="전화 아이콘" />} title={<>신고<br />접수하기</>} btnText={"전화 연결"} handleBtn={handleCallClick} />
                 <ReactingCard icon={<img className="w-6 h-7" src={Siren} alt="사이렌 아이콘" />} title={<>피해대응<br />절차보기</>} btnText={"바로가기"} handleBtn={handleReportClick} />
-                <ReactingCard icon={<img className="w-6 h-7" src={SmartPhone} alt="스마트폰 아이콘" />} title={<>보호자에게<br />알리기</>} btnText={"공유하기"} handleBtn={handleGuardianClick} />
+                <ReactingCard icon={<img className="w-7 h-7" src={Guardian} alt="보호자 아이콘" />} title={<>보호자에게<br />알리기</>} btnText={"공유하기"} handleBtn={handleGuardianClick} />
             </div>
 
             <button className="text-center justify-center text-white text-base font-bold underline leading-normal" onClick={handleHomeClick}>
