@@ -87,8 +87,8 @@ const AnalysisResultPage = () => {
             // 테스트용
             // setIsLoading(false);
             // setData(dummyResponse.data);
+            setStatus("loading")
             try {
-                setStatus("loading")
                 const formData = makeForm();
                 const response = await getResult(formData);
                 console.log("사기 분석 요청 결과 : ", response)
