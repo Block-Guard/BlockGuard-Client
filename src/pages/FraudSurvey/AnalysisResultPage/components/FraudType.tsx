@@ -40,7 +40,7 @@ const FraudType = ({ data }: FraudTypeProps) => {
                 <div className="w-full px-4 py-3.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5 text-[#000b25] text-lg leading-relaxed">
                     <span>
                         {
-                            ScamTypeData[estimatedFraudType as ScamType].map((scamData, index) => (
+                            (ScamTypeData[estimatedFraudType as ScamType]||[]).map((scamData, index) => (
                                 <span key={index} className={scamData.className}>
                                     {scamData.text}
                                 </span>

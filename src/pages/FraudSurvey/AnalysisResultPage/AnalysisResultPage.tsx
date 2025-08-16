@@ -26,20 +26,21 @@ const AnalysisResultPage = () => {
         "authorityPressure",
         "accountOrLinkRequest",
     ]
-    const [data, setData] = useState<FraudResultData>();
+    const [data, setData] = useState<FraudResultData | null>(null);
     const [resultTheme, setResultTheme] = useState(riskState[1]);
     const [overrideHeader, setOverrideHeader] = useState(false);
 
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [isError, setIsError] = useState(false);
+    const [status, setStatus] = useState("idle");
+
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/13");
     /** 사기 분석 결과 얻은 후, localStorage 내 설문 초기화 */
     const handleCloseClick = () => {
-        localStorage.removeItem("surveyAnswers");
         navigate("/home");
     }
 
@@ -87,7 +88,7 @@ const AnalysisResultPage = () => {
             // setIsLoading(false);
             // setData(dummyResponse.data);
             try {
-                setIsLoading(true);
+                setStatus("loading")
                 const formData = makeForm();
                 const response = await getResult(formData);
                 console.log("사기 분석 요청 결과 : ", response)
@@ -95,28 +96,29 @@ const AnalysisResultPage = () => {
                 const themeIndex = getTheme(response.riskLevel)
                 const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
                 setResultTheme(detailDegree);
-                setIsLoading(false);
+
+                setStatus("succeeded");
             } catch (error) {
                 console.error("사기 분석 결과 페이지에서 로드 오류 발생 오류페이지 로드", error);
-                setIsError(true);
-            } finally {
-                setIsLoading(false);
+                setStatus("failed");
             }
         }
-
         if (allAnswers) {
             process();
         }
+    }, []);
 
-    }, [])
+    useEffect(() => {
+        if (status === "succeeded") {
+            console.log("사기 분석 결과 로딩 성공. 기존 로컬 설문 데이터 초기화");
+            localStorage.removeItem("surveyAnswers");
+        }
+    }, [status])
 
     useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
 
-    if (isLoading) {
-        return <AnalysisLoadingPage />
-    } else if (isError) {
-        return <AnalysisErrorPage />
-    }
+    if (status === "loading") return <AnalysisLoadingPage />
+    if (status === "failed") return <AnalysisErrorPage />
 
     return (
         <div className="flex flex-col justify-between w-full h-full overflow-y-scroll">
@@ -199,9 +201,9 @@ const AnalysisResultPage = () => {
                 </div>
 
                 <div className="mt-7.5 text-center text-black text-xl font-bold leading-loose">
-                    의심되면 <span className="text-blue-500">경찰청(112)</span>
+                    의심되면 <span className="text-primary-400">경찰청(112)</span>
                     <br />
-                    또는 <span className="text-blue-500">금융감독원(1132)</span>
+                    또는 <span className="text-primary-400">금융감독원(1132)</span>
                     <br />
                     로 확인 전화를 추천드려요.
                 </div>
