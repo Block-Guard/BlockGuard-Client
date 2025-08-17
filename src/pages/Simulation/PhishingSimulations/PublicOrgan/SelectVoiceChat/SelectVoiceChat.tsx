@@ -56,7 +56,7 @@ const SelectVoiceChat = ({
           {voiceChatData.options.map((option, index) => (
             <div
               key={index}
-              className="whitespace-pre-line rounded-[50px] bg-[#f9f9f9] py-[14px] w-full flex justify-center text-[16px] font-medium text-center"
+              className="whitespace-pre-line rounded-[50px] bg-[#f9f9f9] py-[14px] w-full flex justify-center text-[16px] font-medium text-center last:mb-3"
               onClick={() => onClickSelectResponse(option)}
             >
               {option}

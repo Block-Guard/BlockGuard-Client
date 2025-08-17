@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BlockeeIcon from "@/assets/characters/blockee-login.svg";
+import BlockeeIcon from "@/assets/characters/blockee-default.png";
 import ToVisiblePwIcon from "@/assets/icons/to-visible-pw-icon.svg";
 import ToInvisiblePwIcon from "@/assets/icons/to-invisible-pw-icon.svg";
 import Button from "../../components/Button/Button";
@@ -64,13 +64,20 @@ const Login = () => {
   }, [isFailedLogin]);
   return (
     <div className="flex flex-col">
-      <img className="w-25 mt-4 mb-2" src={BlockeeIcon} alt="블록이사진" />
       <main className="flex flex-col px-4 gap-6">
-        <h1 className="text-primary-400 text-[54px] font-ncs-radhiumz leading-[57px]">
-          Block
-          <br />
-          Guard
-        </h1>
+        <div className="relative flex flex-row mt-[calc(100vh/10)]">
+          <h1 className="text-primary-400 text-[54px] font-ncs-radhiumz leading-[57px] z-5">
+            Block
+            <br />
+            Guard
+          </h1>
+          <img
+            className="absolute w-35 left-43 -top-4"
+            src={BlockeeIcon}
+            alt="블록이사진"
+          />
+        </div>
+
         <div className="flex flex-col gap-3">
           <InputBar
             type="email"

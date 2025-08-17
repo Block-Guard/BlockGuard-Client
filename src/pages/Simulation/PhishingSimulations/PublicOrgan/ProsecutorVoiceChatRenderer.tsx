@@ -46,9 +46,9 @@ const ProsecutorVoiceChatRenderer = () => {
         </span>
         <img src={VoiceFrequency} alt="통화 음성표" />
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-3">
         {renderStep >= 0 && (
-          <div className="w-full py-6 px-4 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center gap-2.5 font-semibold">
+          <div className="w-full py-6 px-4 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center font-semibold">
             지금부터 법정 증거 확보를 위해 본인 동의하에 녹취를 진행할겁니다.
             <br />
             조용한 공간에서 협조해 주시고, 위증이나 허위 진술 시 5년 이하
@@ -59,7 +59,7 @@ const ProsecutorVoiceChatRenderer = () => {
         )}
         {renderStep === 1 && (
           <div className="flex flex-col gap-8">
-            <div className="w-full py-6 px-4 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center gap-2.5 font-semibold">
+            <div className="w-full py-6 px-4 bg-white/75 rounded-[20px] outline-2 outline-offset-[-2px] outline-white/60 inline-flex flex-col justify-start items-center font-semibold">
               지금 메신저로 수사 협조 의뢰 공문서와 검찰 공무원증 사본을
               보내드리겠습니다.
               <br />
@@ -67,7 +67,7 @@ const ProsecutorVoiceChatRenderer = () => {
               따라 주세요.
             </div>
             <div
-              className="flex flex-col justify-center items-center gap-3"
+              className="flex flex-col justify-center items-center gap-3 mb-3"
               onClick={clickToNextPage}
             >
               <p className="text-xl font-bold text-white w-full text-center animate-pulse">

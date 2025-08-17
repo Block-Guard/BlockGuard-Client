@@ -107,7 +107,7 @@ const CardVoiceChatRenderer = () => {
             링크 하나 보내드릴건데 한번 확인해주시겠습니까?
           </div>
           <div
-            className="flex flex-col justify-center items-center gap-3"
+            className="flex flex-col justify-center items-center gap-3 mb-3"
             onClick={clickToNextPage}
           >
             <p className="text-xl font-bold text-white w-full text-center animate-pulse">

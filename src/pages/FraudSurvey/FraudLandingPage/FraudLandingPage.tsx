@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import HomeBgShieild from "../../../assets/home-background-shield-image.svg";
-import Blockee from "../../../assets/character-cropped-fit-image.svg";
+import Blockee from "../../../assets/characters/blockee-fraud.png";
 import LeftArrowWhiteIcon from "../../../assets/icons/arrow-left-white-icon.svg";
 import Header from "../../../components/Header/Header";
 
@@ -10,7 +10,7 @@ const FraudLandingPage = () => {
     navigate("/fraud-analysis/survey/1-10");
   };
   return (
-    <div className="w-full h-full flex bg-primary-400 box-border">
+    <div className="w-full h-full flex bg-primary-400 box-border overflow-auto">
       <Header
         leftChild={
           <button onClick={() => navigate("/home")}>
@@ -32,7 +32,7 @@ const FraudLandingPage = () => {
             의심스러운 연락을 받았다면 <br /> 지금 피싱여부를 진단해보세요!
           </div>
 
-          <img src={HomeBgShieild} className="absolute -right-6 top-33 " />
+          <img src={HomeBgShieild} className="absolute -right-6 top-33" />
         </div>
 
         <div>
@@ -45,10 +45,10 @@ const FraudLandingPage = () => {
             정확도가 올라가요.
           </div>
 
-          <div className="flex justify-end z-0 my-10">
-            <img src={Blockee} width="144px" height="126px" />
+          <div className="flex justify-end z-0 mb-10">
+            <img className="w-40" src={Blockee} />
           </div>
-          <div className="flex justify-center text-white/50 text-xl font-semibold leading-loose animate-pulse">
+          <div className="flex justify-center text-white/50 text-xl font-semibold leading-loose animate-pulse mb-3">
             화면을 터치하여 시작하세요!
           </div>
         </div>
