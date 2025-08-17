@@ -180,7 +180,10 @@ const AnalysisResultPage = () => {
                 {resultTheme.state === "safe" ?
                     (
                         <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                            {data ? data.explanation : "설명 로드 실패"}
+                            
+                            <div className="text-[#000b25] text-lg font-medium leading-relaxed">
+                                분석결과, 현재 상황은 보이스 피싱의 일반적인 패턴과 다르게 나타납니다. 특별한 위험 요소나 이상 징후는 확인되지 않아요
+                            </div>
                         </div>
                     ) : null}
 
