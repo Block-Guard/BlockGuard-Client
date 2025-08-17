@@ -6,7 +6,7 @@ import CloseIcon from "../assets/icons/close-white-icon.svg";
 const CallViewLayout = () => {
   const navigate = useNavigate();
   return (
-    <div className="bg-[linear-gradient(180deg,_#7374AE_0%,_#342929_100%)]">
+    <div className="bg-[linear-gradient(180deg,_#7374AE_0%,_#342929_100%)] overflow-auto">
       <Header
         leftChild={
           <img
