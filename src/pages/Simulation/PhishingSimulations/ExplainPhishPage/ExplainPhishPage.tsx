@@ -3,7 +3,7 @@ import Header from "../../../../components/Header/Header";
 import Button from "../../../../components/Button/Button";
 
 import LeftArrowWhiteIcon from "../../../../assets/icons/arrow-left-white-icon.svg";
-import Blockee from "../../../../assets/character-cropped-fit-image.svg";
+import Blockee from "../../../../assets/characters/blockee-default.png";
 import { MethodCard } from "./components/MethodCard";
 import { FeatureCard } from "./components/FeatureCard";
 import type { ExplainInfo } from "./constant";
@@ -17,9 +17,9 @@ const ExplainLoanPhishPage = ({ info }: ExplainLoanPhishPageProps) => {
   const navigate = useNavigate();
   const handleBackClick = () => navigate("/home");
   const handleLearnClick = () => {
-    console.log(info.category, "유형 뉴스 기사로 이동")
-    navigate(`/news/recent?category=${info.category}`)
-  }
+    console.log(info.category, "유형 뉴스 기사로 이동");
+    navigate(`/news/recent?category=${info.category}`);
+  };
   const handleQuitClick = () => navigate("/simulation");
   const topRef = useRef<HTMLDivElement | null>(null);
 
@@ -45,7 +45,7 @@ const ExplainLoanPhishPage = ({ info }: ExplainLoanPhishPageProps) => {
         <img
           src={Blockee}
           alt="캐릭터"
-          className="absolute top-52 right-2 z-0"
+          className="absolute w-55 top-50 right-0 z-0"
         />
       </div>
 

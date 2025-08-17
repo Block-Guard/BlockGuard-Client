@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BlockeeIcon from "@/assets/characters/blockee-login.png";
+import BlockeeIcon from "@/assets/characters/blockee-default.png";
 import ToVisiblePwIcon from "@/assets/icons/to-visible-pw-icon.svg";
 import ToInvisiblePwIcon from "@/assets/icons/to-invisible-pw-icon.svg";
 import Button from "../../components/Button/Button";

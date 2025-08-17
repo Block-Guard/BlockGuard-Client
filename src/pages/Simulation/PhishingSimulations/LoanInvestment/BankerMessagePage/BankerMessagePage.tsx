@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import useDelayRender from "../../../../../hooks/useDelayRender";
 import ClickAnimation from "../../../../../assets/lottie/click-black.json";
-import FakeProfile from "../../../../../assets/simulation/loan-investment/fake-banker-profile.svg";
+import FakeProfile from "../../../../../assets/simulation/loan-investment/fake-banker-profile.png";
 import DownLoadIcon from "../../../../../assets/simulation/loan-investment/download-blue-icon.svg";
 import { InstallFakeAppDialog } from "./components/InstallFakeAppDialog";
 import { useEffect, useRef, useState } from "react";

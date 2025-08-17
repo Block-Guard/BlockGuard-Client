@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button/Button";
-import Blockee from "../../../assets/character-image.svg";
+import Blockee from "@/assets/characters/blockee-default.png";
 
 const FraudCheck = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const FraudCheck = () => {
       </div>
       <div className="relative">
         <div className="absolute right-1 bottom-5 z-[-1]">
-          <img src={Blockee} alt="캐릭터" />
+          <img className="w-28" src={Blockee} alt="캐릭터" />
         </div>
         <Button onClick={onClickCheckStart} isHighlight={true}>
           시작하기

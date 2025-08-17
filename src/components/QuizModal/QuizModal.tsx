@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Dialog, DialogContent, DialogTitle } from "../../components/ui/dialog";
-import Blockee from "../../assets/character-cropped-fit-image.svg";
+import Blockee from "../../assets/characters/blockee-default.png";
 
 type Props = {
   isOpen: boolean;
@@ -110,7 +110,7 @@ const QuizModal = ({
         <div className="py-5 px-[10px] flex flex-col gap-5 items-center rounded-[20px] bg-monochrome-200">
           {isCorrected ? (
             <div className="w-full flex flex-col items-center gap-[10px]">
-              <img className="w-[43px]" src={Blockee} />
+              <img className="w-[50px]" src={Blockee} />
               <div className="w-full flex flex-col items-center gap-[15px]">
                 <h3 className="text-[22px] font-semibold text-[#437EFC]">
                   정답입니다!
@@ -142,14 +142,14 @@ const QuizModal = ({
           </button>
         ) : selectedAnswer !== 0 ? (
           selectedAnswer === correctAnswer ? (
-            <div className="w-full h-16 flex flex-row rounded-[90px] gap-[15px] bg-white text-[#437efc] text-[20px] font-semibold justify-center items-center">
+            <div className="w-full h-16 flex flex-row rounded-[90px] gap-[10px] bg-white text-[#437efc] text-[20px] font-semibold justify-center items-center">
               정답이에요!
-              <img className="w-[43px]" src={Blockee} />
+              <img className="w-[45px]" src={Blockee} />
             </div>
           ) : (
-            <div className="w-full h-16 flex flex-row rounded-[90px] gap-[15px] bg-white text-[#F24E4E] text-[20px] font-semibold justify-center items-center">
+            <div className="w-full h-16 flex flex-row rounded-[90px] gap-[10px] bg-white text-[#F24E4E] text-[20px] font-semibold justify-center items-center">
               다시 시도해보세요!
-              <img className="w-[43px]" src={Blockee} />
+              <img className="w-[45px]" src={Blockee} />
             </div>
           )
         ) : (

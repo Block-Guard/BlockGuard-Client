@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import MsgImg1 from "@/assets/simulation/message-imgs/publi-organ-msg1.png";
-import MsgImg2 from "@/assets/simulation/message-imgs/publi-organ-msg2.png";
+import MsgImg1 from "@/assets/simulation/message-imgs/public-organ-msg1.png";
+import MsgImg2 from "@/assets/simulation/message-imgs/public-organ-msg2.png";
 import PublicOrganModal from "./PublicOrganModal";
 import ReceivedMessage from "../../../../components/SimulationMessage/ReceivedMessage";
 import SelectSendMessage from "../../../../components/SimulationMessage/SelectSendMessage";
@@ -71,8 +71,11 @@ const ProsecutorMessage = () => {
         <div className="w-full flex flex-col gap-[30px] px-[15px]">
           <div className="flex flex-col gap-[10px]">
             <div className="relative h-[310px] w-[270px]">
-              <img className="absolute top-0 left-4" src={MsgImg1} />
-              <img className="absolute bottom-0 right-4 z-10" src={MsgImg2} />
+              <img className="absolute w-43 top-0 left-4" src={MsgImg1} />
+              <img
+                className="absolute w-43 bottom-0 right-4 z-10"
+                src={MsgImg2}
+              />
             </div>
             <ReceivedMessage content={publicOrganMsgs.step0} />
           </div>
