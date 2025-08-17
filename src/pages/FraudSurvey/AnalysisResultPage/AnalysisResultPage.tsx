@@ -33,10 +33,7 @@ const AnalysisResultPage = () => {
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
 
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [isError, setIsError] = useState(false);
     const [status, setStatus] = useState("idle");
-
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/13");
     /** 사기 분석 결과 얻은 후, localStorage 내 설문 초기화 */
