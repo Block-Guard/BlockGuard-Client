@@ -4,9 +4,11 @@ import {
   type GetUserInfoResponse,
 } from "../types/api-types";
 import type { EditUserInfoPayload } from "../types/user-info-types";
+import { toast } from "sonner";
 
 const USER_INFO_API = "users/me";
 const UPDATE_USER_PW_API = "users/me/password";
+const WITHDRAW_USER_API = "users/withdraw";
 
 // 회원정보 조회 api
 export const getUserInfoApi = async () => {
@@ -72,5 +74,16 @@ export const updatePasswordApi = async (currentPwd: string, newPwd: string) => {
       "유저 비밀번호 수정 실패:",
       error.response?.data || error.message
     );
+  }
+};
+
+// 회원 탈퇴하기
+export const withdrawUserApi = async () => {
+  try {
+    await axiosInstance.delete(WITHDRAW_USER_API);
+    localStorage.clear();
+    toast("계정 탈퇴 처리되었습니다.");
+  } catch (error: any) {
+    console.error("회원 탙퇴 실패:", error.response?.data || error.message);
   }
 };

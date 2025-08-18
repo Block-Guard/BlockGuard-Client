@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { getUserInfoApi } from "../../apis/mypage";
 import SettingsSectionPanel from "./components/SettingsSectionPanel";
 import { mypageMenus } from "./constants/mypageMenu";
@@ -7,10 +8,13 @@ import { type UserInfoType } from "../../types/user-info-types";
 import LoginedUserInfoSection from "./components/LoginedUserInfoSection";
 import NotLoginedUserInfoSection from "./components/NotLoginedUserInfoSection";
 import SettingsLoading from "./SettingsLoading";
+import WithdrawalModal from "./components/WithdrawalModal";
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState<UserInfoType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isWithDrawalModalOpen, setIsWithDrawalModalOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     getUserInfo();
@@ -51,9 +55,18 @@ const MyPage = () => {
           menus={mypageMenus.serviceInfo}
         />
         {userInfo && (
-          <SettingsSectionPanel title="계정" menus={mypageMenus.account} />
+          <SettingsSectionPanel
+            title="계정"
+            menus={mypageMenus.account}
+            setIsModalOpen={setIsWithDrawalModalOpen}
+          />
         )}
       </div>
+
+      <WithdrawalModal
+        isOpen={isWithDrawalModalOpen}
+        setIsOpen={setIsWithDrawalModalOpen}
+      />
     </div>
   );
 };
