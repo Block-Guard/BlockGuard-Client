@@ -7,7 +7,7 @@ const FakeAppLandingPage = ()=>{
     const navigate = useNavigate();
     const loadNextPage = () => navigate("/simulation/loan-investment/fake-app-home")
     useEffect(()=>{
-        setTimeout(loadNextPage, 1000);
+        setTimeout(loadNextPage, 1500);
     }, [])
     return(
         <div className="flex flex-col justify-center items-center w-full h-[100vh] bg-[#0154AA]">

@@ -4,7 +4,6 @@ import {
   DrawerTitle,
 } from "../../../../components/ui/drawer";
 import DarkBlueX from "../../../../assets/icons/close-darkblue-icon.svg";
-import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
 import { GuardianCallItem } from "./GuardianCallItem";
 import { useEffect, useState } from "react";
@@ -84,12 +83,9 @@ export const GuardianCallDrawer = ({ openGuardianCall, setOpenGuardianCall }: Gu
       <DrawerContent aria-label="보호자에게 알리기" className=" bg-[#EEF1F3]"
       >
         <div className="flex flex-col px-6 bg-[#EEF1F3]">
-
-          <div className="flex-4 flex justify-center items-center mb-7.5">
-            <div className="flex-1 flex justify-start">
-              <img src={LinkIcon} alt="아이콘" className="w-6 h-6" />
-            </div>
-            <DrawerTitle className="text-center justify-center text-slate-950 text-2xl font-bold leading-9">
+          <div className="flex-4 flex items-center mb-7.5">
+            <div className="flex-1 flex justify-start"/>
+            <DrawerTitle className="text-center flex-4 flex justify-center text-slate-950 text-2xl font-bold leading-9">
               보호자에게 알리기
             </DrawerTitle>
             <button className="flex-1 flex justify-end" onClick={handleCloseClick}>
