@@ -122,7 +122,7 @@ const EditUserInfoPage = () => {
             popoverTrigger={
               <div className="relative w-40 self-center">
                 <img
-                  className="rounded-full w-40 h-40"
+                  className="rounded-full w-40 h-40 object-cover object-center bg-[#B7D1FF]"
                   src={
                     newProfileImg
                       ? URL.createObjectURL(newProfileImg)
