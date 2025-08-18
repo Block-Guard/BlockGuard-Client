@@ -57,7 +57,7 @@ const ReportStep2 = () => {
         <div className="flex flex-col gap-[10px]">
           <ReportActionItem
             title="경찰청 통합신고 대응센터 (112)"
-            emoticon={<img src={PhoneIcon} alt="이모티콘" />}
+            emoticon={<img className="w-9" src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
               <Button
                 onClick={() => {
@@ -77,7 +77,7 @@ const ReportStep2 = () => {
           />
           <ReportActionItem
             title="금융감독원 콜센터 (1132)️️️️️️️️"
-            emoticon={<img src={PhoneIcon} alt="이모티콘" />}
+            emoticon={<img className="w-9" src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
               <Button
                 onClick={() => {
@@ -96,8 +96,8 @@ const ReportStep2 = () => {
             }
           />
           <ReportActionItem
-            title="금융결제원 계좌 통합관리 서비스 ️️️️️️️️️️️️️"
-            emoticon={<img src={WriteIcon} alt="이모티콘" />}
+            title="금융결제원 계좌 통합관리 서비스"
+            emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
             shortcutButton={
               <Button
                 onClick={() => {

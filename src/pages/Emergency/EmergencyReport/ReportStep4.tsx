@@ -93,7 +93,7 @@ const ReportStep4 = () => {
         {reportStep4Contents.writeDamageRelief}
         <ReportActionItem
           title="피해구제 신청서 작성예시"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button onClick={handleOpenPdf} size="sm">
               바로 가기
@@ -143,7 +143,7 @@ const ReportStep4 = () => {
         {reportStep4Contents.damageRefundContent}
         <ReportActionItem
           title="채권소멸절차 개시공고 확인"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button
               onClick={() => {

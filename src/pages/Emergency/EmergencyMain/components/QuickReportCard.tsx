@@ -9,8 +9,8 @@ type Props = {
 const QuickReportCard = ({ title, handleToCall }: Props) => {
   return (
     <div className="flex flex-row bg-primary-200 rounded-2xl border-blur-sm py-3 px-[13px] justify-between items-center">
-      <div className="flex flex-row gap-3">
-        <img className="w-[18px]" src={PhoneCallIcon} alt="전화기 아이콘" />
+      <div className="flex flex-row gap-1 items-center">
+        <img className="w-10" src={PhoneCallIcon} alt="전화기 아이콘" />
         <span className="font-bold text-[16px] text-monochrome-700 leading-5">
           {title}
         </span>

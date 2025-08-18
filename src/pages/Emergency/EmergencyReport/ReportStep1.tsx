@@ -78,7 +78,7 @@ const ReportStep1 = () => {
         <div className="flex flex-col gap-[10px]">
           <ReportActionItem
             title="경찰청 통합신고 대응센터 (112)"
-            emoticon={<img src={PhoneIcon} alt="이모티콘" />}
+            emoticon={<img className="w-9" src={PhoneIcon} alt="이모티콘" />}
             shortcutButton={
               <Button
                 onClick={() => {
@@ -92,7 +92,7 @@ const ReportStep1 = () => {
           />
           <ReportActionItem
             title="경찰청 사이버 신고센터"
-            emoticon={<img src={WriteIcon} alt="이모티콘" />}
+            emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
             shortcutButton={
               <Button
                 onClick={() => {
@@ -138,7 +138,7 @@ const ReportStep1 = () => {
         {reportStep1Contents.goPoliceOffice}
         <ReportActionItem
           title="사건사고사실 확인원"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button onClick={handleOpenPdf} size="sm">
               문서보기
