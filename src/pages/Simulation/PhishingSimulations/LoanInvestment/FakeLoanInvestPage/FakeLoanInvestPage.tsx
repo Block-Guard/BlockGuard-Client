@@ -1,4 +1,4 @@
-import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.svg";
+import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.png";
 import MenuIcon from "@/assets/simulation/loan-investment/menu-button-icon.svg";
 import ArrowLeftDarkBlue from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import { useNavigate } from "react-router-dom";
