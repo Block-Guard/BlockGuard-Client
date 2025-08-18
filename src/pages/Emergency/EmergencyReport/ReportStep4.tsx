@@ -49,7 +49,7 @@ const ReportStep4 = () => {
             </span>
             <RequiredActionCheck
               index={1}
-              title="사건사고사실확인원 발급"
+              title="신고접수 서류 발급"
               isDone={isIssuedAccidentFactsConf}
               setIsDone={setIsIssuedAccidentFactsConf}
               disabled={isCompletedByServer}
@@ -75,11 +75,11 @@ const ReportStep4 = () => {
       <div className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">1</span>
-          증거 확보하기
+          경찰서 신고 접수
         </h1>
         {reportStep4Contents.evidenceContent}
         <ReportOneCheck
-          title="사건사고사실확인원 발급️"
+          title="신고접수 서류 발급"
           isChecked={isIssuedAccidentFactsConfList}
           setIsChecked={setIsIssuedAccidentFactsConfList}
         />

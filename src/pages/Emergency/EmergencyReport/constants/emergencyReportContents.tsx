@@ -260,8 +260,8 @@ export const reportStep4Contents = {
       에 직접 방문해 진행해야 해요.
       <br />
       <br />
-      방문 시 반드시 ➊사건사고사실확인원(경찰서에서 발급)과 ➋신분증 ➋피해구제
-      신청서 세 가지 서류를 함께 지참해 주세요.
+      방문 시 반드시 ➊신고접수 서류 발급과 ➋신분증 ➌피해구제 신청서 세 가지
+      서류를 함께 지참해 주세요.
     </span>
   ),
   evidenceContent: (
@@ -270,7 +270,7 @@ export const reportStep4Contents = {
       <br />
       <br />
       가까운 경찰서(사이버 수사대)에 방문하여 피해 사건을 접수하고{" "}
-      <span className="font-semibold">‘사건사고사실확인원’</span>을
+      <span className="font-semibold">‘신고접수 서류 발급’</span>을
       발급받으세요.
     </p>
   ),
@@ -321,7 +321,7 @@ export const reportStep4Contents = {
       지점에 직접 방문해서 진행해주세요.
       <br />
       <br />
-      방문 시 반드시 ➊사건사고사실확인원(경찰서에서 발급)과 ➋신분증 ➋피해구제
+      방문 시 반드시 ➊사건사고사실확인원(경찰서에서 발급)과 ➋신분증 ➌피해구제
       신청서 세 가지 서류를 함께 지참해 주세요.
     </p>
   ),
