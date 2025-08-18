@@ -13,11 +13,11 @@ export const GuardianCallItem = ({ isPrimary, icon = UserIcon, text, phoneNumber
         icon = UserIcon;
     }
     const handleMsgClick = () => {
-        console.log("메세지 어플리케이션 이동");
+        console.log("메세지 어플리케이션 이동, 사용자 이름 : ", userName, userName.length, msgTemplate);
     }
     // eslint-disable-next-line no-useless-escape
     const primaryText = `\(가족 대표\)`
-    const msgTemplate = `[Block Guard] 보호대상자(${userName}) 통화/문자에서 고위험 사기 징후 감지 즉시 확인 바랍니다`;
+    const msgTemplate = `[Block Guard] 보호대상자(${userName.trim()}) 통화/문자에서 고위험 사기 징후 감지 즉시 확인 바랍니다`;
     const encodedMsg = encodeURIComponent(msgTemplate);
     
     return (

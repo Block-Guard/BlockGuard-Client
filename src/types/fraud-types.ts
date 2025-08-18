@@ -64,3 +64,8 @@ export interface FraudFeature {
   title: string;
   content: string;
 }
+
+export interface ScamTypeDataSegment {
+  text: string;
+  className: string;
+}
