@@ -4,7 +4,6 @@ import {
   DrawerTitle,
 } from "../../../../components/ui/drawer";
 import DarkBlueX from "../../../../assets/icons/close-darkblue-icon.svg";
-import LinkIcon from "../../../../assets/analysis-result/link-icon.svg";
 import Plus from "../../../../assets/analysis-result/plus-icon.svg";
 import { GuardianCallItem } from "./GuardianCallItem";
 import { useEffect, useState } from "react";
