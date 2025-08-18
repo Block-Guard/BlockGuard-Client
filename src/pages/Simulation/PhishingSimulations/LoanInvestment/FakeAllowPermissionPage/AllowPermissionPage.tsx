@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../../../../components/Header/Header";
 import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
 import CloseIcon from "@/assets/icons/close-darkblue-icon.svg";
-import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.svg";
+import FakeBankApp from "@/assets/simulation/loan-investment/fake-bank-app-icon.png";
 import { permissionList } from "../constant";
 import PermissionItem from "./components/PermissionItem";
 import PermissionSwitch from "./components/PermissionSwitch";
@@ -30,7 +30,8 @@ const AllowPermissionPage = () => {
     });
   };
 
-  const handleBackClick = () => navigate("/simulation/loan-investment/message-app");
+  const handleBackClick = () =>
+    navigate("/simulation/loan-investment/message-app");
   const handleCloseClick = () => {
     if (toggleAllValue) {
       navigate("/simulation/loan-investment/fake-app-landing");
@@ -43,14 +44,14 @@ const AllowPermissionPage = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
-  useEffect(()=>{
-    if(switches.every(Boolean)){
-      const timer = setTimeout(()=>{
-          navigate("/simulation/loan-investment/fake-app-landing");
-        }, 1500)
-        return () => clearTimeout(timer);
+  useEffect(() => {
+    if (switches.every(Boolean)) {
+      const timer = setTimeout(() => {
+        navigate("/simulation/loan-investment/fake-app-landing");
+      }, 1500);
+      return () => clearTimeout(timer);
     }
-  }, [switches])
+  }, [switches]);
 
   return (
     <div className="relative flex flex-col justify-between w-full h-screen overflow-y-scroll overflow-x-hidden no-scrollbar">
@@ -73,7 +74,7 @@ const AllowPermissionPage = () => {
       />
       <main className="p-[18px] ">
         <div className="flex items-center mt-[57px]">
-          <img src={FakeBankApp} alt="어플이미지" className="mr-6" />
+          <img src={FakeBankApp} alt="어플이미지" className="mr-6 w-[68px]" />
           <div className="w-52 h-14 justify-start text-black text-xl font-medium leading-normal">
             XX은행에서 액세스하도록
             <br />
@@ -115,7 +116,7 @@ const AllowPermissionPage = () => {
             )}
           </div>
         </div>
-           {/* 바텀 스크롤 타겟 */}
+        {/* 바텀 스크롤 타겟 */}
         <div ref={bottomRef} />
       </main>
     </div>
