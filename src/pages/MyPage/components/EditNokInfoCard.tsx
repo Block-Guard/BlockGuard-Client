@@ -106,8 +106,9 @@ const EditNokInfoCard = ({
           <MyPageMenuPopover
             popoverTrigger={
               <div className="relative">
+                {/*  object-contain 또는 cover */}
                 <img
-                  className="w-25 h-25 rounded-full"
+                  className="w-25 h-25 rounded-full object-cover object-center bg-[#B7D1FF]"
                   src={
                     nokProfileImg
                       ? URL.createObjectURL(nokProfileImg)

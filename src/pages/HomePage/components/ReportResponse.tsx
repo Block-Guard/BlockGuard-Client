@@ -16,8 +16,8 @@ const ReportResponse = () => {
       const response = await getInProgressReportApi();
       if (response !== undefined) {
         setInProgressStepData(response);
+        setIsLogined(true);
       }
-      setIsLogined(true);
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
       setIsLogined(false);
@@ -41,10 +41,10 @@ const ReportResponse = () => {
             onClick={() => navigate("/emergency")}
           >
             <div className="flex flex-row gap-1">
+              <img src={SirenIcon} alt="긴급 신고 아이콘" />
               <div className="text-slate-950 text-xl font-bold leading-8">
                 긴급 신고/대응 바로가기
               </div>
-              <img src={SirenIcon} alt="긴급 신고 아이콘" />
             </div>
 
             <button type="button" aria-label="다음으로 이동">

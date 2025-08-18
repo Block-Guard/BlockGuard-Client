@@ -88,7 +88,7 @@ const RegisterNewNokCard = ({ setAddNokMode, setIsChangedFlag }: Props) => {
       <div className="flex flex-row items-center justify-start gap-6 ml-1">
         <div className="relative" onClick={openFilePicker}>
           <img
-            className="w-25 h-25 rounded-full"
+            className="w-25 h-25 rounded-full object-cover object-center bg-[#B7D1FF]"
             src={
               nokProfileImg
                 ? URL.createObjectURL(nokProfileImg)

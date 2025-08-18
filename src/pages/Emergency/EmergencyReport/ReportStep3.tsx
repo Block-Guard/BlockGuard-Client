@@ -124,7 +124,7 @@ const ReportStep3 = () => {
         {reportStep3Contents.registerPersonalInformContent}
         <ReportActionItem
           title="‍개인정보노출자 사고예방시스템"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button
               onClick={() => {
@@ -155,7 +155,7 @@ const ReportStep3 = () => {
         {reportStep3Contents.isOpenedAccountContents}
         <ReportActionItem
           title="‍계좌정보통합관리서비스"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button
               onClick={() => {
@@ -186,7 +186,7 @@ const ReportStep3 = () => {
         {reportStep3Contents.impersonationPhone}
         <ReportActionItem
           title="‍‍명의도용방지서비스 (M-Safer)"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button
               onClick={() => {

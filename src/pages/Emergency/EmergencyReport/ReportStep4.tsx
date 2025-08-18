@@ -49,7 +49,7 @@ const ReportStep4 = () => {
             </span>
             <RequiredActionCheck
               index={1}
-              title="사건사고사실확인원 발급"
+              title="신고접수 서류 발급"
               isDone={isIssuedAccidentFactsConf}
               setIsDone={setIsIssuedAccidentFactsConf}
               disabled={isCompletedByServer}
@@ -75,11 +75,11 @@ const ReportStep4 = () => {
       <div className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">1</span>
-          증거 확보하기
+          경찰서 신고 접수
         </h1>
         {reportStep4Contents.evidenceContent}
         <ReportOneCheck
-          title="사건사고사실확인원 발급️"
+          title="신고접수 서류 발급"
           isChecked={isIssuedAccidentFactsConfList}
           setIsChecked={setIsIssuedAccidentFactsConfList}
         />
@@ -93,7 +93,7 @@ const ReportStep4 = () => {
         {reportStep4Contents.writeDamageRelief}
         <ReportActionItem
           title="피해구제 신청서 작성예시"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button onClick={handleOpenPdf} size="sm">
               바로 가기
@@ -143,7 +143,7 @@ const ReportStep4 = () => {
         {reportStep4Contents.damageRefundContent}
         <ReportActionItem
           title="채권소멸절차 개시공고 확인"
-          emoticon={<img src={WriteIcon} alt="이모티콘" />}
+          emoticon={<img className="w-9" src={WriteIcon} alt="이모티콘" />}
           shortcutButton={
             <Button
               onClick={() => {

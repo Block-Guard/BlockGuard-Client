@@ -5,9 +5,10 @@ import { toast } from "sonner";
 type Props = {
   title: string;
   menus: MypageMenuType[];
+  setIsModalOpen?: (value: boolean) => void;
 };
 
-const SettingsSectionPanel = ({ title, menus }: Props) => {
+const SettingsSectionPanel = ({ title, menus, setIsModalOpen }: Props) => {
   const navigate = useNavigate();
 
   const handleClickMenu = (menu: string) => {
@@ -40,7 +41,7 @@ const SettingsSectionPanel = ({ title, menus }: Props) => {
         navigate("/login");
         break;
       case "계정 탈퇴":
-        console.log("계정 탈퇴하기");
+        if (setIsModalOpen) setIsModalOpen(true);
         break;
       default:
         return;
