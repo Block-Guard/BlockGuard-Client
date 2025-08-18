@@ -1,7 +1,6 @@
 import TypeFeatureCard from "./TypeFeatureCard"
 import NewsIcon from "../../../../assets/analysis-result/news-icon.svg"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
 import type { FraudFeature, ScamType } from "../../../../types/fraud-types";
 import { fraudFeatureList, scamTypes } from "../constants";
 import { createScamMapImmutable } from "../../../../utils/fraudResult";
@@ -13,7 +12,7 @@ interface TypeFeatureProps {
 export const TypeFeature = ({ fraudType }: TypeFeatureProps) => {
     const navigate = useNavigate();
 
-    const [features] = useState<FraudFeature[]>(fraudFeatureList[fraudType as ScamType])
+    const features:FraudFeature[] = fraudFeatureList[fraudType as ScamType]
     const scamMap = createScamMapImmutable(scamTypes);
     const findTopLevelNameFromMap = (name: string) => {
         return scamMap[name] || null;
@@ -36,10 +35,11 @@ export const TypeFeature = ({ fraudType }: TypeFeatureProps) => {
                 이 유형의 주요 특징은?
             </div>
             {
-                features.map((feat) => {
+                (features ?? []).map((feat) => {
                     return (<TypeFeatureCard
                         title={feat.title}
-                        content={feat.content} />)
+                        content={feat.content}
+                        key={feat.title} />)
                 })
             }
             <button className="w-full h-11 my-2.5 px-4 bg-blue-500 rounded-[10px] inline-flex justify-center items-center gap-1.5"
