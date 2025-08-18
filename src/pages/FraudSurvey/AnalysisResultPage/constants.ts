@@ -1,5 +1,5 @@
-import BlockeeWarning from "../../../assets/characters/blockee-warning.svg";
-import BlockeeSafe from "../../../assets/characters/blockee-safe.svg";
+import BlockeeWarning from "../../../assets/characters/blockee-warning.png";
+import BlockeeSafe from "../../../assets/characters/blockee-safe.png";
 import RiskChatBubble from "../../../assets/analysis-result/chat-bubble-result-risk.svg";
 import WarnChatBubble from "../../../assets/analysis-result/chat-bubble-result-warn.svg";
 import SafeChatBubble from "../../../assets/analysis-result/chat-bubble-result-safe.svg";
