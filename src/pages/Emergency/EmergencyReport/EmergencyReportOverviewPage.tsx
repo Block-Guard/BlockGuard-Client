@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 const EmergencyReportOverviewPage = () => {
   const navigate = useNavigate();
 
+  const [isLogined, setIsLogined] = useState(false);
+
   const [stepState, setStepState] = useState({
     first: "",
     second: "",
@@ -29,14 +31,17 @@ const EmergencyReportOverviewPage = () => {
       console.log(response);
       if (response === null) {
         setInProgressStepData({ reportId: 0, step: 0 });
+        setIsLogined(true);
       } else {
         setInProgressStepData({
           reportId: response!.reportId,
           step: response!.step,
         });
+        setIsLogined(true);
       }
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
+      setIsLogined(false);
     }
   };
 
@@ -100,14 +105,22 @@ const EmergencyReportOverviewPage = () => {
         }
       />
       <div className="overflow-y-scroll pb-10 flex flex-col gap-7 px-6 mt-[72px]">
-        <h1
-          className="text-monochrome-700 text-2xl font-bold leading-9"
-          style={{
-            wordBreak: "keep-all",
-          }}
-        >
-          다음과 같은 순서대로 진행해주세요!
-        </h1>
+        <div>
+          <h1
+            className="text-monochrome-700 text-2xl font-bold leading-9"
+            style={{
+              wordBreak: "keep-all",
+            }}
+          >
+            다음과 같은 순서대로 진행해주세요!
+          </h1>
+          {!isLogined && (
+            <span className="text-sm text-highlight-1">
+              로그인을 하지 않아 기록이 저장되지 않습니다.
+            </span>
+          )}
+        </div>
+
         <div className="grid grid-cols-2 gap-3">
           <ReportStepCard
             reportId={inProgressStepData.reportId}

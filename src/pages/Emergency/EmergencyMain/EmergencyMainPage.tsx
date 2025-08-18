@@ -18,8 +18,8 @@ const EmergencyMainPage = () => {
       const response = await getInProgressReportApi();
       if (response !== undefined) {
         setInProgressStepData(response);
+        setIsLogined(true);
       }
-      setIsLogined(true);
     } catch (error) {
       console.error("진행중인 신고 조회 실패 : ", error);
       setIsLogined(false);
