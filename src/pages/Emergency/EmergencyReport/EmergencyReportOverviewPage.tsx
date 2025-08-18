@@ -1,13 +1,13 @@
 import Header from "../../../components/Header/Header";
-import LeftArrowIcon from "../../../assets/icons/arrow-left-darkblue-icon.svg";
-import Step1Img from "../../../assets/report-guide/step1.svg";
-import Step2Img from "../../../assets/report-guide/step2.svg";
-import Step3Img from "../../../assets/report-guide/step3.svg";
-import Step4Img from "../../../assets/report-guide/step4.svg";
+import { getInProgressReportApi } from "../../../apis/emergency";
+import LeftArrowIcon from "@/assets/icons/arrow-left-darkblue-icon.svg";
+import Step1Img from "@/assets/report-guide/step1.png";
+import Step2Img from "@/assets/report-guide/step2.png";
+import Step3Img from "@/assets/report-guide/step3.png";
+import Step4Img from "@/assets/report-guide/step4.png";
 import ReportStepCard from "./components/ReportStepCard";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getInProgressReportApi } from "../../../apis/emergency";
 
 const EmergencyReportOverviewPage = () => {
   const navigate = useNavigate();
