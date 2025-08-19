@@ -68,7 +68,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           form={form}
           type={type}
-          className={`max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`}
+          className={cn(
+            `max-w-[800px] ${isDiabled} w-full ${paddingClass} text-[${fontSize}] ${fontWeight} text-monochrome-100 rounded-xl cursor-pointer`,
+            className
+          )}
           onClick={onClick}
         >
           {children}
