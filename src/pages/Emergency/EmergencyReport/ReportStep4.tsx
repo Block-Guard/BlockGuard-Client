@@ -31,12 +31,26 @@ const ReportStep4 = () => {
   const isCompletedByServer = serverCompletedSteps[currentStep] || false;
 
   const topRef = useRef<HTMLDivElement | null>(null);
+
+  const currentStepScroll1Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll2Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll3Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll4Ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
+
   const handleOpenPdf = () => {
     window.open("/files/damage-relief-application.pdf", "_blank");
   };
+
+  const handleToScrollJump = (
+    scrollRef: React.RefObject<HTMLDivElement | null>
+  ) => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="w-full flex flex-col mb-40">
       <div ref={topRef} />
@@ -53,6 +67,7 @@ const ReportStep4 = () => {
               isDone={isIssuedAccidentFactsConf}
               setIsDone={setIsIssuedAccidentFactsConf}
               disabled={isCompletedByServer}
+              onClickToScroll={() => handleToScrollJump(currentStepScroll1Ref)}
             />
             <RequiredActionCheck
               index={3}
@@ -60,19 +75,28 @@ const ReportStep4 = () => {
               isDone={didWrittenSubmission}
               setIsDone={setDidWrittenSubmission}
               disabled={isCompletedByServer}
+              onClickToScroll={() => handleToScrollJump(currentStepScroll3Ref)}
             />
           </div>
           <div className="flex flex-col gap-[10px]">
             <span className="text-primary-400 text-[16px] font-bold leading-5">
               권장 조치
             </span>
-            <RecommendedList index={2} title="피해구제 신청서 작성" />
-            <RecommendedList index={4} title="채권소멸절차 및 피해금 환급 " />
+            <RecommendedList
+              index={2}
+              title="피해구제 신청서 작성"
+              onClickToScroll={() => handleToScrollJump(currentStepScroll2Ref)}
+            />
+            <RecommendedList
+              index={4}
+              title="채권소멸절차 및 피해금 환급 "
+              onClickToScroll={() => handleToScrollJump(currentStepScroll4Ref)}
+            />
           </div>
         </div>
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll1Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">1</span>
           경찰서 신고 접수
@@ -85,7 +109,7 @@ const ReportStep4 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll2Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">2</span>
           피해구제 신청서 작성
@@ -107,7 +131,7 @@ const ReportStep4 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll3Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">3</span>
           서면접수(피해구제신청)
@@ -125,7 +149,7 @@ const ReportStep4 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll4Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">4</span>
           채권소멸절차 및 피해금 환급
