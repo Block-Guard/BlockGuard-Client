@@ -9,6 +9,7 @@ interface ApiBaseResponse {
 export interface CheckEmailResponse extends ApiBaseResponse {
   data: {
     duplicated: boolean;
+    deleted: boolean;
   };
 }
 
