@@ -103,7 +103,7 @@ export interface EditUserInfoResponse extends ApiBaseResponse {
   data: null;
 }
 
-interface FraudRecordItem {
+export interface FraudRecordItem {
   fraudAnalysisRecordId :number;
 	estimatedFraudType:string;
 	riskLevel:string;
