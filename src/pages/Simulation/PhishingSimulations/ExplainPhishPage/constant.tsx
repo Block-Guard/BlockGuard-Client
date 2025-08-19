@@ -11,6 +11,7 @@ export interface FraudFeatrue {
 }
 
 export interface ExplainInfo {
+    // 조회할 뉴스 카테고리
     category: string;
     title: React.ReactNode;
     description: React.ReactNode;
@@ -21,7 +22,7 @@ export interface ExplainInfo {
 
 /** 대출 사기형 설명 정보 */
 export const explainPhishLoan: ExplainInfo = {
-    category: "보이스 피싱",
+    category: "대출 사기형",
     title: (<div className="w-full text-stone-50 text-[28px] font-extrabold leading-11">
         대출사기형<br/>
         보이스피싱 유형
@@ -100,7 +101,7 @@ export const explainPhishLoan: ExplainInfo = {
 
 /** 지인 사칭형 설명 정보 */
 export const explainPhishFamAqui: ExplainInfo = {
-    category: "메신저 피싱",
+    category: "가족/지인 사칭형",
     title: (<div className="w-full text-stone-50 text-[28px] font-extrabold leading-11">
         가족/지인사칭형<br />
         메신저피싱
@@ -177,7 +178,7 @@ export const explainPhishFamAqui: ExplainInfo = {
 
 /** 검찰 공공기관 사칭형 */
 export const explainPhishPublicOrg: ExplainInfo = {
-    category: "보이스 피싱",
+    category: "기관 사칭형",
     title: (<div className="w-full text-stone-50 text-[28px] font-extrabold leading-11">
         기관사칭형<br />
         보이스피싱 유형
@@ -254,7 +255,7 @@ export const explainPhishPublicOrg: ExplainInfo = {
 
 /** 카드 배송 사칭형 */
 export const explainPhishDeliCard: ExplainInfo = {
-    category: "보이스피싱",
+    category: "카드사 사칭형",
     title: (<div className="w-full text-stone-50 text-[28px] font-extrabold leading-11">
         카드 배송형<br />
         보이스피싱 유형

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import NewsDefaultImg from "../../../assets/news/news-default-image.svg";
 
 interface NewsCardItemProps{
@@ -9,7 +10,13 @@ interface NewsCardItemProps{
 }
 
 const NewsCardItem = ({title, publishedAt, url, newspaper, imageUrl}: NewsCardItemProps) =>{
-    const handleClickNews = () => window.open(url, "_blank");
+    const navigate = useNavigate();
+    const handleClickNews = () =>{
+        if(url === "none")
+            navigate("/home");
+        else
+            window.open(url, "_blank");
+    } 
     return(
 
         <div className="w-full flex gap-[13px] border-b-1 py-2.5" onClick={handleClickNews}>
