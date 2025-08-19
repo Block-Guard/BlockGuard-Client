@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "./axiosInstance";
 import type { FruadAnalysisResponse } from "../types/api-types";
 
 const FRAUD_RESULT_API = "https://www.blockguard.shop/api/fraud-analysis";
@@ -6,7 +7,7 @@ const FRAUD_RESULT_API = "https://www.blockguard.shop/api/fraud-analysis";
 export const fraudAnalysisApi = async (formdata: FormData) => {
     try {
         console.log("사기 분석 api 요청 시작")
-        const response = await axios.post<FruadAnalysisResponse>(
+        const response = await axiosInstance.post<FruadAnalysisResponse>(
             FRAUD_RESULT_API, formdata,
             {
                 headers: { "Content-Type": "multipart/form-data" },

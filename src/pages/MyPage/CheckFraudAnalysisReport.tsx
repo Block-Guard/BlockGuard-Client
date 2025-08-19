@@ -39,7 +39,7 @@ const CheckFraudAnalysisReport = () => {
           </h1>
         </div>
       </header>
-      <div className="overflow-y-scroll pb-10 flex flex-col gap-4.5 px-6 mt-[116px]">
+      <div className="overflow-y-scroll pb-10 flex flex-col gap-4.5 px-6 mt-[86px]">
         {
           (!recordList || recordList?.length === 0) &&
           <div className="mt-[50%] inline-flex justify-center items-center text-center text-black text-xl">
