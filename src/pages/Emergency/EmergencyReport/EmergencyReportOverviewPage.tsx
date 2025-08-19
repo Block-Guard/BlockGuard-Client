@@ -104,8 +104,8 @@ const EmergencyReportOverviewPage = () => {
           />
         }
       />
-      <div className="overflow-y-scroll pb-10 flex flex-col gap-7 px-6 mt-[72px]">
-        <div>
+      <div className="overflow-y-scroll pb-10 flex flex-col gap-8 px-6 mt-[72px]">
+        <div className="relative">
           <h1
             className="text-monochrome-700 text-2xl font-bold leading-9"
             style={{
@@ -115,8 +115,8 @@ const EmergencyReportOverviewPage = () => {
             다음과 같은 순서대로 진행해주세요!
           </h1>
           {!isLogined && (
-            <span className="text-sm text-highlight-1">
-              로그인을 하지 않아 기록이 저장되지 않습니다.
+            <span className="absolute -bottom-5 left-0 text-sm text-[#A1A1A1]">
+              *비회원은 신고기록이 자동 저장되지 않아요
             </span>
           )}
         </div>
