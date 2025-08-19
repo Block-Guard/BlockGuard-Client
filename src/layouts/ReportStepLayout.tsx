@@ -87,7 +87,7 @@ const ReportStepLayout = () => {
         />
       </main>
       <div
-        className="absolute bottom-0 w-full px-6 pt-6 pb-8"
+        className="absolute bottom-0 w-full px-6 pt-6 pb-8 pointer-events-none"
         style={{
           background:
             "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%)",
@@ -95,13 +95,14 @@ const ReportStepLayout = () => {
       >
         <div className="flex flex-col gap-5">
           <div
-            className="w-fit p-2 self-end bg-monochrome-100 rounded-[50%]"
+            className="w-fit p-2 self-end bg-monochrome-100 rounded-[50%] pointer-events-auto"
             style={{ boxShadow: "0px 0px 5.714px 0px rgba(0, 0, 0, 0.25)" }}
             onClick={onClickScrollToTop}
           >
             <img src={UpArrowIcon} alt="맨위로" />
           </div>
           <Button
+            className="pointer-events-auto"
             onClick={() => onClickNextButton(currentStepCompleted)}
             nonCompleted={!currentStepCompleted}
           >

@@ -11,22 +11,14 @@ import NewsLinesItem from "../HomePage/components/NewsLinesItem";
 const dummyData = [
     {
         id: 1,
-        title: "검찰청 범죄 연루 경고",
-        publishedAt: "1시간 전",
-        url: "https://example.com/article/1",
-        newspaper: "서울신문",
+        title: "뉴스 페이지를 불러오는데 실패했습니다.",
+        publishedAt: "잠시 후 다시 시도해주세요.",
+        url: "none",
+        newspaper: "BlockGuard",
         imageUrl: "https://image/1"
-
     },
-    {
-        id: 2,
-        title: "김철수, 범죄 혐의 부인",
-        publishedAt: "어제",
-        url: "https://example.com/article/2",
-        newspaper: "동아일보",
-        imageUrl: null
-    }
 ]
+
 
 
 const NewsHomePage = () => {

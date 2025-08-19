@@ -15,6 +15,7 @@ import { fraudAnalysisApi } from "../../../apis/fraud";
 import type { FraudResultData } from "../../../types/fraud-types";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 import AnalysisErrorPage from "../AnalysisErrorPage/AnalysisErrorPage";
+import { useQuery } from "@tanstack/react-query";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -26,14 +27,11 @@ const AnalysisResultPage = () => {
         "authorityPressure",
         "accountOrLinkRequest",
     ]
-    const [data, setData] = useState<FraudResultData | null>(null);
+    // const [data, setData] = useState<FraudResultData | null>(null);
     const [resultTheme, setResultTheme] = useState(riskState[1]);
     const [overrideHeader, setOverrideHeader] = useState(false);
-
     const [openReportCall, setOpenReportCall] = useState(false);
     const [openGuardianCall, setOpenGuardianCall] = useState(false);
-
-    const [status, setStatus] = useState("idle");
 
     const handleBackClick = () => navigate("/fraud-analysis/survey/13");
     /** 사기 분석 결과 얻은 후, localStorage 내 설문 초기화 */
@@ -45,7 +43,6 @@ const AnalysisResultPage = () => {
         const formData = new FormData();
         type SurveyKey = typeof initSurvey & { [key: string]: string | string[] | boolean };
         const stringSurvey: SurveyKey = { ...initSurvey };
-
         for (const [key, value] of Object.entries(allAnswers)) {
             /** imageBase64는 이미지 프리뷰, localStorage 복원용 */
             if (key === "imageBase64") continue;
@@ -75,47 +72,47 @@ const AnalysisResultPage = () => {
         return formData;
     }
 
-    const getResult = async (formData: FormData) => {
-        return await fraudAnalysisApi(formData);
+    const fetchFraudResult = async () => {
+        const formData = makeForm();
+        const data: FraudResultData = await fraudAnalysisApi(formData);
+        return data;
     }
 
-    useEffect(() => {
-        const process = async () => {
-            // 테스트용
-            // setIsLoading(false);
-            // setData(dummyResponse.data);
-            setStatus("loading")
-            try {
-                const formData = makeForm();
-                const response = await getResult(formData);
-                console.log("사기 분석 요청 결과 : ", response)
-                setData(response);
-                const themeIndex = getTheme(response.riskLevel)
-                const detailDegree = { ...riskState[themeIndex], degree: (response.score * 180 / 100) }
-                setResultTheme(detailDegree);
-
-                setStatus("succeeded");
-            } catch (error) {
-                console.error("사기 분석 결과 페이지에서 로드 오류 발생 오류페이지 로드", error);
-                setStatus("failed");
-            }
-        }
-        if (allAnswers) {
-            process();
-        }
-    }, []);
+    const { data, isLoading, error, isSuccess } = useQuery({
+        queryKey: ['fraud-result', {}],
+        // queryKey: ['fraud-result', JSON.stringify(allAnswers)],
+        queryFn: fetchFraudResult,
+        // 키 값이 일치하면 데이터 5분간 유지
+        staleTime: 1000 * 60 * 5,
+        enabled: !!allAnswers,
+        refetchOnMount: false, // 컴포넌트가 다시 마운트될 때 5분내라면 refetch 안 하도록. 
+    })
 
     useEffect(() => {
-        if (status === "succeeded") {
+        if (data) {
+            const themeIndex = getTheme(data.riskLevel)
+            const detailDegree = { ...riskState[themeIndex], degree: (data.score * 180 / 100) }
+            setResultTheme(detailDegree);
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (isSuccess) {
             console.log("사기 분석 결과 로딩 성공. 기존 로컬 설문 데이터 초기화");
             localStorage.removeItem("surveyAnswers");
         }
-    }, [status])
+    }, [isSuccess])
 
     useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
 
-    if (status === "loading") return <AnalysisLoadingPage />
-    if (status === "failed") return <AnalysisErrorPage />
+    if (isLoading)
+        return <AnalysisLoadingPage />
+
+    if (error)
+        return <AnalysisErrorPage />
+
+    if(!allAnswers && !isLoading)
+        navigate("/home"); // 설문 기록이 초기화되었는데, 결과 화면인 예외 처리
 
     return (
         <div className="flex flex-col justify-between w-full h-full overflow-y-scroll">
@@ -177,7 +174,7 @@ const AnalysisResultPage = () => {
                 {resultTheme.state === "safe" ?
                     (
                         <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
-                            
+
                             <div className="text-[#000b25] text-lg font-medium leading-relaxed">
                                 분석결과, 현재 상황은 보이스 피싱의 일반적인 패턴과 다르게 나타납니다. 특별한 위험 요소나 이상 징후는 확인되지 않아요
                             </div>
@@ -191,8 +188,6 @@ const AnalysisResultPage = () => {
                         {data ? <FraudType data={data} /> : null}
                     </>
                 ) : null}
-
-                {/* 여기부터 응답과 상관없음 */}
 
                 {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature fraudType={data.estimatedFraudType} />}
 

@@ -23,9 +23,17 @@ const ReportStep2 = () => {
   const isCompletedByServer = serverCompletedSteps[currentStep] || false;
 
   const topRef = useRef<HTMLDivElement | null>(null);
+  const currentStepScrollRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
+
+  const handleToScrollJump = (
+    scrollRef: React.RefObject<HTMLDivElement | null>
+  ) => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="w-full flex flex-col mb-40">
@@ -40,10 +48,11 @@ const ReportStep2 = () => {
           isDone={isRequestedToStopPayment}
           setIsDone={setIsRequestedToStopPayment}
           disabled={isCompletedByServer}
+          onClickToScroll={() => handleToScrollJump(currentStepScrollRef)}
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScrollRef} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-2xl font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">1</span>
           지급정지 요청하기

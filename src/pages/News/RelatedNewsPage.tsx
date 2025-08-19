@@ -20,24 +20,17 @@ const dummyData = [
 ]
 
 
-const RecentNewsPage = () => {
-    const categoryList = [
-        "전체", "보이스 피싱", "메신저 피싱", "스미싱", "기타"
-    ];
+const RelatedNewsPage = () => {
     const navigate = useNavigate();
     const topRef = useRef<HTMLDivElement | null>(null);
     const [newsData, setNewsData] = useState<NewsItem[]>([]);
     const [categoryParams] = useSearchParams();
     const [page, setPage] = useState(1);
     const [sort, setSort] = useState(true)
-    const [category, setCategory] = useState(categoryParams.get("category") || categoryList[0]);
     const [totalPages, setTotalPages] = useState(1);
 
     const handleBackClick = () => navigate(-1)
-    const handleCategory = (selectedCategory: string) => {
-        setPage(1);
-        setCategory(selectedCategory);
-    }
+
     const handleSortClick = () => setSort(!sort);
     const handlePrePage = () => {
         if (page !== 1)
@@ -47,6 +40,7 @@ const RecentNewsPage = () => {
         if (page !== totalPages)
             setPage(page + 1);
     }
+
 
     const start = Math.max(1, page - 2);
     const end = Math.min(totalPages, start + 4);
@@ -62,6 +56,7 @@ const RecentNewsPage = () => {
 
     useEffect(() => {
         const process = async () => {
+            const category = categoryParams.get("category") || "전체"
             try {
                 const response = getNewsList(page, sort, category);
                 setNewsData((await response).news)
@@ -74,7 +69,7 @@ const RecentNewsPage = () => {
         }
         process();
         topRef.current?.scrollIntoView({ behavior: "instant" });
-    }, [category, page, sort])
+    }, [categoryParams, page, sort])
 
     return (
         <div className="flex flex-col w-screen h-screen box-border" >
@@ -86,34 +81,7 @@ const RecentNewsPage = () => {
                     </button>
                 }
             />
-            <div className="w-full bg-white mt-[57px] fixed h-9 flex justify-around text-lg font-semibold leading-relaxed overflow-x-scroll no-scrollbar z-10" >
-                {
-                    categoryList.map((item) => {
-                        return (
-                            <>
-                                {
-                                    item === category ? (
-                                        <div className="flex flex-col justify-between items-center text-primary-400 leading-tight relative z-10"
-                                            onClick={() => handleCategory(item)}>
-                                            {item}
-                                            <div className="absolute w-[120%] h-[5px] bg-primary-400 rounded-[90px] top-[31px] z-50" />
-                                        </div>
-                                    ) : (
-                                        <div className="flex flex-col text-[#79818A] leading-tight"
-                                            onClick={() => handleCategory(item)}>
-                                            {item}
-                                        </div>
-                                    )
-                                }
-                            </>
-                        )
-                    }
-                    )
-                }
-                <div className="w-full h-[5px] bg-[#E4E7E9] rounded-[90px] fixed top-[88px] z-0" />
-            </div>
-           
-            <main className="mt-[57px] px-6 pb-6">
+            <main className="px-6 pb-6">
                 <button className="inline-flex justify-start text-gray-900/50 text-sm font-norma mt-16.5 gap-2"
                     onClick={handleSortClick}>
                     <img src={SortIcon} alt="정렬 아이콘" className="w-4.5 h-4.5" />
@@ -151,4 +119,4 @@ const RecentNewsPage = () => {
     )
 }
 
-export default RecentNewsPage;
+export default RelatedNewsPage;

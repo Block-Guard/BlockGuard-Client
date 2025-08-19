@@ -7,6 +7,7 @@ type Props = {
   isDone: boolean;
   setIsDone: (value: boolean) => void;
   disabled?: boolean;
+  onClickToScroll: () => void;
 };
 
 const RequiredActionCheck = ({
@@ -15,6 +16,7 @@ const RequiredActionCheck = ({
   isDone,
   setIsDone,
   disabled = false,
+  onClickToScroll,
 }: Props) => {
   const handleToCheck = () => {
     if (!disabled) {
@@ -27,6 +29,7 @@ const RequiredActionCheck = ({
         className={`flex flex-row justify-center gap-2 px-[17px] py-[10px] rounded-[90px] text-[18px] font-bold leading-5 whitespace-nowrap ${
           disabled ? "bg-monochrome-300" : "bg-primary-200"
         }`}
+        onClick={onClickToScroll}
       >
         <span
           className={`${disabled ? "text-monochrome-500" : "text-primary-400"}`}

@@ -64,6 +64,7 @@ import CheckFraudAnalysisReport from "../pages/MyPage/CheckFraudAnalysisReport";
 import ChangePasswordPage from "../pages/MyPage/ChangePasswordPage";
 import NewsHomePage from "../pages/News/NewsHomePage";
 import RecentNewsPage from "../pages/News/RecentNewsPage";
+import RelatedNewsPage from "../pages/News/RelatedNewsPage";
 
 const router = createBrowserRouter([
   {
@@ -222,6 +223,10 @@ const router = createBrowserRouter([
         path: "recent",
         element: <RecentNewsPage />,
       },
+      {
+        path: "related",
+        element: <RelatedNewsPage/>
+      }
     ],
   },
 

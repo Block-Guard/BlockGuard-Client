@@ -22,7 +22,7 @@ export const checkEmailApi = async (email: string) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-    return response.data.data.duplicated;
+    return response.data.data;
   } catch (error: any) {
     console.error(
       "이메일 중복 확인 실패:",

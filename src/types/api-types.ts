@@ -9,6 +9,7 @@ interface ApiBaseResponse {
 export interface CheckEmailResponse extends ApiBaseResponse {
   data: {
     duplicated: boolean;
+    deleted: boolean;
   };
 }
 
@@ -102,6 +103,18 @@ export interface GetUserInfoResponse extends ApiBaseResponse {
 export interface EditUserInfoResponse extends ApiBaseResponse {
   data: null;
 }
+
+export interface FraudRecordItem {
+  fraudAnalysisRecordId :number;
+	estimatedFraudType:string;
+	riskLevel:string;
+	analyzedAt: string;
+}
+
+export interface GetFraudRecordResponse extends ApiBaseResponse {
+  data: FraudRecordItem [];
+}
+
 /** 뉴스 목록 조회 API 응답 중 뉴스 데이터 타입*/
 export interface NewsItem {
   id: number;

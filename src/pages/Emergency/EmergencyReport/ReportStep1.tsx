@@ -31,12 +31,22 @@ const ReportStep1 = () => {
   const isCompletedByServer = serverCompletedSteps[currentStep] || false;
 
   const topRef = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll1Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll2Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll3Ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
 
   const handleOpenPdf = () => {
     window.open("/files/incident-report.pdf", "_blank");
+  };
+
+  const handleToScrollJump = (
+    scrollRef: React.RefObject<HTMLDivElement | null>
+  ) => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -52,6 +62,7 @@ const ReportStep1 = () => {
           isDone={reportReceived}
           setIsDone={setReportReceived}
           disabled={isCompletedByServer}
+          onClickToScroll={() => handleToScrollJump(currentStepScroll1Ref)}
         />
         <RequiredActionCheck
           index={2}
@@ -59,6 +70,7 @@ const ReportStep1 = () => {
           isDone={secureEvidence}
           setIsDone={setSecureEvidence}
           disabled={isCompletedByServer}
+          onClickToScroll={() => handleToScrollJump(currentStepScroll2Ref)}
         />
         <RequiredActionCheck
           index={3}
@@ -66,10 +78,11 @@ const ReportStep1 = () => {
           isDone={caseFiled}
           setIsDone={setCaseFiled}
           disabled={isCompletedByServer}
+          onClickToScroll={() => handleToScrollJump(currentStepScroll3Ref)}
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll1Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">1</span>
           경찰서 신고 접수
@@ -116,7 +129,7 @@ const ReportStep1 = () => {
         </div>
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll2Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">2</span>
           증거 확보하기
@@ -130,7 +143,7 @@ const ReportStep1 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll3Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row gap-[11px] text-2xl font-bold leading-9">
           <span className="text-primary-400">3</span>
           경찰서 방문 및 사건접수

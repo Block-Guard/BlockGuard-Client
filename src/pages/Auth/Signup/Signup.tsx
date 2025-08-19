@@ -21,6 +21,7 @@ const Signup = () => {
   const [inputEmail, setInputEmail] = useState("");
   const [isEmailChecked, setIsEmailChecked] = useState(false);
   const [isEmailDuplicated, setIsEmailDuplicated] = useState(false);
+  const [isEmailDeleted, setIsEmailDeleted] = useState(false);
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
 
   const [inputPw, setInputPw] = useState("");
@@ -97,13 +98,20 @@ const Signup = () => {
   const handleCheckIsEmailDuplicated = async () => {
     const response = await checkIsEmailDuplicated();
     // 만약 중복이 되었다면
-    if (response) {
+    if (response?.deleted) {
+      setIsEmailChecked(true);
+      setIsEmailDeleted(true);
+      setIsEmailDuplicated(false);
+      setEmailErrorMsg("이미 탈퇴한 계정은 다시 사용할 수 없습니다.");
+    } else if (response?.duplicated) {
       setIsEmailChecked(true);
       setIsEmailDuplicated(true);
+      setIsEmailDeleted(false);
       setEmailErrorMsg("이미 등록된 아이디입니다.");
     } else {
       setIsEmailChecked(true);
       setIsEmailDuplicated(false);
+      setIsEmailDeleted(false);
       setEmailErrorMsg("");
     }
   };
@@ -195,7 +203,11 @@ const Signup = () => {
             <Button
               onClick={handleToNextButton}
               disabled={
-                !inputEmail || !inputPw || !inputCheckPw || isEmailDuplicated
+                !inputEmail ||
+                !inputPw ||
+                !inputCheckPw ||
+                isEmailDuplicated ||
+                isEmailDeleted
               }
             >
               다음

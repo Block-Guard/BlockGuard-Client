@@ -27,9 +27,23 @@ const ReportStep3 = () => {
   const isCompletedByServer = serverCompletedSteps[currentStep] || false;
 
   const topRef = useRef<HTMLDivElement | null>(null);
+
+  const currentStepScroll1Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll2Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll3Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll4Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll5Ref = useRef<HTMLDivElement | null>(null);
+  const currentStepScroll6Ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, []);
+
+  const handleToScrollJump = (
+    scrollRef: React.RefObject<HTMLDivElement | null>
+  ) => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="w-full flex flex-col mb-40">
@@ -47,6 +61,7 @@ const ReportStep3 = () => {
               isDone={isBlockedBadApp}
               setIsDone={setIsBlockedBadApp}
               disabled={isCompletedByServer}
+              onClickToScroll={() => handleToScrollJump(currentStepScroll1Ref)}
             />
             <RequiredActionCheck
               index={2}
@@ -54,24 +69,38 @@ const ReportStep3 = () => {
               isDone={isRegisteredPersonalInformExposed}
               setIsDone={setIsRegisteredPersonalInformExposed}
               disabled={isCompletedByServer}
+              onClickToScroll={() => handleToScrollJump(currentStepScroll2Ref)}
             />
           </div>
           <div className="flex flex-col gap-[10px]">
             <span className="text-primary-400 text-[16px] font-bold leading-5">
               권장 조치
             </span>
-            <RecommendedList index={3} title="계좌개설여부조회" />
+            <RecommendedList
+              index={3}
+              title="계좌개설여부조회"
+              onClickToScroll={() => handleToScrollJump(currentStepScroll3Ref)}
+            />
             <RecommendedList
               index={4}
               title="명의도용된 휴대전화 개설 여부 조회"
+              onClickToScroll={() => handleToScrollJump(currentStepScroll4Ref)}
             />
-            <RecommendedList index={5} title="휴대폰 소액결제차단 신청" />
-            <RecommendedList index={6} title="여신거래 안심차단 서비스 신청" />
+            <RecommendedList
+              index={5}
+              title="휴대폰 소액결제차단 신청"
+              onClickToScroll={() => handleToScrollJump(currentStepScroll5Ref)}
+            />
+            <RecommendedList
+              index={6}
+              title="여신거래 안심차단 서비스 신청"
+              onClickToScroll={() => handleToScrollJump(currentStepScroll6Ref)}
+            />
           </div>
         </div>
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll1Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">1</span>
           악성앱 차단하기
@@ -115,7 +144,7 @@ const ReportStep3 = () => {
         </div>
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll2Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">2</span>
           개인정보노출자 등록
@@ -138,7 +167,7 @@ const ReportStep3 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll3Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">3</span>
           계좌개설여부조회
@@ -169,7 +198,7 @@ const ReportStep3 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll4Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">4</span>
           명의도용된 휴대전화 개설 여부 조회
@@ -200,7 +229,7 @@ const ReportStep3 = () => {
         />
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll5Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">5</span>
           휴대폰 소액결제차단 신청
@@ -215,7 +244,7 @@ const ReportStep3 = () => {
         {reportStep3Contents.micropaymentContent}
       </div>
       <div className="w-full h-[1px] bg-monochrome-400 my-4" />
-      <div className="flex flex-col gap-5 p-6">
+      <div ref={currentStepScroll6Ref} className="flex flex-col gap-5 p-6">
         <h1 className="flex flex-row text-[20px] font-bold leading-9">
           <span className="text-primary-400 mr-[11px]">6</span>
           여신거래 안심차단 서비스 신청
