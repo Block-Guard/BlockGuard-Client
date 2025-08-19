@@ -6,9 +6,13 @@ import Header from "../../../components/Header/Header";
 
 const FraudLandingPage = () => {
   const navigate = useNavigate();
+
+  /** 새로운 설문을 시작하는 경우 localStorage 비우기 -> 캐싱 없이 새로운 요청 */
   const handleClick = () => {
+    localStorage.removeItem("surveyAnswers");
     navigate("/fraud-analysis/survey/1-10");
   };
+
   return (
     <div className="w-full h-full flex bg-primary-400 box-border overflow-auto">
       <Header
@@ -45,7 +49,7 @@ const FraudLandingPage = () => {
             정확도가 올라가요.
           </div>
 
-          <div className="flex justify-end z-0 mb-10">
+          <div className="flex justify-end z-0 mb-2">
             <img className="w-40" src={Blockee} />
           </div>
           <div className="flex justify-center text-white/50 text-xl font-semibold leading-loose animate-pulse mb-3">

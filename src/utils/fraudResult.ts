@@ -1,3 +1,5 @@
+import { scamTypes } from "../pages/FraudSurvey/AnalysisResultPage/constants";
+
 export const getTheme = (riskLevel: string) => {
     if (riskLevel === "위험") return 0;
     if (riskLevel === "주의") return 1;
@@ -5,34 +7,30 @@ export const getTheme = (riskLevel: string) => {
     return 0;
 };
 
+export const findMiddleCategoryName = (inputName: string): string | null => {
+  // 최상위 분류를 순회
+  for (const topCategory of scamTypes) {
+    if (!topCategory.children) continue;
 
-interface NodeType{
-    name: string;
-    children?: NodeType[];
-}
+    // 중간 분류를 순회
+    for (const middleCategory of topCategory.children) {
+      // 입력된 이름이 중간 분류 이름과 일치하는 경우
+      if (middleCategory.name === inputName) {
+        return middleCategory.name;
+      }
 
-/** 재귀적으로 Map을 채워나가는 헬퍼 함수 */
-const createMapImmutable = (nodes: NodeType[], topLevelName: string): Record<string, string> => {
-    let map: Record<string, string> = {};
-
-    for (const node of nodes) {
-        // 현재 노드 맵
-        const currentNodeMap = { [node.name]: topLevelName };
-        // 자식 노드가 있다면 재귀적으로 자식 맵 생성
-        const childrenMap = node.children ? createMapImmutable(node.children, topLevelName) : {};
-
-        // 현재 맵, 자식 맵들을 모두 합쳐서 새로운 맵을 만듦
-        map = { ...map, ...currentNodeMap, ...childrenMap };
+      // 입력된 이름이 세부 분류에 있는지 확인
+      if (middleCategory.children) {
+        // 세부 분류를 순회
+        for (const detailCategory of middleCategory.children) {
+          if (detailCategory.name === inputName) {
+            // 세부 분류를 찾았다면, 그 부모인 중간 분류의 이름을 반환
+            return middleCategory.name;
+          }
+        }
+      }
     }
+  }
 
-    return map;
-}
-
-/** 계층 없앤 버전으로 반환 */
-export const createScamMapImmutable = (data: NodeType[]): Record<string, string> => {
-    // reduce를 사용하여 각 최상위 아이템별로 생성된 맵을 하나로 합칩니다.
-    return data.reduce((acc, topLevelItem) => {
-        const newMap = createMapImmutable([topLevelItem], topLevelItem.name);
-        return { ...acc, ...newMap };
-    }, {});
-}
+  return null;
+};

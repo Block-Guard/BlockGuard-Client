@@ -8,19 +8,7 @@ import FraudRecordCard from "./components/FraudRecordCard";
 
 const CheckFraudAnalysisReport = () => {
   const navigate = useNavigate();
-  // const [recordList, setRecordList] = useState<FraudRecordItem[] | undefined>([]);
-  const [recordList, setRecordList] = useState<FraudRecordItem[] | undefined>([{
-    "fraudAnalysisRecordId": 1,
-    "estimatedFraudType": "대출사기형",
-    "riskLevel": "위험",
-    "analyzedAt": "2025-08-05T14:23:00"
-  },
-  {
-    "fraudAnalysisRecordId": 2,
-    "estimatedFraudType": "기관사칭형",
-    "riskLevel": "주의",
-    "analyzedAt": "2025-08-05T14:23:00"
-  }]);
+  const [recordList, setRecordList] = useState<FraudRecordItem[] | undefined>([]);
 
   const getFraudRecord = async () => {
     try {

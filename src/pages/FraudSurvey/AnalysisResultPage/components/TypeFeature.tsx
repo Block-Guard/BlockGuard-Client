@@ -2,8 +2,8 @@ import TypeFeatureCard from "./TypeFeatureCard"
 import NewsIcon from "../../../../assets/analysis-result/news-icon.svg"
 import { useNavigate } from "react-router-dom"
 import type { FraudFeature, ScamType } from "../../../../types/fraud-types";
-import { fraudFeatureList, scamTypes } from "../constants";
-import { createScamMapImmutable } from "../../../../utils/fraudResult";
+import { fraudFeatureList } from "../constants";
+import { findMiddleCategoryName } from "../../../../utils/fraudResult";
 
 interface TypeFeatureProps {
     fraudType: string;
@@ -13,19 +13,15 @@ export const TypeFeature = ({ fraudType }: TypeFeatureProps) => {
     const navigate = useNavigate();
 
     const features:FraudFeature[] = fraudFeatureList[fraudType as ScamType]
-    const scamMap = createScamMapImmutable(scamTypes);
-    const findTopLevelNameFromMap = (name: string) => {
-        return scamMap[name] || null;
-    }
 
     const handleLearnClick = () => {
-        const topName = findTopLevelNameFromMap(fraudType)
-        console.log("fraudType, topName : ", fraudType, topName)
-        if (topName) {
-            navigate(`/news/recent?category=${topName}`);
+        const scamName = findMiddleCategoryName(fraudType)
+        console.log("fraudType, topName : ", fraudType, scamName)
+        if (scamName) {
+            navigate(`/news/related?category=${scamName}`);
         }
         else {
-            navigate(`/news/recent?category=전체`);
+            navigate(`/news/related?category=전체`);
         }
     }
 

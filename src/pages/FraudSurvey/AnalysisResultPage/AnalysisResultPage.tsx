@@ -78,9 +78,8 @@ const AnalysisResultPage = () => {
         return data;
     }
 
-    const { data, isLoading, error, isSuccess } = useQuery({
-        queryKey: ['fraud-result', {}],
-        // queryKey: ['fraud-result', JSON.stringify(allAnswers)],
+    const { data, isLoading, error} = useQuery({
+        queryKey: ['fraud-result', JSON.stringify(allAnswers)],
         queryFn: fetchFraudResult,
         // 키 값이 일치하면 데이터 5분간 유지
         staleTime: 1000 * 60 * 5,
@@ -95,13 +94,6 @@ const AnalysisResultPage = () => {
             setResultTheme(detailDegree);
         }
     }, [data])
-
-    useEffect(() => {
-        if (isSuccess) {
-            console.log("사기 분석 결과 로딩 성공. 기존 로컬 설문 데이터 초기화");
-            localStorage.removeItem("surveyAnswers");
-        }
-    }, [isSuccess])
 
     useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
 
