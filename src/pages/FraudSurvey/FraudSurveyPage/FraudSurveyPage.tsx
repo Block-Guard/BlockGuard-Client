@@ -21,6 +21,12 @@ const FraudSurveyPage = () => {
             {" (복수선택 가능)"}
           </span>
         }
+        {
+          (!currentSurvey?.isEssential && progress > 5) &&
+          <span className="text-zinc-300 text-2xl font-bold leading-9">
+            {" (선택)"}
+          </span>
+        }
       </div>
 
       <div className="flex flex-col gap-4 pb-4">

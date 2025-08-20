@@ -24,7 +24,7 @@ export const surveyContent = [
         progress: 3
     },
     {
-        question: "문자 또는 통화에서 언급된 내용은 어떤 것인가요",
+        question: "문자 또는 통화에서 언급된 내용은 어떤 것인가요?",
         isEssential: true,
         isMultiple: true,
         answers: ["휴대폰 고장 / 인증 오류 / 상품권 구매", 
