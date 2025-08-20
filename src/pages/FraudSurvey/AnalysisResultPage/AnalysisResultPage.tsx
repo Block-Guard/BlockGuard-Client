@@ -108,7 +108,7 @@ const AnalysisResultPage = () => {
         navigate("/home"); // 설문 기록이 초기화되었는데, 결과 화면인 에러 경우.. 예외 처리
 
     return (
-        <div className="flex flex-col justify-between w-full h-full">
+        <div className="flex flex-col justify-between w-full h-full" >
             <AutoColorHeader
                 leftChild={
                     <button onClick={handleBackClick}>
@@ -132,7 +132,7 @@ const AnalysisResultPage = () => {
                     </button>
                 }
             />
-            <main className="flex-1 overflow-y-auto no-scrollbar" ref={scrollContainerRef}>
+            <main className="flex-1 overflow-y-auto no-scrollbar overscroll-contain" ref={scrollContainerRef}>
                 {/* 그냥 말풍선과 캐릭터, 아이콘을 전부 하나로 합치는 것도 고려.. */}
                 <div className="h-37 flex justify-between items-end pt-6 pl-6 pr-9 overflow-clip" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
                     <div className="h-full flex items-start">
