@@ -132,7 +132,7 @@ const AnalysisResultPage = () => {
                     </button>
                 }
             />
-            <main className="flex-1 overflow-y-auto no-scrollbar overscroll-contain" ref={scrollContainerRef}>
+            <main className="flex-1 overflow-y-auto no-scrollbar overscroll-none" ref={scrollContainerRef}>
                 {/* 그냥 말풍선과 캐릭터, 아이콘을 전부 하나로 합치는 것도 고려.. */}
                 <div className="h-37 flex justify-between items-end pt-6 pl-6 pr-9 overflow-clip" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
                     <div className="h-full flex items-start">
