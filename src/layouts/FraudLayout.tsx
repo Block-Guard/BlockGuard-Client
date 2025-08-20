@@ -57,7 +57,7 @@ const FraudLayout = () => {
   }, [])
 
   return (
-    <div className="flex flex-col justify-between w-full h-full">
+    <div className="flex flex-col justify-between w-full h-dvh">
       {location.pathname === "/fraud-analysis/survey/result" ? (
         <Outlet context={contextValue} />
       ) : (
@@ -70,7 +70,7 @@ const FraudLayout = () => {
             }
           />
           
-          <div className="w-full h-1.5 fixed mt-[57px]">
+          <div className="w-full h-1.5 fixed top-[58px]">
             <div className="w-full h-[5px] left-0 top-0 absolute bg-gray-200" />
             <div
               className="h-[5px] left-0 top-0 absolute bg-blue-500 rounded-tr-[90px] rounded-br-[90px] transition-all duration-300"
@@ -79,8 +79,8 @@ const FraudLayout = () => {
           </div>
 
           <main
-            className="h-[calc(100vh-140px)] bg-[#ffffff] 
-        overflow-hidden overflow-y-auto no-scrollbar mt-15"
+            className="flex-1 bg-[#ffffff] 
+        overflow-hidden overflow-y-auto no-scrollbar pt-16"
           >
             <Outlet context={contextValue} /> {/* 사기분석 설문 내용 렌더링 */}
           </main>
