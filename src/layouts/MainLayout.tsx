@@ -9,8 +9,8 @@ const MainLayout = () => {
     topRef.current?.scrollIntoView({ behavior: "instant" });
   }, [location.pathname]);
   return (
-    <div className="flex flex-col justify-between w-full h-full">
-      <main className="h-[calc(100vh-85px)] bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar">
+    <div className="flex flex-col justify-between w-full h-dvh">
+      <main className="flex-1 bg-[#ffffff] overflow-hidden overflow-y-auto no-scrollbar">
         <div ref={topRef} />
         <Outlet />
       </main>
