@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Header from "../../../components/Header/Header";
+import { useEffect, useRef, useState } from "react";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
 import { initSurvey, riskState } from "./constants";
 import { getTheme } from "../../../utils/fraudResult";
@@ -16,6 +15,7 @@ import type { FraudResultData } from "../../../types/fraud-types";
 import { useFraudSurveyContext } from "../../../hooks/useFraudSurvey";
 import AnalysisErrorPage from "../AnalysisErrorPage/AnalysisErrorPage";
 import { useQuery } from "@tanstack/react-query";
+import AutoColorHeader from "./components/AutoColorHeader";
 
 const AnalysisResultPage = () => {
     const navigate = useNavigate();
@@ -95,7 +95,8 @@ const AnalysisResultPage = () => {
         }
     }, [data])
 
-    useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader))
+    const scrollContainerRef = useRef<HTMLElement>(null)
+    useScrollHeader((overrideHeader) => setOverrideHeader(overrideHeader), scrollContainerRef)
 
     if (isLoading)
         return <AnalysisLoadingPage />
@@ -108,96 +109,98 @@ const AnalysisResultPage = () => {
 
     return (
         <div className="flex flex-col justify-between w-full h-full">
-            <Header
+            <AutoColorHeader
                 leftChild={
                     <button onClick={handleBackClick}>
-                        <svg className={overrideHeader ? 'text-black' : 'text-white'} width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className={`${overrideHeader ? 'text-black' : 'text-white'} transition-colors duration-150 ease-in-out`} width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 17.5195L1 9.51953L9 1.51953" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
                 }
                 bgColor={`${overrideHeader ? '#fff' : resultTheme.bgColor}`}
                 title={
-                    <h1 className="text-xl font-bold leading-8" style={{ color: `${overrideHeader ? '#000B25' : '#fff'}` }}>
+                    <h1 className="text-xl font-bold leading-8 transition-colors duration-150 ease-in-out" style={{ color: `${overrideHeader ? '#000B25' : '#fff'}` }}>
                         AI 분석 결과
                     </h1>
                 }
                 rightChild={
                     <button onClick={handleCloseClick}>
-                        <svg className={overrideHeader ? 'text-black' : 'text-white'} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className={`${overrideHeader ? 'text-black' : 'text-white'} transition-colors duration-150 ease-in-out`} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.256 5.93359L5.25 15.9396" stroke="currentColor" strokeWidth="1.66766" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M5.25 5.93359L15.256 15.9396" stroke="currentColor" strokeWidth="1.66766" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
                 }
             />
-
-            {/* 그냥 말풍선과 캐릭터, 아이콘을 전부 하나로 합치는 것도 고려.. */}
-            <div className="h-37 flex justify-between items-end mt-[57px] pt-6 pl-6 pr-9 overflow-clip" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
-                <div className="h-full flex items-start">
-                    <img src={resultTheme.bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
-                </div>
-                <div className="h-full flex items-end">
-                    <img src={resultTheme.character} alt="캐릭터" className="relative top-4" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
-                </div>
-            </div>
-
-            {/* 여기까지 상단 안내 */}
-
-            <div className="flex flex-col items-center py-7.5 px-6 z-10">
-                <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
-                    {resultTheme.text}
-                </div>
-
-                <div className="h-42 relative">
-                    <img src={resultTheme.boardImg} alt="위험도 표"
-                        className="z-0 w-85 h-41" />
-                    <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
-                        <img src={IndicatorArrow} alt="위험지시핀"
-                            className="absolute left-2"
-                            style={{
-                                transform: `rotate(${resultTheme.degree}deg)`,
-                                transformOrigin: "95% center",
-                            }} />
+            <main className="flex-1 overflow-y-auto no-scrollbar" ref={scrollContainerRef}>
+                {/* 그냥 말풍선과 캐릭터, 아이콘을 전부 하나로 합치는 것도 고려.. */}
+                <div className="h-37 flex justify-between items-end pt-6 pl-6 pr-9 overflow-clip" style={{ backgroundColor: `${resultTheme.bgColor}` }}>
+                    <div className="h-full flex items-start">
+                        <img src={resultTheme.bubbleChat} alt="위험 경고문구" className="w-51 h-18" />
+                    </div>
+                    <div className="h-full flex items-end">
+                        <img src={resultTheme.character} alt="캐릭터" className="relative top-4" style={{ width: '120px', height: '96px', objectFit: 'cover' }} />
                     </div>
                 </div>
 
-                {resultTheme.state === "safe" ?
-                    (
-                        <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
+                {/* 여기까지 상단 안내 */}
 
-                            <div className="text-[#000b25] text-lg font-medium leading-relaxed">
-                                분석결과, 현재 상황은 보이스 피싱의 일반적인 패턴과 다르게 나타납니다. 특별한 위험 요소나 이상 징후는 확인되지 않아요
-                            </div>
+                <div className="flex flex-col items-center py-7.5 px-6 z-10">
+                    <div className="text-3xl font-extrabold leading-10" style={{ color: resultTheme.bgColor }}>
+                        {resultTheme.text}
+                    </div>
+
+                    <div className="h-42 relative">
+                        <img src={resultTheme.boardImg} alt="위험도 표"
+                            className="z-0 w-85 h-41" />
+                        <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
+                            <img src={IndicatorArrow} alt="위험지시핀"
+                                className="absolute left-2"
+                                style={{
+                                    transform: `rotate(${resultTheme.degree}deg)`,
+                                    transformOrigin: "95% center",
+                                }} />
                         </div>
+                    </div>
+
+                    {resultTheme.state === "safe" ?
+                        (
+                            <div className="w-full px-4 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
+
+                                <div className="text-[#000b25] text-lg font-medium leading-relaxed">
+                                    분석결과, 현재 상황은 보이스 피싱의 일반적인 패턴과 다르게 나타납니다. 특별한 위험 요소나 이상 징후는 확인되지 않아요
+                                </div>
+                            </div>
+                        ) : null}
+
+                    <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
+
+                    {resultTheme.state !== "safe" ? (
+                        <>
+                            {data ? <FraudType data={data} /> : null}
+                        </>
                     ) : null}
 
-                <div className="w-full h-0 outline-[0.50px] outline-offset-[-0.25px] outline-zinc-300 my-7.5"></div>
+                    {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature fraudType={data.estimatedFraudType} />}
 
-                {resultTheme.state !== "safe" ? (
-                    <>
-                        {data ? <FraudType data={data} /> : null}
-                    </>
-                ) : null}
+                    <div className="text-center text-black text-xl font-bold leading-loose">
+                        AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
+                    </div>
 
-                {resultTheme.state === "safe" || !data || data.estimatedFraudType === "판단할 수 없음" ? null : <TypeFeature fraudType={data.estimatedFraudType} />}
-
-                <div className="text-center text-black text-xl font-bold leading-loose">
-                    AI 판단 결과는 <br />완벽하지 않을 수 있습니다.
+                    <div className="mt-7.5 text-center text-black text-xl font-bold leading-loose">
+                        의심되면 <span className="text-primary-400">경찰청(112)</span>
+                        <br />
+                        또는 <span className="text-primary-400">금융감독원(1132)</span>
+                        <br />
+                        로 확인 전화를 추천드려요.
+                    </div>
                 </div>
 
-                <div className="mt-7.5 text-center text-black text-xl font-bold leading-loose">
-                    의심되면 <span className="text-primary-400">경찰청(112)</span>
-                    <br />
-                    또는 <span className="text-primary-400">금융감독원(1132)</span>
-                    <br />
-                    로 확인 전화를 추천드려요.
-                </div>
-            </div>
+                <BottomCard setOpenReportCall={setOpenReportCall} setOpenGuardianCall={setOpenGuardianCall} />
+                <ReportCallDrawer openReportCall={openReportCall} setOpenReportCall={setOpenReportCall} />
+                <GuardianCallDrawer openGuardianCall={openGuardianCall} setOpenGuardianCall={setOpenGuardianCall} />
 
-            <BottomCard setOpenReportCall={setOpenReportCall} setOpenGuardianCall={setOpenGuardianCall} />
-            <ReportCallDrawer openReportCall={openReportCall} setOpenReportCall={setOpenReportCall} />
-            <GuardianCallDrawer openGuardianCall={openGuardianCall} setOpenGuardianCall={setOpenGuardianCall} />
+            </main>
         </div>
     )
 }
