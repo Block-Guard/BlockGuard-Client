@@ -14,7 +14,8 @@ const FraudLandingPage = () => {
   };
 
   return (
-    <div className="w-full h-full flex bg-primary-400 box-border overflow-auto">
+    
+    <div className="w-full h-dvh flex bg-primary-400 box-border overflow-auto">
       <Header
         leftChild={
           <button onClick={() => navigate("/home")}>
@@ -24,7 +25,7 @@ const FraudLandingPage = () => {
         bgColor="#437efc"
       />
       <div
-        className="flex flex-col justify-between h-[calc(100vh-57px)] border-box p-6 mt-[57px]"
+        className="flex flex-col justify-between h-[calc(100dvh-57px)] border-box p-6 mt-[57px]"
         onClick={handleClick}
       >
         <div className="relative">

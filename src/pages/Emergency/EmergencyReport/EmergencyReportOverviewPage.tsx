@@ -100,7 +100,7 @@ const EmergencyReportOverviewPage = () => {
           <img
             className="py-[5.5px] pr-1"
             src={LeftArrowIcon}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/home")}
           />
         }
       />
