@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../../../components/Header/Header";
 import IndicatorArrow from "../../../assets/analysis-result/indicator-arrow.svg"
 import { initSurvey, riskState } from "./constants";
@@ -78,7 +78,7 @@ const AnalysisResultPage = () => {
         return data;
     }
 
-    const { data, isLoading, error} = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['fraud-result', JSON.stringify(allAnswers)],
         queryFn: fetchFraudResult,
         // 키 값이 일치하면 데이터 5분간 유지
@@ -103,12 +103,11 @@ const AnalysisResultPage = () => {
     if (error)
         return <AnalysisErrorPage />
 
-    if(!allAnswers && !isLoading)
-        navigate("/home"); // 설문 기록이 초기화되었는데, 결과 화면인 예외 처리
+    if (!allAnswers && !isLoading)
+        navigate("/home"); // 설문 기록이 초기화되었는데, 결과 화면인 에러 경우.. 예외 처리
 
     return (
-        <div className="flex flex-col justify-between w-full h-full overflow-y-scroll">
-
+        <div className="flex flex-col justify-between w-full h-full">
             <Header
                 leftChild={
                     <button onClick={handleBackClick}>
