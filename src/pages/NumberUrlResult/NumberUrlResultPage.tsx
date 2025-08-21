@@ -66,7 +66,7 @@ const NumberUrlResultPage = () => {
     }
 
     return (
-        <div className="flex flex-col w-screen h-screen">
+        <div className="flex flex-col w-screen h-dvh">
             <Header
                 bgColor={riskState[riskLevel].bgColor}
                 title={
@@ -118,16 +118,18 @@ const NumberUrlResultPage = () => {
 
                 <div className="h-42 relative">
                     <img src={riskState[riskLevel].boardImg} alt="위험도 표"
-                        className="z-0" />
+                        className="z-0 w-85 h-41" />
                     <div className="relative left-25 bottom-11 w-16 h-16 flex items-center justify-end">
                         <img src={IndicatorArrow} alt="위험지시핀"
-                            className="absolute left-4"
+                            className="absolute left-2"
                             style={{
                                 transform: `rotate(${riskState[riskLevel].degree}deg)`,
                                 transformOrigin: "95% center",
                             }} />
                     </div>
                 </div>
+
+
                 <div className="w-full px-10 py-3.5 mt-7.5 bg-gray-100 rounded-2xl border-blur inline-flex flex-col justify-start items-start gap-2.5">
                     {riskLevel === 0 ?
                         (
