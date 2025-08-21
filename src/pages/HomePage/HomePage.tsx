@@ -14,7 +14,6 @@ const HomePage = () => {
   return (
     <div className="overflow-y-scroll no-scrollbar mb-10 flex flex-col gap-8">
       <HomeCheck />
-      <HomeCheck />
       <ReportResponse />
       <NewsLines />
     </div>
