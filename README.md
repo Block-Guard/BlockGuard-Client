@@ -79,7 +79,7 @@
 
   * **Main**: `React, TypeScript, Vite, Tailwind CSS`
   * **Deployment**: `Vercel`
-  * **Etc.**: `Lodash, TanstackQuery(React Query), Axios`
+  * **Etc.**: `Lodash, TanstackQuery(React Query), Axios, Shadcn UI`
 
 ## 📁 폴더 구조
 
