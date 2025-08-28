@@ -1,5 +1,6 @@
 # BlockGuard: 보이스피싱, 예방, 대응, 학습을 제공하는 웹 서비스
-![블락가드](2086.jpg)
+
+![블락가드](./.github/assets/readme/2086.jpg)
 
 ## 🌟 프로젝트 소개
 
@@ -16,12 +17,12 @@
 <table width="100%">
   <tr>
     <td width="50%" align="center">
-      <img src="Screen_Recording_20250826_210517_Chrome.gif" width="100%">
+      <img src="./.github/assets/readme/Screen_Recording_20250826_210517_Chrome.gif" width="100%">
       <br>
       <sub><b>[사기 분석 시연]</b></sub>
     </td>
     <td width="50%" align="center">
-      <img src="Screen_Recording_20250826_213752_Chrome.gif" width="100%">
+      <img src="./.github/assets/readme/Screen_Recording_20250826_213752_Chrome.gif" width="100%">
       <br>
       <sub><b>[카드 배송 사칭형 시뮬레이션 시연]</b></sub>
     </td>
@@ -31,55 +32,53 @@
 <table width="100%">
   <tr>
     <td width="33%" align="center">
-      <img src="image.png" width="100%">
+      <img src="./.github/assets/readme/image.png" width="100%">
       <br>
       <sub><b>[메인 페이지]</b></sub>
     </td>
     <td width="33%" align="center">
-      <img src="Screenshot_20250826_204759_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_204759_Chrome.jpg" width="100%">
       <br>
       <sub><b>[긴급 대응 홈 페이지]</b></sub>
     </td>
     <td width="33%" align="center">
-      <img src="Screenshot_20250826_204935_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_204935_Chrome.jpg" width="100%">
       <br>
       <sub><b>[시뮬레이션 홈 페이지]</b></sub>
     </td>
   </tr>
 </table>
 
-
 <table width="100%">
   <tr>
     <td width="25%" align="center">
-      <img src="Screenshot_20250826_205008_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_205008_Chrome.jpg" width="100%">
       <br>
       <sub><b>[전화 화면 시뮬레이션]</b></sub>
     </td>
     <td width="25%" align="center">
-      <img src="Screenshot_20250826_205052_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_205052_Chrome.jpg" width="100%">
       <br>
       <sub><b>[보이스 시뮬레이션]</b></sub>
     </td>
     <td width="25%" align="center">
-      <img src="Screenshot_20250826_205111_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_205111_Chrome.jpg" width="100%">
       <br>
       <sub><b>[시뮬레이션 퀴즈]</b></sub>
     </td>
     <td width="25%" align="center">
-      <img src="Screenshot_20250826_205229_Chrome.jpg" width="100%">
+      <img src="./.github/assets/readme/Screenshot_20250826_205229_Chrome.jpg" width="100%">
       <br>
       <sub><b>[문자 시뮬레이션]</b></sub>
     </td>
   </tr>
 </table>
 
-
 ## ⚙️ 기술 스택
 
-  * **Main**: `React, TypeScript, Vite, Tailwind CSS`
-  * **Deployment**: `Vercel`
-  * **Etc.**: `Lodash, TanstackQuery(React Query), Axios, Shadcn UI`
+- **Main**: `React, TypeScript, Vite, Tailwind CSS`
+- **Deployment**: `Vercel`
+- **Etc.**: `Lodash, TanstackQuery(React Query), Axios, Shadcn UI`
 
 ## 📁 폴더 구조
 
@@ -97,6 +96,7 @@
  ┣ 📄 main.tsx       // 애플리케이션의 진입점(Entry Point)입니다.
  ┗ 📄 App.tsx        // 애플리케이션의 최상위 컴포넌트입니다.
 ```
+
 <details>
 <summary>
     <strong>전체 파일 구조 보기(클릭하여 펼치기)</strong>
@@ -167,4 +167,5 @@
     ├── 📄 formatCallTime.ts
     └── 📄 utils.ts
 ```
+
 </details>
